@@ -3,31 +3,30 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<stddef.h>` A Few Standard Definitions {#stddef}
+# `<stddef.h>` Vài Định Nghĩa Chuẩn {#stddef}
 
 [i[`stddef.h` header file]i]
 
-Despite its name, I've haven't seen this frequently included.
+Dù tên gọi vậy, tôi hiếm khi thấy header này được include.
 
-It includes several types and macros.
+Nó gồm vài kiểu và macro.
 
-|Name|Description
+|Tên|Mô tả
 |-|-|
-|[`ptrdiff_t`](#man-ptrdiff_t)|Signed integer difference between two pointers|
-|[`size_t`](#man-size_t)|Unsigned integer type returned by `sizeof`|
-|[`max_align_t`](#man-max_align_t)|Declare a type with the biggest possible alignment|
-|[`wchar_t`](#man-wchar_t)|Wide character type|
-|`NULL`|`NULL` pointer, as defined a number of places|
-|[`offsetof`](#man-offsetof)|Get the byte offsets of `struct` or `union` fields|
+|[`ptrdiff_t`](#man-ptrdiff_t)|Integer có dấu cho hiệu giữa hai pointer|
+|[`size_t`](#man-size_t)|Kiểu integer không dấu mà `sizeof` trả về|
+|[`max_align_t`](#man-max_align_t)|Khai báo một kiểu với alignment lớn nhất có thể|
+|[`wchar_t`](#man-wchar_t)|Kiểu ký tự rộng|
+|`NULL`|Con trỏ `NULL`, được định nghĩa ở vài chỗ|
+|[`offsetof`](#man-offsetof)|Lấy byte offset của trường trong `struct` hoặc `union`|
 
 ## `ptrdiff_t` {#man-ptrdiff_t}
 
 [i[`ptrdiff_t` type]i]
 
-This holds the different between two pointers. You could store this in
-another type, but the result of a pointer subtraction is an
-implementation-defined type; you can be maximally portable by using
-`ptrdiff_t`.
+Kiểu này giữ hiệu giữa hai pointer. Bạn có thể lưu kết quả này vào
+kiểu khác, nhưng kiểu của kết quả phép trừ pointer là
+implementation-defined; portable tối đa thì dùng `ptrdiff_t`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -40,15 +39,16 @@ int main(void)
 	int *f = cats + 20;
 	int *g = cats + 60;
 
-	ptrdiff_t d = g - f;  // difference is 40
+	ptrdiff_t d = g - f;  // hiệu là 40
 
 ```
 
-And you can print it by prefixing the integer format specifier with `t`:
+Và bạn có thể in nó bằng cách thêm prefix `t` vào format specifier
+integer:
 
 ``` {.c .numberLines startFrom="13"}
-	printf("%td\n", d);  // Print decimal: 40
-	printf("%tX\n", d);  // Print hex:     28
+	printf("%td\n", d);  // In thập phân: 40
+	printf("%tX\n", d);  // In hex:       28
 }
 ```
 
@@ -56,10 +56,10 @@ And you can print it by prefixing the integer format specifier with `t`:
 
 [i[`size_t` type]i]
 
-This is the type returned by `sizeof` and used in a few other places.
-It's an unsigned integer.
+Đây là kiểu mà `sizeof` trả về và được dùng ở vài chỗ khác. Nó là
+integer không dấu.
 
-You can print it using the `z` prefix in `printf()`:
+Bạn có thể in nó dùng prefix `z` trong `printf()`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -77,9 +77,9 @@ int main(void)
 
 ```
 
-Some functions return negative numbers cast to `size_t` as error values
-(such as [`mbrtoc16()`](#man-mbrtoc16)). If you want to print these as
-negative values, you can do it with `%zd`:
+Một số hàm trả về số âm cast thành `size_t` làm giá trị lỗi (như
+[`mbrtoc16()`](#man-mbrtoc16)). Nếu muốn in mấy cái đó dưới dạng
+giá trị âm, bạn có thể dùng `%zd`:
 
 ``` {.c .numberLines startFrom="14"}
     char16_t a;
@@ -96,12 +96,12 @@ negative values, you can do it with `%zd`:
 
 [i[`max_align_t` type]i]
 
-As far as I can tell, this exists to allow the runtime computation of
-the maximum fundamental [flw[alignment|Data_structure_alignment]] on the
-current platform. Someone please mail me if there's another use.
+Theo hiểu của tôi, cái này tồn tại để cho phép tính runtime
+[flw[alignment|Data_structure_alignment]] fundamental tối đa trên
+nền tảng hiện tại. Ai biết thêm công dụng khác làm ơn mail cho tôi.
 
-Maybe you need this if you're writing your own memory allocator or
-somesuch.
+Có lẽ bạn cần cái này nếu đang viết memory allocator của riêng
+mình hay gì đó.
 
 ``` {.c .numberLines}
 #include <stddef.h>
@@ -116,45 +116,46 @@ int main(void)
 }
 ```
 
-On my system, this prints:
+Trên hệ của tôi, in ra:
 
 ``` {.default}
 Maximum fundamental alignment: 16
 ```
 
-See also [`alignas`](#man-alignas), [`alignof`](#man-alignof).
+Xem thêm [`alignas`](#man-alignas), [`alignof`](#man-alignof).
 
 ## `wchar_t` {#man-wchar_t}
 
 [i[`wchar_t` type]i]
 
-This is analogous to `char`, except it's for wide characters.
+Cái này tương tự `char`, chỉ khác là nó dành cho ký tự rộng (wide
+character).
 
-It's an integer type that has enough range to hold unique values for all
-characters in all supported locales.
+Đây là kiểu integer có tầm đủ lớn để giữ giá trị duy nhất cho mọi
+ký tự trong mọi locale được hỗ trợ.
 
-The value `0` is the wide `NUL` character.
+Giá trị `0` là ký tự `NUL` rộng.
 
-Finally, the values of character constants from the basic character set
-will be the same as their corresponding `wchar_t` values... unless
-`__STDC_MB_MIGHT_NEQ_WC__` is defined.
+Cuối cùng, giá trị của các hằng ký tự từ tập ký tự cơ bản sẽ bằng
+với giá trị `wchar_t` tương ứng... trừ khi
+`__STDC_MB_MIGHT_NEQ_WC__` được định nghĩa.
 
 ## `offsetof` {#man-offsetof}
 
 [i[`offsetof` operator]i]
 
-If you have a `struct` or `union`, you can use this to get the byte
-offset of fields within that type.
+Nếu bạn có `struct` hoặc `union`, bạn có thể dùng cái này để lấy
+byte offset của các trường trong kiểu đó.
 
-Usage is:
+Cách dùng:
 
 ``` {.c}
 offsetof(type, fieldname);
 ```
 
-The resulting value has type `size_t`.
+Giá trị kết quả có kiểu `size_t`.
 
-Here's an example that prints the field offsets of a `struct`:
+Đây là ví dụ in offset trường của một `struct`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -176,7 +177,7 @@ int main(void)
 }
 ```
 
-On my system, this outputs:
+Trên hệ của tôi, output là:
 
 ``` {.default}
 a: 0
@@ -185,4 +186,4 @@ c: 5
 d: 8
 ```
 
-And you can't use `offsetof` on a bitfield, so don't get your hopes up.
+Và bạn không thể dùng `offsetof` trên bitfield, nên đừng hi vọng hão.
