@@ -3,47 +3,47 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<inttypes.h>` More Integer Conversions {#inttypes}
+# `<inttypes.h>` Các phép chuyển đổi số nguyên thêm {#inttypes}
 
 [i[`inttypes.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`imaxabs()`](#man-imaxabs)|Compute the absolute value of an `intmax_t`|
-|[`imaxdiv()`](#man-imaxdiv)|Compute the quotient and remainder of `intmax_t`s|
-|[`strtoimax()`](#man-strtoimax)|Convert strings to type `intmax_t`|
-|[`strtoumax()`](#man-strtoimax)|Convert strings to type `uintmax_t`|
-|[`wcstoimax()`](#man-wcstoimax)|Convert wide strings to type `intmax_t`|
-|[`wcstoumax()`](#man-wcstoimax)|Convert wide strings to type `uintmax_t`|
+|[`imaxabs()`](#man-imaxabs)|Tính giá trị tuyệt đối của một `intmax_t`|
+|[`imaxdiv()`](#man-imaxdiv)|Tính thương và số dư của các `intmax_t`|
+|[`strtoimax()`](#man-strtoimax)|Chuyển string sang kiểu `intmax_t`|
+|[`strtoumax()`](#man-strtoimax)|Chuyển string sang kiểu `uintmax_t`|
+|[`wcstoimax()`](#man-wcstoimax)|Chuyển wide string sang kiểu `intmax_t`|
+|[`wcstoumax()`](#man-wcstoimax)|Chuyển wide string sang kiểu `uintmax_t`|
 
-This header does conversions to maximum sized integers, division with
-maximum sized integers, and also provides format specifiers for
-[`printf()`](#man-printf) and [`scanf()`](#man-scanf) for a variety of
-types defined in [`<stdint.h>`](#stdint).
+Header này làm các phép chuyển đổi sang số nguyên cỡ lớn nhất, chia
+với số nguyên cỡ lớn nhất, và cũng cung cấp format specifier cho
+[`printf()`](#man-printf) và [`scanf()`](#man-scanf) cho một loạt
+kiểu được định nghĩa trong [`<stdint.h>`](#stdint).
 
-The header [`<stdint.h>`](#stdint) is included by this one.
+Header [`<stdint.h>`](#stdint) được include bởi header này.
 
-## Macros
+## Macro
 
-These are to help with 
-[`printf()`](#man-printf) and [`scanf()`](#man-scanf) when you use a
-type such as `int_least16_t`... what format specifiers do you use?
+Mấy macro này là để giúp
+[`printf()`](#man-printf) và [`scanf()`](#man-scanf) khi bạn dùng một
+kiểu như `int_least16_t`... bạn dùng format specifier gì?
 
-Let's start with `printf()`---all these macros start with `PRI` and then
-are followed by the format specifier you'd typically use for that type.
-Lastly, the number of bits is added on.
+Bắt đầu với `printf()`---mấy macro này bắt đầu bằng `PRI` rồi theo
+sau là format specifier mà bạn thường dùng cho kiểu đó. Cuối cùng,
+thêm số bit.
 
-For example, the format specifier for a 64-bit integer is `PRId64`---the
-`d` is because you usually print integers with `"%d"`.
+Ví dụ, format specifier cho số nguyên 64-bit là `PRId64`---chữ `d` là
+vì thường bạn in số nguyên với `"%d"`.
 
-An unsigned 16-bit integer could be printed with `PRIu16`.
+Một số nguyên không dấu 16-bit có thể được in với `PRIu16`.
 
-These macros expand to string literals. We can take advantage of the
-fact that C automatically concatenates neighboring string literals and
-use these specifiers like this:
+Mấy macro này mở rộng thành string literal. Ta có thể tận dụng việc C
+tự động nối các string literal kề nhau và dùng các specifier này như
+sau:
 
 ``` {.c .numberLines}
-#include <stdio.h>     // for printf()
+#include <stdio.h>     // cho printf()
 #include <inttypes.h>
 
 int main(void)
@@ -54,31 +54,31 @@ int main(void)
 }
 ```
 
-There's nothing magical happening on line 8, above. Indeed, if I print
-out the value of the macro:
+Không có gì ma thuật xảy ra ở dòng 8 bên trên đâu. Thật vậy, nếu tôi
+in giá trị của macro:
 
 ``` {.c}
 printf("%s\n", PRId16);
 ```
 
-we get this on my system:
+ta nhận được cái này trên hệ của tôi:
 
 ``` {.default}
 hd
 ```
 
-which is a `printf()` format specifier meaning "short signed integer" .
+là một format specifier của `printf()` có nghĩa "số nguyên có dấu
+ngắn".
 
-So back to line 8, after string literal concatenation, it's just as if
-I'd typed:
+Nên quay lại dòng 8, sau khi nối string literal, nó y hệt như tôi đã
+gõ:
 
 ``` {.c .numberLines startFrom="8"}
     printf("The value is %hd!\n", x);
 ```
 
-Here's a table of all the macros you can use for `printf()` format
-specifiers... substitute the number of bits for _N_, usually 8, 16, 32,
-or 64.
+Đây là bảng mọi macro bạn có thể dùng cho format specifier của
+`printf()`... thay số bit vào _N_, thường là 8, 16, 32, hoặc 64.
 
 [i[`PRIdn` macros]i] [i[`PRIdLEASTn` macros]i] [i[`PRIdFASTn` macros]i] [i[`PRIdMAX` macro]i] [i[`PRIdPTR` macro]i]
 [i[`PRIin` macros]i] [i[`PRIiLEASTn` macros]i] [i[`PRIiFASTn` macros]i] [i[`PRIiMAX` macro]i] [i[`PRIiPTR` macro]i]
@@ -96,11 +96,11 @@ or 64.
 `PRIX`_N_ `PRIXLEAST`_N_ `PRIXFAST`_N_ `PRIXMAX` `PRIXPTR`
 --------- -------------- ------------- --------- ---------
 
-Note again how the lowercase center letter represents the usual format
-specifiers you'd pass to `printf()`: `d`, `i`, `o`, `u`, `x`, and `X`.
+Để ý lần nữa là chữ chữ thường ở giữa đại diện cho các format
+specifier thông thường bạn truyền cho `printf()`: `d`, `i`, `o`, `u`,
+`x`, và `X`.
 
-And we have a similar set of macros for `scanf()` for reading in these
-various types:
+Và ta có một bộ macro tương tự cho `scanf()` để đọc các kiểu này:
 
 [i[`SCNdn` macros]i] [i[`SCNdLEASTn` macros]i] [i[`SCNdFASTn` macros]i] [i[`SCNdMAX` macro]i] [i[`SCNdPTR` macro]i]
 [i[`SCNin` macros]i] [i[`SCNiLEASTn` macros]i] [i[`SCNiFASTn` macros]i] [i[`SCNiMAX` macro]i] [i[`SCNiPTR` macro]i]
@@ -116,15 +116,15 @@ various types:
 `SCNx`_N_ `SCNxLEAST`_N_ `SCNxFAST`_N_ `SCNxMAX` `SCNxPTR`
 --------- -------------- ------------- --------- ---------
 
-The rule is that for each type defined in `<stdint.h>` there will be
-corresponding `printf()` and `scanf()` macros defined here.
+Quy tắc là với mỗi kiểu được định nghĩa trong `<stdint.h>` sẽ có các
+macro `printf()` và `scanf()` tương ứng được định nghĩa ở đây.
 
 [[manbreak]]
 ## `imaxabs()` {#man-imaxabs}
 
 [i[`imaxabs()` function]i]
 
-Compute the absolute value of an `intmax_t`
+Tính giá trị tuyệt đối của một `intmax_t`
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -134,21 +134,21 @@ Compute the absolute value of an `intmax_t`
 intmax_t imaxabs(intmax_t j);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-When you need the absolute value of the biggest integer type on the
-system, this is the function for you.
+Khi bạn cần giá trị tuyệt đối của kiểu số nguyên lớn nhất trên hệ
+thống, đây là hàm dành cho bạn.
 
-The spec notes that if the absolute value of the number cannot be
-represented, the behavior is undefined. This would happen if you tried
-to take the absolute value of the smallest possible negative number in a
-two's-complement system.
+Spec ghi chú rằng nếu giá trị tuyệt đối của số không biểu diễn được,
+hành vi là undefined. Chuyện này xảy ra nếu bạn thử lấy giá trị tuyệt
+đối của số âm nhỏ nhất có thể trên hệ thống biểu diễn bù hai (two's
+complement).
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the absolute value of the input, $|j|$.
+Trả về giá trị tuyệt đối của đầu vào, $|j|$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -162,7 +162,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fabs()`](#man-fabs)
 
@@ -172,7 +172,7 @@ int main(void)
 
 [i[`imaxdiv()` function]i]
 
-Compute the quotient and remainder of `intmax_t`s
+Tính thương và số dư của các `intmax_t`
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -182,23 +182,22 @@ Compute the quotient and remainder of `intmax_t`s
 imaxdiv_t imaxdiv(intmax_t numer, intmax_t denom);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-When you want to do integer division and remainder in a single
-operation, this function will do it for you.
+Khi bạn muốn làm phép chia nguyên và lấy số dư trong cùng một phép,
+hàm này sẽ làm cho bạn.
 
-It computes `numer/denom` and `numer%denom` and returns the result in a
-structure of type `imaxdiv_t`.
+Nó tính `numer/denom` và `numer%denom` rồi trả về kết quả trong một
+struct kiểu `imaxdiv_t`.
 
-This structure has two `imaxdiv_t` fields, `quot` and `rem`, that you
-use to retrieve the sought-after values.
+Struct này có hai field kiểu `imaxdiv_t`, `quot` và `rem`, mà bạn
+dùng để lấy các giá trị mong muốn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns an `imaxdiv_t` containing the quotient and remainder of the
-operation.
+Trả về một `imaxdiv_t` chứa thương và số dư của phép toán.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -221,7 +220,7 @@ Output:
 Quotient: 205, remainder: 5
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`remquo()`](#man-remquo)
 
@@ -231,7 +230,7 @@ Quotient: 205, remainder: 5
 [i[`strtoimax()` function]i]
 [i[`strtoumax()` function]i]
 
-Convert strings to types `intmax_t` and `uintmax_t`
+Chuyển string sang kiểu `intmax_t` và `uintmax_t`
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -245,25 +244,25 @@ uintmax_t strtoumax(const char * restrict nptr, char ** restrict endptr,
                    int base);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These work just like the [`strtol()`](#man-strtol) family of functions,
-except they return an `intmax_t` or `uintmax_t`.
+Mấy cái này hoạt động y hệt họ hàm [`strtol()`](#man-strtol), chỉ
+khác là trả về `intmax_t` hoặc `uintmax_t`.
 
-See the [`strtol()`](#man-strtol) reference page for details.
+Xem trang tham chiếu [`strtol()`](#man-strtol) để biết chi tiết.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the converted string as an `intmax_t` or `uintmax_t`.
+Trả về string đã chuyển dưới dạng `intmax_t` hoặc `uintmax_t`.
 
-If the result is out of range, the returned value will be `INTMAX_MAX`,
-`INTMAX_MIN`, or `UINTMAX_MAX`, as appropriate. And the `errno` variable
-will be set to `ERANGE`.
+Nếu kết quả nằm ngoài miền giá trị, giá trị trả về sẽ là `INTMAX_MAX`,
+`INTMAX_MIN`, hoặc `UINTMAX_MAX`, tuỳ trường hợp. Và biến `errno` sẽ
+được set thành `ERANGE`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-The following example converts a base-10 number to an `intmax_t`.  Then
-it attempts to convert an invalid base-2 number, catching the error.
+Ví dụ sau chuyển một số cơ số 10 sang `intmax_t`. Rồi nó thử chuyển
+một số cơ số 2 không hợp lệ, bắt lỗi.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -274,7 +273,7 @@ int main(void)
     intmax_t r;
     char *endptr;
 
-    // Valid base-10 number
+    // Số cơ số 10 hợp lệ
     r = strtoimax("123456789012345", &endptr, 10);
 
     if (*endptr != '\0')
@@ -282,7 +281,7 @@ int main(void)
     else
         printf("Value is %jd\n", r);
     
-    // The following binary number contains an invalid digit
+    // Số nhị phân sau chứa chữ số không hợp lệ
     r = strtoimax("0100102010101101", &endptr, 2);
 
     if (*endptr != '\0')
@@ -299,7 +298,7 @@ Value is 123456789012345
 Invalid digit: 2
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`strtol()`](#man-strtol),
 [`errno`](#errno)
@@ -311,12 +310,12 @@ Invalid digit: 2
 [i[`wcstoimax()` function]i]
 [i[`wcstoumax()` function]i]
 
-Convert wide strings to types `intmax_t` and `uintmax_t`
+Chuyển wide string sang kiểu `intmax_t` và `uintmax_t`
 
 ### Synopsis {.unnumbered .unlisted}
 
 ``` {.c}
-#include <stddef.h> // for wchar_t
+#include <stddef.h> // cho wchar_t
 #include <inttypes.h>
 
 intmax_t wcstoimax(const wchar_t * restrict nptr,
@@ -326,25 +325,25 @@ uintmax_t wcstoumax(const wchar_t * restrict nptr,
                     wchar_t ** restrict endptr, int base);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These work just like the [`wcstol()`](#man-wcstol) family of functions,
-except they return an `intmax_t` or `uintmax_t`.
+Mấy cái này hoạt động y hệt họ hàm [`wcstol()`](#man-wcstol), chỉ
+khác là trả về `intmax_t` hoặc `uintmax_t`.
 
-See the [`wcstol()`](#man-wcstol) reference page for details.
+Xem trang tham chiếu [`wcstol()`](#man-wcstol) để biết chi tiết.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the converted wide string as an `intmax_t` or `uintmax_t`.
+Trả về wide string đã chuyển dưới dạng `intmax_t` hoặc `uintmax_t`.
 
-If the result is out of range, the returned value will be `INTMAX_MAX`,
-`INTMAX_MIN`, or `UINTMAX_MAX`, as appropriate. And the `errno` variable
-will be set to `ERANGE`.
+Nếu kết quả nằm ngoài miền giá trị, giá trị trả về sẽ là `INTMAX_MAX`,
+`INTMAX_MIN`, hoặc `UINTMAX_MAX`, tuỳ trường hợp. Và biến `errno` sẽ
+được set thành `ERANGE`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-The following example converts a base-10 number to an `intmax_t`.  Then
-it attempts to convert an invalid base-2 number, catching the error.
+Ví dụ sau chuyển một số cơ số 10 sang `intmax_t`. Rồi nó thử chuyển
+một số cơ số 2 không hợp lệ, bắt lỗi.
 
 ``` {.c .numberLines}
 #include <wchar.h>
@@ -355,7 +354,7 @@ int main(void)
     intmax_t r;
     wchar_t *endptr;
 
-    // Valid base-10 number
+    // Số cơ số 10 hợp lệ
     r = wcstoimax(L"123456789012345", &endptr, 10);
 
     if (*endptr != '\0')
@@ -363,7 +362,7 @@ int main(void)
     else
         wprintf(L"Value is %jd\n", r);
     
-    // The following binary number contains an invalid digit
+    // Số nhị phân sau chứa chữ số không hợp lệ
     r = wcstoimax(L"0100102010101101", &endptr, 2);
 
     if (*endptr != '\0')
@@ -378,7 +377,7 @@ Value is 123456789012345
 Invalid digit: 2
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`wcstol()`](#man-wcstol),
 [`errno`](#errno)
