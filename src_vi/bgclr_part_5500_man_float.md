@@ -3,7 +3,7 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<float.h>` Floating Point Limits {#float}
+# `<float.h>` Giới hạn Dấu chấm động {#float}
 
 [i[`float.h` header file]i]
 
@@ -29,39 +29,39 @@
 [i[`DBL_MAX` macro]i]
 [i[`LDBL_MAX` macro]i]
 
-|Macro|Minimum Magnitude|Description|
+|Macro|Độ lớn tối thiểu|Mô tả|
 |--|:--:|--------|
-|`FLT_ROUNDS`||Current rounding mode|
-|`FLT_EVAL_METHOD`||Types used for evaluation|
-|`FLT_HAS_SUBNORM`||Subnormal support for `float`|
-|`DBL_HAS_SUBNORM`||Subnormal support for `double`|
-|`LDBL_HAS_SUBNORM`||Subnormal support for `long double`|
-|`FLT_RADIX`|`2`|Floating point radix (base)|
-|`FLT_MANT_DIG`||Number of base `FLT_RADIX` digits in a `float`|
-|`DBL_MANT_DIG`||Number of base `FLT_RADIX` digits in a `double`|
-|`LDBL_MANT_DIG`||Number of base `FLT_RADIX` digits in a `long double`|
-|`FLT_DECIMAL_DIG`|`6`|Number of decimal digits required to encode a `float`|
-|`DBL_DECIMAL_DIG`|`10`|Number of decimal digits required to encode a `double`|
-|`LDBL_DECIMAL_DIG`|`10`|Number of decimal digits required to encode a `long double`|
-|`DECIMAL_DIG`|`10`|Number of decimal digits required to encode the the widest floating point number supported|
-|`FLT_DIG`|`6`|Number of decimal digits that can be safely stored in a `float`|
-|`DBL_DIG`|`10`|Number of decimal digits that can be safely stored in a `double`|
-|`LDBL_DIG`|`10`|Number of decimal digits that can be safely stored in a `long double`|
-|`FLT_MIN_EXP`||`FLT_RADIX` to the `FLT_MIN_EXP-1` power is the smallest normalized `float`|
-|`DBL_MIN_EXP`||`FLT_RADIX` to the `DBL_MIN_EXP-1` power is the smallest normalized `double`|
-|`LDBL_MIN_EXP`||`FLT_RADIX` to the `LDBL_MIN_EXP-1` power is the smallest normalized `long double`|
-|`FLT_MIN_10_EXP`|`-37`|Minimum exponent such that `10` to this number is a normalized `float`|
-|`DBL_MIN_10_EXP`|`-37`|Minimum exponent such that `10` to this number is a normalized `double`
-|`LDBL_MIN_10_EXP`|`-37`|Minimum exponent such that `10` to this number is a normalized `long_double`
-|`FLT_MAX_EXP`||`FLT_RADIX` to the `FLT_MAX_EXP-1` power is the largest finite `float`|
-|`DBL_MAX_EXP`||`FLT_RADIX` to the `DBL_MAX_EXP-1` power is the largest finite `double`|
-|`LDBL_MAX_EXP`||`FLT_RADIX` to the `LDBL_MAX_EXP-1` power is the largest finite `long double`|
-|`FLT_MAX_10_EXP`|`-37`|Minimum exponent such that `10` to this number is a finite `float`|
-|`DBL_MAX_10_EXP`|`-37`|Minimum exponent such that `10` to this number is a finite `double`
-|`LDBL_MAX_10_EXP`|`-37`|Minimum exponent such that `10` to this number is a finite `long_double`
-|`FLT_MAX`|`1E+37`|Largest finite `float`|
-|`DBL_MAX`|`1E+37`|Largest finite `double`|
-|`LDBL_MAX`|`1E+37`|Largest finite `long double`|
+|`FLT_ROUNDS`||Chế độ làm tròn hiện tại|
+|`FLT_EVAL_METHOD`||Các kiểu dùng để đánh giá|
+|`FLT_HAS_SUBNORM`||Hỗ trợ subnormal cho `float`|
+|`DBL_HAS_SUBNORM`||Hỗ trợ subnormal cho `double`|
+|`LDBL_HAS_SUBNORM`||Hỗ trợ subnormal cho `long double`|
+|`FLT_RADIX`|`2`|Cơ số dấu chấm động (radix)|
+|`FLT_MANT_DIG`||Số chữ số cơ số `FLT_RADIX` trong `float`|
+|`DBL_MANT_DIG`||Số chữ số cơ số `FLT_RADIX` trong `double`|
+|`LDBL_MANT_DIG`||Số chữ số cơ số `FLT_RADIX` trong `long double`|
+|`FLT_DECIMAL_DIG`|`6`|Số chữ số thập phân cần để mã hoá một `float`|
+|`DBL_DECIMAL_DIG`|`10`|Số chữ số thập phân cần để mã hoá một `double`|
+|`LDBL_DECIMAL_DIG`|`10`|Số chữ số thập phân cần để mã hoá một `long double`|
+|`DECIMAL_DIG`|`10`|Số chữ số thập phân cần để mã hoá số dấu chấm động rộng nhất được hỗ trợ|
+|`FLT_DIG`|`6`|Số chữ số thập phân có thể lưu an toàn trong `float`|
+|`DBL_DIG`|`10`|Số chữ số thập phân có thể lưu an toàn trong `double`|
+|`LDBL_DIG`|`10`|Số chữ số thập phân có thể lưu an toàn trong `long double`|
+|`FLT_MIN_EXP`||`FLT_RADIX` mũ `FLT_MIN_EXP-1` là `float` chuẩn hoá nhỏ nhất|
+|`DBL_MIN_EXP`||`FLT_RADIX` mũ `DBL_MIN_EXP-1` là `double` chuẩn hoá nhỏ nhất|
+|`LDBL_MIN_EXP`||`FLT_RADIX` mũ `LDBL_MIN_EXP-1` là `long double` chuẩn hoá nhỏ nhất|
+|`FLT_MIN_10_EXP`|`-37`|Số mũ tối thiểu sao cho `10` luỹ thừa số này là `float` chuẩn hoá|
+|`DBL_MIN_10_EXP`|`-37`|Số mũ tối thiểu sao cho `10` luỹ thừa số này là `double` chuẩn hoá
+|`LDBL_MIN_10_EXP`|`-37`|Số mũ tối thiểu sao cho `10` luỹ thừa số này là `long_double` chuẩn hoá
+|`FLT_MAX_EXP`||`FLT_RADIX` mũ `FLT_MAX_EXP-1` là `float` hữu hạn lớn nhất|
+|`DBL_MAX_EXP`||`FLT_RADIX` mũ `DBL_MAX_EXP-1` là `double` hữu hạn lớn nhất|
+|`LDBL_MAX_EXP`||`FLT_RADIX` mũ `LDBL_MAX_EXP-1` là `long double` hữu hạn lớn nhất|
+|`FLT_MAX_10_EXP`|`-37`|Số mũ tối thiểu sao cho `10` luỹ thừa số này là `float` hữu hạn|
+|`DBL_MAX_10_EXP`|`-37`|Số mũ tối thiểu sao cho `10` luỹ thừa số này là `double` hữu hạn
+|`LDBL_MAX_10_EXP`|`-37`|Số mũ tối thiểu sao cho `10` luỹ thừa số này là `long_double` hữu hạn
+|`FLT_MAX`|`1E+37`|`float` hữu hạn lớn nhất|
+|`DBL_MAX`|`1E+37`|`double` hữu hạn lớn nhất|
+|`LDBL_MAX`|`1E+37`|`long double` hữu hạn lớn nhất|
 
 [i[`FLT_EPSILON` macro]i]
 [i[`DBL_EPSILON` macro]i]
@@ -73,57 +73,54 @@
 [i[`DBL_TRUE_MIN` macro]i]
 [i[`LDBL_TRUE_MIN` macro]i]
 
-|Macro|Maximum Value|Description|
+|Macro|Giá trị tối đa|Mô tả|
 |--|:--:|--------|
-|`FLT_EPSILON`|`1E-5`|Difference between 1 and the next biggest representable `float`|
-|`DBL_EPSILON`|`1E-9`|Difference between 1 and the next biggest representable `double`|
-|`LDBL_EPSILON`|`1E-9`|Difference between 1 and the next biggest representable `long double`|
-|`FLT_MIN`|`1E-37`|Minimum positive normalized `float`|
-|`DBL_MIN`|`1E-37`|Minimum positive normalized `double`|
-|`LDBL_MIN`|`1E-37`|Minimum positive normalized `long double`|
-|`FLT_TRUE_MIN`|`1E-37`|Minimum positive `float`|
-|`DBL_TRUE_MIN`|`1E-37`|Minimum positive `double`|
-|`LDBL_TRUE_MIN`|`1E-37`|Minimum positive `long double`|
+|`FLT_EPSILON`|`1E-5`|Chênh lệch giữa 1 và `float` biểu diễn được lớn hơn kế tiếp|
+|`DBL_EPSILON`|`1E-9`|Chênh lệch giữa 1 và `double` biểu diễn được lớn hơn kế tiếp|
+|`LDBL_EPSILON`|`1E-9`|Chênh lệch giữa 1 và `long double` biểu diễn được lớn hơn kế tiếp|
+|`FLT_MIN`|`1E-37`|`float` chuẩn hoá dương nhỏ nhất|
+|`DBL_MIN`|`1E-37`|`double` chuẩn hoá dương nhỏ nhất|
+|`LDBL_MIN`|`1E-37`|`long double` chuẩn hoá dương nhỏ nhất|
+|`FLT_TRUE_MIN`|`1E-37`|`float` dương nhỏ nhất|
+|`DBL_TRUE_MIN`|`1E-37`|`double` dương nhỏ nhất|
+|`LDBL_TRUE_MIN`|`1E-37`|`long double` dương nhỏ nhất|
 
-The minimum and maximum values here are from the spec---they should what
-you can at least expect across all platforms. Your super dooper machine
-might do better, still!
+Các giá trị tối thiểu và tối đa ở đây lấy từ spec---đó là mức tối
+thiểu bạn có thể mong đợi trên mọi nền tảng. Máy siêu xịn của bạn có
+thể làm tốt hơn nữa!
 
-## Background
+## Bối cảnh
 
-The spec allows a lot of leeway when it comes to how C represents
-floating point numbers. This header file spells out the limits on those
-numbers.
+Spec cho phép khá thoáng trong chuyện C biểu diễn số dấu chấm động
+như thế nào. Header này đánh vần ra các giới hạn của những con số đó.
 
-It gives a model that can describe any floating point number that I
-_know_ you're going to absolutely love. It looks like this:
+Nó đưa ra một mô hình có thể mô tả bất kỳ số dấu chấm động nào mà tôi
+_biết_ chắc chắn bạn sẽ mê tít. Trông như vầy:
 
 $\displaystyle x=sb^e\sum_{k=1}^p f_k b^{-k}, e_{min} \le e \le e_{max}$
 
-where:
+trong đó:
 
-|Variable|Meaning|
+|Biến|Ý nghĩa|
 |:-:|-|
-|$s$|Sign, $-1$ or $1$|
-|$b$|Base (radix), probably $2$ on your system|
-|$e$|Exponent|
-|$p$|Precision: how many base-$b$ digits in the number|
-|$f_k$|The individual digits of the number, the significand|
+|$s$|Dấu, $-1$ hoặc $1$|
+|$b$|Cơ số (radix), trên hệ của bạn chắc là $2$|
+|$e$|Số mũ|
+|$p$|Độ chính xác: có bao nhiêu chữ số cơ số $b$ trong số|
+|$f_k$|Từng chữ số của số, tức significand|
 
-But let's blissfully ignore all that for a second.
+Nhưng tạm thời cứ bỏ qua mớ đó đi cho nhẹ đầu.
 
-Let's assume your computer uses base 2 for it's floating point (it
-probably does). And that in the example below the 1s-and-0s numbers are
-in binary, and the rest are in decimal.
+Giả sử máy của bạn dùng cơ số 2 cho dấu chấm động (chắc là có). Và
+trong ví dụ dưới đây các số 1-và-0 là ở hệ nhị phân, còn lại ở thập
+phân.
 
-The short of it is you could have floating point numbers like shown in
-this example:
+Tóm lại là bạn có thể có các số dấu chấm động như trong ví dụ này:
 
 $-0.10100101 \times 2^5 = -10100.101 = -20.625$
 
-That's your fractional part multiplied by the base to the exponent's
-power. The exponent controls where the decimal point is. It "floats"
-around!
+Đó là phần phân số nhân với cơ số luỹ thừa số mũ. Số mũ điều khiển
+dấu thập phân nằm ở đâu. Nó "trôi" loanh quanh!
 
 <!--
 Or, more specifically, that example uses:
@@ -135,71 +132,70 @@ $p=8$ \
 $f_n=10100101$ 
 -->
 
-## `FLT_ROUNDS` Details
+## Chi tiết `FLT_ROUNDS`
 
 [i[`FLT_ROUNDS` macro]i]
 
-This tells you the rounding mode. It can be changed with a call to
-[`fesetround()`](#man-fegetround).
+Cái này cho bạn biết chế độ làm tròn. Có thể thay đổi bằng một lời
+gọi [`fesetround()`](#man-fegetround).
 
-|Mode|Description|
+|Chế độ|Mô tả|
 |:-:|-|
-|`-1`|Indeterminable|
-|`0`|Toward zero|
-|`1`|To nearest|
-|`2`|Toward positive infinity|
-|`3`|Toward negative infinity... and beyond!|
+|`-1`|Không xác định được|
+|`0`|Về phía 0|
+|`1`|Về gần nhất|
+|`2`|Về phía dương vô cực|
+|`3`|Về phía âm vô cực... và xa hơn nữa!|
 
-Unlike every other macro in this here header, `FLT_ROUNDS` might not be
-a constant expression.
+Không giống mọi macro khác trong header này, `FLT_ROUNDS` có thể
+không phải là biểu thức hằng.
 
-## `FLT_EVAL_METHOD` Details
+## Chi tiết `FLT_EVAL_METHOD`
 
 [i[`FLT_EVAL_METHOD` macro]i]
 
-This basically tells you how floating point values are promoted to
-different types in expressions.
+Cái này cơ bản cho bạn biết các giá trị dấu chấm động được promote
+sang kiểu khác thế nào trong biểu thức.
 
-|Method|Description|
+|Phương pháp|Mô tả|
 |:--:|-----------------------|
-|`-1`|Indeterminable|
-|`0`|Evaluate all operations and constants to the precision of their respective types|
-|`1`|Evaluate `float` and `double` operations as `double` and `long double` ops as `long double`|
-|`2`|Evaluate all operations and constants as `long double`|
+|`-1`|Không xác định được|
+|`0`|Đánh giá mọi phép toán và hằng ở độ chính xác của kiểu tương ứng|
+|`1`|Đánh giá phép toán `float` và `double` như `double`, phép toán `long double` như `long double`|
+|`2`|Đánh giá mọi phép toán và hằng như `long double`|
 
-## Subnormal Numbers
+## Số Subnormal
 
 [i[`FLT_HAS_SUBNORM` macro]i]
 [i[`DBL_HAS_SUBNORM` macro]i]
 [i[`LDBL_HAS_SUBNORM` macro]i]
 
-The macros `FLT_HAS_SUBNORM`, `DBL_HAS_SUBNORM`, and `LDBL_HAS_SUBNORM`
-all let you know if those types support [flw[subnormal
-numbers|Subnormal_number]].
+Các macro `FLT_HAS_SUBNORM`, `DBL_HAS_SUBNORM`, và `LDBL_HAS_SUBNORM`
+đều cho bạn biết các kiểu đó có hỗ trợ [flw[số
+subnormal|Subnormal_number]] không.
 
-|Value|Description|
+|Giá trị|Mô tả|
 |:-:|-|
-|`-1`|Indeterminable|
-|`0`|Subnormals not supported for this type|
-|`1`|Subnormals supported for this type|
+|`-1`|Không xác định được|
+|`0`|Subnormal không được hỗ trợ cho kiểu này|
+|`1`|Subnormal được hỗ trợ cho kiểu này|
 
-## How Many Decimal Places Can I Use?
+## Tôi dùng được bao nhiêu chữ số thập phân?
 
-It depends on what you want to do.
+Còn tuỳ bạn muốn làm gì.
 
 [i[`FLT_DIG` macro]i]
 [i[`DBL_DIG` macro]i]
 [i[`LDBL_DIG` macro]i]
 
-The safe thing is if you never use more than `FLT_DIG` base-10 digits in
-your `float`, you're good. (Same for `DBL_DIG` and `LDBL_DIG` for their
-types.)
+An toàn là nếu bạn không bao giờ dùng quá `FLT_DIG` chữ số cơ số 10
+trong `float` của mình, bạn ổn. (Tương tự với `DBL_DIG` và `LDBL_DIG`
+cho kiểu của chúng.)
 
-And by "use" I mean print out, have in code, read from the keyboard,
-etc.
+Và "dùng" tôi nói đây là in ra, có trong code, đọc từ bàn phím, v.v.
 
-You can print out that many decimal places with `printf()` and the `%g`
-format specifier:
+Bạn có thể in ra từng ấy chữ số thập phân bằng `printf()` và format
+specifier `%g`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -209,39 +205,37 @@ int main(void)
 {
     float pi = 3.1415926535897932384626433832795028841971;
 
-    // With %g or %G, the precision refers to the number of significant
-    // digits:
+    // Với %g hoặc %G, precision chỉ số chữ số có nghĩa:
 
-    printf("%.*g\n", FLT_DIG, pi);  // For me: 3.14159
+    printf("%.*g\n", FLT_DIG, pi);  // Với tôi: 3.14159
 
-    // But %f prints too many, since the precision is the number of
-    // digits to the right of the decimal--it doesn't count the digits
-    // to the left of it:
+    // Nhưng %f in quá nhiều, vì precision là số chữ số bên phải
+    // dấu thập phân--nó không đếm các chữ số bên trái:
 
-    printf("%.*f\n", FLT_DIG, pi);  // For me: 3.14159... 3 ???
+    printf("%.*f\n", FLT_DIG, pi);  // Với tôi: 3.14159... 3 ???
 }
 ```
 
-That's the end, but stay tuned for the exciting conclusion of "How Many
-Decimal Places Can I Use?"
+Đấy là hết, nhưng mời đón xem phần kết hấp dẫn của "Tôi dùng được
+bao nhiêu chữ số thập phân?"
 
-Because base 10 and base 2 (your typical `FLT_RADIX`) don't mix very
-well, you can actually have more than `FLT_DIG` in your
-`float`; the bits of storage go out a little farther. But these might
-round in a way you don't expect.
+Vì cơ số 10 và cơ số 2 (`FLT_RADIX` tiêu biểu của bạn) không ăn ý với
+nhau lắm, bạn có thể thực sự có nhiều hơn `FLT_DIG` chữ số trong
+`float`; các bit lưu trữ kéo dài thêm chút nữa. Nhưng chúng có thể
+làm tròn theo cách bạn không ngờ tới.
 
 [i[`FLT_DECIMAL_DIG` macro]i]
 [i[`DBL_DECIMAL_DIG` macro]i]
 [i[`LDBL_DECIMAL_DIG` macro]i]
 
-But if you want to convert a floating point number to base 10 and then
-be able to convert it back again to the exact same floating point
-number, you'll need `FLT_DECIMAL_DIG` digits from your `float` to make
-sure you get those extra bits of storage represented. (And
-`DBL_DECIMAL_DIG` and `LDBL_DECIMAL_DIG` for those corresponding types.)
+Nhưng nếu bạn muốn chuyển một số dấu chấm động sang cơ số 10 rồi có
+thể chuyển nó ngược lại thành cùng một số dấu chấm động y hệt, bạn sẽ
+cần `FLT_DECIMAL_DIG` chữ số từ `float` để đảm bảo mấy bit lưu trữ
+dư ra được thể hiện đầy đủ. (Và `DBL_DECIMAL_DIG` và
+`LDBL_DECIMAL_DIG` cho các kiểu tương ứng.)
 
-Here's some example output that shows how the value stored might have
-some extra decimal places at the end.
+Dưới đây là ví dụ output cho thấy giá trị được lưu có thể có vài chữ
+số thập phân thừa ở cuối.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -254,7 +248,7 @@ int main(void)
     printf("FLT_DIG = %d\n", FLT_DIG);
     printf("FLT_DECIMAL_DIG = %d\n\n", FLT_DECIMAL_DIG);
 
-    assert(FLT_DIG == 6);  // Code below assumes this
+    assert(FLT_DIG == 6);  // Code dưới giả định điều này
 
     for (float x = 0.123456; x < 0.12346; x += 0.000001) {
         printf("As written: %.*g\n", FLT_DIG, x);
@@ -263,8 +257,8 @@ int main(void)
 }
 ```
 
-And the output on my machine, starting at `0.123456` and incrementing by
-`0.000001` each time:
+Và output trên máy của tôi, bắt đầu tại `0.123456` và tăng dần
+`0.000001` mỗi lần:
 
 ``` {.default}
 FLT_DIG = 6
@@ -286,20 +280,19 @@ As written: 0.12346
 As stored:  0.123459995
 ```
 
-You can see that the value stored isn't always the value we're expecting
-since base-2 can't represent all base-10 fractions exactly. The best it
-can do is store more places and then round.
+Bạn có thể thấy giá trị lưu không phải lúc nào cũng là giá trị ta
+mong đợi, vì cơ số 2 không biểu diễn chính xác được mọi phân số cơ số
+10. Tốt nhất nó có thể làm là lưu thêm vài chữ số rồi làm tròn.
 
-Also notice that even though we tried to stop the `for` loop _before_
-`0.123460`, it actually ran including that value since the stored
-version of that number was `0.123459995`, which is still less than
-`0.123460`.
+Cũng để ý là dù ta đã cố dừng vòng `for` _trước_ `0.123460`, nó thực
+sự chạy qua cả giá trị đó vì bản lưu của số đó là `0.123459995`, vẫn
+nhỏ hơn `0.123460`.
 
-Aren't floating point numbers fun?
+Số dấu chấm động vui ghê nhỉ?
 
-## Comprehensive Example
+## Ví dụ Toàn diện
 
-Here's a program that prints out the details for a particular machine:
+Đây là chương trình in ra chi tiết cho một máy cụ thể:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -357,7 +350,7 @@ int main(void)
 }
 ```
 
-And here's the output on my machine:
+Và đây là output trên máy của tôi:
 
 ``` {.default}
 FLT_RADIX: 2
