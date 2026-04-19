@@ -3,38 +3,38 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<uchar.h>` Unicode utility functions {#uchar}
+# `<uchar.h>` Hàm Tiện Ích Unicode {#uchar}
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`c16rtomb()`](#man-c16rtomb)|Convert a `char16_t` to a multibyte character|
-|[`c32rtomb()`](#man-c16rtomb)|Convert a `char32_t` to a multibyte character|
-|[`mbrtoc16()`](#man-mbrtoc16)|Convert a multibyte character to a `char16_t`|
-|[`mbrtoc32()`](#man-mbrtoc16)|Convert a multibyte character to a `char32_t`|
+|[`c16rtomb()`](#man-c16rtomb)|Chuyển `char16_t` sang ký tự multibyte|
+|[`c32rtomb()`](#man-c16rtomb)|Chuyển `char32_t` sang ký tự multibyte|
+|[`mbrtoc16()`](#man-mbrtoc16)|Chuyển ký tự multibyte sang `char16_t`|
+|[`mbrtoc32()`](#man-mbrtoc16)|Chuyển ký tự multibyte sang `char32_t`|
 
 
-These functions are _restartable_, meaning multiple threads can safely
-call them at once. They handle this by having their own conversion
-state variable (of type `mbstate_t`) per call.
+Các hàm này là _restartable_, tức là nhiều luồng có thể cùng gọi
+chúng an toàn. Chúng xử được chuyện đó nhờ giữ biến conversion
+state riêng (kiểu `mbstate_t`) cho mỗi lần gọi.
 
-## Types
+## Kiểu
 
-This header file defines four types.
+Header này định nghĩa bốn kiểu.
 
 [i[`char16_t` type]i]
 [i[`char32_t` type]i]
 [i[`mbstate_t` type]i]
 [i[`size_t` type]i]
 
-|Type|Description|
+|Kiểu|Mô tả|
 |------|----------------------|
-|`char16_t`|Type to hold 16-bit characters|
-|`char32_t`|Type to hold 32-bit characters|
-|`mbstate_t`|Holds the conversion state for restartable funcitons (also defined in [`<wchar.h>`](#wchar))|
-|`size_t`|To hold various counts (also defined in [`<stddef.h>`](#stddef))|
+|`char16_t`|Kiểu giữ ký tự 16-bit|
+|`char32_t`|Kiểu giữ ký tự 32-bit|
+|`mbstate_t`|Giữ conversion state cho các hàm restartable (cũng định nghĩa trong [`<wchar.h>`](#wchar))|
+|`size_t`|Giữ các count (cũng định nghĩa trong [`<stddef.h>`](#stddef))|
 
-String literals for the character types are `u` for `char16_t` and `U`
-for `char32_t`.
+String literal cho các kiểu ký tự này là `u` cho `char16_t` và `U`
+cho `char32_t`.
 
 ``` {.c}
 char16_t *str1 = u"Hello, world!";
@@ -44,16 +44,16 @@ char16_t *chr1 = u'A';
 char32_t *chr2 = U'B';
 ```
 
-Note that `char16_t` and `char32_t` _might_ contain Unicode. Or not. If
-`__STDC_UTF_16__` or `__STDC_UTF_32__` is defined as `1`, then
-`char16_t` and `char32_t` use Unicode, respectively. Otherwise they
-don't and the actual value stored depend on the locale. And if you're
-not using Unicode, you have my commiserations.
+Lưu ý `char16_t` và `char32_t` _có thể_ chứa Unicode. Hoặc không.
+Nếu `__STDC_UTF_16__` hoặc `__STDC_UTF_32__` được định nghĩa bằng
+`1`, thì `char16_t` và `char32_t` tương ứng dùng Unicode. Không thì
+chúng không dùng và giá trị thật lưu lại phụ thuộc locale. Và nếu
+bạn không xài Unicode, tôi xin chia buồn.
 
-## OS X issue
+## Vấn đề trên OS X
 
-This header file doesn't exist on OS X---bummer. If you just want the
-types, you can:
+Header này không có trên OS X---buồn nhỉ. Nếu chỉ cần mấy kiểu
+thôi, bạn có thể làm:
 
 ``` {.c}
 #include <stdint.h>
@@ -62,7 +62,7 @@ typedef int_least16_t char16_t;
 typedef int_least32_t char32_t;
 ```
 
-But if you also want the functions, that's all on you.
+Nhưng nếu bạn còn cần cả các hàm nữa thì tự lo.
 
 [[manbreak]]
 ## `mbrtoc16()` `mbrtoc32()` {#man-mbrtoc16}
@@ -70,7 +70,8 @@ But if you also want the functions, that's all on you.
 [i[`mbrtoc16()` function]i]
 [i[`mbrtoc32()` function]i]
 
-Convert a multibyte character to a `char16_t` or `char32_t` restartably
+Chuyển ký tự multibyte sang `char16_t` hoặc `char32_t` kiểu
+restartable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -86,85 +87,83 @@ size_t mbrtoc32(char32_t * restrict pc32, const char * restrict s, size_t n,
 
 ### Description {.unnumbered .unlisted}
 
-Given a source string `s` and a destination buffer `pc16` (or `pc32` for
-`mbrtoc32()`), convert the first character of the source to `char16_t`s
-(or `char32_t`s for `mbrtoc32()`).
+Cho một source string `s` và buffer đích `pc16` (hoặc `pc32` với
+`mbrtoc32()`), chuyển ký tự đầu tiên của nguồn thành các `char16_t`
+(hoặc `char32_t` với `mbrtoc32()`).
 
-Basically you have a regular character and you want it as `char16_t` or
-`char32_t`. Use these functions to do it. Note that only one character
-is converted no matter how many characters in `s`.
+Đại loại bạn có một ký tự thường và muốn nó ở dạng `char16_t` hay
+`char32_t`. Dùng mấy hàm này là xong. Lưu ý chỉ một ký tự được
+chuyển thôi bất kể `s` có bao nhiêu ký tự.
 
-As the functions scan `s`, you don't want them to overrun the end. So
-you pass in `n` as the maximum number of bytes to inspect. The functions
-will quit after that many bytes or when they have a complete multibyte
-character, whichever comes first.
+Khi các hàm scan `s`, bạn không muốn chúng chạy quá khỏi đầu cuối.
+Nên bạn truyền `n` là số byte tối đa được kiểm. Hàm sẽ dừng sau khi
+xét đủ từng ấy byte hoặc khi có đủ một ký tự multibyte hoàn chỉnh,
+tùy cái nào tới trước.
 
-Since they're restartable, pass in a conversion state variable for the
-functions to do their work.
+Vì chúng restartable, truyền vào một biến conversion state cho hàm
+làm việc.
 
-And the result will be placed in `pc16` (or `pc32` for `mbrtoc32()`).
+Và kết quả sẽ được đặt vào `pc16` (hoặc `pc32` với `mbrtoc32()`).
 
 ### Return Value {.unnumbered .unlisted}
 
-When successful this function returns a number between `1` and `n`
-inclusive representing the number of bytes that made up the multibyte
-character.
+Khi thành công, hàm trả về số giữa `1` và `n` (bao gồm cả hai đầu)
+biểu thị số byte tạo nên ký tự multibyte đó.
 
-Or, also in the success category, they can return `0` if the source
-character is the NUL character (value `0`).
+Hoặc, cũng tính là thành công, chúng có thể trả `0` nếu ký tự nguồn
+là NUL (giá trị `0`).
 
-When not entirely successful, they can return a variety of codes. These
-are all of type `size_t`, but negative values cast to that type.
+Khi không hoàn toàn thành công, chúng có thể trả đủ loại code. Tất
+cả đều kiểu `size_t`, nhưng là giá trị âm cast sang kiểu đó.
 
-|Return Value|Description|
+|Giá trị trả về|Mô tả|
 |------|----------------------|
-|`(size_t)(-1)`|Encoding error---this isn't a valid sequence of bytes. `errno` is set to `EILSEQ`.|
-|`(size_t)(-2)`|`n` bytes were examined and were a _partial_ valid character, but not a complete one.|
-|`(size_t)(-3)`|A subsequent value of a character that can't be represented as a single value. See below.|
+|`(size_t)(-1)`|Lỗi encoding---đây không phải chuỗi byte hợp lệ. `errno` được đặt thành `EILSEQ`.|
+|`(size_t)(-2)`|`n` byte đã được xét và tạo thành _một phần_ ký tự hợp lệ, nhưng chưa hoàn chỉnh.|
+|`(size_t)(-3)`|Một giá trị tiếp theo của ký tự không biểu diễn được bằng một giá trị đơn. Xem dưới.|
 
-Case `(size_t)(-3)` is an odd one. Basically there are some characters
-that can't be represented with 16 bits and so can't be stored in a
-`char16_t`. These characters are store in something called (in the
-Unicode world) _surrogate pairs_. That is, there are _two_ 16-bit values
-back to back that represent a larger Unicode value.
+Trường hợp `(size_t)(-3)` hơi lạ. Cơ bản là có vài ký tự không biểu
+diễn được bằng 16 bit nên không lưu được trong `char16_t`. Các ký
+tự này được lưu trong cái (gọi trong thế giới Unicode) là _surrogate
+pair_. Tức là có _hai_ giá trị 16-bit đi liền nhau biểu diễn một
+giá trị Unicode lớn hơn.
 
-For example, if you want to read the Unicode character `\U0001fbc5`
-(which is a [flw[stick figure|Symbols_for_Legacy_Computing]]---I'm just
-not putting it in the text because my font doesn't render it) that's
-more than 16 bits. But each call to `mbrtoc16()` only returns a single
-`char16_t`!
+Ví dụ, nếu bạn muốn đọc ký tự Unicode `\U0001fbc5` (là một
+[flw[hình người que|Symbols_for_Legacy_Computing]]---tôi không để
+trong text vì font của tôi không render nó được) thì nó dài hơn 16
+bit. Nhưng mỗi lần gọi `mbrtoc16()` chỉ trả một `char16_t`!
 
-So subsequent calls to `mbrtoc16()` resolves the _next_ value in the
-surrogate pair and returns `(size_t)(-3)` to let you know this has
-happened.
+Nên các lần gọi `mbrtoc16()` kế tiếp sẽ giải giá trị _tiếp theo_
+trong surrogate pair và trả về `(size_t)(-3)` để báo cho bạn biết
+chuyện này đã xảy ra.
 
-You can also pass `NULL` for `pc16` or `pc32`. This will cause no result
-to be stored, but you can use it if you're only interested in the return
-value from the functions.
+Bạn cũng có thể truyền `NULL` cho `pc16` hoặc `pc32`. Làm vậy sẽ
+không lưu kết quả, nhưng bạn có thể dùng nếu chỉ quan tâm đến giá
+trị trả về của hàm.
 
-Finally, if you pass `NULL` for `s`, the call is equivalent to:
+Cuối cùng, nếu bạn truyền `NULL` cho `s`, lệnh gọi tương đương với:
 
 ``` {.c}
 mbrtoc16(NULL, "", 1, ps)
 ```
 
-Since the character is a NUL in that case, this has the effect of
-setting the state in `ps` to the initial conversion state.
+Vì ký tự là NUL trong trường hợp đó, chuyện này có tác dụng đặt
+state trong `ps` về conversion state ban đầu.
 
 ### Example {.unnumbered .unlisted}
 
-Normal use case example where we get the first two character values from
-the multibyte string `"€Zillion"`:
+Ví dụ use case thường thấy, lấy hai giá trị ký tự đầu tiên từ chuỗi
+multibyte `"€Zillion"`:
 
 ``` {.c}
 #include <uchar.h>
-#include <stdio.h>   // for printf()
-#include <locale.h>  // for setlocale()
-#include <string.h>  // for memset()
+#include <stdio.h>   // cho printf()
+#include <locale.h>  // cho setlocale()
+#include <string.h>  // cho memset()
 
 int main(void)
 {
-    char *s = "\u20acZillion";  // 20ac is "€"
+    char *s = "\u20acZillion";  // 20ac là "€"
     char16_t pc16;
     size_t r;
     mbstate_t mbs;
@@ -172,35 +171,35 @@ int main(void)
     setlocale(LC_ALL, "");
     memset(&mbs, 0, sizeof mbs);
 
-    // Examine the next 8 bytes to see if there's a character in there
+    // Kiểm 8 byte kế xem có ký tự nào trong đó
     r = mbrtoc16(&pc16, s, 8, &mbs);
 
-    printf("%zu\n", r);     // Prints a value >= 1 (3 in UTF-8 locale)
-    printf("%#x\n", pc16);  // Prints 0x20ac for "€"
+    printf("%zu\n", r);     // In một giá trị >= 1 (3 trong locale UTF-8)
+    printf("%#x\n", pc16);  // In 0x20ac cho "€"
 
-    s += r;  // Move to next character
+    s += r;  // Sang ký tự kế
 
-    // Examine the next 8 bytes to see if there's a character in there
+    // Kiểm 8 byte kế xem có ký tự nào trong đó
     r = mbrtoc16(&pc16, s, 8, &mbs);
 
-    printf("%zu\n", r);     // Prints 1
-    printf("%#x\n", pc16);  // Prints 0x5a for "Z"
+    printf("%zu\n", r);     // In 1
+    printf("%#x\n", pc16);  // In 0x5a cho "Z"
 }
 ```
 
-Example with a surrogate pair. In this case we read plenty to get the
-entire character, but the result must be stored in two `char16_t`s,
-requiring two calls to get them both.
+Ví dụ với surrogate pair. Trong trường hợp này ta đọc đủ để có toàn
+bộ ký tự, nhưng kết quả phải được lưu trong hai `char16_t`, cần hai
+lần gọi để lấy cả hai.
 
 ``` {.c .numberLines}
 #include <uchar.h>
-#include <stdio.h>   // for printf()
-#include <string.h>  // for memset()
-#include <locale.h>  // for setlocale()
+#include <stdio.h>   // cho printf()
+#include <string.h>  // cho memset()
+#include <locale.h>  // cho setlocale()
 
 int main(void)
 {
-    char *s = "\U0001fbc5*";   // Stick figure glyph, more than 16 bits
+    char *s = "\U0001fbc5*";   // Glyph hình người que, hơn 16 bit
     char16_t pc16;
     mbstate_t mbs;
     size_t r;
@@ -210,30 +209,29 @@ int main(void)
 
     r = mbrtoc16(&pc16, s, 8, &mbs);
 
-    printf("%zd\n", r);     // r is 4 bytes in UTF-8 locale
-    printf("%#x\n", pc16);  // First value of surrogate pair
+    printf("%zd\n", r);     // r là 4 byte trong locale UTF-8
+    printf("%#x\n", pc16);  // Giá trị đầu của surrogate pair
 
-    s += r;  // Move to next character
-
-    r = mbrtoc16(&pc16, s, 8, &mbs);
-
-    printf("%zd\n", r);     // r is (size_t)(-3) here to indicate...
-    printf("%#x\n", pc16);  // ...Second value of surrogate pair
-
-    // Since r is -3, it means we're still processing the same
-    // character, so DON'T move to the next character this time
-    //s += r;  // Commented out
+    s += r;  // Sang ký tự kế
 
     r = mbrtoc16(&pc16, s, 8, &mbs);
 
-    printf("%zd\n", r);     // 1 byte for "*"
-    printf("%#x\n", pc16);  // 0x2a for "*"
+    printf("%zd\n", r);     // r là (size_t)(-3) ở đây để báo...
+    printf("%#x\n", pc16);  // ...Giá trị thứ hai của surrogate pair
+
+    // Vì r là -3, nghĩa là ta vẫn đang xử cùng một ký tự,
+    // nên ĐỪNG sang ký tự kế lần này
+    //s += r;  // Comment đi
+
+    r = mbrtoc16(&pc16, s, 8, &mbs);
+
+    printf("%zd\n", r);     // 1 byte cho "*"
+    printf("%#x\n", pc16);  // 0x2a cho "*"
 }
 ```
 
-Output on my system, indicating the first character is represented by
-the pair `(0xd83e, 0xdfc5)` and the second character is represented by
-`0x2a`:
+Output trên hệ của tôi, cho thấy ký tự đầu được biểu diễn bởi cặp
+`(0xd83e, 0xdfc5)` và ký tự thứ hai được biểu diễn bởi `0x2a`:
 
 ``` {.default}
 4
@@ -255,7 +253,8 @@ the pair `(0xd83e, 0xdfc5)` and the second character is represented by
 [i[`c16rtomb()` function]i]
 [i[`c32rtomb()` function]i]
 
-Convert a `char16_t` or `char32_t` to a multibyte character restartably
+Chuyển `char16_t` hoặc `char32_t` sang ký tự multibyte kiểu
+restartable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -269,56 +268,54 @@ size_t c32rtomb(char * restrict s, char32_t c32, mbstate_t * restrict ps);
 
 ### Description {.unnumbered .unlisted}
 
-If you have a character in a `char16_t` or `char32_t`, use these
-functions to convert them into a multibyte character.
+Nếu bạn có một ký tự trong `char16_t` hoặc `char32_t`, dùng các hàm
+này để chuyển sang ký tự multibyte.
 
-These functions figure out how many bytes are needed for the multibyte
-character in the current locale and stores them in the buffer pointed to
-by `s`.
+Các hàm này tính ra cần bao nhiêu byte cho ký tự multibyte trong
+locale hiện tại và lưu vào buffer được trỏ bởi `s`.
 
-But how big to make that buffer? Luckily there is a macro to help: it
-needs be no larger than `MB_CUR_MAX`.
+Nhưng buffer đó phải bự cỡ nào? May là có một macro giúp: nó không
+cần lớn hơn `MB_CUR_MAX`.
 
-As a special case, if `s` is `NULL`, it's the same as calling
+Trường hợp đặc biệt, nếu `s` là `NULL`, nó giống như gọi
 
 ``` {.c}
-c16rtomb(buf, L'\0', ps);  // or...
+c16rtomb(buf, L'\0', ps);  // hoặc...
 c32rtomb(buf, L'\0', ps);
 ```
 
-where `buf` is a buffer maintained by the system that you don't have
-access to.
+trong đó `buf` là buffer do hệ thống quản mà bạn không truy cập
+được.
 
-This has the effect of setting the `ps` state to the initial state.
+Chuyện này có tác dụng đặt state `ps` về trạng thái ban đầu.
 
-Finally for surrogate pairs (where the character has been split into two
-`char16_t`s), you call this once with the first of the pair---at this
-point, the function will return `0`. Then you call it again with the
-second of the pair, and the function will return the number of bytes and
-store the result in the array `s`.
+Cuối cùng với surrogate pair (khi ký tự bị chia thành hai
+`char16_t`), bạn gọi lần đầu với phần tử đầu của cặp---lúc này hàm
+sẽ trả `0`. Rồi gọi lại với phần tử thứ hai của cặp, hàm sẽ trả số
+byte và lưu kết quả trong mảng `s`.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the number of bytes stored in the array pointed to by `s`.
+Trả về số byte đã lưu vào mảng được trỏ bởi `s`.
 
-Returns 0 if processing is not yet complete for the current character,
-as in the case of surrogate pairs.
+Trả về 0 nếu việc xử lý ký tự hiện tại chưa xong, như trong trường
+hợp surrogate pair.
 
-If there is an encoding error, the functions return `(size_t)(-1)` and
-`errno` is set to `EILSEQ`.
+Nếu có lỗi encoding, hàm trả `(size_t)(-1)` và `errno` được đặt
+thành `EILSEQ`.
 
 ### Example {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <uchar.h>
-#include <stdlib.h>  // for MB_CUR_MAX
-#include <stdio.h>   // for printf()
-#include <string.h>  // for memset()
-#include <locale.h>  // for setlocale()
+#include <stdlib.h>  // cho MB_CUR_MAX
+#include <stdio.h>   // cho printf()
+#include <string.h>  // cho memset()
+#include <locale.h>  // cho setlocale()
 
 int main(void)
 {
-    char16_t c16 = 0x20ac;  // Unicode for Euro symbol
+    char16_t c16 = 0x20ac;  // Unicode cho ký hiệu Euro
     char dest[MB_CUR_MAX];
     size_t r;
     mbstate_t mbs;
@@ -329,35 +326,34 @@ int main(void)
     // Convert
     r = c16rtomb(dest, c16, &mbs);
 
-    printf("r == %zd\n", r);  // r == 3 on my system
+    printf("r == %zd\n", r);  // r == 3 trên hệ của tôi
 
-    // And this should print a Euro symbol
+    // Và cái này sẽ in ký hiệu Euro
     printf("dest == \"%s\"\n", dest);
 }
 ```
 
-Output on my system:
+Output trên hệ của tôi:
 
 ``` {.default}
 r == 3
 dest == "€"
 ```
 
-This is a more complex example that converts a large-valued character in
-a multibyte string into a surrogate pair (as in the `mbrtoc16()`
-example, above) and then converts it back again into a multibyte string
-to print.
+Đây là ví dụ phức tạp hơn, chuyển một ký tự giá trị lớn trong chuỗi
+multibyte thành surrogate pair (như ví dụ `mbrtoc16()` ở trên) rồi
+chuyển ngược lại thành chuỗi multibyte để in.
 
 ``` {.c .numberLines}
 #include <uchar.h>
-#include <stdlib.h>  // for MB_CUR_MAX
-#include <stdio.h>   // for printf()
-#include <string.h>  // for memset()
-#include <locale.h>  // for setlocale()
+#include <stdlib.h>  // cho MB_CUR_MAX
+#include <stdio.h>   // cho printf()
+#include <string.h>  // cho memset()
+#include <locale.h>  // cho setlocale()
 
 int main(void)
 {
-    char *src = "\U0001fbc5*";   // Stick figure glyph, more than 16 bits
+    char *src = "\U0001fbc5*";   // Glyph hình người que, hơn 16 bit
     char dest[MB_CUR_MAX];
     char16_t surrogate0, surrogate1;
     mbstate_t mbs;
@@ -366,33 +362,32 @@ int main(void)
     setlocale(LC_ALL, "");
     memset(&mbs, 0, sizeof mbs);  // Reset conversion state
 
-    // Get first surrogate character
+    // Lấy ký tự surrogate đầu
     r = mbrtoc16(&surrogate0, src, 8, &mbs);
 
-    // Get next surrogate character
-    src += r;  // Move to next character
+    // Lấy ký tự surrogate kế
+    src += r;  // Sang ký tự kế
     r = mbrtoc16(&surrogate1, src, 8, &mbs);
 
     printf("Surrogate pair: %#x, %#x\n", surrogate0, surrogate1);
 
-    // Now reverse it
+    // Giờ đảo ngược lại
     memset(&mbs, 0, sizeof mbs);  // Reset conversion state
 
-    // Process first surrogate character
+    // Xử ký tự surrogate đầu
     r = c16rtomb(dest, surrogate0, &mbs);
 
-    // r should be 0 at this point, because the character hasn't been
-    // processed yet. And dest won't have anything useful... yet!
+    // r nên là 0 lúc này, vì ký tự chưa được xử xong.
+    // Và dest sẽ chưa có gì xài được... chưa đâu!
     printf("r == %zd\n", r);   // r == 0
 
-    // Process second surrogate character
+    // Xử ký tự surrogate thứ hai
     r = c16rtomb(dest, surrogate1, &mbs);
 
-    // Now we should be in business. r should have the number of
-    // bytes, and dest should hold the character.
-    printf("r == %zd\n", r);  // r == 4 on my system
+    // Giờ thì ổn rồi. r có số byte, và dest giữ ký tự.
+    printf("r == %zd\n", r);  // r == 4 trên hệ của tôi
 
-    // And this should print a stick figure, if your font supports it
+    // Và cái này sẽ in hình người que, nếu font của bạn hỗ trợ
     printf("dest == \"%s\"\n", dest);
 }
 ```
