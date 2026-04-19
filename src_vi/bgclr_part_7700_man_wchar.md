@@ -3,107 +3,107 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<wchar.h>` Wide Character Handling {#wchar}
+# `<wchar.h>` Xử Lý Wide Character {#wchar}
 
 [i[`wchar.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |------|-------------------------|
-|[`btowc()`](#man-btowc)|Convert a single byte character to a wide character|
-|[`fgetwc()`](#man-getwc)|Get a wide character from a wide stream|
-|[`fgetws()`](#man-fgetws)|Read a wide string from a wide stream|
-|[`fputwc()`](#man-putwc)|Write a wide character to a wide stream|
-|[`fputws()`](#man-fputws)|Write a wide string to a wide stream|
-|[`fwide()`](#man-fwide)|Get or set the orientation of the stream|
-|[`fwprintf()`](#man-wprintf)|Formatted wide output to a wide stream|
-|[`fwscanf()`](#man-wscanf)|Formatted wide input from a wide stream|
-|[`getwchar()`](#man-getwc)|Get a wide character from `stdin`|
-|[`getwc()`](#man-getwc)|Get a wide character from `stdin`|
-|[`mbrlen()`](#man-mbrlen)|Compute the number of bytes in a multibyte character restartably|
-|[`mbrtowc()`](#man-mbrtowc)|Convert multibyte to wide characters restartably|
-|[`mbsinit()`](#man-mbsinit)|Test if an `mbstate_t` is in the initial conversion state|
-|[`mbsrtowcs()`](#man-mbsrtowcs)|Convert a multibyte string to a wide character string restartably|
-|[`putwchar()`](#man-putwc)|Write a wide character to `stdout`|
-|[`putwc()`](#man-putwc)|Write a wide character to `stdout`|
-|[`swprintf()`](#man-wprintf)|Formatted wide output to a wide string|
-|[`swscanf()`](#man-wscanf)|Formatted wide input from a wide string|
-|[`ungetwc()`](#man-ungetwc)|Pushes a wide character back into the input stream|
-|[`vfwprintf()`](#man-wprintf)|Variadic formatted wide output to a wide stream|
-|[`vfwscanf()`](#man-wscanf)|Variadic formatted wide input from a wide stream|
-|[`vswprintf()`](#man-wprintf)|Variadic formatted wide output to a wide string|
-|[`vswscanf()`](#man-wscanf)|Variadic formatted wide input from a wide string|
-|[`vwprintf()`](#man-wprintf)|Variadic formatted wide output|
-|[`vwscanf()`](#man-wscanf)|Variadic formatted wide input|
-|[`wcscat()`](#man-wcscat)|Concatenate wide strings dangerously|
-|[`wcschr()`](#man-wcschr)|Find a wide character in a wide string|
-|[`wcscmp()`](#man-wcscmp)|Compare wide strings|
-|[`wcscoll()`](#man-wcscoll)|Compare two wide strings accounting for locale|
-|[`wcscpy()`](#man-wcscpy)|Copy a wide string dangerously|
-|[`wcscspn()`](#man-wcsspn)|Count characters not from a start at the front of a wide string|
-|[`wcsftime()`](#man-wcsftime)|Formatted date and time output|
-|[`wcslen()`](#man-wcslen)|Returns the length of a wide string|
-|[`wcsncat()`](#man-wcscat)|Concatenate wide strings more safely|
-|[`wcsncmp()`](#man-wcscmp)|Compare wide strings, length limited|
-|[`wcsncpy()`](#man-wcscpy)|Copy a wide string more safely|
-|[`wcspbrk()`](#man-wcspbrk)|Search a wide string for one of a set of wide characters|
-|[`wcsrchr()`](#man-wcschr)|Find a wide character in a wide string from the end|
-|[`wcsrtombs()`](#man-wcsrtombs)|Convert a wide character string to a multibyte string restartably|
-|[`wcsspn()`](#man-wcsspn)|Count characters from a set at the front of a wide string|
-|[`wcsstr()`](#man-wcsstr)|Find a wide string in another wide string|
-|[`wcstod()`](#man-wcstod)|Convert a wide string to a `double`|
-|[`wcstof()`](#man-wcstod)|Convert a wide string to a `float`|
-|[`wcstok()`](#man-wcstok)|Tokenize a wide string|
-|[`wcstold()`](#man-wcstod)|Convert a wide string to a `long double`|
-|[`wcstoll()`](#man-wcstol)|Convert a wide string to a `long long`|
-|[`wcstol()`](#man-wcstol)|Convert a wide string to a `long`|
-|[`wcstoull()`](#man-wcstol)|Convert a wide string to an `unsigned long long`|
-|[`wcstoul()`](#man-wcstol)|Convert a wide string to an `unsigned long`|
-|[`wcsxfrm()`](#man-wcsxfrm)|Transform a wide string for comparing based on locale|
-|[`wctob()`](#man-btowc)|Convert a wide character to a single byte character|
-|[`wctombr()`](#man-wcrtomb)|Convert wide to multibyte characters restartably|
-|[`wmemcmp()`](#man-wcscmp)|Compare wide characters in memory|
-|[`wmemcpy()`](#man-wmemcpy)|Copy wide character memory|
-|[`wmemmove()`](#man-wmemcpy)|Copy wide character memory, potentially overlapping|
-|[`wprintf()`](#man-wprintf)|Formatted wide output|
-|[`wscanf()`](#man-wscanf)|Formatted wide input|
+|[`btowc()`](#man-btowc)|Chuyển ký tự một byte sang wide character|
+|[`fgetwc()`](#man-getwc)|Lấy một wide character từ một wide stream|
+|[`fgetws()`](#man-fgetws)|Đọc một wide string từ một wide stream|
+|[`fputwc()`](#man-putwc)|Ghi một wide character ra một wide stream|
+|[`fputws()`](#man-fputws)|Ghi một wide string ra một wide stream|
+|[`fwide()`](#man-fwide)|Lấy hoặc đặt orientation của stream|
+|[`fwprintf()`](#man-wprintf)|Xuất wide có định dạng ra một wide stream|
+|[`fwscanf()`](#man-wscanf)|Nhập wide có định dạng từ một wide stream|
+|[`getwchar()`](#man-getwc)|Lấy một wide character từ `stdin`|
+|[`getwc()`](#man-getwc)|Lấy một wide character từ `stdin`|
+|[`mbrlen()`](#man-mbrlen)|Tính số byte của một ký tự multibyte kiểu restartable|
+|[`mbrtowc()`](#man-mbrtowc)|Chuyển multibyte sang wide character kiểu restartable|
+|[`mbsinit()`](#man-mbsinit)|Kiểm tra một `mbstate_t` có đang ở conversion state ban đầu không|
+|[`mbsrtowcs()`](#man-mbsrtowcs)|Chuyển chuỗi multibyte sang chuỗi wide character kiểu restartable|
+|[`putwchar()`](#man-putwc)|Ghi một wide character ra `stdout`|
+|[`putwc()`](#man-putwc)|Ghi một wide character ra `stdout`|
+|[`swprintf()`](#man-wprintf)|Xuất wide có định dạng ra một wide string|
+|[`swscanf()`](#man-wscanf)|Nhập wide có định dạng từ một wide string|
+|[`ungetwc()`](#man-ungetwc)|Đẩy một wide character trở lại input stream|
+|[`vfwprintf()`](#man-wprintf)|Xuất wide có định dạng variadic ra một wide stream|
+|[`vfwscanf()`](#man-wscanf)|Nhập wide có định dạng variadic từ một wide stream|
+|[`vswprintf()`](#man-wprintf)|Xuất wide có định dạng variadic ra một wide string|
+|[`vswscanf()`](#man-wscanf)|Nhập wide có định dạng variadic từ một wide string|
+|[`vwprintf()`](#man-wprintf)|Xuất wide có định dạng variadic|
+|[`vwscanf()`](#man-wscanf)|Nhập wide có định dạng variadic|
+|[`wcscat()`](#man-wcscat)|Nối wide string kiểu nguy hiểm|
+|[`wcschr()`](#man-wcschr)|Tìm một wide character trong một wide string|
+|[`wcscmp()`](#man-wcscmp)|So sánh wide string|
+|[`wcscoll()`](#man-wcscoll)|So sánh hai wide string có tính đến locale|
+|[`wcscpy()`](#man-wcscpy)|Copy một wide string kiểu nguy hiểm|
+|[`wcscspn()`](#man-wcsspn)|Đếm các ký tự không thuộc tập bắt đầu từ đầu một wide string|
+|[`wcsftime()`](#man-wcsftime)|Xuất ngày giờ có định dạng|
+|[`wcslen()`](#man-wcslen)|Trả về độ dài của một wide string|
+|[`wcsncat()`](#man-wcscat)|Nối wide string an toàn hơn|
+|[`wcsncmp()`](#man-wcscmp)|So sánh wide string, giới hạn độ dài|
+|[`wcsncpy()`](#man-wcscpy)|Copy một wide string an toàn hơn|
+|[`wcspbrk()`](#man-wcspbrk)|Tìm một wide character trong một tập ở một wide string|
+|[`wcsrchr()`](#man-wcschr)|Tìm một wide character trong một wide string từ cuối|
+|[`wcsrtombs()`](#man-wcsrtombs)|Chuyển chuỗi wide character sang chuỗi multibyte kiểu restartable|
+|[`wcsspn()`](#man-wcsspn)|Đếm các ký tự thuộc một tập ở đầu một wide string|
+|[`wcsstr()`](#man-wcsstr)|Tìm một wide string trong một wide string khác|
+|[`wcstod()`](#man-wcstod)|Chuyển một wide string sang `double`|
+|[`wcstof()`](#man-wcstod)|Chuyển một wide string sang `float`|
+|[`wcstok()`](#man-wcstok)|Tách token một wide string|
+|[`wcstold()`](#man-wcstod)|Chuyển một wide string sang `long double`|
+|[`wcstoll()`](#man-wcstol)|Chuyển một wide string sang `long long`|
+|[`wcstol()`](#man-wcstol)|Chuyển một wide string sang `long`|
+|[`wcstoull()`](#man-wcstol)|Chuyển một wide string sang `unsigned long long`|
+|[`wcstoul()`](#man-wcstol)|Chuyển một wide string sang `unsigned long`|
+|[`wcsxfrm()`](#man-wcsxfrm)|Biến đổi một wide string để so sánh dựa trên locale|
+|[`wctob()`](#man-btowc)|Chuyển một wide character sang ký tự một byte|
+|[`wctombr()`](#man-wcrtomb)|Chuyển wide sang multibyte kiểu restartable|
+|[`wmemcmp()`](#man-wcscmp)|So sánh wide character trong bộ nhớ|
+|[`wmemcpy()`](#man-wmemcpy)|Copy bộ nhớ wide character|
+|[`wmemmove()`](#man-wmemcpy)|Copy bộ nhớ wide character, có thể đè nhau|
+|[`wprintf()`](#man-wprintf)|Xuất wide có định dạng|
+|[`wscanf()`](#man-wscanf)|Nhập wide có định dạng|
 
-These are the wide character variants of the functions found in
+Đây là các biến thể wide character của những hàm có trong
 [`<stdio.h>`](#stdio).
 
-Remember that you can't mix-and-match multibyte output functions (like
-[`printf()`](#man-printf)) with wide character output functions (like
-[`wprintf()`](#man-wprintf)). The output stream has an _orientation_ to
-either multibyte or wide that gets set on the first I/O call to that
-stream. (Or it can be set with [`fwide()`](#man-fwide).)
+Nhớ là bạn không được mix-and-match các hàm xuất multibyte (như
+[`printf()`](#man-printf)) với các hàm xuất wide character (như
+[`wprintf()`](#man-wprintf)). Output stream có một _orientation_ (định
+hướng) hoặc là multibyte hoặc là wide, được đặt ngay lời gọi I/O đầu
+tiên lên stream đó. (Hoặc có thể đặt bằng [`fwide()`](#man-fwide).)
 
-So choose one or the other and stick with it.
+Nên chọn một trong hai và bám lấy nó.
 
-And you can specify wide character constants and string literals by
-prefixing `L` to the front of it:
+Bạn có thể đặc tả wide character constant và string literal bằng cách
+thêm tiền tố `L` ở đầu:
 
 ``` {.c}
 wchar_t *s = L"Hello, world!";
 wchar_t c = L'B';
 ```
 
-This header also introduces a type `wint_t` that is used by the
-character I/O functions. It's a type that can hold any single wide
-character, but _also_ the macro `WEOF` to indicate wide end-of-file.
+Header này cũng giới thiệu kiểu `wint_t` được các hàm I/O ký tự dùng.
+Đây là kiểu có thể giữ bất kỳ wide character đơn nào, và _cũng_ giữ
+được macro `WEOF` để báo wide end-of-file.
 
-## Restartable Functions
+## Hàm Restartable
 
-Finally, a note on the "restartable" functions that are included here.
-When conversion is happening, some encodings require C to keep track of
-some _state_ about the progress of the conversion so far.
+Cuối cùng, vài lời về các hàm "restartable" có trong đây. Khi
+conversion đang diễn ra, một số encoding yêu cầu C phải theo dõi một
+ít _state_ (trạng thái) về tiến độ conversion cho đến thời điểm đó.
 
-For a lot of the functions, C uses an internal variable for the state
-that is shared between function calls. The problem is if you're writing
-multithreaded code, this state might get trampled by other threads.
+Với nhiều hàm, C dùng một biến nội bộ cho state đó, dùng chung giữa
+các lời gọi hàm. Vấn đề là nếu bạn viết code đa luồng, state này có
+thể bị các luồng khác dẫm đạp.
 
-To avoid this, each thread needs to maintain its own state in a variable
-of the opaque type [i[`mbstate_t` type]i] `mbstate_t`. And the
-"restartable" functions allow you to pass in this state so that each
-thread can use their own.
+Để tránh chuyện đó, mỗi luồng cần tự giữ state của riêng nó trong
+một biến kiểu opaque [i[`mbstate_t` type]i] `mbstate_t`. Và các hàm
+"restartable" cho phép bạn truyền state đó vào để mỗi luồng dùng biến
+của riêng mình.
 
 [[manbreak]]
 ## `wprintf()`, `fwprintf()`, `swprintf()` {#man-wprintf}
@@ -112,7 +112,7 @@ thread can use their own.
 [i[`fwprintf()` function]i]
 [i[`swprintf()` function]i]
 
-Formatted output with a wide string
+Xuất có định dạng với một wide string
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -130,25 +130,24 @@ int swprintf(wchar_t * restrict s, size_t n,
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide versions of [`printf()`](#man-printf),
-[`fprintf()](#man-printf), and [`sprintf()`](#man-printf).
+Đây là các phiên bản wide của [`printf()`](#man-printf),
+[`fprintf()](#man-printf), và [`sprintf()`](#man-printf).
 
-See those pages for exact substantial usage.
+Xem các trang đó để biết cách dùng cụ thể.
 
-These are the same except the `format` string is a wide character
-string instead of a multibyte string.
+Chúng giống hệt nhau trừ cái `format` string là một chuỗi wide
+character thay vì một chuỗi multibyte.
 
-And that `swprintf()` is analogous to `snprintf()` in that they both
-take the size of the destination array as an argument.
+Và `swprintf()` thì tương tự `snprintf()` ở chỗ cả hai đều nhận kích
+thước của mảng đích làm tham số.
 
-And one more thing: the precision specified for a `%s` specifier
-corresponds to the number of wide characters printed, not the number of
-bytes. If you know of other difference, let me know.
+Một chuyện nữa: precision đặc tả cho một `%s` specifier tương ứng với
+số wide character được in, không phải số byte. Nếu bạn biết khác biệt
+nào khác, báo tôi.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the number of wide characters outputted, or `-1` if there's an
-error.
+Trả về số wide character đã xuất, hoặc `-1` nếu có lỗi.
 
 ### Example {.unnumbered .unlisted}
 
@@ -187,7 +186,7 @@ pi = 3.141593
 [i[`fwscanf()` function]i]
 [i[`swscanf()` function]i]
 
-Scan a wide stream or wide string for formatted input
+Scan một wide stream hoặc wide string để nhập có định dạng
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -204,15 +203,14 @@ int swscanf(const wchar_t * restrict s, const wchar_t * restrict format, ...);
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide variants of [`scanf()`](#man-scanf),
-[`fscanf()`](#man-scanf), and [`sscanf()`](#man-scanf).
+Đây là các biến thể wide của [`scanf()`](#man-scanf),
+[`fscanf()`](#man-scanf), và [`sscanf()`](#man-scanf).
 
-See the [`scanf()`](#man-scanf) page for all the details.
+Xem trang [`scanf()`](#man-scanf) để biết mọi chi tiết.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the number of items successfully scanned, or `EOF` on some kind
-of input failure.
+Trả về số mục scan được thành công, hoặc `EOF` nếu có lỗi input nào đó.
 
 ### Example {.unnumbered .unlisted}
 
@@ -234,7 +232,7 @@ int main(void)
 }
 ```
 
-Output (input of `12: apples`):
+Output (với input là `12: apples`):
 
 ``` {.default}
 Enter "quantity: item"
@@ -254,7 +252,7 @@ You entered: 12 apples
 [i[`vfwprintf()` function]i]
 [i[`vswprintf()` function]i]
 
-`wprintf()` variants using variable argument lists (`va_list`)
+Các biến thể của `wprintf()` dùng danh sách tham số biến thiên (`va_list`)
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -274,20 +272,19 @@ int vfwprintf(FILE * restrict stream, const wchar_t * restrict format,
 
 ### Description {.unnumbered .unlisted}
 
-These functions are the wide character variants of the
-[`vprintf()`](#man-vprintf), functions. You can [refer to that reference
-page](#man-vprintf) for more details.
+Các hàm này là biến thể wide character của các hàm
+[`vprintf()`](#man-vprintf). Bạn có thể [xem trang tham khảo
+đó](#man-vprintf) để biết thêm chi tiết.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the number of wide characters stored, or a negative value on
-error.
+Trả về số wide character đã lưu, hoặc một giá trị âm nếu có lỗi.
 
 ### Example {.unnumbered .unlisted}
 
-In this example, we make our own version of `wprintf()` called
-`wlogger()` that timestamps output. Notice how the calls to `wlogger()`
-have all the bells and whistles of `wprintf()`.
+Trong ví dụ này, chúng ta tự làm phiên bản riêng của `wprintf()` tên
+là `wlogger()` để chấm timestamp vào output. Để ý rằng các lời gọi
+`wlogger()` có đủ hết những thứ hay ho của `wprintf()`.
 
 ``` {.c .numberLines}
 #include <stdarg.h>
@@ -300,7 +297,7 @@ int wlogger(wchar_t *format, ...)
     time_t now_secs = time(NULL);
     struct tm *now = gmtime(&now_secs);
 
-    // Output timestamp in format "YYYY-MM-DD hh:mm:ss : "
+    // In timestamp theo định dạng "YYYY-MM-DD hh:mm:ss : "
     wprintf(L"%04d-%02d-%02d %02d:%02d:%02d : ",
         now->tm_year + 1900, now->tm_mon + 1, now->tm_mday,
         now->tm_hour, now->tm_min, now->tm_sec);
@@ -344,7 +341,7 @@ Output:
 [i[`vfwscanf()` function]i]
 [i[`vswscanf()` function]i]
 
-`wscanf()` variants using variable argument lists (`va_list`)
+Các biến thể của `wscanf()` dùng danh sách tham số biến thiên (`va_list`)
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -364,22 +361,20 @@ int vswscanf(const wchar_t * restrict s, const wchar_t * restrict format,
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide counterparts to the [`vscanf()`](#man-vscanf)
-collection of functions. See their [reference page for
-details](#man-vscanf).
+Đây là các đối tác wide của tập hàm [`vscanf()`](#man-vscanf). Xem
+[trang tham khảo của chúng để biết chi tiết](#man-vscanf).
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the number of items successfully scanned, or `EOF` on some kind
-of input failure.
+Trả về số mục scan được thành công, hoặc `EOF` nếu có lỗi input nào đó.
 
 ### Example {.unnumbered .unlisted}
 
-I have to admit I was wracking my brain to think of when you'd ever want
-to use this. The best example I could find was [fl[one on Stack
+Tôi phải thú nhận là tôi vắt óc mãi mới nghĩ ra bao giờ thì bạn muốn
+dùng cái này. Ví dụ hay nhất tôi tìm được là [fl[một cái trên Stack
 Overflow|https://stackoverflow.com/questions/17017331/c99-vscanf-for-dummies/17018046#17018046]]
-that error-checks the return value from `scanf()` against the expected.
-A variant of that is shown below.
+kiểm tra lỗi cho giá trị trả về từ `scanf()` so với giá trị kỳ vọng.
+Một biến thể của cái đó ở dưới.
 
 ``` {.c .numberLines}
 #include <stdarg.h>
@@ -394,7 +389,7 @@ int error_check_wscanf(int expected_count, wchar_t *format, ...)
     int count = vwscanf(format, va);
     va_end(va);
 
-    // This line will crash the program if the condition is false:
+    // Dòng này sẽ làm chương trình crash nếu điều kiện sai:
     assert(count == expected_count);
 
     return count;
@@ -421,7 +416,7 @@ int main(void)
 [i[`fgetwc()` function]i]
 [i[`getwchar()` function]i]
 
-Get a wide character from an input stream
+Lấy một wide character từ một input stream
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -438,30 +433,29 @@ wint_t fgetwc(FILE *stream);
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide variants of [`fgetc()`](#man-getc).
+Đây là các biến thể wide của [`fgetc()`](#man-getc).
 
-`fgetwc()` and `getwc()` are identical except that `getwc()` might be
-implemented as a macro and is allowed to evaluate `stream` multiple
-times.
+`fgetwc()` và `getwc()` giống hệt nhau, chỉ khác `getwc()` có thể được
+hiện thực dưới dạng macro và được phép evaluate `stream` nhiều lần.
 
-`getwchar()` is identical to `getwc()` with `stream` set to `stdin`.
+`getwchar()` giống hệt `getwc()` với `stream` là `stdin`.
 
-I don't know why you'd ever use `getwc()` instead of `fgetwc()`, but if
-anyone knows, drop me a line.
+Tôi chẳng hiểu sao bạn lại dùng `getwc()` thay vì `fgetwc()`, nhưng
+nếu ai biết thì báo tôi một tiếng.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the next wide character in the input stream. Return `WEOF` on
-end-of-file or error.
+Trả về wide character tiếp theo trong input stream. Trả về `WEOF` ở
+end-of-file hoặc khi có lỗi.
 
-If an I/O error occurs, the error flag is also set on the stream.
+Nếu có lỗi I/O, cờ lỗi cũng được đặt trên stream.
 
-If an invalid byte sequence is encountered, `errno` is set to `ILSEQ`.
+Nếu gặp byte sequence không hợp lệ, `errno` được đặt thành `ILSEQ`.
 
 ### Example {.unnumbered .unlisted}
 
-Reads all the characters from a file, outputting only the letter 'b's it
-finds in the file:
+Đọc tất cả ký tự từ một file, chỉ xuất ra những chữ 'b' nó tìm thấy
+trong file:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -495,7 +489,7 @@ int main(void)
 
 [i[`fgetws()` function]i]
 
-Read a wide string from a file
+Đọc một wide string từ một file
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -508,19 +502,18 @@ wchar_t *fgetws(wchar_t * restrict s, int n, FILE * restrict stream);
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide version of [`fgets()`](#man-gets).  See [its reference
-page for details](#man-gets).
+Đây là phiên bản wide của [`fgets()`](#man-gets). Xem [trang tham
+khảo của nó để biết chi tiết](#man-gets).
 
-A wide `NUL` character is used to terminate the string.
+Một ký tự wide `NUL` được dùng để kết thúc chuỗi.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns `s` on success, or a `NULL` pointer on end-of-file or error.
+Trả về `s` nếu thành công, hoặc con trỏ `NULL` nếu end-of-file hoặc có lỗi.
 
 ### Example {.unnumbered .unlisted}
 
-The following example reads lines from a file and prepends them with
-numbers:
+Ví dụ sau đây đọc từng dòng từ một file và đánh số vào đầu mỗi dòng:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -544,8 +537,7 @@ int main(void)
 }
 ```
 
-Example output for a file with these lines in them (without the
-prepended numbers):
+Output ví dụ cho một file có các dòng (không có số đã thêm):
 
 ``` {.default}
 0001: line 1
@@ -566,7 +558,7 @@ prepended numbers):
 [i[`putwc()` function]i]
 [i[`fputwc()` function]i]
 
-Write a single wide character to the console or to a file
+Ghi một wide character đơn ra console hoặc ra file
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -583,31 +575,30 @@ wint_t fputwc(wchar_t c, FILE *stream);
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide character equivalents to the ['fputc()'](#man-putc)
-group of functions. You can find more information ['in that reference
-section'](#man-putc).
+Đây là các tương đương wide character của nhóm hàm
+['fputc()'](#man-putc). Bạn có thể tìm thêm thông tin ['ở phần tham
+khảo đó'](#man-putc).
 
-`fputwc()` and `putwc()` are identical except that `putwc()` might be
-implemented as a macro and is allowed to evaluate `stream` multiple
-times.
+`fputwc()` và `putwc()` giống hệt nhau, chỉ khác `putwc()` có thể
+được hiện thực dưới dạng macro và được phép evaluate `stream` nhiều lần.
 
-`putwchar()` is identical to `putwc()` with `stream` set to `stdin`.
+`putwchar()` giống hệt `putwc()` với `stream` là `stdin`.
 
-I don't know why you'd ever use `putwc()` instead of `fputwc()`, but if
-anyone knows, drop me a line.
+Tôi chẳng hiểu sao bạn lại dùng `putwc()` thay vì `fputwc()`, nhưng
+nếu ai biết thì báo tôi một tiếng.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the wide character written, or `WEOF` on error.
+Trả về wide character đã ghi, hoặc `WEOF` nếu có lỗi.
 
-If it's an I/O error, the error flag will be set for the stream.
+Nếu là lỗi I/O, cờ lỗi sẽ được đặt cho stream.
 
-If it's an encoding error, `errno` will be set to `EILSEQ`.
+Nếu là lỗi encoding, `errno` sẽ được đặt thành `EILSEQ`.
 
 ### Example {.unnumbered .unlisted}
 
-Read all characters from a file, outputting only the letter 'b's it
-finds in the file:
+Đọc tất cả ký tự từ một file, chỉ xuất ra những chữ 'b' nó tìm thấy
+trong file:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -641,7 +632,7 @@ int main(void)
 
 [i[`fputws()` function]i]
 
-Write a wide string to a file
+Ghi một wide string ra một file
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -654,13 +645,13 @@ int fputws(const wchar_t * restrict s, FILE * restrict stream);
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide version of [`fputs()`](#man-puts).
+Đây là phiên bản wide của [`fputs()`](#man-puts).
 
-Pass in a wide string and an output stream, and it will so be written.
+Truyền vào một wide string và một output stream, và nó sẽ được ghi ra.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns a non-negative value on success, or `EOF` on error.
+Trả về một giá trị không âm nếu thành công, hoặc `EOF` nếu có lỗi.
 
 ### Example {.unnumbered .unlisted}
 
@@ -684,7 +675,7 @@ int main(void)
 
 [i[`fwide()` function]i]
 
-Get or set the orientation of the stream
+Lấy hoặc đặt orientation của stream
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -697,52 +688,52 @@ int fwide(FILE *stream, int mode);
 
 ### Description {.unnumbered .unlisted}
 
-Streams can be either wide-oriented (meaning the wide functions are in
-use) or byte-oriented (that the regular multibyte functions are in use).
-Or, before an orientation is chosen, unoriented.
+Stream có thể là wide-oriented (nghĩa là các hàm wide đang được dùng)
+hoặc byte-oriented (các hàm multibyte thường đang được dùng). Hoặc,
+trước khi orientation được chọn, thì là unoriented.
 
-There are two ways to set the orientation of an unoriented stream:
+Có hai cách đặt orientation cho một stream unoriented:
 
-* Implicitly: just use a function like `printf()` (byte oriented) or
-  `wprintf()` (wide oriented), and the orientation will be set.
+* Ngầm: chỉ cần dùng một hàm như `printf()` (byte oriented) hoặc
+  `wprintf()` (wide oriented), và orientation sẽ được đặt.
 
-* Explicitly: use this function to set it.
+* Tường minh: dùng hàm này để đặt.
 
-You can set the orientation for the stream by passing different numbers
-to `mode`:
+Bạn có thể đặt orientation cho stream bằng cách truyền các số khác
+nhau vào `mode`:
 
-|`mode`|Description|
+|`mode`|Mô tả|
 |-|-|
-|`0`|Do not alter the orientation|
-|`-1`|Set stream to byte-oriented|
-|`1`|Set stream to wide-oriented|
+|`0`|Không thay đổi orientation|
+|`-1`|Đặt stream thành byte-oriented|
+|`1`|Đặt stream thành wide-oriented|
 
-(I said `-1` and `1` there, but really it could be any positive or
-negative number.)
+(Tôi nói `-1` và `1` ở đó, nhưng thực ra có thể là bất kỳ số dương
+hay âm nào.)
 
-Most people choose the wide or byte functions (`printf()` or
-`wprintf()`) and just start using them and never use `fwide()` to set
-the orientation.
+Hầu hết mọi người chọn các hàm wide hoặc byte (`printf()` hoặc
+`wprintf()`) và cứ xài, không bao giờ dùng `fwide()` để đặt
+orientation.
 
-And once the orientation is set, you can't change it. So you can't use
-`fwide()` for that, either.
+Và một khi orientation đã được đặt, bạn không đổi được. Nên bạn cũng
+chẳng dùng `fwide()` cho việc đó được.
 
-So what can you use it for?
+Vậy dùng nó để làm gì?
 
-You can _test_ to see what orientation a stream is in by passing `0` as
-the `mode` and checking the return value.
+Bạn có thể _kiểm tra_ xem một stream đang ở orientation nào bằng cách
+truyền `0` vào `mode` và kiểm tra giá trị trả về.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns greater than zero if the stream is wide-oriented.
+Trả về số lớn hơn 0 nếu stream là wide-oriented.
 
-Returns less than zero if the stream is byte-oriented.
+Trả về số nhỏ hơn 0 nếu stream là byte-oriented.
 
-Returns zero if the stream is unoriented.
+Trả về 0 nếu stream là unoriented.
 
 ### Example {.unnumbered .unlisted}
 
-Example setting to byte-oriented:
+Ví dụ đặt thành byte-oriented:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -750,7 +741,7 @@ Example setting to byte-oriented:
 
 int main(void)
 {
-    printf("Hello world!\n");  // Implicitly set to byte
+    printf("Hello world!\n");  // Ngầm đặt thành byte
 
     int mode = fwide(stdout, 0);
 
@@ -765,7 +756,7 @@ Hello world!
 Stream is byte-oriented
 ```
 
-Example setting to wide-oriented:
+Ví dụ đặt thành wide-oriented:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -773,7 +764,7 @@ Example setting to wide-oriented:
 
 int main(void)
 {
-    wprintf(L"Hello world!\n");  // Implicitly set to wide
+    wprintf(L"Hello world!\n");  // Ngầm đặt thành wide
 
     int mode = fwide(stdout, 0);
 
@@ -799,7 +790,7 @@ Stream is wide-oriented
 
 [i[`ungetwc()` function]i]
 
-Pushes a wide character back into the input stream
+Đẩy một wide character trở lại input stream
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -812,29 +803,28 @@ wint_t ungetwc(wint_t c, FILE *stream);
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide character variant of [`ungetc()`](#man-ungetc).
+Đây là biến thể wide character của [`ungetc()`](#man-ungetc).
 
-It performs the reverse operation of [`fgetwc()`](#man-getwc), pushing a
-character back on the input stream.
+Nó làm điều ngược với [`fgetwc()`](#man-getwc), đẩy một ký tự trở lại
+input stream.
 
-The spec guarantees you can do this one time in a row. You can probably
-do it more times, but it's up to the implementation. If you do too many
-calls without an intervening read, an error could be returned.
+Spec bảo đảm bạn làm được chuyện này một lần liên tiếp. Có thể bạn
+làm được nhiều lần hơn, nhưng tuỳ implementation. Nếu gọi quá nhiều
+lần mà không có lời đọc xen vào, có thể sẽ trả về lỗi.
 
-Setting the file position discards any characters pushed by `ungetwc()`
-without being subsequently read.
+Đặt vị trí file sẽ huỷ mọi ký tự đã được `ungetwc()` đẩy vào mà chưa
+đọc lại.
 
-The end-of-file flag is cleared after a successful call.
+Cờ end-of-file sẽ được xoá sau một lời gọi thành công.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the value of the pushed character on success, or `WEOF` on failure.
+Trả về giá trị của ký tự đã đẩy nếu thành công, hoặc `WEOF` nếu thất bại.
 
 ### Example {.unnumbered .unlisted}
 
-This example reads a piece of punctuation, then everything after it up
-to the next piece of punctuation. It returns the leading punctuation,
-and stores the rest in a string.
+Ví dụ này đọc một dấu câu, rồi mọi thứ sau nó cho đến dấu câu tiếp
+theo. Nó trả về dấu câu dẫn đầu và lưu phần còn lại vào một chuỗi.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -847,16 +837,16 @@ wint_t read_punctstring(FILE *fp, wchar_t *s)
     
     origpunct = fgetwc(fp);
 
-    if (origpunct == WEOF)  // return EOF on end-of-file
+    if (origpunct == WEOF)  // trả về EOF khi end-of-file
         return WEOF;
 
     while (c = fgetwc(fp), !iswpunct(c) && c != WEOF)
-        *s++ = c;  // save it in the string
+        *s++ = c;  // lưu vào chuỗi
 
-    *s = L'\0'; // nul-terminate the string
+    *s = L'\0'; // nul-terminate chuỗi
 
-    // if we read punctuation last, ungetc it so we can fgetc it next
-    // time:
+    // nếu đọc được dấu câu cuối cùng, ungetc nó để lần sau fgetc
+    // lấy lại được:
     if (iswpunct(c))
         ungetwc(c, fp);
 
@@ -900,7 +890,7 @@ Sample output:
 [i[`wcstof()` function]i]
 [i[`wcstold()` function]i]
 
-Convert a wide string to a floating point number
+Chuyển một wide string sang số dấu phẩy động
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -916,22 +906,21 @@ long double wcstold(const wchar_t * restrict nptr, wchar_t ** restrict endptr);
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide counterparts to the [`strtod()`](#man-strtod) family
-of functions. See [their reference pages for details](#man-strtod).
+Đây là các đối tác wide của họ hàm [`strtod()`](#man-strtod). Xem
+[trang tham khảo của chúng để biết chi tiết](#man-strtod).
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the string converted to a floating point value.
+Trả về chuỗi đã được chuyển sang giá trị dấu phẩy động.
 
-Returns `0` if there's no valid number in the string.
+Trả về `0` nếu không có số hợp lệ trong chuỗi.
 
-On overflow, returns an apporpriately-signed `HUGE_VAL`, `HUGE_VALF`. or
-`HUGE_VALL` depending on the return type, and `errno` is set to
+Khi overflow, trả về `HUGE_VAL`, `HUGE_VALF`, hoặc `HUGE_VALL` với
+dấu thích hợp tuỳ kiểu trả về, và `errno` được đặt thành `ERANGE`.
+
+Khi underflow, trả về một số không lớn hơn số dương normalized nhỏ
+nhất, có dấu thích hợp. Implementation _có thể_ đặt `errno` thành
 `ERANGE`.
-
-On underflow, returns a number no greater than the smallest normalized
-positive number, appropriately signed. The implemention _might_ set
-`errno` to `ERANGE`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -983,7 +972,7 @@ No bad chars: 11.223300
 [i[`wcstoul()` function]i]
 [i[`wcstoull()` function]i]
 
-Convert a wide string to an integer value
+Chuyển một wide string sang giá trị số nguyên
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1005,19 +994,18 @@ unsigned long long int wcstoull(const wchar_t * restrict nptr,
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide counterparts to the [`strtol()`](#man-strtol) family
-of functions, so see [their reference pages for the
-details](#man-strtol).
+Đây là các đối tác wide của họ hàm [`strtol()`](#man-strtol), nên xem
+[trang tham khảo của chúng để biết chi tiết](#man-strtol).
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the integer value of the string.
+Trả về giá trị số nguyên của chuỗi.
 
-If nothing can be found, `0` is returned.
+Nếu không tìm được gì, trả về `0`.
 
-If the result is out of range, the value returned is one of `LONG_MIN`,
-`LONG_MAX`, `LLONG_MIN`, `LLONG_MAX`, `ULONG_MAX` or `ULLONG_MAX`, as
-appropriate. And `errno` is set to `ERANGE`.
+Nếu kết quả nằm ngoài phạm vi, giá trị trả về là một trong `LONG_MIN`,
+`LONG_MAX`, `LLONG_MIN`, `LLONG_MAX`, `ULONG_MAX` hoặc `ULLONG_MAX`,
+tuỳ trường hợp. Và `errno` được đặt thành `ERANGE`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1073,7 +1061,7 @@ Bad chars at "beej"
 [i[`wcscpy()` function]i]
 [i[`wcsncpy()` function]i]
 
-Copy a wide string
+Copy một wide string
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1088,24 +1076,24 @@ wchar_t *wcsncpy(wchar_t * restrict s1,
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide versions of [`strcpy()`](#man-strcpy) and
+Đây là các phiên bản wide của [`strcpy()`](#man-strcpy) và
 [`strncpy()`](#man-strcpy).
 
-They'll copy a string up to a wide NUL. Or, in the case of the safer
-`wcsncpy()`, until then or until `n` wide characters are copied.
+Chúng copy một chuỗi đến khi gặp wide NUL. Hoặc, với phiên bản an
+toàn hơn `wcsncpy()`, đến đó hoặc đến khi `n` wide character đã
+được copy.
 
-If the string in `s1` is shorter than `n`, `wcsncpy()` will pad `s2`
-with wide NUL characters until the `n`th wide character is reached.
+Nếu chuỗi trong `s1` ngắn hơn `n`, `wcsncpy()` sẽ đệm `s2` bằng các
+wide NUL character cho đến khi chạm wide character thứ `n`.
 
-Even though `wcsncpy()` is safer because it will never overrun the end
-of `s2` (assuming you set `n` correctly), it's still unsafe a NUL is not
-found in `s1` in the first `n` characters. In that case, `s2` will not
-be NUL-terminated. Always make sure `n` is greater than the string
-length of `s1`!
+Dù `wcsncpy()` an toàn hơn vì nó sẽ không bao giờ chạy vượt cuối `s2`
+(giả sử bạn đặt `n` đúng), nó vẫn không an toàn nếu không tìm thấy
+NUL trong `n` ký tự đầu của `s1`. Trong trường hợp đó, `s2` sẽ không
+được NUL-terminate. Luôn đảm bảo `n` lớn hơn độ dài chuỗi `s1`!
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns `s1`.
+Trả về `s1`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1136,7 +1124,7 @@ int main(void)
 [i[`wmemcpy()` function]i]
 [i[`wmemmove()` function]i]
 
-Copy wide characters
+Copy wide character
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1151,17 +1139,17 @@ wchar_t *wmemmove(wchar_t *s1, const wchar_t *s2, size_t n);
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide versions of [`memcpy()`](#man-memcpy) and
+Đây là các phiên bản wide của [`memcpy()`](#man-memcpy) và
 [`memmove()`](#man-memcpy).
 
-They copy `n` wide characters from `s2` to `s1`.
+Chúng copy `n` wide character từ `s2` vào `s1`.
 
-They're the same except that `wmemmove()` is guaranteed to work with
-overlapping memory regions, and `wmemcpy()` is not.
+Chúng giống nhau trừ chuyện `wmemmove()` được bảo đảm hoạt động với
+các vùng nhớ đè nhau, còn `wmemcpy()` thì không.
 
 ### Return Value {.unnumbered .unlisted}
 
-Both functions return the pointer `s1`.
+Cả hai hàm đều trả về con trỏ `s1`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1173,9 +1161,9 @@ int main(void)
     wchar_t s[100] = L"Goats";
     wchar_t t[100];
 
-    wmemcpy(t, s, 6);       // Copy non-overlapping memory
+    wmemcpy(t, s, 6);       // Copy bộ nhớ không đè nhau
 
-    wmemmove(s + 2, s, 6);  // Copy overlapping memory
+    wmemmove(s + 2, s, 6);  // Copy bộ nhớ đè nhau
 
     wprintf(L"s is \"%ls\"\n", s);
     wprintf(L"t is \"%ls\"\n", t);
@@ -1202,7 +1190,7 @@ t is "Goats"
 [i[`wcscat()` function]i]
 [i[`wcsncat()` function]i]
 
-Concatenate wide strings
+Nối wide string
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1217,20 +1205,20 @@ wchar_t *wcsncat(wchar_t * restrict s1,
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide variants of [`strcat()`](#man-strcat) and
+Đây là các biến thể wide của [`strcat()`](#man-strcat) và
 [`strncat()`](#man-strcat).
 
-They concatenate `s2` onto the end of `s1`.
+Chúng nối `s2` vào cuối `s1`.
 
-They're the same except `wcsncat()` gives you the option to limit the
-number of wide characters appended.
+Chúng giống nhau trừ `wcsncat()` cho bạn chọn giới hạn số wide
+character được nối.
 
-Note that `wcsncat()` always adds a NUL terminator to the end, even if
-`n` characters were appended. So be sure to leave room for that.
+Lưu ý `wcsncat()` luôn thêm một NUL terminator vào cuối, kể cả khi
+`n` ký tự đã được nối. Nên nhớ chừa chỗ cho cái đó.
 
 ### Return Value {.unnumbered .unlisted}
 
-Both functions return the pointer `s1`.
+Cả hai hàm đều trả về con trỏ `s1`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1248,7 +1236,7 @@ int main(void)
     wcscat(dest, src);
     wprintf(L"dest after strcat:  \"%ls\"\n", dest); // "Hello, world!"
 
-    wcsncat(dest, numbers, 3); // strcat first 3 chars of numbers
+    wcsncat(dest, numbers, 3); // strcat 3 ký tự đầu của numbers
     wprintf(L"dest after strncat: \"%ls\"\n", dest); // "Hello, world!123"
 }
 ```
@@ -1265,7 +1253,7 @@ int main(void)
 [i[`wcsncmp()` function]i]
 [i[`wmemcmp()` function]i]
 
-Compare wide strings or memory
+So sánh wide string hoặc bộ nhớ
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1282,28 +1270,25 @@ int wmemcmp(const wchar_t *s1, const wchar_t *s2, size_t n);
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide variants of [`memcmp()`](#man-strcmp),
-[`strcmp()`](#man-strcmp), and [`strncmp()`](#man-strcmp).
+Đây là các biến thể wide của [`memcmp()`](#man-strcmp),
+[`strcmp()`](#man-strcmp), và [`strncmp()`](#man-strcmp).
 
-`wcscmp()` and `wcsncmp()` both compare strings until a NUL character.
+`wcscmp()` và `wcsncmp()` đều so sánh chuỗi đến ký tự NUL.
 
-`wcsncmp()` also has the additional restriction that it will only
-compare the first `n` characters.
+`wcsncmp()` còn thêm hạn chế là chỉ so sánh `n` ký tự đầu.
 
-`wmemcmp()` is like `wcsncmp()` except it won't stop at a NUL.
+`wmemcmp()` giống `wcsncmp()` trừ chuyện nó không dừng ở NUL.
 
-The comparison is done against the character value (which might (or
-might not) be its Unicode code point).
+So sánh được thực hiện dựa trên giá trị ký tự (có thể (hoặc không)
+là Unicode code point của nó).
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns zero if both regions are equal.
+Trả về 0 nếu cả hai vùng bằng nhau.
 
-Returns a negative number if the region pointed to by `s1` is less than
-`s2`.
+Trả về một số âm nếu vùng `s1` trỏ tới nhỏ hơn `s2`.
 
-Returns a positive number if the region pointed to by `s1` is greater
-than `s2`.
+Trả về một số dương nếu vùng `s1` trỏ tới lớn hơn `s2`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1325,11 +1310,10 @@ int main(void)
     if (wcscmp(s1, s3) == 0)
         wprintf(L"This will print because s1 and s3 are the same\n");
 
-    // this is a little weird...but if the strings are the same, it'll
-    // return zero, which can also be thought of as "false". Not-false
-    // is "true", so (!wcscmp()) will be true if the strings are the
-    // same. yes, it's odd, but you see this all the time in the wild
-    // so you might as well get used to it:
+    // hơi lạ...nhưng nếu các chuỗi giống nhau, nó sẽ trả về 0,
+    // mà 0 cũng có thể hiểu là "false". Not-false là "true",
+    // nên (!wcscmp()) sẽ là true nếu các chuỗi giống nhau. Vâng,
+    // lạ thật, nhưng bạn thấy hoài ngoài kia nên cứ quen dần đi:
 
     if (!wcscmp(s1, s3))
         wprintf(L"The strings are the same!\n");
@@ -1361,7 +1345,7 @@ The first 6 characters of s1 and s2 are the same
 
 [i[`wcscoll()` function]i]
 
-Compare two wide strings accounting for locale
+So sánh hai wide string có tính đến locale
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1373,21 +1357,20 @@ int wcscoll(const wchar_t *s1, const wchar_t *s2);
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide version of [`strcoll()`](#man-strcoll). See [`that
-reference page`](#man-strcoll) for details.
+Đây là phiên bản wide của [`strcoll()`](#man-strcoll). Xem [`trang
+tham khảo đó`](#man-strcoll) để biết chi tiết.
 
-This is slower than `wcscmp()`, so only use it if you need the
-locale-specific compare.
+Cái này chậm hơn `wcscmp()`, nên chỉ dùng khi bạn cần so sánh theo
+locale.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns zero if both regions are equal in this locale.
+Trả về 0 nếu cả hai vùng bằng nhau trong locale này.
 
-Returns a negative number if the region pointed to by `s1` is less than
-`s2` in this locale.
+Trả về một số âm nếu vùng `s1` trỏ tới nhỏ hơn `s2` trong locale này.
 
-Returns a positive number if the region pointed to by `s1` is greater
-than `s2` in this locale.
+Trả về một số dương nếu vùng `s1` trỏ tới lớn hơn `s2` trong locale
+này.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1399,9 +1382,8 @@ int main(void)
 {
     setlocale(LC_ALL, "");
 
-    // If your source character set doesn't support "é" in a string
-    // you can replace it with `\u00e9`, the Unicode code point
-    // for "é".
+    // Nếu source character set không hỗ trợ "é" trong chuỗi thì
+    // có thể thay bằng `\u00e9`, Unicode code point của "é".
 
     wprintf(L"%d\n", wcscmp(L"é", L"f"));   // Reports é > f, yuck.
     wprintf(L"%d\n", wcscoll(L"é", L"f"));  // Reports é < f, yay!
@@ -1419,7 +1401,7 @@ int main(void)
 
 [i[`wcsxfrm()` function]i]
 
-Transform a wide string for comparing based on locale
+Biến đổi một wide string để so sánh dựa trên locale
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1432,15 +1414,15 @@ size_t wcsxfrm(wchar_t * restrict s1,
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide variant of [`strxfrm()`](#man-strxfrm). See
-[that reference page](#man-strxfrm) for details.
+Đây là biến thể wide của [`strxfrm()`](#man-strxfrm). Xem [trang
+tham khảo đó](#man-strxfrm) để biết chi tiết.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the length of the transformed wide string in wide characters.
+Trả về độ dài của wide string đã biến đổi tính theo wide character.
 
-If the return value is greater than `n`, all bets are off for the
-result in `s1`.
+Nếu giá trị trả về lớn hơn `n`, kết quả trong `s1` coi như bỏ, không
+đoán được gì.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1449,8 +1431,7 @@ result in `s1`.
 #include <locale.h>
 #include <stdlib.h>
 
-// Transform a string for comparison, returning a malloc'd
-// result
+// Biến đổi một chuỗi để so sánh, trả về kết quả đã malloc'd
 wchar_t *get_xfrm_str(wchar_t *s)
 {
     int len = wcsxfrm(NULL, s, 0) + 1;
@@ -1461,8 +1442,8 @@ wchar_t *get_xfrm_str(wchar_t *s)
     return d;
 }
 
-// Does half the work of a regular wcscoll() because the second
-// string arrives already transformed.
+// Làm một nửa công việc của wcscoll() thường vì chuỗi thứ hai
+// đến đã được biến đổi sẵn.
 int half_wcscoll(wchar_t *s1, wchar_t *s2_transformed)
 {
     wchar_t *s1_transformed = get_xfrm_str(s1);
@@ -1478,10 +1459,10 @@ int main(void)
 {
     setlocale(LC_ALL, "");
 
-    // Pre-transform the string to compare against
+    // Biến đổi trước chuỗi để so sánh
     wchar_t *s = get_xfrm_str(L"éfg");
 
-    // Repeatedly compare against "éfg" 
+    // So sánh lặp lại với "éfg" 
     wprintf(L"%d\n", half_wcscoll(L"fgh", s));  // "fgh" > "éfg"
     wprintf(L"%d\n", half_wcscoll(L"àbc", s));  // "àbc" < "éfg"
     wprintf(L"%d\n", half_wcscoll(L"ĥij", s));  // "ĥij" > "éfg"
@@ -1510,7 +1491,7 @@ Output:
 [i[`wcschr()` function]i]
 [i[`wcsrchr()` function]i]
 
-Find a wide character in a wide string
+Tìm một wide character trong một wide string
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1536,17 +1517,17 @@ QWchar_t *wmemchr(QWchar_t *s, wchar_t c, size_t n);
 
 ### Description {.unnumbered .unlisted}
 
-These are the wide equivalents to [`strchr()`](#man-strchr),
-[`strrchr()`](#man-strchr), and [`memchr()`](#man-strchr).
+Đây là các tương đương wide của [`strchr()`](#man-strchr),
+[`strrchr()`](#man-strchr), và [`memchr()`](#man-strchr).
 
-They search for wide characters in a wide string from the front
-(`wcschr()`), the end (`wcsrchr()`) or for an arbitrary number of wide
-characters (`wmemchr()`).
+Chúng tìm wide character trong một wide string từ đầu
+(`wcschr()`), từ cuối (`wcsrchr()`) hoặc tìm trong một số lượng
+wide character tuỳ ý (`wmemchr()`).
 
 ### Return Value {.unnumbered .unlisted}
 
-All three functions return a pointer to the wide character found, or
-`NULL` if the character, sadly, isn't found.
+Cả ba hàm đều trả về con trỏ đến wide character tìm được, hoặc `NULL`
+nếu không tìm thấy (buồn thật).
 
 ### Example {.unnumbered .unlisted}
 
@@ -1562,12 +1543,12 @@ int main(void)
     wchar_t *str = L"Hello, world!";
     wchar_t *p;
 
-    p = wcschr(str, ',');       // p now points at position A
-    p = wcsrchr(str, 'o');      // p now points at position B
+    p = wcschr(str, ',');       // p bây giờ trỏ đến vị trí A
+    p = wcsrchr(str, 'o');      // p bây giờ trỏ đến vị trí B
 
-    p = wmemchr(str, '!', 13);   // p now points at position C
+    p = wmemchr(str, '!', 13);   // p bây giờ trỏ đến vị trí C
 
-    // repeatedly find all occurrences of the letter 'B'
+    // Lặp để tìm tất cả các chữ 'B'
     str = L"A BIG BROWN BAT BIT BEEJ";
 
     for(p = wcschr(str, 'B'); p != NULL; p = wcschr(p + 1, 'B')) {
@@ -1598,8 +1579,8 @@ Found a 'B' here: BEEJ
 [i[`wcsspn()` function]i]
 [i[`wcscspn()` function]i]
 
-Return the length of a wide string consisting entirely of a set of wide
-characters, or of not a set of wide characters
+Trả về độ dài của một wide string gồm toàn các ký tự thuộc một tập
+wide character, hoặc không thuộc một tập wide character
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1613,18 +1594,17 @@ size_t wcscspn(const wchar_t *s1, const wchar_t *s2);
 
 ### Description {.unnumbered .unlisted}
 
-The are the wide character counterparts to [`strspn()`] (#man-strspn)and
+Đây là các đối tác wide character của [`strspn()`] (#man-strspn) và
 [`strcspn()`](#man-strspn).
 
-They compute the length of the string pointed to by `s1` consisting
-entirely of the characters found in `s2`. Or, in the case of
-`wcscspn()`, the characters _not_ found in `s2`.
+Chúng tính độ dài của chuỗi `s1` trỏ tới gồm toàn các ký tự có trong
+`s2`. Hoặc, với `wcscspn()`, các ký tự _không_ có trong `s2`.
 
 ### Return Value {.unnumbered .unlisted}
 
-The length of the string pointed to by `s1` consisting solely of the
-characters in `s2` (in the case of `wcsspn()`) or of the characters
-_not_ in `s2` (in th ecase of `wcscspn()`).
+Độ dài của chuỗi `s1` trỏ tới gồm toàn các ký tự trong `s2` (với
+`wcsspn()`) hoặc toàn các ký tự _không_ có trong `s2` (với
+`wcscspn()`).
 
 ### Example {.unnumbered .unlisted}
 
@@ -1637,16 +1617,16 @@ int main(void)
     wchar_t str2[] = L"the bolivian navy on maneuvers in the south pacific";
     int n;
 
-    // how many letters in str1 until we reach something that's not a vowel?
+    // có bao nhiêu ký tự trong str1 trước khi gặp ký tự không phải nguyên âm?
     n = wcsspn(str1, L"aeiou");
     wprintf(L"%d\n", n);  // n == 1, just "a"
 
-    // how many letters in str1 until we reach something that's not a, b,
-    // or space?
+    // có bao nhiêu ký tự trong str1 trước khi gặp ký tự không phải
+    // a, b, hoặc space?
     n = wcsspn(str1, L"ab ");
     wprintf(L"%d\n", n);  // n == 4, "a ba"
 
-    // how many letters in str2 before we get a "y"?
+    // có bao nhiêu ký tự trong str2 trước khi gặp "y"?
     n = wcscspn(str2, L"y");
     wprintf(L"%d\n", n);  // n = 16, "the bolivian nav"
 }
@@ -1663,7 +1643,7 @@ int main(void)
 
 [i[`wcspbrk()` function]i]
 
-Search a wide string for one of a set of wide characters
+Tìm một wide character trong một tập ở một wide string
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1681,17 +1661,17 @@ QWchar_t *wcspbrk(QWchar_t *s1, const wchar_t *s2);
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide character variant of [`strpbrk()`](#man-strpbrk).
+Đây là biến thể wide character của [`strpbrk()`](#man-strpbrk).
 
-It finds the first occurrance of any of a set of wide characters in a
-wide string.
+Nó tìm vị trí xuất hiện đầu tiên của bất kỳ ký tự nào trong một tập
+wide character có trong một wide string.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns a pointer to the first character in the string `s1` that exists
-in the string `s2`.
+Trả về con trỏ đến ký tự đầu tiên trong chuỗi `s1` tồn tại trong
+chuỗi `s2`.
 
-Or `NULL` if none of the characters in `s2` can be found in `s1`.
+Hoặc `NULL` nếu không tìm thấy ký tự nào của `s2` trong `s1`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1700,12 +1680,12 @@ Or `NULL` if none of the characters in `s2` can be found in `s1`.
 
 int main(void)
 {
-    //  p points here after wcspbrk
+    //  p trỏ vào đây sau wcspbrk
     //                  v
     wchar_t *s1 = L"Hello, world!";
-    wchar_t *s2 = L"dow!";  // Match any of these chars
+    wchar_t *s2 = L"dow!";  // Match bất kỳ ký tự nào trong đây
 
-    wchar_t *p = wcspbrk(s1, s2);  // p points to the o
+    wchar_t *p = wcspbrk(s1, s2);  // p trỏ vào chữ o
 
     wprintf(L"%ls\n", p);  // "o, world!"
 }
@@ -1722,7 +1702,7 @@ int main(void)
 
 [i[`wcsstr()` function]i]
 
-Find a wide string in another wide string
+Tìm một wide string trong một wide string khác
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1740,15 +1720,15 @@ QWchar_t *wcsstr(QWchar_t *s1, const wchar_t *s2);
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide variant of [`strstr()`](#man-strstr).
+Đây là biến thể wide của [`strstr()`](#man-strstr).
 
-It locates a substring in a string.
+Nó tìm vị trí một chuỗi con trong một chuỗi.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns a pointer to the location in `s1` that contains `s2`.
+Trả về con trỏ đến vị trí trong `s1` có chứa `s2`.
 
-Or `NULL` if `s2` cannot be found in `s1`.
+Hoặc `NULL` nếu không tìm thấy `s2` trong `s1`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1763,7 +1743,7 @@ int main(void)
     p = wcsstr(str, L"lazy");
     wprintf(L"%ls\n", p == NULL? L"null": p); // "lazy dogs."
 
-    // p is NULL after this, since the string "wombat" isn't in str:
+    // p sẽ là NULL sau đoạn này, vì chuỗi "wombat" không có trong str:
     p = wcsstr(str, L"wombat");
     wprintf(L"%ls\n", p == NULL? L"null": p); // "null"
 }
@@ -1782,7 +1762,7 @@ int main(void)
 
 [i[`wcstok()` function]i]
 
-Tokenize a wide string
+Tách token một wide string
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1794,16 +1774,15 @@ wchar_t *wcstok(wchar_t * restrict s1, const wchar_t * restrict s2,
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide version of [`strtok()`](#man-strtok).
+Đây là phiên bản wide của [`strtok()`](#man-strtok).
 
-And, like that one, it modifies the string `s1`. So make a copy of it
-first if you want to preserve the original.
+Và, cũng như nó, nó chỉnh sửa chuỗi `s1`. Nên hãy copy nó ra trước
+nếu muốn giữ chuỗi gốc.
 
-One key difference is that `wcstok()` can be threadsafe because you pass
-in the pointer `ptr` to the current state of the transformation. This
-gets initializers for you when `s1` is initially passed in as
-non-`NULL`. (Subsequent calls with a `NULL` `s1` cause the state to
-update.)
+Một khác biệt quan trọng là `wcstok()` có thể threadsafe vì bạn truyền
+vào con trỏ `ptr` trỏ đến state hiện tại của quá trình biến đổi. Cái
+này được khởi tạo tự động khi `s1` được truyền vào lần đầu dưới dạng
+khác `NULL`. (Các lần gọi sau với `s1` là `NULL` làm state cập nhật.)
 
 ### Return Value {.unnumbered .unlisted}
 
@@ -1814,23 +1793,23 @@ update.)
 
 int main(void)
 {
-    // break up the string into a series of space or
-    // punctuation-separated words
+    // tách chuỗi thành chuỗi các từ cách nhau bởi space
+    // hoặc dấu câu
     wchar_t str[] = L"Where is my bacon, dude?";
     wchar_t *token;
     wchar_t *state;
 
-    // Note that the following if-do-while construct is very very
-    // very very very common to see when using strtok().
+    // Lưu ý cấu trúc if-do-while sau đây rất rất rất
+    // rất rất thường thấy khi dùng strtok().
 
-    // grab the first token (making sure there is a first token!)
+    // lấy token đầu tiên (đảm bảo có token đầu tiên!)
     if ((token = wcstok(str, L".,?! ", &state)) != NULL) {
         do {
             wprintf(L"Word: \"%ls\"\n", token);
 
-            // now, the while continuation condition grabs the
-            // next token (by passing NULL as the first param)
-            // and continues if the token's not NULL:
+            // bây giờ, điều kiện tiếp tục của while lấy token
+            // tiếp theo (bằng cách truyền NULL làm tham số đầu)
+            // và tiếp tục nếu token không NULL:
         } while ((token = wcstok(NULL, L".,?! ", &state)) != NULL);
     }
 }
@@ -1855,7 +1834,7 @@ Word: "dude"
 
 [i[`wcslen()` function]i]
 
-Returns the length of a wide string
+Trả về độ dài của một wide string
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1867,11 +1846,11 @@ size_t wcslen(const wchar_t *s);
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide counterpart to [`strlen()`](#man-strlen).
+Đây là đối tác wide của [`strlen()`](#man-strlen).
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the number of wide characters before the wide NUL terminator.
+Trả về số wide character trước wide NUL terminator.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1880,9 +1859,9 @@ Returns the number of wide characters before the wide NUL terminator.
 
 int main(void)
 {
-    wchar_t *s = L"Hello, world!"; // 13 characters
+    wchar_t *s = L"Hello, world!"; // 13 ký tự
 
-    // prints "The string is 13 characters long.":
+    // in "The string is 13 characters long.":
 
     wprintf(L"The string is %zu characters long.\n", wcslen(s));
 }
@@ -1897,7 +1876,7 @@ int main(void)
 
 [i[`wcsftime()` function]i]
 
-Formatted date and time output
+Xuất ngày giờ có định dạng
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1912,18 +1891,18 @@ size_t wcsftime(wchar_t * restrict s, size_t maxsize,
 
 ### Description {.unnumbered .unlisted}
 
-This is the wide equivalent to [`strftime()`](#man-strftime). See that
-reference page for details.
+Đây là tương đương wide của [`strftime()`](#man-strftime). Xem trang
+tham khảo đó để biết chi tiết.
 
-`maxsize` here refers to the maximum number of wide characters that can
-be in the result string.
+`maxsize` ở đây là số wide character tối đa có thể có trong chuỗi
+kết quả.
 
 ### Return Value {.unnumbered .unlisted}
 
-If successful, returns the number of wide characters written.
+Nếu thành công, trả về số wide character đã ghi.
 
-If not successful because the result couldn't fit in the space alloted,
-`0` is returned and the contents of the string could be anything.
+Nếu thất bại vì kết quả không vừa chỗ đã cấp, trả về `0` và nội dung
+của chuỗi có thể là bất kỳ thứ gì.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1938,26 +1917,26 @@ int main(void)
     wchar_t s[BUFSIZE];
     time_t now = time(NULL);
 
-    // %c: print date as per current locale
+    // %c: in ngày theo locale hiện hành
     wcsftime(s, BUFSIZE, L"%c", localtime(&now));
     wprintf(L"%ls\n", s);   // Sun Feb 28 22:29:00 2021
 
-    // %A: full weekday name
-    // %B: full month name
-    // %d: day of the month
+    // %A: tên đầy đủ của thứ
+    // %B: tên đầy đủ của tháng
+    // %d: ngày trong tháng
     wcsftime(s, BUFSIZE, L"%A, %B %d", localtime(&now));
     wprintf(L"%ls\n", s);   // Sunday, February 28
 
-    // %I: hour (12 hour clock)
-    // %M: minute
-    // %S: second
-    // %p: AM or PM
+    // %I: giờ (đồng hồ 12 giờ)
+    // %M: phút
+    // %S: giây
+    // %p: AM hoặc PM
     wcsftime(s, BUFSIZE, L"It's %I:%M:%S %p", localtime(&now));
     wprintf(L"%ls\n", s);   // It's 10:29:00 PM
 
     // %F: ISO 8601 yyyy-mm-dd
     // %T: ISO 8601 hh:mm:ss
-    // %z: ISO 8601 time zone offset
+    // %z: ISO 8601 offset múi giờ
     wcsftime(s, BUFSIZE, L"ISO 8601: %FT%T%z", localtime(&now));
     wprintf(L"%ls\n", s);   // ISO 8601: 2021-02-28T22:29:00-0800
 }
@@ -1973,7 +1952,7 @@ int main(void)
 [i[`btowc()` function]i]
 [i[`wctob()` function]i]
 
-Convert a single byte character to a wide character
+Chuyển một ký tự một byte sang một wide character
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1987,27 +1966,25 @@ int wctob(wint_t c);
 
 ### Description {.unnumbered .unlisted}
 
-These functions convert between single byte characters and wide
-characters, and vice-versa.
+Các hàm này chuyển qua lại giữa ký tự một byte và wide character.
 
-Even though `int`s are involved, don't let this mislead you; they're
-effectively converted to `unsigned char`s internally.
+Tuy có `int` trong đây, đừng để nó đánh lừa; thực chất chúng được
+chuyển thành `unsigned char` bên trong.
 
-The characters in the basic character set are guaranteed to be a single
-byte.
+Các ký tự trong basic character set được đảm bảo là một byte.
 
 ### Return Value {.unnumbered .unlisted}
 
-`btowc()` returns the single-byte character as a wide character. Returns
-`WEOF` if `EOF` is passed in, or if the byte doesn't correspond to a
-valid wide character.
+`btowc()` trả về ký tự một byte dưới dạng wide character. Trả về
+`WEOF` nếu `EOF` được truyền vào, hoặc byte không tương ứng wide
+character hợp lệ.
 
-`wctob()` returns the wide character as a single-byte character. Returns
-`EOF` if `WEOF` is passed in, or if the wide character doesn't
-correspond to a value single-byte character.
+`wctob()` trả về wide character dưới dạng ký tự một byte. Trả về
+`EOF` nếu `WEOF` được truyền vào, hoặc wide character không tương
+ứng ký tự một byte hợp lệ.
 
-See [`mbtowc()`](#man-mbtowc) and [`wctomb()`](#man-wctomb) for
-multibyte to wide character conversion.
+Xem [`mbtowc()`](#man-mbtowc) và [`wctomb()`](#man-wctomb) để chuyển
+multibyte sang wide character.
 
 ### Example {.unnumbered .unlisted}
 
@@ -2016,11 +1993,11 @@ multibyte to wide character conversion.
 
 int main(void)
 {
-    wint_t wc = btowc('B');    // Convert single byte to wide char
+    wint_t wc = btowc('B');    // Chuyển byte đơn sang wide char
 
     wprintf(L"Wide character: %lc\n", wc);
 
-    unsigned char c = wctob(wc);  // Convert back to single byte
+    unsigned char c = wctob(wc);  // Chuyển ngược về byte đơn
 
     wprintf(L"Single-byte character: %c\n", c);
 }
@@ -2043,7 +2020,7 @@ Single-byte character: B
 
 [i[`mbsinit()` function]i]
 
-Test if an `mbstate_t` is in the initial conversion state
+Kiểm tra một `mbstate_t` có đang ở conversion state ban đầu không
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2055,27 +2032,27 @@ int mbsinit(const mbstate_t *ps);
 
 ### Description {.unnumbered .unlisted}
 
-For a given conversion state in a `mbstate_t` variable, this function
-determines if it's in the initial conversion state.
+Với một conversion state cho sẵn trong biến `mbstate_t`, hàm này xác
+định xem nó có đang ở conversion state ban đầu không.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns non-zero if the value pointed to by `ps` is in the initial
-conversion state, or if `ps` is `NULL`.
+Trả về khác 0 nếu giá trị `ps` trỏ tới đang ở conversion state ban
+đầu, hoặc nếu `ps` là `NULL`.
 
-Returns `0` if the value pointed to by `ps` is **not** in the initial
-conversion state.
+Trả về `0` nếu giá trị `ps` trỏ tới **không** ở conversion state ban
+đầu.
 
 ### Example {.unnumbered .unlisted}
 
-For me, this example doesn't do anything exciting, saying that the
-`mbstate_t` variable is always in the initial state. Yay.
+Với tôi, ví dụ này chẳng có gì thú vị, nói rằng biến `mbstate_t` luôn
+luôn ở state ban đầu. Yay.
 
-But if have a stateful encoding like 2022-JP, try messing around with
-this to see if you can get into an intermediate state.
+Nhưng nếu bạn có một encoding có state như 2022-JP, thử nghịch với cái
+này xem có vào được state trung gian nào không.
 
-This program has a bit of code at the top that reports if your locale's
-encoding requires any state.
+Chương trình này có một đoạn code ở đầu báo xem encoding của locale
+bạn có cần state nào không.
 
 ``` {.c .numberLines}
 #include <locale.h>   // For setlocale()
@@ -2094,7 +2071,7 @@ int main(void)
 
     wprintf(L"Is encoding state dependent? %d\n", is_state_dependent);
 
-    memset(&state, 0, sizeof state);  // Set to initial state
+    memset(&state, 0, sizeof state);  // Đặt về state ban đầu
 
     wprintf(L"In initial conversion state? %d\n", mbsinit(&state));
 
@@ -2116,7 +2093,7 @@ int main(void)
 
 [i[`mbrlen()` function]i]
 
-Compute the number of bytes in a multibyte character, restartably
+Tính số byte của một ký tự multibyte, kiểu restartable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2128,31 +2105,30 @@ size_t mbrlen(const char * restrict s, size_t n, mbstate_t * restrict ps);
 
 ### Description {.unnumbered .unlisted}
 
-This is the restartable version of [`mblen()`](#man-mblen).
+Đây là phiên bản restartable của [`mblen()`](#man-mblen).
 
-It inspects at most `n` bytes of the string `s` to see how many bytes in
-this character.
+Nó xét tối đa `n` byte của chuỗi `s` xem có bao nhiêu byte trong ký
+tự này.
 
-The conversion state is stored in `ps`.
+Conversion state được lưu trong `ps`.
 
-This function doesn't have the functionality of `mblen()` that allowed
-you to query if this character encoding was stateful and to reset the
-internal state.
+Hàm này không có chức năng của `mblen()` cho phép bạn truy vấn xem
+encoding ký tự này có stateful không và reset state nội bộ.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the number of bytes required for this multibyte character.
+Trả về số byte cần cho ký tự multibyte này.
 
-Returns `(size_t)(-1)` if the data in `s` is not a valid multibyte
-character.
+Trả về `(size_t)(-1)` nếu dữ liệu trong `s` không phải ký tự multibyte
+hợp lệ.
 
-Returns `(size_t)(-2)` if the data is `s` is a valid but not complete
-multibyte character.
+Trả về `(size_t)(-2)` nếu dữ liệu trong `s` hợp lệ nhưng chưa đủ một
+ký tự multibyte hoàn chỉnh.
 
 ### Example {.unnumbered .unlisted}
 
-If your character set doesn't support the Euro symbol "€", substitute
-the Unicode escape sequence `\u20ac`, below.
+Nếu character set của bạn không hỗ trợ ký hiệu Euro "€", thay bằng
+chuỗi escape Unicode `\u20ac`, ở dưới.
 
 ``` {.c .numberLines}
 #include <locale.h>   // For setlocale()
@@ -2166,7 +2142,7 @@ int main(void)
 
     setlocale(LC_ALL, "");
 
-    memset(&state, 0, sizeof state);  // Set to initial state
+    memset(&state, 0, sizeof state);  // Đặt về state ban đầu
 
     len = mbrlen("B", 5, &state);
 
@@ -2194,7 +2170,7 @@ Length of '€' is 3 byte(s)
 
 [i[`mbrtowc()` function]i]
 
-Convert multibyte to wide characters restartably
+Chuyển multibyte sang wide character kiểu restartable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2207,50 +2183,49 @@ size_t mbrtowc(wchar_t * restrict pwc, const char * restrict s,
 
 ### Description {.unnumbered .unlisted}
 
-This is the restartable counterpart to [`mbtowc()`](#man-mbtowc).
+Đây là đối tác restartable của [`mbtowc()`](#man-mbtowc).
 
-It converts individual characters from multibyte to wide, tracking the
- conversion state in the variable pointed to by `ps`.
+Nó chuyển các ký tự đơn từ multibyte sang wide, theo dõi conversion
+state trong biến được `ps` trỏ tới.
 
-At most `n` bytes are inspected for conversion to a wide character.
+Tối đa `n` byte được xét để chuyển sang một wide character.
 
-These two variants are identical and cause the state pointed to by `ps`
-to be set to the initial conversion state:
+Hai biến thể sau đây giống nhau và làm state mà `ps` trỏ tới được
+đặt về conversion state ban đầu:
 
 ``` {.c}
 mbrtowc(NULL, NULL, 0, &state);
 mbrtowc(NULL, "", 1, &state);
 ```
 
-Also, if you're just interested in the length in bytes of the multibyte
-character, you can pass `NULL` for `pwc` and nothing will be stored for
-the wide character:
+Ngoài ra, nếu bạn chỉ quan tâm đến độ dài tính bằng byte của ký tự
+multibyte, có thể truyền `NULL` cho `pwc` và không có gì được lưu
+cho wide character:
 
 ``` {.c}
 int len = mbrtowc(NULL, "€", 5, &state);
 ```
 
-This function doesn't have the functionality of `mbtowc()` that allowed
-you to query if this character encoding was stateful and to reset the
-internal state.
+Hàm này không có chức năng của `mbtowc()` cho phép bạn truy vấn xem
+encoding ký tự này có stateful không và reset state nội bộ.
 
 ### Return Value {.unnumbered .unlisted}
 
-On success, returns a positive number corresponding to the number of
-bytes in the multibyte character.
+Nếu thành công, trả về một số dương tương ứng với số byte trong ký
+tự multibyte.
 
-Returns `0` if the character encoded is a wide NUL character.
+Trả về `0` nếu ký tự được encode là wide NUL character.
 
-Returns `(size_t)(-1)` if the data in `s` is not a valid multibyte
-character.
+Trả về `(size_t)(-1)` nếu dữ liệu trong `s` không phải ký tự multibyte
+hợp lệ.
 
-Returns `(size_t)(-2)` if the data is `s` is a valid but not complete
-multibyte character.
+Trả về `(size_t)(-2)` nếu dữ liệu trong `s` hợp lệ nhưng chưa đủ một
+ký tự multibyte hoàn chỉnh.
 
 ### Example {.unnumbered .unlisted}
 
-If your character set doesn't support the Euro symbol "€", substitute
-the Unicode escape sequence `\u20ac`, below.
+Nếu character set của bạn không hỗ trợ ký hiệu Euro "€", thay bằng
+chuỗi escape Unicode `\u20ac`, ở dưới.
 
 ``` {.c .numberLines}
 #include <string.h>  // For memset()
@@ -2277,7 +2252,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 State dependency: 0
@@ -2294,7 +2269,7 @@ L'€' takes 3 bytes as multibyte char '€'
 
 [i[`wcrtomb()` function]i]
 
-Convert wide to multibyte characters restartably
+Chuyển wide sang multibyte kiểu restartable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2306,31 +2281,31 @@ size_t wcrtomb(char * restrict s, wchar_t wc, mbstate_t * restrict ps);
 
 ### Description {.unnumbered .unlisted}
 
-This is the restartable counterpart to [`wctomb()`](#man-wctomb).
+Đây là đối tác restartable của [`wctomb()`](#man-wctomb).
 
-It converts individual characters from wide to multibyte, tracking the
-conversion state in the variable pointed to by `ps`.
+Nó chuyển các ký tự đơn từ wide sang multibyte, theo dõi conversion
+state trong biến được `ps` trỏ tới.
 
-The destination array `s` should be at least `MB_CUR_MAX`^[This is a
-variable, not a macro, so if you use it to define an array, it'll be a
-variable-length array.] bytes in size---you won't get anything bigger
-back from this function.
+Mảng đích `s` cần có kích thước tối thiểu `MB_CUR_MAX`^[Đây là một
+biến, không phải macro, nên nếu bạn dùng nó để định nghĩa mảng, đó
+sẽ là mảng có độ dài biến thiên (variable-length array).] byte---bạn
+sẽ không nhận được thứ gì lớn hơn từ hàm này.
 
-Note that the values in this result array won't be NUL-terminated.
+Lưu ý các giá trị trong mảng kết quả này sẽ không được NUL-terminate.
 
-If you pass a wide NUL character in, the result will contain any bytes
-needed to restore the conversion state to its initial state followed by
-a NUL character, and the state pointed to by `ps` will be reset to its
-initial state:
+Nếu bạn truyền vào một wide NUL character, kết quả sẽ chứa các byte
+cần thiết để phục hồi conversion state về state ban đầu, theo sau là
+một NUL character, và state `ps` trỏ tới sẽ được reset về state ban
+đầu:
 
 ``` {.c}
 // Reset state
 wcrtomb(mb, L'\0', &state)
 ```
 
-If you don't care about the results (i.e. you're just interested in
-resetting the state or getting the return value), you can do this by
-passing `NULL` for `s`:
+Nếu bạn không quan tâm kết quả (nghĩa là bạn chỉ muốn reset state
+hoặc lấy giá trị trả về), có thể làm vậy bằng cách truyền `NULL` cho
+`s`:
 
 ``` {.c}
 wcrtomb(NULL, L'\0', &state);                // Reset state
@@ -2338,23 +2313,22 @@ wcrtomb(NULL, L'\0', &state);                // Reset state
 int byte_count = wctomb(NULL, "X", &state);  // Count bytes in 'X'
 ```
 
-This function doesn't have the functionality of `wctomb()` that allowed
-you to query if this character encoding was stateful and to reset the
-internal state.
+Hàm này không có chức năng của `wctomb()` cho phép bạn truy vấn xem
+encoding ký tự này có stateful không và reset state nội bộ.
 
 ### Return Value {.unnumbered .unlisted}
 
-On success, returns the number of bytes needed to encode this wide
-character in the current locale.
+Nếu thành công, trả về số byte cần để encode wide character này
+trong locale hiện hành.
 
-If the input is an invalid wide character, `errno` will be set to
-`EILSEQ` and the function returns `(size_t)(-1)`. If this happens, all
-bets are off for the conversion state, so you might as well reset it.
+Nếu input là wide character không hợp lệ, `errno` sẽ được đặt thành
+`EILSEQ` và hàm trả về `(size_t)(-1)`. Khi chuyện này xảy ra, conversion
+state coi như bỏ, bạn cứ reset luôn cho rồi.
 
 ### Example {.unnumbered .unlisted}
 
-If your character set doesn't support the Euro symbol "€", substitute
-the Unicode escape sequence `\u20ac`, below.
+Nếu character set của bạn không hỗ trợ ký hiệu Euro "€", thay bằng
+chuỗi escape Unicode `\u20ac`, ở dưới.
 
 ``` {.c .numberLines}
 #include <string.h>  // For memset()
@@ -2390,7 +2364,7 @@ int main(void)
 
 [i[`mbsrtowcs()` function]i]
 
-Convert a multibyte string to a wide character string restartably
+Chuyển một chuỗi multibyte sang chuỗi wide character kiểu restartable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2403,45 +2377,44 @@ size_t mbsrtowcs(wchar_t * restrict dst, const char ** restrict src,
 
 ### Description {.unnumbered .unlisted}
 
-This is the restartable version of [`mbstowcs()`](#man-mbstowcs).
+Đây là phiên bản restartable của [`mbstowcs()`](#man-mbstowcs).
 
-It converts a multibyte string to a wide character string.
+Nó chuyển một chuỗi multibyte sang chuỗi wide character.
 
-The result is put in the buffer pointed to by `dst`, and the pointer
-`src` is updated to indicate how much of the string was consumed (unless
-`dst` is `NULL`).
+Kết quả được đặt vào buffer mà `dst` trỏ tới, và con trỏ `src` được
+cập nhật để chỉ ra phần chuỗi đã được tiêu thụ (trừ khi `dst` là
+`NULL`).
 
-At most `len` wide characters will be stored.
+Tối đa `len` wide character sẽ được lưu.
 
-This also takes a pointer to its own `mbstate_t` variable in `ps` for
-holding the conversion state.
+Hàm này cũng nhận con trỏ đến biến `mbstate_t` của riêng nó trong
+`ps` để giữ conversion state.
 
-You can set `dst` to `NULL` if you only care about the return value.
-This could be useful for getting the number of characters in a multibyte
-string.
+Bạn có thể đặt `dst` thành `NULL` nếu chỉ quan tâm đến giá trị trả
+về. Chuyện này có thể hữu ích khi muốn lấy số ký tự trong chuỗi
+multibyte.
 
-In the normal case, the `src` string will be consumed up to the NUL
-character, and the results will be stored in the `dst` buffer, including
-the wide NUL character. In this case, the pointer pointed to by `src`
-will be set to `NULL`. And the conversion state will be set to the
-initial conversion state.
+Trong trường hợp bình thường, chuỗi `src` sẽ được tiêu thụ đến ký tự
+NUL, và kết quả sẽ được lưu vào buffer `dst`, bao gồm cả wide NUL
+character. Trong trường hợp này, con trỏ được `src` trỏ tới sẽ được
+đặt thành `NULL`. Và conversion state sẽ được đặt về conversion state
+ban đầu.
 
-If things go wrong because the source string isn't a valid sequence of
-characters, conversion will stop and the pointer pointed to by `src`
-will be set to the address just after the last successfully-translated
-multibyte character.
+Nếu có sự cố vì chuỗi nguồn không phải chuỗi ký tự hợp lệ, conversion
+sẽ dừng và con trỏ được `src` trỏ tới sẽ được đặt thành địa chỉ ngay
+sau ký tự multibyte được biến đổi thành công cuối cùng.
 
 ### Return Value {.unnumbered .unlisted}
 
-If successful, returns the number of characters converted, not including
-any NUL terminator.
+Nếu thành công, trả về số ký tự đã được chuyển, không tính NUL
+terminator.
 
-If the multibyte sequence is invalid, the function returns
-`(size_t)(-1)` and `errno` is set to `EILSEQ`.
+Nếu chuỗi multibyte không hợp lệ, hàm trả về `(size_t)(-1)` và `errno`
+được đặt thành `EILSEQ`.
 
 ### Example {.unnumbered .unlisted}
 
-Here we'll convert the string "€5 ± π" into a wide character string:
+Ở đây chúng ta sẽ chuyển chuỗi "€5 ± π" sang chuỗi wide character:
 
 ``` {.c .numberLines}
 #include <locale.h>  // For setlocale()
@@ -2473,10 +2446,9 @@ Output:
 Wide string L"€5 ± π" is 6 characters
 ```
 
-Here's another example of using `mbsrtowcs()` to get the length in
-characters of a multibyte string even if the string is full of multibyte
-characters. This is in contrast to `strlen()`, which returns the total
-number of bytes in the string.
+Đây là một ví dụ khác dùng `mbsrtowcs()` để lấy độ dài tính theo ký
+tự của một chuỗi multibyte kể cả khi chuỗi đầy ký tự multibyte. Cái
+này ngược với `strlen()`, hàm trả về tổng số byte trong chuỗi.
 
 ``` {.c .numberLines}
 #include <stdio.h>   // For printf()
@@ -2506,7 +2478,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 "€5 ± π" is 6 characters...
@@ -2526,7 +2498,7 @@ but it's 10 bytes!
 
 [i[`wcsrtombs()` function]i]
 
-Convert a wide character string to a multibyte string restartably
+Chuyển một chuỗi wide character sang chuỗi multibyte kiểu restartable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2539,40 +2511,39 @@ size_t wcsrtombs(char * restrict dst, const wchar_t ** restrict src,
 
 ### Description {.unnumbered .unlisted}
 
-If you have a wide character string, you can convert it to a multibyte
-character string in the current locale using this function.
+Nếu bạn có một chuỗi wide character, bạn có thể chuyển nó sang chuỗi
+ký tự multibyte trong locale hiện hành bằng hàm này.
 
-At most `len` bytes of data will be stored in the buffer pointed to by
-`dst`. Conversion will stop just after the NUL terminator is copied, or
-`len` bytes get copied, or some other error occurs.
+Tối đa `len` byte dữ liệu sẽ được lưu vào buffer mà `dst` trỏ tới.
+Conversion sẽ dừng ngay sau khi NUL terminator được copy, hoặc `len`
+byte đã được copy, hoặc có lỗi nào khác xảy ra.
 
-If `dst` is a `NULL` pointer, no result is stored. You might do this if
-you're just interested in the return value (nominally the number of
-bytes this would use in a multibyte string, not including the NUL
-terminator).
+Nếu `dst` là con trỏ `NULL`, không có kết quả nào được lưu. Bạn có
+thể làm vậy nếu chỉ quan tâm đến giá trị trả về (thường là số byte
+chuỗi này dùng trong chuỗi multibyte, không tính NUL terminator).
 
-If `dst` is not a `NULL` pointer, the pointer pointed to by `src` will
-get modified to indicate how much of the data was copied. If it contains
-`NULL` at the end, it means everything went well. In this case, the
-state `ps` will be set to the initial conversion state.
+Nếu `dst` không phải `NULL`, con trỏ được `src` trỏ tới sẽ được chỉnh
+để cho biết bao nhiêu dữ liệu đã được copy. Nếu ở cuối nó chứa `NULL`,
+nghĩa là mọi chuyện ổn. Trong trường hợp này, state `ps` sẽ được đặt
+về conversion state ban đầu.
 
-If `len` was reached or an error occurred, it'll point one address past
+Nếu `len` đã chạm hoặc có lỗi xảy ra, nó sẽ trỏ tới địa chỉ ngay sau
 `dst+len`.
 
 ### Return Value {.unnumbered .unlisted}
 
-If everything goes well, returns the number of bytes needed for the
-multibyte string, not counting the NUL terminator.
+Nếu mọi chuyện ổn, trả về số byte cần cho chuỗi multibyte, không tính
+NUL terminator.
 
-If any character in the string doesn't correspond to a valid multibyte
-character in the currently locale, it returns `(size_t)(-1)` and
-`EILSEQ` is stored in `errno`.
+Nếu có ký tự nào trong chuỗi không tương ứng ký tự multibyte hợp lệ
+trong locale hiện hành, nó trả về `(size_t)(-1)` và `EILSEQ` được lưu
+vào `errno`.
 
 
 ### Example {.unnumbered .unlisted}
 
-Here we'll convert the wide string "€5 ± π" into a multibyte character
-string:
+Ở đây chúng ta sẽ chuyển chuỗi wide "€5 ± π" sang chuỗi ký tự
+multibyte:
 
 ``` {.c .numberLines}
 #include <locale.h>  // For setlocale()
@@ -2598,9 +2569,9 @@ int main(void)
 }
 ```
 
-Here's another example helper function that `malloc()`s just enough
-memory to hold the converted string, then returns the result. (Which
-must later be freed, of course, to prevent leaking memory.)
+Đây là một ví dụ helper function khác `malloc()` vừa đủ bộ nhớ để giữ
+chuỗi đã chuyển, rồi trả về kết quả. (Cái này về sau dĩ nhiên phải
+free, để tránh leak bộ nhớ.)
 
 ``` {.c .numberLines}
 #include <stdlib.h>  // For malloc()
@@ -2616,32 +2587,32 @@ char *get_mb_string(const wchar_t *wcs)
     mbstate_t state;
     memset(&state, 0, sizeof state);
 
-    // Need a copy of this because wcsrtombs changes it
+    // Cần copy cái này vì wcsrtombs thay đổi nó
     const wchar_t *p = wcs;
 
-    // Compute the number of bytes needed to hold the result
+    // Tính số byte cần để giữ kết quả
     size_t bytes_needed = wcsrtombs(NULL, &p, SIZE_MAX, &state);
 
-    // If we didn't get a good full conversion, forget it
+    // Nếu chuyển chưa đủ đàng hoàng, bỏ qua
     if (bytes_needed == (size_t)(-1))
         return NULL;
 
-    // Allocate space for result
-    char *mbs = malloc(bytes_needed + 1);  // +1 for NUL terminator
+    // Cấp chỗ cho kết quả
+    char *mbs = malloc(bytes_needed + 1);  // +1 cho NUL terminator
 
-    // Set conversion state to initial state
+    // Đặt conversion state về state ban đầu
     memset(&state, 0, sizeof state);
 
-    // Convert and store result
+    // Chuyển và lưu kết quả
     wcsrtombs(mbs, &wcs, bytes_needed + 1, &state);
 
-    // Make sure things went well
+    // Đảm bảo mọi chuyện ổn
     if (wcs != NULL) {
         free(mbs);
         return NULL;
     }
 
-    // Success!
+    // Thành công!
     return mbs;
 }
 
