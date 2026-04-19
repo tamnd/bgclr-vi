@@ -3,65 +3,65 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<stdlib.h>` Standard Library Functions {#stdlib}
+# `<stdlib.h>` Các Hàm Thư Viện Chuẩn {#stdlib}
 
 [i[`stdlib.h` header file]i]
 
-Some of the following functions have variants that handle different
-types: `atoi()`, `strtod()`, `strtol()`, `abs()`, and `div()`. Only a
-single one is listed here for brevity.
+Một số hàm dưới đây có các biến thể xử lý các kiểu khác nhau: `atoi()`,
+`strtod()`, `strtol()`, `abs()`, và `div()`. Ở đây tôi chỉ liệt kê một
+cái cho gọn.
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`_Exit()`](#man-exit)|Exit the currently-running program and don't look back|
-|[`abort()`](#man-abort)|Abruptly end program execution|
-|[`abs()`](#man-abs)|Compute the absolute value of an integer|
-|[`aligned_alloc()`](#man-aligned_alloc)|Allocate specifically-aligned memory|
-|[`at_quick_exit()`](#man-atexit)|Set up handlers to run when the program quickly exits|
-|[`atexit()`](#man-atexit)|Set up handlers to run when the program exits|
-|[`atof()`](#man-atof)|Convert a string to a floating point value|
-|[`atoi()`](#man-atoi)|Convert an integer in a string into a integer type|
-|[`bsearch()`](#man-bsearch)|Binary Search (maybe) an array of objects|
-|[`calloc()`](#man-malloc)|Allocate and clear memory for arbitrary use|
-|[`div()`](#man-div)|Compute the quotient and remainder of two numbers|
-|[`exit()`](#man-exit)|Exit the currently-running program|
-|[`free()`](#man-free)|Free a memory region|
-|[`getenv()`](#man-getenv)|Get the value of an environment variable|
-|[`malloc()`](man-malloc)|Allocate memory for arbitrary use|
-|[`mblen()`](#man-mblen)|Return the number of bytes in a multibyte character|
-|[`mbstowcs()`](#man-mbstowcs)|Convert a multibyte string to a wide character string|
-|[`mbtowc()`](#man-mbtowc)|Convert a multibyte character to a wide character|
-|[`qsort()`](#man-qsort)|Quicksort (maybe) some data|
-|[`quick_exit()`](#man-exit)|Exit the currently-running program quickly|
-|[`rand()`](#man-rand)|Return a pseudorandom number|
-|[`realloc()`](#man-realloc)|Resize a previously allocated stretch of memory|
-|[`srand()`](#man-srand)|Seed the built-in pseudorandom number generator|
-|[`strtod()`](#man-strtod)|Convert a string to a floating point number|
-|[`strtol()`](#man-strtol)|Convert a string to an integer|
-|[`system()`](#man-system)|Run an external program|
-|[`wcstombs()`](#man-wcstombs)|Convert a wide character string to a multibyte string|
-|[`wctomb()`](#man-wctomb)|Convert a wide character to a multibyte character|
+|[`_Exit()`](#man-exit)|Thoát (exit) chương trình đang chạy và không ngoái đầu nhìn lại|
+|[`abort()`](#man-abort)|Kết thúc chương trình đột ngột|
+|[`abs()`](#man-abs)|Tính giá trị tuyệt đối của một số nguyên|
+|[`aligned_alloc()`](#man-aligned_alloc)|Cấp phát bộ nhớ được căn chỉnh cụ thể|
+|[`at_quick_exit()`](#man-atexit)|Đăng ký handler chạy khi chương trình thoát nhanh|
+|[`atexit()`](#man-atexit)|Đăng ký handler chạy khi chương trình thoát|
+|[`atof()`](#man-atof)|Chuyển chuỗi thành giá trị dấu phẩy động|
+|[`atoi()`](#man-atoi)|Chuyển một số nguyên trong chuỗi sang kiểu số nguyên|
+|[`bsearch()`](#man-bsearch)|Binary Search (có thể) trên một mảng đối tượng|
+|[`calloc()`](#man-malloc)|Cấp phát và điền 0 bộ nhớ để dùng tuỳ ý|
+|[`div()`](#man-div)|Tính thương và phần dư của hai số|
+|[`exit()`](#man-exit)|Thoát chương trình đang chạy|
+|[`free()`](#man-free)|Giải phóng một vùng bộ nhớ|
+|[`getenv()`](#man-getenv)|Lấy giá trị của một biến môi trường|
+|[`malloc()`](man-malloc)|Cấp phát bộ nhớ để dùng tuỳ ý|
+|[`mblen()`](#man-mblen)|Trả về số byte của một ký tự multibyte|
+|[`mbstowcs()`](#man-mbstowcs)|Chuyển chuỗi multibyte thành chuỗi ký tự rộng|
+|[`mbtowc()`](#man-mbtowc)|Chuyển một ký tự multibyte thành ký tự rộng|
+|[`qsort()`](#man-qsort)|Quicksort (có thể) dữ liệu|
+|[`quick_exit()`](#man-exit)|Thoát chương trình đang chạy một cách nhanh chóng|
+|[`rand()`](#man-rand)|Trả về một số giả ngẫu nhiên|
+|[`realloc()`](#man-realloc)|Đổi kích thước một vùng bộ nhớ đã cấp phát trước đó|
+|[`srand()`](#man-srand)|Seed bộ sinh số giả ngẫu nhiên có sẵn|
+|[`strtod()`](#man-strtod)|Chuyển chuỗi thành số dấu phẩy động|
+|[`strtol()`](#man-strtol)|Chuyển chuỗi thành số nguyên|
+|[`system()`](#man-system)|Chạy một chương trình bên ngoài|
+|[`wcstombs()`](#man-wcstombs)|Chuyển chuỗi ký tự rộng thành chuỗi multibyte|
+|[`wctomb()`](#man-wctomb)|Chuyển ký tự rộng thành ký tự multibyte|
 
-The `<stdlib.h>` header has all kinds of---dare I say---miscellaneous
-functions bundled into it. This functionality includes:
+Header `<stdlib.h>` gói đủ mọi loại hàm---dám nói luôn---linh tinh nhét
+hết vào đây. Bao gồm:
 
-* Conversions from numbers to strings
-* Conversions from strings to numbers
-* Pseudorandom number generation
-* Dynamic memory allocation
-* Various ways to exit the program
-* Ability to run external programs
-* Binary search (or some fast search)
-* Quicksort (or some fast sort)
-* Integer arithmetic functions
-* Multibyte and wide character and string conversions
+* Chuyển đổi từ số sang chuỗi
+* Chuyển đổi từ chuỗi sang số
+* Sinh số giả ngẫu nhiên
+* Cấp phát bộ nhớ động
+* Nhiều cách để thoát chương trình
+* Khả năng chạy chương trình bên ngoài
+* Binary search (hoặc vài kiểu tìm kiếm nhanh nào đó)
+* Quicksort (hoặc vài kiểu sắp xếp nhanh nào đó)
+* Các hàm số học với số nguyên
+* Chuyển đổi ký tự và chuỗi multibyte và ký tự rộng
 
-So, you know... a little of everything.
+Vậy đó... mỗi thứ một tí.
 
-## `<stdlib.h>` Types and Macros
+## Kiểu và Macro của `<stdlib.h>`
 
-A couple new types and macros are introduced, though some of these might
-also be defined elsewhere:
+Vài kiểu và macro mới được giới thiệu, dù một số có thể cũng được định
+nghĩa ở chỗ khác:
 
 [i[`size_t` type]i]
 [i[`wchar_t` type]i]
@@ -69,15 +69,15 @@ also be defined elsewhere:
 [i[`ldiv_t` type]i]
 [i[`lldiv_t` type]i]
 
-|Type|Description|
+|Kiểu|Mô tả|
 |-|-|
-|`size_t`|Returned from `sizeof` and used elsewhere
-|`wchar_t`|For wide character operations
-|`div_t`|For the `div()` function|
-|`ldiv_t`|For the `ldiv()` function|
-|`lldiv_t`|for the `lldiv()` function|
+|`size_t`|Được trả về từ `sizeof` và dùng ở nhiều chỗ khác
+|`wchar_t`|Cho các thao tác với ký tự rộng
+|`div_t`|Cho hàm `div()`|
+|`ldiv_t`|Cho hàm `ldiv()`|
+|`lldiv_t`|Cho hàm `lldiv()`|
 
-And some macros:
+Và một vài macro:
 
 [i[`NULL` macro]i]
 [i[`EXIT_SUCCESS` macro]i]
@@ -85,16 +85,15 @@ And some macros:
 [i[`RAND_MAX` macro]i]
 [i[`MB_CUR_MAX` macro]i]
 
-|Type|Description|
+|Kiểu|Mô tả|
 |-|-|
-|`NULL`|Our good pointer friend|
-|`EXIT_SUCCESS`|Good exit status when things go well|
-|`EXIT_FAILURE`|Good exit status when things go poorly|
-|`RAND_MAX`|The maximum value that can be returned by the `rand()` function|
-|`MB_CUR_MAX`|Maximum number of bytes in a multibyte character in the current locale|
+|`NULL`|Người bạn con trỏ tốt của chúng ta|
+|`EXIT_SUCCESS`|Mã thoát đẹp khi mọi thứ suôn sẻ|
+|`EXIT_FAILURE`|Mã thoát đẹp khi mọi thứ tệ hại|
+|`RAND_MAX`|Giá trị lớn nhất mà hàm `rand()` có thể trả về|
+|`MB_CUR_MAX`|Số byte tối đa trong một ký tự multibyte tại locale hiện tại|
 
-And there you have it. Just a lot of fun, useful functions in here.
-Let's check 'em out!
+Vậy đó. Bao nhiêu hàm vui vẻ và hữu ích trong đây. Cùng xem thử nào!
 
 
 [[manbreak]]
@@ -102,7 +101,7 @@ Let's check 'em out!
 
 [i[`atof()` function]i]
 
-Convert a string to a floating point value
+Chuyển chuỗi thành giá trị dấu phẩy động
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -112,34 +111,34 @@ Convert a string to a floating point value
 double atof(const char *nptr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This stood for [fl["ASCII-To-Floating" back in the
-day|http://man.cat-v.org/unix-1st/3/atof]], but no one would dare to use
-such coarse language now.
+Ngày xưa cái tên này viết tắt cho [fl["ASCII-To-Floating" hồi
+đó|http://man.cat-v.org/unix-1st/3/atof]], nhưng bây giờ không ai dám
+dùng kiểu ngôn ngữ thô thiển đó nữa.
 
-But the gist is the same: we're going to convert a string with numbers
-and (optionally) a decimal point into a floating point value. Leading
-whitespace is ignored, and translation stops at the first invalid
-character.
+Nhưng ý tưởng thì vẫn như cũ: chúng ta sẽ chuyển một chuỗi chứa chữ số
+và (tuỳ chọn) một dấu thập phân thành giá trị dấu phẩy động. Khoảng
+trắng đầu chuỗi bị bỏ qua, và việc chuyển đổi dừng ở ký tự không hợp lệ
+đầu tiên.
 
-If the result doesn't fit in a `double`, behavior is undefined.
+Nếu kết quả không vừa trong `double`, hành vi là không xác định.
 
-It generally works as if you'd called [`strtod()`](#man-strtod):
+Nó thường hoạt động như thể bạn đã gọi [`strtod()`](#man-strtod):
 
 ``` {.c}
 strtod(nptr, NULL)
 ```
 
-So check out [that reference page](#man-strtod) for more info.
+Nên xem trang tham chiếu [đó](#man-strtod) để biết thêm thông tin.
 
-In fact, `strtod()` is just better and you should probably use that.
+Thực ra `strtod()` xịn hơn và bạn chắc nên dùng nó.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the string converted to a `double`.
+Trả về chuỗi đã được chuyển thành `double`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -153,7 +152,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atoi()`](#man-atoi),
 [`strtod()`](#man-strtod)
@@ -165,7 +164,7 @@ int main(void)
 [i[`atol()` function]i]
 [i[`atoll()` function]i]
 
-Convert an integer in a string into a integer type
+Chuyển một số nguyên trong chuỗi sang kiểu số nguyên
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -179,40 +178,39 @@ long int atol(const char *nptr);
 long long int atoll(const char *nptr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Back in the day, `atoi()` stood for
-[fl["ASCII-To_Integer"|http://man.cat-v.org/unix-1st/3/atoi]] but now
-the spec makes no mention of that.
+Ngày xưa, `atoi()` viết tắt cho
+[fl["ASCII-To_Integer"|http://man.cat-v.org/unix-1st/3/atoi]] nhưng
+giờ spec không nhắc đến chuyện đó nữa.
 
-These functions take a string with a number in them and convert it to an
-integer of the specified return type. Leading whitespace is ignored.
-Translation stops at the first invalid character.
+Các hàm này nhận một chuỗi có số trong đó và chuyển nó thành số nguyên
+của kiểu trả về tương ứng. Khoảng trắng đầu bị bỏ qua. Việc chuyển đổi
+dừng ở ký tự không hợp lệ đầu tiên.
 
-If the result doesn't fit in the return type, behavior is undefined.
+Nếu kết quả không vừa trong kiểu trả về, hành vi là không xác định.
 
-It generally works as if you'd called [`strtol()`](#man-strtol) family
-of functions:
+Nó thường hoạt động như thể bạn đã gọi họ hàm [`strtol()`](#man-strtol):
 
 ``` {.c}
-atoi(nptr)                 // is basically the same as...
+atoi(nptr)                 // về cơ bản giống như...
 (int)strtol(nptr, NULL, 10)
 
-atol(nptr)                 // is basically the same as...
+atol(nptr)                 // về cơ bản giống như...
 strtol(nptr, NULL, 10)
 
-atoll(nptr)                // is basically the same as...
+atoll(nptr)                // về cơ bản giống như...
 strtoll(nptr, NULL, 10)
 ```
 
-Again, the [`strtol()`](#man-strtol) functions are generally better, so
-I recommend them instead of these.
+Lần nữa, các hàm [`strtol()`](#man-strtol) nhìn chung tốt hơn, nên tôi
+khuyên dùng chúng thay vì mấy hàm này.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns an integer result corresponding to the return type.
+Trả về kết quả số nguyên tương ứng với kiểu trả về.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -226,7 +224,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atof()`](#man-atof),
 [`strtol()`](#man-strtol)
@@ -238,7 +236,7 @@ int main(void)
 [i[`strtof()` function]i]
 [i[`strtold()` function]i]
 
-Convert a string to a floating point number
+Chuyển chuỗi thành số dấu phẩy động
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -252,23 +250,22 @@ float strtof(const char * restrict nptr, char ** restrict endptr);
 long double strtold(const char * restrict nptr, char ** restrict endptr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These are some neat functions that convert strings to floating point
-numbers (or even NaN or Infinity) and provide some error checking,
-besides.
+Đây là mấy hàm hay ho, chuyển chuỗi thành số dấu phẩy động (thậm chí cả
+NaN hoặc Infinity) và lại còn cung cấp chút kiểm tra lỗi nữa.
 
-Firstly, leading whitespace is skipped.
+Đầu tiên, khoảng trắng đầu chuỗi bị bỏ qua.
 
-Then the functions attempt to convert characters into the floating point
-result. Finally, when an invalid character (or NUL character) is
-reached, they set `endptr` to point to the invalid character.
+Rồi các hàm cố gắng chuyển từng ký tự thành kết quả dấu phẩy động. Cuối
+cùng, khi gặp ký tự không hợp lệ (hoặc ký tự NUL), chúng đặt `endptr`
+trỏ tới ký tự không hợp lệ đó.
 
-Set `endptr` to `NULL` if you don't care about where the first invalid
-character is.
+Đặt `endptr` thành `NULL` nếu bạn không quan tâm đến vị trí ký tự không
+hợp lệ đầu tiên ở đâu.
 
-If you didn't set `endptr` to `NULL`, it will point to a NUL character
-if the translation didn't find any bad characters. That is:
+Nếu bạn không đặt `endptr` thành `NULL`, nó sẽ trỏ tới ký tự NUL nếu
+quá trình chuyển đổi không gặp ký tự xấu nào. Nghĩa là:
 
 ``` {.c}
 if (*endptr == '\0') {
@@ -278,54 +275,54 @@ if (*endptr == '\0') {
 }
 ```
 
-But guess what! You can also translate strings into special values, like
-NaN and Infinity!
+Nhưng đoán xem! Bạn cũng có thể chuyển chuỗi thành các giá trị đặc
+biệt, như NaN và Infinity!
 
-If `nptr` points to a string containing `INF` or `INFINITY` (upper or
-lowercase), the value for Infinity will be returned.
+Nếu `nptr` trỏ tới chuỗi chứa `INF` hoặc `INFINITY` (chữ hoa hay chữ
+thường cũng được), giá trị Infinity sẽ được trả về.
 
-If `nptr` points to a string containing `NAN`, then (a quiet,
-non-signalling) NaN will be returned. You can tag the `NAN` with a
-sequence of characters from the set `0`-`9`, `a`-`z`, `A`-`Z`, and `_`
-by enclosing them in parens:
+Nếu `nptr` trỏ tới chuỗi chứa `NAN`, thì (một NaN yên lặng, không báo
+hiệu) sẽ được trả về. Bạn có thể gắn tag cho `NAN` bằng một chuỗi ký tự
+từ tập `0`-`9`, `a`-`z`, `A`-`Z`, và `_` bằng cách bao chúng trong dấu
+ngoặc:
 
 ``` {.c}
 NAN(foobar_3490)
 ```
 
-What your compiler does with this is implementation-defined, but it can
-be used to specify different kinds of NaN.
+Việc compiler của bạn làm gì với cái này là do implementation quyết
+định, nhưng nó có thể được dùng để chỉ định các kiểu NaN khác nhau.
 
-You can also specify a number in hexadecimal with a power-of-two
-exponent ($2^x$) if you lead with `0x` (or `0X`). For the exponent, use
-a `p` followed by a base 10 exponent. (You can't use `e` because that's
-a valid hex digit!)
+Bạn cũng có thể chỉ định số ở dạng thập lục phân với số mũ luỹ thừa 2
+($2^x$) nếu bắt đầu bằng `0x` (hoặc `0X`). Với phần số mũ, dùng `p`
+theo sau là số mũ cơ số 10. (Bạn không thể dùng `e` vì đó là chữ số hex
+hợp lệ!)
 
-Example:
+Ví dụ:
 
 ``` {.c}
 0xabc.123p15
 ```
 
-Which computes to $0xabc.123\times2^{15}$.
+Có giá trị bằng $0xabc.123\times2^{15}$.
 
-You can put in `FLT_DECIMAL_DIG`, `DBL_DECIMAL_DIG`, or
-`LDBL_DECIMAL_DIG` digits and get a correctly-rounded result for the
-type.
+Bạn có thể đưa vào `FLT_DECIMAL_DIG`, `DBL_DECIMAL_DIG`, hoặc
+`LDBL_DECIMAL_DIG` chữ số và nhận được kết quả làm tròn chính xác cho
+kiểu đó.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the converted number. If there was no number, returns `0`.
-`endptr` is set to point to the first invalid character, or the NUL
-terminator if all characters were consumed.
+Trả về số đã chuyển đổi. Nếu không có số nào, trả về `0`. `endptr` được
+đặt trỏ tới ký tự không hợp lệ đầu tiên, hoặc tới ký tự NUL kết thúc
+nếu tất cả ký tự đều được xử lý.
 
-If there's an overflow, `HUGE_VAL`, `HUGE_VALF`, or `HUGE_VALL` is
-returned, signed like the input, and `errno` is set to `ERANGE`.
+Nếu có tràn số, `HUGE_VAL`, `HUGE_VALF`, hoặc `HUGE_VALL` sẽ được trả
+về, mang dấu của input, và `errno` được đặt thành `ERANGE`.
 
-If there's an underflow, it returns the smallest number closest to zero
-with the input sign. `errno` may be set to `ERANGE`.
+Nếu có underflow, nó trả về số nhỏ nhất gần 0 nhất với dấu của input.
+`errno` có thể được đặt thành `ERANGE`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -362,7 +359,7 @@ Ignoring bad chars: 987.654321
 No bad chars: 11.223300
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atof()`](#man-atof),
 [`strtol()`](#man-strtol)
@@ -375,7 +372,7 @@ No bad chars: 11.223300
 [i[`strtoul()` function]i]
 [i[`strtoull()` function]i]
 
-Convert a string to an integer
+Chuyển chuỗi thành số nguyên
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -396,61 +393,61 @@ unsigned long long int strtoull(const char * restrict nptr,
 
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These convert a string to an integer like `atoi()`, but they have a few
-more bells and whistles.
+Mấy hàm này chuyển chuỗi thành số nguyên giống `atoi()`, nhưng chúng có
+thêm vài tính năng hay ho.
 
-Most notable, they can tell you where conversion started going wrong,
-i.e. where invalid characters, if any, appear. Leading spaces are
-ignored. A `+` or `-` sign may precede the number.
+Đáng chú ý nhất, chúng có thể cho bạn biết chỗ nào việc chuyển đổi bắt
+đầu sai, tức là ký tự không hợp lệ, nếu có, xuất hiện ở đâu. Khoảng
+trắng đầu bị bỏ qua. Dấu `+` hoặc `-` có thể đứng trước số.
 
-The basic idea is that if things go well, these functions will return
-the integer values contained in the strings. And if you pass in the
-`char**` typed `endptr`, it'll set it to point at the NUL at the end of
-the string.
+Ý tưởng cơ bản là nếu mọi thứ ổn, các hàm này sẽ trả về giá trị số
+nguyên chứa trong chuỗi. Và nếu bạn truyền vào `endptr` kiểu `char**`,
+nó sẽ đặt biến đó trỏ vào ký tự NUL ở cuối chuỗi.
 
-If things don't go well, they'll set `endptr` to point at the first
-character where things have gone awry. That is, if you're converting a
-value `103z2!` in base 10, they'll send `endptr` to point at the `z`
-because that's the first non-numeric character.
+Nếu mọi thứ không ổn, chúng sẽ đặt `endptr` trỏ vào ký tự đầu tiên có
+vấn đề. Nghĩa là, nếu bạn đang chuyển giá trị `103z2!` ở hệ 10, chúng
+sẽ đặt `endptr` trỏ vào ký tự `z` vì đó là ký tự không phải số đầu
+tiên.
 
-You can pass in `NULL` for `endptr` if you don't care to do any of that
-kind of error checking.
+Bạn có thể truyền `NULL` cho `endptr` nếu không muốn làm kiểu kiểm tra
+lỗi đó.
 
-Wait---did I just say we could set the number base for the conversion?
-Yes! Yes, I did. Now [flw[number bases|Radix]] are out of scope for this
-document, but certainly some of the more well-known are binary (base 2),
-octal (base 8), decimal (base 10), and hexadecimal (base 16).
+Khoan---tôi vừa nói là chúng ta có thể chỉ định cơ số cho việc chuyển
+đổi à? Đúng rồi! Đúng, tôi nói vậy. Mà [flw[cơ số|Radix]] thì nằm ngoài
+phạm vi tài liệu này rồi, nhưng chắc chắn một số cơ số quen thuộc hơn
+là nhị phân (cơ số 2), bát phân (cơ số 8), thập phân (cơ số 10), và
+thập lục phân (cơ số 16).
 
-You can specify the number base for the conversion as the third
-parameter. Bases from 2 to 36 are supported, with case-insensitive
-digits running from `0` to `Z`.
+Bạn có thể chỉ định cơ số để chuyển đổi làm tham số thứ ba. Các cơ số
+từ 2 đến 36 được hỗ trợ, với các chữ số không phân biệt hoa thường chạy
+từ `0` tới `Z`.
 
-If you specify a base of `0`, the function will make an effort to
-determine it. It'll default to base 10 except for a couple cases:
+Nếu bạn chỉ định cơ số là `0`, hàm sẽ cố gắng tự xác định nó. Mặc định
+là cơ số 10 trừ vài trường hợp:
 
-The binary conversion is new in C23!
+Chuyển nhị phân là mới trong C23!
 
-* If the number has a leading `0b` or `0B`, it will be binary (base 2)
-* If the number has a leading `0`, it will be octal (base 8)
-* If the number has a leading `0x` or `0X`, it will be hex (base 16)
+* Nếu số bắt đầu bằng `0b` hoặc `0B`, nó sẽ là nhị phân (cơ số 2)
+* Nếu số bắt đầu bằng `0`, nó sẽ là bát phân (cơ số 8)
+* Nếu số bắt đầu bằng `0x` hoặc `0X`, nó sẽ là hex (cơ số 16)
 
-The locale might affect the behavior of these functions.
+Locale có thể ảnh hưởng đến hành vi của các hàm này.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the converted value.
+Trả về giá trị đã chuyển đổi.
 
-`endptr`, if not `NULL` is set to the first invalid character, or to the
-beginning of the string if no conversion was performed, or to the string
-terminal NUL if all characters were valid.
+`endptr`, nếu không phải `NULL`, được đặt trỏ vào ký tự không hợp lệ
+đầu tiên, hoặc vào đầu chuỗi nếu không có chuyển đổi nào được thực
+hiện, hoặc vào ký tự NUL kết thúc chuỗi nếu tất cả ký tự đều hợp lệ.
 
-If there's overflow, one of these values will be returned: `LONG_MIN`,
-`LONG_MAX`, `LLONG_MIN`, `LLONG_MAX`, `ULONG_MAX`, `ULLONG_MAX`. And
-`errno` is set to `ERANGE`.
+Nếu có tràn số, một trong các giá trị sau sẽ được trả về: `LONG_MIN`,
+`LONG_MAX`, `LLONG_MIN`, `LLONG_MAX`, `ULONG_MAX`, `ULLONG_MAX`. Và
+`errno` được đặt thành `ERANGE`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -458,15 +455,15 @@ If there's overflow, one of these values will be returned: `LONG_MIN`,
 
 int main(void)
 {
-    // All output in decimal (base 10)
+    // Tất cả output ở hệ thập phân (cơ số 10)
 
     printf("%ld\n", strtol("123", NULL, 0));      // 123
     printf("%ld\n", strtol("123", NULL, 10));     // 123
-    printf("%ld\n", strtol("101010", NULL, 2));   // binary, 42
-    printf("%ld\n", strtol("123", NULL, 8));      // octal, 83
+    printf("%ld\n", strtol("101010", NULL, 2));   // nhị phân, 42
+    printf("%ld\n", strtol("123", NULL, 8));      // bát phân, 83
     printf("%ld\n", strtol("123", NULL, 16));     // hex, 291
 
-    printf("%ld\n", strtol("0123", NULL, 0));     // octal, 83
+    printf("%ld\n", strtol("0123", NULL, 0));     // bát phân, 83
     printf("%ld\n", strtol("0x123", NULL, 0));    // hex, 291
 
     char *badchar;
@@ -491,7 +488,7 @@ Value is 1234
 Bad chars at "beej"
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atoi()`](#man-atoi),
 [`strtod()`](#man-strtod),
@@ -504,7 +501,7 @@ Bad chars at "beej"
 
 [i[`rand()` function]i]
 
-Return a pseudorandom number
+Trả về một số giả ngẫu nhiên
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -514,57 +511,56 @@ Return a pseudorandom number
 int rand(void);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This gives us back a pseudorandom number in the range `0` to `RAND_MAX`,
-inclusive. (`RAND_MAX` will be at least $32767$.)
+Hàm này trả về một số giả ngẫu nhiên trong khoảng `0` tới `RAND_MAX`,
+bao gồm cả hai đầu. (`RAND_MAX` sẽ tối thiểu là $32767$.)
 
-If you want to force this to a certain range, the classic way to do this
-is to force it with the modulo operator `%`, although [fl[this
-introduces
-biases|https://stackoverflow.com/questions/10984974/why-do-people-say-there-is-modulo-bias-when-using-a-random-number-generator]]
-if `RAND_MAX+1` is not a multiple of the number you're modding by. Dealing
-with this is out of scope for this guide.
+Nếu muốn ép nó vào một khoảng nhất định, cách cổ điển là dùng toán tử
+modulo `%`, dù [fl[việc này có gây ra
+bias|https://stackoverflow.com/questions/10984974/why-do-people-say-there-is-modulo-bias-when-using-a-random-number-generator]]
+nếu `RAND_MAX+1` không phải bội số của số bạn chia dư. Xử lý chuyện này
+nằm ngoài phạm vi guide này.
 
-If you want to to make a floating point number between `0` and `1`
-inclusive, you can divide the result by `RAND_MAX`. Or `RAND_MAX+1` if
-you don't want to include `1`. But of course, there are out-of-scope
-[fl[problems with this, as
-well|https://mumble.net/~campbell/2014/04/28/uniform-random-float]].
+Nếu muốn tạo một số dấu phẩy động giữa `0` và `1` bao gồm cả hai, bạn
+có thể chia kết quả cho `RAND_MAX`. Hoặc `RAND_MAX+1` nếu không muốn
+bao gồm `1`. Nhưng tất nhiên, cũng có [fl[những vấn đề ngoài phạm vi
+nữa|https://mumble.net/~campbell/2014/04/28/uniform-random-float]].
 
-In short, `rand()` is a great way to get potentially poor random numbers
-with ease. Probably good enough for the game you're writing.
+Tóm lại, `rand()` là cách tuyệt vời để lấy các số ngẫu nhiên có thể tệ
+một cách dễ dàng. Chắc cũng đủ dùng cho trò chơi bạn đang viết.
 
-The spec elaborates:
+Spec nói rõ thêm:
 
-> There are no guarantees as to the quality of the random sequence
-> produced and some implementations are known to produce sequences with
-> distressingly non-random low-order bits. Applications with particular
-> requirements should use a generator that is known to be sufficient for
-> their needs.
+> Không có đảm bảo nào về chất lượng của chuỗi ngẫu nhiên được sinh ra
+> và một số implementation được biết là sinh ra các chuỗi với các bit
+> thấp kém ngẫu nhiên đến mức đáng lo. Ứng dụng có yêu cầu riêng nên
+> dùng bộ sinh được biết là đủ tốt cho nhu cầu của chúng.
 
-Your system probably has a good random number generator on it if you
-need a stronger source. Linux users have `getrandom()`, for example, and
-Windows has `CryptGenRandom()`.
+Hệ thống của bạn chắc có bộ sinh số ngẫu nhiên tốt nếu bạn cần nguồn
+mạnh hơn. Người dùng Linux có `getrandom()`, ví dụ vậy, và Windows có
+`CryptGenRandom()`.
 
-For other more demanding random number work, you might find a library
-like the [fl[GNU Scientific
-Library|https://www.gnu.org/software/gsl/doc/html/rng.html]] of use.
+Với các công việc số ngẫu nhiên đòi hỏi cao hơn, bạn có thể thấy một
+thư viện như [fl[GNU Scientific
+Library|https://www.gnu.org/software/gsl/doc/html/rng.html]] hữu ích.
 
-With most implementations, the numbers produced by `rand()` will be the
-same from run to run. To get around this, you need to start it off in a
-different place by passing a _seed_ into the random number generator.
-You can do this with [`srand()`](#man-srand).
+Với đa số implementation, các số do `rand()` sinh ra sẽ giống nhau qua
+các lần chạy. Để khắc phục, bạn cần bắt đầu nó ở một vị trí khác bằng
+cách truyền một _seed_ vào bộ sinh số ngẫu nhiên. Bạn có thể làm việc
+này với [`srand()`](#man-srand).
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a random number in the range `0` to `RAND_MAX`, inclusive.
+Trả về một số ngẫu nhiên trong khoảng `0` tới `RAND_MAX`, bao gồm cả
+hai đầu.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Note that all of these examples don't produce perfectly uniform
-distributions. But good enough for the untrained eye, and really common
-in general use when mediocre random number quality is acceptable.
+Lưu ý rằng tất cả các ví dụ này đều không sinh ra phân phối hoàn toàn
+đều. Nhưng đủ tốt cho mắt người không luyện, và thực sự rất phổ biến
+trong sử dụng chung khi chất lượng số ngẫu nhiên trung bình là chấp
+nhận được.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -582,7 +578,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 RAND_MAX = 2147483647
@@ -592,7 +588,7 @@ RAND_MAX = 2147483647
 10.5 to 15.7: 14.651888
 ```
 
-Example of seeding the RNG with the time:
+Ví dụ seed cho RNG bằng thời gian:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -601,8 +597,8 @@ Example of seeding the RNG with the time:
 
 int main(void)
 {
-    // time(NULL) very likely returns the number of seconds since
-    // January 1, 1970:
+    // time(NULL) gần như chắc chắn trả về số giây kể từ
+    // ngày 1 tháng 1 năm 1970:
 
     srand(time(NULL));
 
@@ -611,7 +607,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`srand()`](#man-srand)
 
@@ -620,7 +616,7 @@ int main(void)
 
 [i[`srand()` function]i]
 
-Seed the built-in pseudorandom number generator
+Seed bộ sinh số giả ngẫu nhiên có sẵn
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -630,57 +626,54 @@ Seed the built-in pseudorandom number generator
 void srand(unsigned int seed);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-The dirty little secret of pseudorandom number generation is that
-they're completely deterministic. There's nothing random about them.
-They just look random.
+Bí mật nho nhỏ bẩn thỉu của việc sinh số giả ngẫu nhiên là chúng hoàn
+toàn xác định (deterministic). Không có gì ngẫu nhiên về chúng cả.
+Chúng chỉ _trông_ ngẫu nhiên thôi.
 
-If you use `rand()` and run your program several times, you might notice
-something _fishy_: they produce the same random numbers over and over
-again.
+Nếu bạn dùng `rand()` và chạy chương trình nhiều lần, bạn có thể thấy
+một chuyện _đáng ngờ_: chúng sinh ra cùng các số ngẫu nhiên lặp đi lặp
+lại.
 
-To mix it up, we need to give the pseudorandom number generator a new
-"starting point", if you will. We call that the _seed_. It's just a
-number, but it is used as the basic for subsequent number generation.
-Give a different seed, and you'll get a different sequence of random
-numbers. Give the same seed, and you'll get the same sequence of random
-numbers corresponding to it^[Minecraft enthusiasts might recall that
-when generating a new world, they were given the option to enter a
-random number seed. That single value is used to generate that entire
-random world. And if your friend starts a world with the same seed you
-did, they'll get the same world you did.].
+Để thay đổi, chúng ta cần cho bộ sinh số giả ngẫu nhiên một "điểm bắt
+đầu" mới, gọi là vậy. Chúng ta gọi đó là _seed_. Nó chỉ là một số, nhưng
+nó được dùng làm nền tảng cho việc sinh số tiếp theo. Cho seed khác, bạn
+sẽ có dãy số ngẫu nhiên khác. Cho seed giống nhau, bạn sẽ có cùng dãy số
+ngẫu nhiên tương ứng^[Fan của Minecraft có thể nhớ rằng khi tạo thế
+giới mới, họ được cho tuỳ chọn nhập vào một seed số ngẫu nhiên. Giá trị
+duy nhất đó được dùng để sinh ra toàn bộ thế giới ngẫu nhiên đó. Và nếu
+bạn của bạn bắt đầu thế giới với cùng seed bạn dùng, họ sẽ nhận được
+cùng thế giới bạn có.].
 
-So if you call `srand(3490)` before you start generating numbers with
-`rand()`, you'll get the same sequence every time. `srand(37)` would
-also give you the same sequence every time, but it would be a different
-sequence than the one you got with `srand(3490)`.
+Nên nếu bạn gọi `srand(3490)` trước khi bắt đầu sinh số với `rand()`,
+bạn sẽ có cùng dãy mỗi lần. `srand(37)` cũng sẽ cho bạn cùng dãy mỗi
+lần, nhưng đó sẽ là dãy khác với dãy bạn có từ `srand(3490)`.
 
-But if you can't hardcode the seed (because that would give you the same
-sequence every time), how are you supposed to do this?
+Nhưng nếu bạn không thể hardcode seed (vì làm vậy sẽ cho bạn cùng dãy
+mỗi lần), thì bạn làm thế nào?
 
-It's really common to use the number of seconds since January 1, 1970
-(this date is known as the [flw[_Unix epoch_|Unix_time]]) to seed the
-generator. This sounds pretty arbitrary except for the fact that it's
-exactly the value most implementations return from the library call
-`time(NULL)`^[The C spec doesn't say exactly what `time(NULL)` will
-return, but the POSIX spec does! And virtually everyone returns exactly
-that: the number of seconds since epoch.].
+Rất phổ biến là dùng số giây kể từ ngày 1 tháng 1 năm 1970 (ngày này
+được biết đến là [flw[_Unix epoch_|Unix_time]]) để seed cho bộ sinh. Cái
+này nghe có vẻ khá tuỳ tiện nhưng thực ra đó chính xác là giá trị mà đa
+số implementation trả về từ lời gọi thư viện `time(NULL)`^[Spec của C
+không quy định chính xác `time(NULL)` sẽ trả về gì, nhưng spec POSIX
+thì có! Và gần như ai cũng trả về đúng thứ đó: số giây kể từ epoch.].
 
-We'll do that in the example.
+Chúng ta sẽ làm vậy trong ví dụ.
 
-If you don't call `srand()`, it's as if you called `srand(1)`.
+Nếu bạn không gọi `srand()`, nó như thể bạn đã gọi `srand(1)`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>    // for the time() call
+#include <time.h>    // cho lời gọi time()
 
 int main(void)
 {
@@ -701,7 +694,7 @@ Output:
 9
 ```
 
-Output from a subsequent run:
+Output từ lần chạy tiếp theo:
 
 ``` {.default}
 19
@@ -711,7 +704,7 @@ Output from a subsequent run:
 24
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`rand()`](#man-rand),
 [`time()`](#man-time)
@@ -722,7 +715,7 @@ Output from a subsequent run:
 
 [i[`aligned_alloc()` function]i]
 
-Allocate specifically-aligned memory
+Cấp phát bộ nhớ được căn chỉnh cụ thể
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -732,34 +725,36 @@ Allocate specifically-aligned memory
 void *aligned_alloc(size_t alignment, size_t size);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Maybe you wanted [`malloc()`](#man-malloc) or [`calloc()`](#man-malloc)
-instead of this. But if you're sure you don't, read on!
+Có lẽ bạn muốn dùng [`malloc()`](#man-malloc) hoặc
+[`calloc()`](#man-malloc) thay vì cái này. Nhưng nếu chắc chắn là
+không, đọc tiếp!
 
-Normally you don't have to think about this, since `malloc()` and
-`realloc()` both provide memory regions that are suitably
-[flw[aligned|Data_structure_alignment]] for use with any data type.
+Bình thường bạn không cần nghĩ về chuyện này, vì `malloc()` và
+`realloc()` cả hai đều cung cấp vùng bộ nhớ được
+[flw[căn chỉnh|Data_structure_alignment]] phù hợp để dùng với bất kỳ
+kiểu dữ liệu nào.
 
-But if you need a more specific alignment, you can specify it with this
-function.
+Nhưng nếu bạn cần căn chỉnh cụ thể hơn, bạn có thể chỉ định nó với hàm
+này.
 
-When you're done using the memory region, be sure to free it with a call
-to [`free()`](#man-free).
+Khi xong việc với vùng bộ nhớ, nhớ giải phóng nó bằng một lời gọi
+[`free()`](#man-free).
 
-Don't pass in `0` for the size. It probably won't do anything you want.
+Đừng truyền `0` cho size. Nó chắc không làm gì bạn muốn đâu.
 
-In case you're wondering, all dynamically-allocated memory is
-automatically freed by the system when the program ends. That said, it's
-considered to be _Good Form_ to explicitly `free()` everything you
-allocate. This way other programmers don't think you were being sloppy.
+Nếu bạn thắc mắc, tất cả bộ nhớ cấp phát động đều được hệ thống tự động
+giải phóng khi chương trình kết thúc. Dù vậy, việc `free()` rõ ràng mọi
+thứ bạn đã cấp phát được coi là _Good Form_ (phong cách tốt). Cách này
+các lập trình viên khác sẽ không nghĩ bạn cẩu thả.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a pointer to the newly-allocated memory, aligned as specified.
-Returns `NULL` if something goes wrong.
+Trả về con trỏ tới vùng bộ nhớ vừa được cấp phát, căn chỉnh như yêu
+cầu. Trả về `NULL` nếu có gì đó sai.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -770,22 +765,22 @@ int main(void)
 {
     int *p = aligned_alloc(256, 10 * sizeof(int));
 
-    // Just for fun, let's convert to intptr_t and mod with 256
-    // to make sure we're actually aligned on a 256-byte boundary.
+    // Cho vui, chuyển sang intptr_t và mod với 256
+    // để chắc chắn chúng ta thật sự căn chỉnh trên biên 256 byte.
     //
-    // This is probably some kind of implementation-defined
-    // behavior, but I'll bet it works.
+    // Chuyện này chắc là một kiểu hành vi do implementation định nghĩa,
+    // nhưng tôi cá là nó hoạt động.
 
     intptr_t ip = (intptr_t)p;
 
     printf("%ld\n", ip % 256);   // 0!
 
-    // Free it up
+    // Giải phóng
     free(p);
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`malloc()`](#man-malloc),
 [`calloc()`](#man-malloc),
@@ -797,7 +792,7 @@ int main(void)
 [i[`calloc()` function]i]
 [i[`malloc()` function]i]
 
-Allocate memory for arbitrary use
+Cấp phát bộ nhớ để dùng tuỳ ý
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -809,69 +804,67 @@ void *calloc(size_t nmemb, size_t size);
 void *malloc(size_t size);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Both of these functions allocate memory for general-purpose use. It will
-be aligned such that it's useable for storing any data type.
+Cả hai hàm này đều cấp phát bộ nhớ cho mục đích chung. Vùng nhớ sẽ được
+căn chỉnh sao cho có thể dùng lưu trữ bất kỳ kiểu dữ liệu nào.
 
-`malloc()` allocates exactly the specified number of bytes of memory in
-a contiguous block. The memory might be full of garbage data. (You can
-clear it with [`memset()`](#man-memset), if you wish.)
+`malloc()` cấp phát chính xác số byte bộ nhớ được chỉ định trong một
+khối liên tục. Vùng bộ nhớ có thể đầy dữ liệu rác. (Bạn có thể xoá nó
+bằng [`memset()`](#man-memset), nếu muốn.)
 
-`calloc()` is different in that it allocates space for `nmemb` objects
-of `size` bytes each. (You can do the same with `malloc()`, but you have
-to do the multiplication yourself.)
+`calloc()` thì khác ở chỗ nó cấp phát chỗ cho `nmemb` đối tượng, mỗi
+cái `size` byte. (Bạn có thể làm điều tương tự với `malloc()`, nhưng
+bạn phải tự nhân.)
 
-`calloc()` has an additional feature: it clears all the memory to `0`.
+`calloc()` có thêm tính năng: nó xoá toàn bộ bộ nhớ về `0`.
 
-So if you're planning to zero the memory anyway, `calloc()` is probably
-the way to go. If you're not, you can avoid that overhead by calling
-`malloc()`.
+Nên nếu bạn định sao cũng zero out bộ nhớ, `calloc()` có lẽ là lựa chọn
+đúng. Nếu không, bạn có thể tránh chi phí đó bằng cách gọi `malloc()`.
 
-When you're done using the memory region, free it with a call to
-`free()`.
+Khi xong việc với vùng bộ nhớ, giải phóng nó bằng một lời gọi `free()`.
 
-Don't pass in `0` for the size. It probably won't do anything you want.
+Đừng truyền `0` cho size. Nó chắc không làm gì bạn muốn đâu.
 
-In case you're wondering, all dynamically-allocated memory is
-automatically freed by the system when the program ends. That said, it's
-considered to be _Good Form_ to explicitly `free()` everything you
-allocate. This way other programmers don't think you were being sloppy.
+Nếu bạn thắc mắc, tất cả bộ nhớ cấp phát động đều được hệ thống tự động
+giải phóng khi chương trình kết thúc. Dù vậy, việc `free()` rõ ràng mọi
+thứ bạn đã cấp phát được coi là _Good Form_ (phong cách tốt). Cách này
+các lập trình viên khác sẽ không nghĩ bạn cẩu thả.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Both functions return a pointer to the shiny, newly-allocated memory. Or
-`NULL` if something's gone awry.
+Cả hai hàm trả về con trỏ tới bộ nhớ mới toanh, sáng bóng vừa được cấp
+phát. Hoặc `NULL` nếu có chuyện gì đó xảy ra.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Comparison of `malloc()` and `calloc()` for allocating 5 `int`s:
+So sánh `malloc()` và `calloc()` khi cấp phát 5 `int`:
 
 ``` {.c .numberLines}
 #include <stdlib.h>
 
 int main(void)
 {
-    // Allocate space for 5 ints
+    // Cấp phát chỗ cho 5 int
     int *p = malloc(5 * sizeof(int));
 
     p[0] = 12;
     p[1] = 30;
 
-    // Allocate space for 5 ints
-    // (Also clear that memory to 0)
+    // Cấp phát chỗ cho 5 int
+    // (Đồng thời xoá bộ nhớ đó về 0)
     int *q = calloc(5, sizeof(int));
 
     q[0] = 12;
     q[1] = 30;
 
-    // All done
+    // Xong rồi
     free(p);
     free(q);
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`aligned_alloc()`](#man-aligned_alloc),
 [`free()`](#man-free)
@@ -881,7 +874,7 @@ int main(void)
 
 [i[`free()` function]i]
 
-Free a memory region
+Giải phóng một vùng bộ nhớ
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -891,47 +884,47 @@ Free a memory region
 void free(void *ptr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-You know that pointer you got back from `malloc()`, `calloc()`, or
-`aligned_alloc()`? You pass that pointer to `free()` to free the memory
-associated with it.
+Bạn biết con trỏ bạn nhận được từ `malloc()`, `calloc()`, hoặc
+`aligned_alloc()` chứ? Bạn truyền con trỏ đó cho `free()` để giải phóng
+bộ nhớ gắn với nó.
 
-If you don't do this, the memory will stay allocated FOREVER AND EVER! (Well,
-until your program exits, anyway.)
+Nếu bạn không làm vậy, bộ nhớ sẽ vẫn được cấp phát MÃI MÃI! (Ờ, cho
+đến khi chương trình thoát, dù sao đi nữa.)
 
-Fun fact: `free(NULL)` does nothing. You can safely call that. Sometimes
-it's convenient.
+Sự thật thú vị: `free(NULL)` không làm gì cả. Bạn có thể gọi nó an
+toàn. Đôi khi điều đó tiện.
 
-Don't `free()` a pointer that's already been `free()`d. Don't `free()` a
-pointer that you didn't get back from one of the allocation functions.
-It would be _Bad_^["Try to imagine all life as you know it stopping
-instantaneously and every molecule in your body exploding at the speed
-of light." ---Egon Spengler].
+Đừng `free()` một con trỏ đã được `free()` trước đó. Đừng `free()` một
+con trỏ mà bạn không nhận được từ một trong các hàm cấp phát. Như vậy
+sẽ là _Bad_^["Thử tưởng tượng mọi sự sống như bạn biết dừng ngay lập
+tức và mọi phân tử trong cơ thể bạn nổ tung ở tốc độ ánh sáng." ---Egon
+Spengler].
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdlib.h>
 
 int main(void)
 {
-    // Allocate space for 5 ints
+    // Cấp phát chỗ cho 5 int
     int *p = malloc(5 * sizeof(int));
 
     p[0] = 12;
     p[1] = 30;
 
-    // Free that space
+    // Giải phóng chỗ đó
     free(p);
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`malloc()`](#man-malloc),
 [`calloc()`](#man-malloc),
@@ -942,7 +935,7 @@ int main(void)
 
 [i[`realloc()` function]i]
 
-Resize a previously allocated stretch of memory
+Đổi kích thước một vùng bộ nhớ đã cấp phát trước đó
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -952,35 +945,35 @@ Resize a previously allocated stretch of memory
 void *realloc(void *ptr, size_t size);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This takes a pointer to some memory previously allocated with `malloc()`
-or `calloc()` and resizes it to the new size.
+Hàm này lấy một con trỏ tới vùng bộ nhớ đã cấp phát trước đó với
+`malloc()` hoặc `calloc()` và đổi kích thước nó thành kích thước mới.
 
-If the new size is smaller than the old size, any data larger than the
-new size is discarded.
+Nếu kích thước mới nhỏ hơn kích thước cũ, phần dữ liệu vượt quá kích
+thước mới sẽ bị loại bỏ.
 
-If the new size is larger than the old size, the new larger part is
-uninitialized. (You can clear it with [`memset()`](#man-memset).)
+Nếu kích thước mới lớn hơn kích thước cũ, phần lớn hơn mới sẽ không
+được khởi tạo. (Bạn có thể xoá nó bằng [`memset()`](#man-memset).)
 
-Important note: the memory might move! If you resize, the system might
-need to relocate the memory to a larger continguous chunk. If this
-happens, `realloc()` will copy the old data to the new location for you.
+Lưu ý quan trọng: bộ nhớ có thể bị di chuyển! Nếu bạn đổi kích thước,
+hệ thống có thể cần chuyển bộ nhớ sang một khối liên tục lớn hơn. Nếu
+chuyện này xảy ra, `realloc()` sẽ sao chép dữ liệu cũ sang vị trí mới
+cho bạn.
 
-Because of this, it's important to save the returned value to your
-pointer to update it to the new location if things move. (Also, be sure
-to error-check so that you don't overwrite your old pointer with `NULL`,
-leaking the memory.)
+Vì chuyện này, việc lưu giá trị trả về vào con trỏ của bạn để cập nhật
+vị trí mới khi có di chuyển là quan trọng. (Cũng nhớ kiểm tra lỗi để
+không ghi đè con trỏ cũ bằng `NULL`, gây rò rỉ bộ nhớ.)
 
-You can also `relloc()` memory allocated with `aligned_alloc()`, but it
-will potentially lose its alignment if the block is moved.
+Bạn cũng có thể `relloc()` bộ nhớ cấp phát bởi `aligned_alloc()`, nhưng
+nó có thể mất căn chỉnh nếu khối bị di chuyển.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a pointer to the resized memory region. This might be equivalent
-to the `ptr` passed in, or it might be some other location.
+Trả về con trỏ tới vùng bộ nhớ đã đổi kích thước. Nó có thể bằng với
+`ptr` truyền vào, hoặc có thể ở vị trí khác.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -988,28 +981,28 @@ to the `ptr` passed in, or it might be some other location.
 
 int main(void)
 {
-    // Allocate space for 5 ints
+    // Cấp phát chỗ cho 5 int
     int *p = malloc(5 * sizeof(int));
 
     p[0] = 12;
     p[1] = 30;
 
-    // Reallocate for 10 bytes
+    // Realloc cho 10 byte
     int *new_p = realloc(p, 10 * sizeof(int));
 
     if (new_p == NULL) {
         printf("Error reallocing\n");
     } else {
-        p = new_p;  // It's good; let's keep it
+        p = new_p;  // Ổn rồi; giữ lại thôi
         p[7] = 99;
     }
 
-    // All done
+    // Xong
     free(p);
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`malloc()`](#man-malloc),
 [`calloc()`](#man-malloc)
@@ -1019,7 +1012,7 @@ int main(void)
 
 [i[`abort()` function]i]
 
-Abruptly end program execution
+Kết thúc chương trình đột ngột
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1029,30 +1022,30 @@ Abruptly end program execution
 _Noreturn void abort(void);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This ends program execution _abnormally_ and immediately. Use this in
-rare, unexpected circumstances.
+Hàm này kết thúc việc thực thi chương trình _không bình thường_ và ngay
+lập tức. Dùng nó trong những tình huống hiếm và bất ngờ.
 
-Open streams might not be flushed. Temporary files created might not be
-removed. Exit handlers are not called.
+Các stream đang mở có thể không được flush. File tạm đã tạo có thể
+không bị xoá. Exit handler không được gọi.
 
-A non-zero exit status is returned to the environment.
+Mã thoát khác 0 được trả về môi trường.
 
-On some systems, `abort()` might [flw[dump core|Core_dump]], but this is
-outside the scope of the spec.
+Trên một số hệ thống, `abort()` có thể [flw[dump core|Core_dump]],
+nhưng chuyện này nằm ngoài phạm vi spec.
 
-You can cause the equivalent of an `abort()` by calling
-`raise(SIGABRT)`, but I don't know why you'd do that.
+Bạn có thể gây ra tương đương `abort()` bằng cách gọi `raise(SIGABRT)`,
+nhưng tôi không biết vì sao bạn lại làm vậy.
 
-The only portable way to stop an `abort()` call midway is to use
-`signal()` to catch `SIGABRT` and then `exit()` in the signal handler.
+Cách portable duy nhất để dừng một lời gọi `abort()` giữa chừng là dùng
+`signal()` để bắt `SIGABRT` rồi `exit()` trong signal handler.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-This function never returns.
+Hàm này không bao giờ trả về.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1064,20 +1057,20 @@ int main(void)
 
     if (bad_thing) {
         printf("This should never have happened!\n");
-        fflush(stdout);  // Make sure the message goes out
+        fflush(stdout);  // Đảm bảo thông điệp ra được
         abort();
     }
 }
 ```
 
-On my system, this outputs:
+Trên máy tôi, output là:
 
 ``` {.default}
 This should never have happened!
 zsh: abort (core dumped)  ./foo
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`signal()`](#man-signal)
 
@@ -1087,7 +1080,7 @@ zsh: abort (core dumped)  ./foo
 [i[`atexit()` function]i]
 [i[`at_quick_exit()` function]i]
 
-Set up handlers to run when the program exits
+Đăng ký handler chạy khi chương trình thoát
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1099,41 +1092,40 @@ int atexit(void (*func)(void));
 int at_quick_exit(void (*func)(void));
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-When the program does a normal exit with `exit()` or returns from
-`main()`, it looks for previously-registered handlers to call on the way
-out. These handlers are registered with the `atexit()` call.
+Khi chương trình thoát bình thường bằng `exit()` hoặc `return` từ
+`main()`, nó sẽ tìm các handler đã đăng ký trước đó để gọi trên đường
+ra. Các handler này được đăng ký bằng lời gọi `atexit()`.
 
-Think of it like, "Hey, when you're about to exit, do these extra
-things."
+Cứ nghĩ nó như là, "Này, lúc chuẩn bị thoát, làm mấy việc thêm này
+nhé."
 
-For the `quick_exit()` call, you can use the `at_quick_exit()` function
-to register handlers for that^[`quick_exit()` differs from `exit()` in
-that open files might not be flushed and temporary files might not be
-removed.]. There's no crossover in handlers from `exit()` to
-`quick_exit()`, i.e. for a call to one, none of the other's handlers
-will fire.
+Với lời gọi `quick_exit()`, bạn có thể dùng hàm `at_quick_exit()` để
+đăng ký handler cho nó^[`quick_exit()` khác `exit()` ở chỗ file đang mở
+có thể không được flush và file tạm có thể không bị xoá.]. Không có sự
+chồng chéo trong handler giữa `exit()` và `quick_exit()`, tức là khi
+gọi một hàm, không handler nào của hàm kia được kích hoạt.
 
-You can register multiple handlers to fire---at least 32 handlers are
-supported by both `exit()` and `quick_exit()`.
+Bạn có thể đăng ký nhiều handler để chạy---ít nhất 32 handler được hỗ
+trợ bởi cả `exit()` và `quick_exit()`.
 
-The argument `func` to the functions looks a little weird---it's a
-pointer to a function to call. Basically just put the function name to
-call in there (without parentheses after). See the example, below.
+Tham số `func` trong các hàm nhìn hơi lạ---nó là con trỏ tới một hàm để
+gọi. Về cơ bản cứ đặt tên hàm cần gọi vào đó (không có dấu ngoặc đằng
+sau). Xem ví dụ bên dưới.
 
-If you call `atexit()` from inside your `atexit()` handler (or equivalent
-in your `at_quick_exit()` handler), it's unspecified if it will get
-called. So get them all registered before you exit.
+Nếu bạn gọi `atexit()` từ bên trong handler `atexit()` của bạn (hoặc
+tương đương trong handler `at_quick_exit()`), thì không rõ liệu nó có
+được gọi hay không. Vậy nên hãy đăng ký tất cả trước khi thoát.
 
-When exiting, the functions will be called in the reverse order they
-were registered.
+Khi thoát, các hàm sẽ được gọi theo thứ tự ngược với thứ tự chúng được
+đăng ký.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-These functions return `0` on success, or nonzero on failure.
+Các hàm này trả về `0` khi thành công, hoặc khác 0 khi thất bại.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 `atexit()`:
 
@@ -1160,14 +1152,14 @@ int main(void)
 }
 ```
 
-For the output:
+Output:
 
 ``` {.default}
 Exit handler 2 called!
 Exit handler 1 called!
 ```
 
-And a similar example with `quick_exit()`:
+Và một ví dụ tương tự với `quick_exit()`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1192,7 +1184,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`exit()`](#man-exit),
 [`quick_exit()`](#man-exit)
@@ -1204,7 +1196,7 @@ int main(void)
 [i[`quick_exit()` function]i]
 [i[`_Exit()` function]i]
 
-Exit the currently-running program
+Thoát chương trình đang chạy
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1218,45 +1210,45 @@ _Noreturn void quick_exit(int status);
 _Noreturn void _Exit(int status);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-All these functions cause the program to exit, with various levels of
-cleanup performed.
+Tất cả các hàm này khiến chương trình thoát, với các mức dọn dẹp khác
+nhau.
 
-`exit()` does the most cleanup and is the most normal exit.
+`exit()` dọn dẹp nhiều nhất và là cách thoát bình thường nhất.
 
-`quick_exit()` is the second most.
+`quick_exit()` là cách thứ hai về mức độ dọn dẹp.
 
-`_Exit()` unceremoniously drops everything and ragequits on the spot.
+`_Exit()` bỏ hết mọi thứ không một chút thủ tục và ragequit tại chỗ.
 
-Calling either of `exit()` or `quick_exit()` causes their respective
-`atexit()` or `at_quick_exit()` handlers to be called in the reverse
-order in which they were registered.
+Gọi `exit()` hoặc `quick_exit()` khiến các handler tương ứng `atexit()`
+hoặc `at_quick_exit()` được gọi theo thứ tự ngược với thứ tự chúng được
+đăng ký.
 
-`exit()` will flush all streams and delete all temporary files.
+`exit()` sẽ flush tất cả stream và xoá tất cả file tạm.
 
-`quick_exit()` or `_Exit()` might not perform that nicety.
+`quick_exit()` hoặc `_Exit()` có thể không làm các thao tác lịch sự đó.
 
-`_Exit()` doesn't call any of the at-exit handlers, either.
+`_Exit()` cũng không gọi các at-exit handler nào cả.
 
-For all functions, the exit `status` is returned to the environment.
+Với tất cả các hàm, mã thoát `status` được trả về môi trường.
 
-Defined exit statuses are:
+Các mã thoát được định nghĩa:
 
-|Status|Description|
+|Status|Mô tả|
 |-|-|
-|`EXIT_SUCCESS`|Typically returned when good things happen|
-|`0`|Same as `EXIT_SUCCESS`|
-|`EXIT_FAILURE`|Oh noes! Definitely failure!|
-|Any positive value|Generally indicates another failure of some kind|
+|`EXIT_SUCCESS`|Thường trả về khi chuyện tốt đẹp xảy ra|
+|`0`|Giống `EXIT_SUCCESS`|
+|`EXIT_FAILURE`|Ôi không! Chắc chắn là thất bại!|
+|Giá trị dương bất kỳ|Thường chỉ một loại thất bại khác|
 
-OS X note: `quick_exit()` is not supported.
+Lưu ý OS X: `quick_exit()` không được hỗ trợ.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-None of these functions ever return.
+Không hàm nào trong số này từng trả về.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdlib.h>
@@ -1270,7 +1262,7 @@ int main(void)
             exit(EXIT_SUCCESS);
 
         case 2:
-            // Not supported in OS X
+            // Không được hỗ trợ trong OS X
             quick_exit(EXIT_SUCCESS);
 
         case 3:
@@ -1279,7 +1271,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atexit()`](#man-atexit),
 [`at_quick_exit()`](#man-atexit)
@@ -1289,7 +1281,7 @@ int main(void)
 
 [i[`getenv()` function]i]
 
-Get the value of an environment variable
+Lấy giá trị của một biến môi trường
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1299,26 +1291,26 @@ Get the value of an environment variable
 char *getenv(const char *name);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-The environment often provides variables that are set before the program
-run that you can access at runtime.
+Environment (môi trường) thường cung cấp các biến được đặt trước khi
+chương trình chạy mà bạn có thể truy cập lúc runtime.
 
-Of course the exact details are system dependent, but these variables
-are key/value pairs, and you can get the value by passing the key to
-`getenv()` as the `name` parameter.
+Tất nhiên chi tiết cụ thể tuỳ hệ thống, nhưng các biến này là cặp
+key/value, và bạn có thể lấy value bằng cách truyền key cho `getenv()`
+qua tham số `name`.
 
-You're not allowed to overwrite the string that's returned.
+Bạn không được phép ghi đè chuỗi trả về.
 
-This is pretty limited in the standard, but your OS often provides
-better functionality.
+Cái này khá hạn chế trong standard, nhưng OS của bạn thường cung cấp
+chức năng tốt hơn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a pointer to the environment variable value, or `NULL` if the
-variable doesn't exist.
+Trả về con trỏ tới giá trị của biến môi trường, hoặc `NULL` nếu biến
+không tồn tại.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1330,7 +1322,7 @@ int main(void)
 }
 ```
 
-Output (truncated in my case):
+Output (bị cắt trong trường hợp của tôi):
 
 ``` {.default}
 PATH is /usr/bin:/usr/local/bin:/usr/sbin:/home/beej/.cargo/bin [...]
@@ -1347,7 +1339,7 @@ PATH is /usr/bin:/usr/local/bin:/usr/sbin:/home/beej/.cargo/bin [...]
 
 [i[`system()` function]i]
 
-Run an external program
+Chạy một chương trình bên ngoài
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1357,31 +1349,31 @@ Run an external program
 int system(const char *string);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This will run an external program and then return to the caller.
+Hàm này sẽ chạy một chương trình bên ngoài rồi trả về cho bên gọi.
 
-The manner in which it runs the program is system-defined, but typically
-you can pass something to it just like you'd run on the command line,
-searching the `PATH`, etc.
+Cách nó chạy chương trình là do hệ thống quy định, nhưng thường là bạn
+có thể truyền cho nó cái gì đó giống như bạn gõ trên dòng lệnh, tìm
+trong `PATH`, v.v.
 
-Not all systems have this capability, but you can test for it by passing
-`NULL` to `system()` and seeing if it returns 0 (no command processor is
-available) or non-zero (a command processor is available! Yay!)
+Không phải hệ thống nào cũng có khả năng này, nhưng bạn có thể kiểm tra
+bằng cách truyền `NULL` cho `system()` và xem nó trả về 0 (không có
+command processor) hay khác 0 (có command processor! Yay!)
 
-If you're getting user input and passing it to the `system()` call, be
-extremely careful to escape all special shell characters (everything
-that's not alphanumeric) with a backslash to keep a villain from running
-something you don't want them to.
+Nếu bạn đang lấy input từ người dùng và truyền nó cho `system()`, hãy
+_cực kỳ_ cẩn thận escape tất cả ký tự đặc biệt của shell (tất cả ký tự
+không phải chữ cái/số) bằng dấu backslash để ngăn kẻ xấu chạy cái gì
+đó bạn không muốn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-If `NULL` is passed, returns nonzero if a command processor is available
-(i.e. `system()` will work at all).
+Nếu truyền `NULL`, trả về khác 0 nếu có command processor (tức là
+`system()` sẽ hoạt động).
 
-Otherwise returns an implementation-defined value.
+Ngược lại trả về giá trị do implementation định nghĩa.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1391,7 +1383,7 @@ int main(void)
 {
     printf("Here's a directory listing:\n\n");
 
-    system("ls -l");   // Run this command and return
+    system("ls -l");   // Chạy lệnh này và trả về
 
     printf("\nAll done!\n");
 }
@@ -1428,14 +1420,14 @@ All done!
 
 [i[`bsearch()` function]i]
 
-Binary Search (maybe) an array of objects
+Binary Search (có thể) trên một mảng đối tượng
 
 ### Synopsis {.unnumbered .unlisted}
 
 ``` {.c}
 #include <stdlib.h>
 
-// Pre-C23:
+// Trước C23:
 
 void *bsearch(const void *key, const void *base,
               size_t nmemb, size_t size,
@@ -1447,53 +1439,49 @@ QVoid *bsearch(const void *key, QVoid *base,
                int (*compar)(const void *, const void *));
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This crazy-looking function searches an array for a value.
+Hàm trông điên rồ này tìm kiếm một giá trị trong mảng.
 
-It probably is a binary search or some fast, efficient search. But the
-spec doesn't really say.
+Nó chắc là binary search hoặc một kiểu tìm kiếm nhanh, hiệu quả nào đó.
+Nhưng spec không nói rõ.
 
-However, the array must be sorted! So binary search seems likely.
+Tuy nhiên, mảng phải được sắp xếp! Nên binary search có vẻ khả thi.
 
-* `key` is a pointer to the value to find.
-* `base` is a pointer to the start of the array---the array must be
-  sorted!
-* `nmemb` is the number of elements in the array.
-* `size` is the `sizeof` each element in the array.
-* `compar` is a pointer to a function that will compare the key against
-  other values.
+* `key` là con trỏ tới giá trị cần tìm.
+* `base` là con trỏ tới đầu mảng---mảng phải được sắp xếp!
+* `nmemb` là số phần tử trong mảng.
+* `size` là `sizeof` của mỗi phần tử trong mảng.
+* `compar` là con trỏ tới hàm so sánh key với các giá trị khác.
 
-The comparison function takes the key as the first argument and the
-value to compare against as the second. It should return a negative
-number if the key is less than the value, `0` if the key equals the
-value, and a positive number if the key is greater than the value.
+Hàm so sánh nhận key làm đối số thứ nhất và giá trị cần so sánh làm đối
+số thứ hai. Nó nên trả về số âm nếu key nhỏ hơn giá trị, `0` nếu key
+bằng giá trị, và số dương nếu key lớn hơn giá trị.
 
-This is commonly computed by taking the difference between the key and
-the value to be compared. If subtraction is supported.
+Kiểu này thường được tính bằng cách lấy hiệu giữa key và giá trị cần so
+sánh. Nếu phép trừ được hỗ trợ.
 
-The return value from the [`strcmp()`](#man-strcmp) function can be used
-for comparing strings.
+Giá trị trả về từ hàm [`strcmp()`](#man-strcmp) có thể dùng để so sánh
+chuỗi.
 
-Again, the array must be sorted according to the order of the comparison
-function before running `bsearch()`. Luckily for you, you can just call
-[`qsort()`](#man-qsort) with the same comparison function to get this
-done.
+Lần nữa, mảng phải được sắp xếp theo thứ tự của hàm so sánh trước khi
+chạy `bsearch()`. May cho bạn, bạn chỉ cần gọi [`qsort()`](#man-qsort)
+với cùng hàm so sánh để lo việc này.
 
-It's a general-purpose function---it'll search any type of array for
-anything. The catch is you have to write the comparison function.
+Nó là hàm đa dụng---nó sẽ tìm bất kỳ kiểu mảng nào cho bất cứ thứ gì.
+Đánh đổi là bạn phải viết hàm so sánh.
 
-And that's not as scary as it looks. Jump down to the example
+Và chuyện đó không đáng sợ như nhìn. Nhảy xuống ví dụ.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-The function returns a pointer to the found value, or `NULL` if it can't
-be found.
+Hàm trả về con trỏ tới giá trị tìm được, hoặc `NULL` nếu không tìm
+thấy.
 
-New in C23: If `base` is `const`, the return type of the `bsearch()`
-function will also be `const`.
+Mới trong C23: Nếu `base` là `const`, kiểu trả về của hàm `bsearch()`
+cũng sẽ là `const`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1501,7 +1489,7 @@ function will also be `const`.
 
 int compar(const void *key, const void *value)
 {
-    const int *k = key, *v = value;  // Need ints, not voids
+    const int *k = key, *v = value;  // Cần int, không phải void
 
     return *k - *v;
 }
@@ -1512,18 +1500,18 @@ int main(void)
 
     int *r, key;
 
-    key = 12;  // 12 is in there
+    key = 12;  // 12 có trong mảng
     r = bsearch(&key, a, 9, sizeof(int), compar);
     printf("Found %d\n", *r);
 
-    key = 30;  // Won't find a 30
+    key = 30;  // Không tìm thấy 30
     r = bsearch(&key, a, 9, sizeof(int), compar);
     if (r == NULL)
         printf("Didn't find 30\n");
 
-    // Searching with an unnamed key, pointer to 32
+    // Tìm với key không tên, con trỏ tới 32
     r = bsearch(&(int){32}, a, 9, sizeof(int), compar);
-    printf("Found %d\n", *r);  // Found it
+    printf("Found %d\n", *r);  // Tìm thấy
 }
 ```
 
@@ -1535,7 +1523,7 @@ Didn't find 30
 Found 32
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`strcmp()`](#man-strcmp),
 [`qsort()`](#man-qsort)
@@ -1546,7 +1534,7 @@ Found 32
 
 [i[`qsort()` function]i]
 
-Quicksort (maybe) some data
+Quicksort (có thể) dữ liệu
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1557,50 +1545,50 @@ void qsort(void *base, size_t nmemb, size_t size,
            int (*compar)(const void *, const void *));
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function will quicksort (or some other sort, probably speedy) an
-array of data in-place^["In-place" meaning that the original array will
-hold the results; no new array is allocated.].
+Hàm này sẽ quicksort (hoặc một kiểu sắp xếp khác, chắc cũng nhanh) một
+mảng dữ liệu tại chỗ^["Tại chỗ" (in-place) nghĩa là mảng gốc sẽ chứa
+kết quả; không có mảng mới nào được cấp phát.].
 
-Like `bsearch()`, it's data-agnostic. Any data for which you can define
-a relative ordering can be sorted, whether `int`s, `struct`s, or
-anything else.
+Giống `bsearch()`, nó không biết gì về dữ liệu. Bất kỳ dữ liệu nào có
+thể định nghĩa thứ tự tương đối đều có thể sắp xếp, dù là `int`,
+`struct`, hay bất kỳ thứ gì khác.
 
-Also like `bsearch()`, you have to give a comparison function to do the
-actual compare.
+Cũng giống `bsearch()`, bạn phải cho một hàm so sánh để thực hiện việc
+so sánh thực sự.
 
-* `base` is a pointer to the start of the array to be sorted.
-* `nmemb` is the number of elements in the array.
-* `size` is the `sizeof` each element.
-* `compar` is a pointer to the comparison function.
+* `base` là con trỏ tới đầu mảng cần sắp xếp.
+* `nmemb` là số phần tử trong mảng.
+* `size` là `sizeof` của mỗi phần tử.
+* `compar` là con trỏ tới hàm so sánh.
 
-The comparison function takes pointers to two elements of the array as
-arguments and compares them. It should return a negative number if the
-first argument is less than the second, `0` if they are equal, and a
-positive number if the first argument is greater than the second.
+Hàm so sánh nhận con trỏ tới hai phần tử của mảng làm đối số và so sánh
+chúng. Nó nên trả về số âm nếu đối số thứ nhất nhỏ hơn đối số thứ hai,
+`0` nếu chúng bằng nhau, và số dương nếu đối số thứ nhất lớn hơn đối
+số thứ hai.
 
-This is commonly computed by taking the difference between the first
-argument and the second. If subtraction is supported.
+Kiểu này thường được tính bằng cách lấy hiệu giữa đối số thứ nhất và
+đối số thứ hai. Nếu phép trừ được hỗ trợ.
 
-The return value from the [`strcmp()`](#man-strcmp) function can provide
-sort order for strings.
+Giá trị trả về từ hàm [`strcmp()`](#man-strcmp) có thể cung cấp thứ tự
+sắp xếp cho chuỗi.
 
-If you have to sort a `struct`, just subtract the specific field you
-want to sort by.
+Nếu bạn phải sắp xếp một `struct`, chỉ việc trừ theo trường cụ thể mà
+bạn muốn sắp xếp theo.
 
-This comparison function can be used by [`bsearch()`](#man-bsearch) to
-do searches after the list is sorted.
+Hàm so sánh này có thể được dùng bởi [`bsearch()`](#man-bsearch) để tìm
+kiếm sau khi danh sách đã được sắp xếp.
 
-To reverse the sort, subtract the second argument from the first, i.e.
-negate the return value from `compar()`.
+Để đảo ngược thứ tự sắp xếp, trừ đối số thứ hai cho đối số thứ nhất,
+tức là đảo dấu giá trị trả về từ `compar()`.
 
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1608,7 +1596,7 @@ Returns nothing!
 
 int compar(const void *elem0, const void *elem1)
 {
-    const int *x = elem0, *y = elem1;  // Need ints, not voids
+    const int *x = elem0, *y = elem1;  // Cần int, không phải void
 
     if (*x > *y) return 1;
     if (*x < *y) return -1;
@@ -1619,19 +1607,19 @@ int main(void)
 {
     int a[9] = {14, 2, 3, 17, 10, 8, 6, 1, 13};
 
-    // Sort the list
+    // Sắp xếp danh sách
 
     qsort(a, 9, sizeof(int), compar);
 
-    // Print sorted list
+    // In danh sách đã sắp xếp
 
     for (int i = 0; i < 9; i++)
         printf("%d ", a[i]);
 
     putchar('\n');
 
-    // Use the same compar() function to binary search
-    // for 17 (passed in as an unnamed object)
+    // Dùng cùng hàm compar() để binary search
+    // cho 17 (truyền vào như một đối tượng không tên)
 
     int *r = bsearch(&(int){17}, a, 9, sizeof(int), compar);
     printf("Found %d!\n", *r);
@@ -1645,7 +1633,7 @@ Output:
 Found 17!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`strcmp()`](#man-strcmp),
 [`bsearch()`](#man-bsearch)
@@ -1657,7 +1645,7 @@ Found 17!
 [i[`labs()` function]i]
 [i[`llabs()` function]i]
 
-Compute the absolute value of an integer
+Tính giá trị tuyệt đối của một số nguyên
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1671,22 +1659,22 @@ long int labs(long int j);
 long long int llabs(long long int j);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Compute the absolute value of `j`. If you don't remember, that's how far
-from zero `j` is.
+Tính giá trị tuyệt đối của `j`. Nếu bạn không nhớ, đó là khoảng cách từ
+`j` đến 0.
 
-In other words, if `j` is negative, return it as a positive. If it's
-positive, return it as a positive. Always be positive. Enjoy life.
+Nói cách khác, nếu `j` âm, trả về nó dưới dạng dương. Nếu nó dương, trả
+về nó dưới dạng dương. Lúc nào cũng dương. Tận hưởng cuộc sống đi.
 
-If the result cannot be represented, the behavior is undefined. Be
-especially aware of the upper half of unsigned numbers.
+Nếu kết quả không thể biểu diễn được, hành vi là không xác định. Đặc
+biệt để ý nửa trên của các số unsigned.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the absolute value of `j`, $|j|$.
+Trả về giá trị tuyệt đối của `j`, $|j|$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1706,7 +1694,7 @@ Output:
 |4|  = 4
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fabs()`](#man-fabs)
 
@@ -1718,7 +1706,7 @@ Output:
 [i[`ldiv()` function]i]
 [i[`lldiv()` function]i]
 
-Compute the quotient and remainder of two numbers
+Tính thương và phần dư của hai số
  
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1732,16 +1720,15 @@ ldiv_t ldiv(long int numer, long int denom);
 lldiv_t lldiv(long long int numer, long long int denom);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions get you the quotient and remainder of a pair of numbers
-in one go.
+Các hàm này cho bạn thương và phần dư của một cặp số trong một lần.
 
-They return a structure that has two fields, `quot`, and `rem`, the
-types of which match types of `numer` and `denom`. Note how each
-function returns a different variant of `div_t`.
+Chúng trả về một cấu trúc có hai trường, `quot` và `rem`, kiểu của
+chúng khớp với kiểu của `numer` và `denom`. Để ý mỗi hàm trả về một
+biến thể khác của `div_t`.
 
-These `div_t` variants are equivalent to the following:
+Các biến thể `div_t` này tương đương với:
 
 ``` {.c}
 typedef struct {
@@ -1757,28 +1744,26 @@ typedef struct {
 } lldiv_t;
 ```
 
-Why use these instead of the division operator?
+Tại sao lại dùng mấy cái này thay vì toán tử chia?
 
-The C99 Rationale says:
+C99 Rationale nói:
 
-> Because C89 had implementation-defined semantics for division of
-> signed integers when negative operands were involved, `div` and
-> `ldiv`, and `lldiv` in C99, were invented to provide well-specified
-> semantics for signed integer division and remainder operations. The
-> semantics were adopted to be the same as in Fortran. Since these
-> functions return both the quotient and the remainder, they also serve
-> as a convenient way of efficiently modeling underlying hardware that
-> computes both results as part of the same operation. Table 7.2
-> summarizes the semantics of these functions.
+> Vì C89 có ngữ nghĩa do implementation định nghĩa cho phép chia số
+> nguyên có dấu khi có toán hạng âm, `div` và `ldiv`, và `lldiv` trong
+> C99, được phát minh để cung cấp ngữ nghĩa được xác định rõ cho chia
+> và phép dư số nguyên có dấu. Ngữ nghĩa được lấy giống như trong
+> Fortran. Vì các hàm này trả về cả thương và phần dư, chúng cũng đóng
+> vai trò là cách tiện lợi để mô hình hiệu quả phần cứng bên dưới tính
+> cả hai kết quả như một phần của cùng thao tác. Bảng 7.2 tóm tắt ngữ
+> nghĩa của các hàm này.
 
-Indeed, K&R2 (C89) says:
+Thật vậy, K&R2 (C89) nói:
 
-> The direction of truncation for `/` and the sign of the result for `%`
-> are machine-dependent for negative operands [...]
+> Hướng truncation cho `/` và dấu của kết quả cho `%` phụ thuộc máy với
+> toán hạng âm [...]
 
-The Rationale then goes on to spell out what the signs of the quotient
-and remainder will be given the signs of a numerator and denominator
-when using the `div()` functions:
+Rationale sau đó tiếp tục nói rõ dấu của thương và phần dư sẽ là gì
+cho trước dấu của tử và mẫu khi dùng các hàm `div()`:
 
 |`numer`|`denom`|`quot`|`rem`|
 |:-:|:-:|:-:|:-:|
@@ -1788,13 +1773,12 @@ when using the `div()` functions:
 |$-$|$-$|$+$|$-$|
 
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-A `div_t`, `ldiv_t`, or `lldiv_t` structure with the `quot` and `rem`
-fields loaded with the quotient and remainder of the operation of
-`numer/denom`.
+Một cấu trúc `div_t`, `ldiv_t`, hoặc `lldiv_t` với các trường `quot` và
+`rem` chứa thương và phần dư của phép toán `numer/denom`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1816,7 +1800,7 @@ Output:
 64 % -7 = 1
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fmod()`](#man-fmod),
 [`remainder()`](#man-remainder)
@@ -1827,7 +1811,7 @@ Output:
 
 [i[`mblen()` function]i]
 
-Return the number of bytes in a multibyte character
+Trả về số byte của một ký tự multibyte
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1837,31 +1821,31 @@ Return the number of bytes in a multibyte character
 int mblen(const char *s, size_t n);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a multibyte character in a string, this will tell you how
-many bytes long it is.
+Nếu bạn có một ký tự multibyte trong một chuỗi, hàm này sẽ cho bạn biết
+nó dài bao nhiêu byte.
 
-`n` is the maximum number of bytes `mblen()` will scan before giving up.
+`n` là số byte tối đa `mblen()` sẽ quét trước khi bỏ cuộc.
 
-If `s` is a `NULL` pointer, tests if this encoding has state dependency,
-as noted in the return value, below. It also resets the state, if there
-is one.
+Nếu `s` là con trỏ `NULL`, kiểm tra xem encoding này có phụ thuộc trạng
+thái không, như đã nói ở phần giá trị trả về bên dưới. Nó cũng reset
+trạng thái, nếu có.
 
-The behavior of this function is influenced by the locale.
+Hành vi của hàm này chịu ảnh hưởng bởi locale.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of bytes used to encode this character, or `-1` if
-there is no valid multibyte character in the next `n` bytes.
+Trả về số byte được dùng để mã hoá ký tự này, hoặc `-1` nếu không có ký
+tự multibyte hợp lệ trong `n` byte tiếp theo.
 
-Or, if `s` is NULL, returns true if this encoding has state dependency.
+Hoặc, nếu `s` là NULL, trả về true nếu encoding này có phụ thuộc trạng
+thái.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-For the example, I used my extended character set to put Unicode
-characters in the source. If this doesn't work for you, use the `\uXXXX`
-escape.
+Cho ví dụ, tôi dùng bộ ký tự mở rộng để đặt ký tự Unicode vào source.
+Nếu cái này không hoạt động với bạn, dùng escape `\uXXXX`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1879,7 +1863,8 @@ int main(void)
 }
 ```
 
-Output (in my case, the encoding is UTF-8, but your mileage may vary):
+Output (trong trường hợp của tôi, encoding là UTF-8, nhưng của bạn có
+thể khác):
 
 ``` {.default}
 State dependency: 0
@@ -1888,7 +1873,7 @@ Bytes for é: 2
 Bytes for &: 1
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mbtowc()`](#man-mbtowc),
 [`mbstowcs())`](#man-mbstowcs),
@@ -1900,7 +1885,7 @@ Bytes for &: 1
 
 [i[`mbtowc()` function]i]
 
-Convert a multibyte character to a wide character
+Chuyển một ký tự multibyte thành ký tự rộng
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1910,31 +1895,32 @@ Convert a multibyte character to a wide character
 int mbtowc(wchar_t * restrict pwc, const char * restrict s, size_t n);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a multibyte character, this function will convert it to a
-wide character and stored at the address pointed to by `pwc`. Up to `n`
-bytes of the multibyte character will be analyzed.
+Nếu bạn có một ký tự multibyte, hàm này sẽ chuyển nó thành ký tự rộng
+và lưu tại địa chỉ do `pwc` trỏ tới. Tối đa `n` byte của ký tự multibyte
+sẽ được phân tích.
 
-If `pwc` is `NULL`, the resulting character will not be stored. (Useful
-for just getting the return value.)
+Nếu `pwc` là `NULL`, ký tự kết quả sẽ không được lưu. (Hữu ích khi chỉ
+muốn lấy giá trị trả về.)
 
-If `s` is a `NULL` pointer, tests if this encoding has state dependency,
-as noted in the return value, below. It also resets the state, if there
-is one.
+Nếu `s` là con trỏ `NULL`, kiểm tra xem encoding này có phụ thuộc trạng
+thái không, như đã nói ở phần giá trị trả về bên dưới. Nó cũng reset
+trạng thái, nếu có.
 
-The behavior of this function is influenced by the locale.
+Hành vi của hàm này chịu ảnh hưởng bởi locale.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of bytes used in the encoded wide character, or `-1`
-if there is no valid multibyte character in the next `n` bytes.
+Trả về số byte được dùng trong ký tự rộng đã mã hoá, hoặc `-1` nếu
+không có ký tự multibyte hợp lệ trong `n` byte tiếp theo.
 
-Returns `0` if `s` points to the NUL character.
+Trả về `0` nếu `s` trỏ tới ký tự NUL.
 
-Or, if `s` is NULL, returns true if this encoding has state dependency.
+Hoặc, nếu `s` là NULL, trả về true nếu encoding này có phụ thuộc trạng
+thái.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1957,14 +1943,14 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 State dependency: 0
 L'€' takes 3 bytes as multibyte char '€'
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mblen()`](#man-mblen),
 [`mbstowcs()`](#man-mbstowcs),
@@ -1976,7 +1962,7 @@ L'€' takes 3 bytes as multibyte char '€'
 
 [i[`wctomb()` function]i]
 
-Convert a wide character to a multibyte character
+Chuyển ký tự rộng thành ký tự multibyte
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1986,33 +1972,33 @@ Convert a wide character to a multibyte character
 int wctomb(char *s, wchar_t wc);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have your hands on a wide character, you can use this to make it
-multibyte.
+Nếu bạn đang nắm trong tay một ký tự rộng, bạn có thể dùng cái này để
+biến nó thành multibyte.
 
-The wide character `wc` is stored as a multibyte character in the string
-pointed to by `s`. The buffer `s` points to should be at least
-`MB_CUR_MAX` characters long. Note that `MB_CUR_MAX` changes with
-locale.
+Ký tự rộng `wc` được lưu dưới dạng ký tự multibyte trong chuỗi được trỏ
+bởi `s`. Buffer mà `s` trỏ tới nên dài ít nhất `MB_CUR_MAX` ký tự. Lưu
+ý `MB_CUR_MAX` thay đổi theo locale.
 
-If `wc` is a NUL wide character, a NUL is stored in `s` after the bytes
-needed to reset the shift state (if any).
+Nếu `wc` là ký tự rộng NUL, một NUL sẽ được lưu vào `s` sau các byte
+cần thiết để reset shift state (nếu có).
 
-If `s` is a `NULL` pointer, tests if this encoding has state dependency,
-as noted in the return value, below. It also resets the state, if there
-is one.
+Nếu `s` là con trỏ `NULL`, kiểm tra xem encoding này có phụ thuộc trạng
+thái không, như đã nói ở phần giá trị trả về bên dưới. Nó cũng reset
+trạng thái, nếu có.
 
-The behavior of this function is influenced by the locale.
+Hành vi của hàm này chịu ảnh hưởng bởi locale.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of bytes used in the encoded multibyte character, or
-`-1` if `wc` does not correspond to any valid multibyte character.
+Trả về số byte được dùng trong ký tự multibyte đã mã hoá, hoặc `-1` nếu
+`wc` không tương ứng với ký tự multibyte hợp lệ nào.
 
-Or, if `s` is NULL, returns true if this encoding has state dependency.
+Hoặc, nếu `s` là NULL, trả về true nếu encoding này có phụ thuộc trạng
+thái.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2036,14 +2022,14 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 State dependency: 0
 L'€' takes 3 bytes as multibyte char '€'
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mbtowc()`](#man-mbtowc),
 [`mbstowcs()`](#man-mbstowcs),
@@ -2056,7 +2042,7 @@ L'€' takes 3 bytes as multibyte char '€'
 
 [i[`mbstowcs()` function]i]
 
-Convert a multibyte string to a wide character string
+Chuyển chuỗi multibyte thành chuỗi ký tự rộng
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2066,35 +2052,33 @@ Convert a multibyte string to a wide character string
 size_t mbstowcs(wchar_t * restrict pwcs, const char * restrict s, size_t n);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a multibyte string (AKA a regular string), you can convert
-it wto a wide character string with this function.
+Nếu bạn có một chuỗi multibyte (hay chuỗi thường), bạn có thể chuyển
+nó thành chuỗi ký tự rộng với hàm này.
 
-At most `n` wide characters are written to the destination `pwcs` from
-the source `s`.
+Tối đa `n` ký tự rộng được ghi vào đích `pwcs` từ nguồn `s`.
 
-A NUL character is stored as a wide NUL character.
+Ký tự NUL được lưu dưới dạng ký tự NUL rộng.
 
-Non-portable POSIX extension: if you're using a POSIX-complaint library,
-this function allows `pwcs` to be `NULL` if you're only interested in
-the return value. Most notably, this will give you the number of
-characters in a multibyte string (as opposed to
-[`strlen()`](#man-strlen) which counts the bytes.)
+Phần mở rộng POSIX không portable: nếu bạn đang dùng một thư viện tuân
+thủ POSIX, hàm này cho phép `pwcs` là `NULL` nếu bạn chỉ quan tâm tới
+giá trị trả về. Đáng chú ý nhất là, việc này sẽ cho bạn số ký tự trong
+chuỗi multibyte (trái ngược với [`strlen()`](#man-strlen) đếm số byte.)
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of wide characters written to the destination `pwcs`.
+Trả về số ký tự rộng được ghi vào đích `pwcs`.
 
-If an invalid multibyte character was found, returns `(size_t)(-1)`.
+Nếu tìm thấy ký tự multibyte không hợp lệ, trả về `(size_t)(-1)`.
 
-If the return value is `n`, it means the result was _not_
-NUL-terminated.
+Nếu giá trị trả về là `n`, nghĩa là kết quả _không_ được kết thúc bằng
+NUL.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This source uses an extended character set. If your compiler doesn't
-support it, you'll have to replace them with `\u` escapes.
+Source này dùng bộ ký tự mở rộng. Nếu compiler của bạn không hỗ trợ,
+bạn sẽ phải thay chúng bằng escape `\u`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2107,7 +2091,7 @@ int main(void)
     setlocale(LC_ALL, "");
 
     wchar_t wcs[128];
-    char *s = "€200 for this spoon?";  // 20 characters
+    char *s = "€200 for this spoon?";  // 20 ký tự
 
     size_t char_count, byte_count;
 
@@ -2116,25 +2100,24 @@ int main(void)
 
     printf("Wide string: L\"%ls\"\n", wcs);
     printf("Char count : %zu\n", char_count);    // 20
-    printf("Byte count : %zu\n\n", byte_count);  // 22 on my system
+    printf("Byte count : %zu\n\n", byte_count);  // 22 trên máy tôi
 
-    // POSIX Extension that allows you to pass NULL for
-    // the destination so you can just use the return
-    // value (which is the character count of the string, 
-    // if no errors have occurred)
+    // Phần mở rộng POSIX cho phép bạn truyền NULL cho
+    // đích để chỉ dùng giá trị trả về (là số ký tự của
+    // chuỗi, nếu không có lỗi xảy ra)
 
-    s = "§¶°±π€•";  // 7 characters
+    s = "§¶°±π€•";  // 7 ký tự
 
-    char_count = mbstowcs(NULL, s, 0);  // POSIX-only, nonportable
+    char_count = mbstowcs(NULL, s, 0);  // Chỉ POSIX, không portable
     byte_count = strlen(s);
 
     printf("Multibyte str: \"%s\"\n", s);
     printf("Char count   : %zu\n", char_count);  // 7
-    printf("Byte count   : %zu\n", byte_count);  // 16 on my system
+    printf("Byte count   : %zu\n", byte_count);  // 16 trên máy tôi
 }
 ```
 
-Output on my system (byte count will depend on your encoding):
+Output trên máy tôi (số byte sẽ tuỳ thuộc vào encoding của bạn):
 
 ``` {.default}
 Wide string: L"€200 for this spoon?"
@@ -2146,7 +2129,7 @@ Char count   : 7
 Byte count   : 16
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mblen()`](#man-mblen),
 [`mbtowc()`](#man-mbtowc),
@@ -2159,7 +2142,7 @@ Byte count   : 16
 
 [i[`wcstombs()` function]i]
 
-Convert a wide character string to a multibyte string
+Chuyển chuỗi ký tự rộng thành chuỗi multibyte
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2169,32 +2152,31 @@ Convert a wide character string to a multibyte string
 size_t wcstombs(char * restrict s, const wchar_t * restrict pwcs, size_t n);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a wide character string and you want it as multibyte string,
-this is the function for you!
+Nếu bạn có chuỗi ký tự rộng và muốn biến nó thành chuỗi multibyte, đây
+là hàm cho bạn!
 
-It'll take the wide characters pointed to by `pwcs` and convert them to
-multibyte characters stored in `s`. No more than `n` bytes will be
-written to `s`.
+Nó sẽ lấy các ký tự rộng được `pwcs` trỏ tới và chuyển chúng thành ký
+tự multibyte lưu vào `s`. Không quá `n` byte sẽ được ghi vào `s`.
 
-Non-portable POSIX extension: if you're using a POSIX-complaint library,
-this function allows `s` to be `NULL` if you're only interested in
-the return value. Most notably, this will give you the number of
-bytes needed to encode the wide characters in a multibyte string.
+Phần mở rộng POSIX không portable: nếu bạn đang dùng một thư viện tuân
+thủ POSIX, hàm này cho phép `s` là `NULL` nếu bạn chỉ quan tâm tới giá
+trị trả về. Đáng chú ý nhất, việc này sẽ cho bạn số byte cần thiết để
+mã hoá các ký tự rộng thành chuỗi multibyte.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of bytes written to `s`, or `(size_t)(-1)` if one of
-the characters can't be encoded into a multibyte string.
+Trả về số byte được ghi vào `s`, hoặc `(size_t)(-1)` nếu một trong các
+ký tự không thể mã hoá thành chuỗi multibyte.
 
-If the return value is `n`, it means the result was _not_
-NUL-terminated.
+Nếu giá trị trả về là `n`, nghĩa là kết quả _không_ được kết thúc bằng
+NUL.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This source uses an extended character set. If your compiler doesn't
-support it, you'll have to replace them with `\u` escapes.
+Source này dùng bộ ký tự mở rộng. Nếu compiler của bạn không hỗ trợ,
+bạn sẽ phải thay chúng bằng escape `\u`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2207,7 +2189,7 @@ int main(void)
     setlocale(LC_ALL, "");
 
     char mbs[128];
-    wchar_t *wcs = L"€200 for this spoon?";  // 20 characters
+    wchar_t *wcs = L"€200 for this spoon?";  // 20 ký tự
 
     size_t byte_count;
 
@@ -2215,23 +2197,22 @@ int main(void)
 
     printf("Wide string: L\"%ls\"\n", wcs);
     printf("Multibyte  : \"%s\"\n", mbs);
-    printf("Byte count : %zu\n\n", byte_count);  // 22 on my system
+    printf("Byte count : %zu\n\n", byte_count);  // 22 trên máy tôi
 
-    // POSIX Extension that allows you to pass NULL for
-    // the destination so you can just use the return
-    // value (which is the character count of the string, 
-    // if no errors have occurred)
+    // Phần mở rộng POSIX cho phép bạn truyền NULL cho
+    // đích để chỉ dùng giá trị trả về (là số ký tự của
+    // chuỗi, nếu không có lỗi xảy ra)
 
-    wcs = L"§¶°±π€•";  // 7 characters
+    wcs = L"§¶°±π€•";  // 7 ký tự
 
-    byte_count = wcstombs(NULL, wcs, 0);  // POSIX-only, nonportable
+    byte_count = wcstombs(NULL, wcs, 0);  // Chỉ POSIX, không portable
 
     printf("Wide string: L\"%ls\"\n", wcs);
-    printf("Byte count : %zu\n", byte_count);  // 16 on my system
+    printf("Byte count : %zu\n", byte_count);  // 16 trên máy tôi
 }
 ```
 
-Output on my system (byte count will depend on your encoding):
+Output trên máy tôi (số byte sẽ tuỳ thuộc vào encoding của bạn):
 
 ``` {.default}
 Wide string: L"€200 for this spoon?"
@@ -2242,7 +2223,7 @@ Wide string: L"§¶°±π€•"
 Byte count : 16
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mblen()`](#man-mblen),
 [`wctomb()`](#man-wctomb),
@@ -2256,7 +2237,7 @@ Byte count : 16
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdlib.h>
@@ -2264,32 +2245,34 @@ New in C23!
 size_t memalignment(const void * p);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function will give you the memory alignment (in bytes) of the
-object pointed to.
+Hàm này sẽ cho bạn biết memory alignment (căn chỉnh bộ nhớ) (tính bằng
+byte) của đối tượng được trỏ tới.
 
-The idea is that we're going to get the same information as we get with
-[`alignof`](#man-alignof), except we can do it with an untyped `void*`.
+Ý tưởng là chúng ta sẽ lấy được cùng thông tin như khi dùng
+[`alignof`](#man-alignof), chỉ khác là chúng ta có thể làm việc đó với
+`void*` không có kiểu.
 
-And you might want to do this because misaligned data could be slower or
-unusable on various platforms.
+Và bạn có thể muốn làm điều này vì dữ liệu căn chỉnh sai có thể chậm
+hơn hoặc không dùng được trên nhiều nền tảng.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the integer alignment of `p`, which will be a power of 2.
-Returns `0` if `NULL` is passed in. 
+Trả về căn chỉnh dạng số nguyên của `p`, sẽ là luỹ thừa của 2. Trả về
+`0` nếu truyền vào `NULL`. 
 
-`0` means the pointer can't be used to access an object of any type.
+`0` nghĩa là con trỏ không thể dùng để truy cập đối tượng của bất kỳ
+kiểu nào.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-(Caveat: none of my compilers support this function yet, so the code is
-largely untested.)
+(Lưu ý: chưa có compiler nào của tôi hỗ trợ hàm này, nên đoạn code phần
+lớn chưa được test.)
 
-The proposal for this feature suggests that a macro might be useful for
-determining if a pointer is well-aligned for a particular type, so we'll
-just steal that as an example:
+Đề xuất cho tính năng này gợi ý rằng một macro có thể hữu ích để xác
+định xem con trỏ có căn chỉnh tốt cho một kiểu cụ thể hay không, nên
+chúng ta sẽ ăn cắp cái đó làm ví dụ:
 
 ``` {.c}
 #include <stdio.h>
@@ -2304,7 +2287,7 @@ void check(void *p)
     if (isaligned(p, int)) {
         puts("The pointer p is well-aligned for an int! :)");
 
-        // So I'm happy doing this:
+        // Nên tôi thoải mái làm thế này:
 
         int *i = p;
         *i = 3490;
@@ -2322,7 +2305,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`alignof()`](#man-alignof),
 [`alignas()`](#man-alignas),
