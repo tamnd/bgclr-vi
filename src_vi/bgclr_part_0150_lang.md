@@ -5,70 +5,69 @@
 
 # The C Language
 
-This is just a quick overview of the fashionable and fun highlights of
-the syntax, keywords, and other animals in the C menagerie.
+Đây là bản tổng quan nhanh các điểm nhấn thời thượng và vui vẻ của
+cú pháp, keyword, và những "con thú" khác trong sở thú C.
 
-## Background
+## Bối cảnh
 
-Some things you'll need to make sense of the examples, below.
+Một vài thứ bạn cần để hiểu các ví dụ bên dưới.
 
-### Comments
+### Comment
 
-Comments in C start with `//` and go to the end of a line.
+Comment trong C bắt đầu bằng `//` và kéo đến cuối dòng.
 
-Multiline comments begin with `/*` and continue until a closing `*/`.
+Comment nhiều dòng bắt đầu bằng `/*` và kéo đến khi gặp `*/` đóng.
 
-### Separators
+### Dấu phân cách
 
-Expressions in C are separated by semicolons (`;`). These tend to appear
-at the ends of lines.
+Biểu thức trong C được phân cách bằng dấu chấm phẩy (`;`). Chúng
+thường xuất hiện ở cuối dòng.
 
-### Expressions
+### Biểu thức
 
-If it's not a keyword or other reserved punctuation, it tends to be an
-expression. Think "math including function calls".
+Nếu nó không phải keyword hay ký tự đặc biệt, khả năng nó là một
+biểu thức. Cứ nghĩ "toán học cộng thêm lời gọi hàm".
 
-### Statements
+### Câu lệnh
 
-Think `if`, `while`, etc. Executable keywords.
+Cứ nghĩ `if`, `while`, v.v. Các keyword thực thi.
 
-### Booleans
+### Boolean
 
-Ignoring the `bool` type, zero is false and non-zero is true.
+Bỏ qua kiểu `bool`, số không là false và khác không là true.
 
-### Blocks
+### Block
 
-Multiple expressions and flow control keywords can be wrapped up in a
-block, made up of `{` followed by one or more expressions or statements,
-followed by `}`.
+Nhiều biểu thức và keyword điều khiển luồng có thể được gói trong
+một block, gồm `{` theo sau là một hay nhiều biểu thức hoặc câu
+lệnh, rồi `}`.
 
-### Code Examples
+### Ví dụ code
 
-They are meant to give an idea of how to use various statements, but not
-be comprehensive in terms of examples.
+Chúng nhằm cho bạn hình dung cách dùng các câu lệnh khác nhau, chứ
+không phải liệt kê ví dụ toàn diện.
 
-In the examples, below, if either an expression or statement can be
-used, the word `code` is inserted.
+Trong các ví dụ dưới đây, nếu chỗ đó có thể là biểu thức hoặc câu
+lệnh, từ `code` được chèn vào.
 
-## Operators
+## Toán tử
 
-### Arithmetic Operators
+### Toán tử số học
 
-The arithmetic operators: `+`, `-`, `*`, `/`, `%` (remainder).
+Các toán tử số học: `+`, `-`, `*`, `/`, `%` (phần dư).
 
-Division is integer if all arguments are integers. Otherwise it's a
-floating result.
+Phép chia là chia số nguyên nếu mọi toán hạng đều là số nguyên. Nếu
+không, kết quả là số thực.
 
-You can also negate an expression by putting `-` in front of it. (You
-can also put a `+` in front of it---this doesn't do anything
-mathematically, but it causes the Usual Arithmetic Conversions to be
-performed on the expression.)
+Bạn cũng có thể đổi dấu một biểu thức bằng cách đặt `-` trước nó.
+(Bạn cũng có thể đặt `+` trước, việc này không làm gì về mặt toán
+học, nhưng nó khiến Usual Arithmetic Conversions được thực hiện trên
+biểu thức đó.)
 
-### Pre- and Post-Increment and -Decrement
+### Pre- và Post-Increment, Pre- và Post-Decrement
 
-The post-increment (`++`) and post-decrement (`--`) operators (after the
-variable) do their work _after_ the rest of the expression has been
-evaluated.
+Toán tử post-increment (`++`) và post-decrement (`--`) (đặt sau biến)
+làm việc của chúng _sau khi_ phần còn lại của biểu thức đã được tính.
 
 ``` {.c}
 int x = 10;
@@ -80,9 +79,8 @@ int w = (x++) + (y--) + (z++);
 print("%d %d %d %d\n", x, y, z, w);  // 11 19 31 60
 ```
 
-The pre-increment (`++`) and pre-decrement (`--`) operators (before the
-variable) do their work _before_ the rest of the expression has been
-evaluated.
+Toán tử pre-increment (`++`) và pre-decrement (`--`) (đặt trước biến)
+làm việc của chúng _trước khi_ phần còn lại của biểu thức được tính.
 
 ``` {.c}
 int x = 10;
@@ -94,93 +92,93 @@ int w = (++x) + (--y) + (++z);
 print("%d %d %d %d\n", x, y, z, w);  // 11 19 31 61
 ```
 
-### Comparison Operators
+### Toán tử so sánh
 
-All of these return a Boolean true-y or false-y value.
+Tất cả đều trả về một giá trị true hoặc false kiểu Boolean.
 
-Less than, greater than, and equal to are: `<`, `>`, `==`, respectively.
+Nhỏ hơn, lớn hơn, và bằng lần lượt là: `<`, `>`, `==`.
 
-Less than or equal to and greater than or equal to are `<=` and `>=`.
+Nhỏ hơn hoặc bằng và lớn hơn hoặc bằng là `<=` và `>=`.
 
-Not equal to is `!=`.
+Không bằng là `!=`.
 
-### Pointer Operators
+### Toán tử con trỏ
 
-`*` in front of a pointer variable dereferences that variable.
+`*` đặt trước biến con trỏ dereference biến đó.
 
-`&` in front of a variable gives the address of that variable.
+`&` đặt trước biến lấy địa chỉ của biến đó.
 
-`+` and `-` arithmetic operators work on pointers for pointer
-arithmetic.
+Các toán tử số học `+` và `-` cũng chạy trên con trỏ để làm số học
+con trỏ.
 
-### Structure and Union Operators
+### Toán tử cho Struct và Union
 
-The dot operator (`.`) can get a field value out of a `struct` or
+Toán tử dấu chấm (`.`) lấy giá trị một field từ `struct` hoặc
 `union`.
 
-The arrow operator (`->`) can get a field value out of a pointer to a
-`struct` or `union`. These two are equivalent, assuming `p` is just such
-a pointer:
+Toán tử mũi tên (`->`) lấy giá trị một field từ con trỏ tới
+`struct` hay `union`. Hai cách dưới đây tương đương nhau, giả sử `p`
+chính là loại con trỏ đó:
 
 ``` {.c}
 (*p).bar;
 p->bar;
 ```
 
-### Array Operators
+### Toán tử mảng
 
-The square bracket operators can reference a value in an array:
+Toán tử ngoặc vuông có thể tham chiếu một giá trị trong mảng:
 
 ``` {.c}
 a[10] = 99;
 ```
 
-This is syntactic sugar over pointer arithmetic and referencing. The
-above line is equivalent to:
+Đây là "syntactic sugar" bọc ngoài số học con trỏ và dereference.
+Dòng trên tương đương với:
 
 ``` {.c}
 *(a + 10) = 99;
 ```
 
-### Bitwise Operators
+### Toán tử bit
 
-Bit shift right: `>>`, bit shift left: `<<`.
+Dịch bit phải: `>>`, dịch bit trái: `<<`.
 
 ```
-int i = x << 3;  // left shift 3 bits
+int i = x << 3;  // dịch trái 3 bit
 ```
 
-Whether or not a right shift on a signed value is sign-extended is
-implementation-defined.
+Việc dịch phải trên một giá trị có dấu có được mở rộng dấu hay không
+là implementation-defined.
 
-Bitwise AND, OR, NOT, and XOR are `&`, `|`, `~`, and `^`, respectively.
+Bitwise AND, OR, NOT, và XOR lần lượt là `&`, `|`, `~`, và `^`.
 
-### Assignment Operators
+### Toán tử gán
 
-A standalone `=` is your basic assignment.
+`=` đứng một mình là phép gán cơ bản.
 
-But there are also compound assignments that are like a shorthand
-version. For example, these two are basically equivalent:
+Nhưng còn có các phép gán kết hợp, kiểu viết tắt. Ví dụ, hai dòng
+sau về cơ bản là tương đương:
 
 ``` {.c}
 x = x + 1;
 x += 1;
 ```
 
-There are compound assignment operators for many of the other operators.
+Có các toán tử gán kết hợp cho phần lớn các toán tử khác.
 
-Arithmetic: `+=`, `-=`, `*=`, `/=`, and `%=`.
+Số học: `+=`, `-=`, `*=`, `/=`, và `%=`.
 
-Bitwise: `|=`, `&=`, `~=`, and `^=`.
+Bit: `|=`, `&=`, `~=`, và `^=`.
 
-### The `sizeof` Operator
+### Toán tử `sizeof`
 
-This is a compile-time operator that gives you the size in bytes of the
-type of the argument. The type of the expression is used; the expression
-is not evaluated. `sizeof` works with any type, even user-defined
-composite types.
+Đây là toán tử lúc compile, cho bạn kích thước tính bằng byte của
+kiểu của đối số. Kiểu của biểu thức được dùng; biểu thức không được
+đánh giá. `sizeof` làm việc với bất kỳ kiểu nào, kể cả kiểu hợp do
+người dùng định nghĩa.
 
-The return type is the integer type `size_t`.
+Kiểu trả về là kiểu integer `size_t`.
 
 ```
 float f;
@@ -189,8 +187,8 @@ size_t x = sizeof f;
 printf("f is %zu bytes\n", x);
 ```
 
-You can also specify a raw type name in there by wrapping it in
-parentheses:
+Bạn cũng có thể chỉ định trực tiếp tên kiểu bằng cách bọc nó trong
+ngoặc:
 
 ``` {.c}
 size_t x = sizeof(int);
@@ -198,18 +196,18 @@ size_t x = sizeof(int);
 printf("int is %zu bytes\n", x);
 ```
 
-### Type Casts
+### Type Cast
 
-You can force an expression to be another type (within reason) by
-_casting_ to that type.
+Bạn có thể ép một biểu thức sang kiểu khác (trong giới hạn hợp lý)
+bằng cách _cast_ sang kiểu đó.
 
-You give the new type name in parentheses.
+Bạn đặt tên kiểu mới trong ngoặc.
 
-Here we are forcing the subexpression `x` to be type `float` just before
-the division^[This doesn't change the type of `x` in other
-contexts---it's just in this one usage in this expression.]. This causes
-the division, which would otherwise be an integer division, to be a
-floating point division.
+Ở đây ta đang ép biểu thức con `x` thành kiểu `float` ngay trước
+phép chia^[Việc này không thay đổi kiểu của `x` ở ngữ cảnh khác, nó
+chỉ có hiệu lực trong lần dùng cụ thể này trong biểu thức này.]. Cái
+này làm cho phép chia, nếu không sẽ là chia số nguyên, trở thành
+chia số thực.
 
 ``` {.c}
 int x = 17;
@@ -218,88 +216,88 @@ int y = 2;
 float f = (float)x / y;
 ```
 
-### `_Alignof` Operator
+### Toán tử `_Alignof`
 
-You can get the byte alignment of any type with the `_Alignof`
-compile-time operator. If you include `<stdalign.h>`, you can use
-`alignof` instead.
+Bạn có thể lấy byte alignment của bất kỳ kiểu nào với toán tử
+compile-time `_Alignof`. Nếu bạn include `<stdalign.h>`, bạn có thể
+dùng `alignof` thay thế.
 
-Any type can be the argument to the operator, which must be in
-parenthesis. Unlike `sizeof`, the argument cannot be an expression.
+Bất kỳ kiểu nào cũng có thể là đối số của toán tử, và phải đặt trong
+ngoặc. Khác với `sizeof`, đối số không thể là biểu thức.
 
 ``` {.c}
 printf("Alignment of int is %zu\n", alignof(int));
 ```
 
-### Comma Operator
+### Toán tử dấu phẩy
 
-You can separate subexpressions with commas, and each will be evaluated
-from left to right, and the value of the entire expression will be the
-value of the subexpression after the last comma.
+Bạn có thể phân tách các biểu thức con bằng dấu phẩy, mỗi biểu thức
+sẽ được tính từ trái sang phải, và giá trị của toàn biểu thức sẽ là
+giá trị của biểu thức con đứng sau dấu phẩy cuối cùng.
 
 ``` {.c}
-int x = (1, 2, 3);  // Silly way to assign `x = 3`
+int x = (1, 2, 3);  // Cách ngốc để gán `x = 3`
 ```
 
-Usually this is used in the various clauses in loops. For example, we
-can do multiple assignments in a `for` loop, and have multiple post
-expressions like this:
+Thường thì cái này được dùng trong các mệnh đề của vòng lặp. Ví dụ,
+ta có thể gán nhiều lần trong vòng `for`, và có nhiều biểu thức post
+như thế này:
 
 ``` {.c}
 for (i = 2, j = 10; i < 100; i++, j += 4) { ... }
 ```
 
-## Type Specifiers
+## Type Specifier
 
-Integer types from smallest to largest capacity: `char`, `short`, `int`,
+Các kiểu integer từ nhỏ nhất đến lớn nhất: `char`, `short`, `int`,
 `long`, `long long`.
 
-Any integer type may be prefaced with `signed` (the default except for
-`char`) or `unsigned`.
+Bất kỳ kiểu integer nào cũng có thể có tiền tố `signed` (mặc định,
+trừ `char`) hoặc `unsigned`.
 
-Whether or not `char` is signed is implementation defined.
+Việc `char` có dấu hay không là implementation-defined.
 
-Floating types from least accuracy to most: `float`, `double`, `long
-double`.
+Các kiểu floating từ ít chính xác nhất đến nhiều nhất: `float`,
+`double`, `long double`.
 
-`void` is a type representing lack of type.
+`void` là kiểu biểu diễn "không có kiểu".
 
-`_Bool` is a Boolean type. This becomes `bool` in C23. Earlier versions
-of C must include `<stdbool.h>` to get `bool`.
+`_Bool` là kiểu Boolean. Kiểu này thành `bool` trong C23. Các phiên
+bản C trước đó phải include `<stdbool.h>` để có `bool`.
 
-`_Complex` indicates a complex floating type type, when paired with such
-a type. Include `<complex.h>` to use `complex` instead.
+`_Complex` chỉ một kiểu số phức floating, khi kết hợp với một kiểu
+đó. Include `<complex.h>` để dùng `complex` thay thế.
 
 ``` {.c}
 complex float x = 1.2 + 2.3*I;
 complex double y = 1.2 + 2.3*I;
 ```
 
-`_Imaginary` is an optional keyword used to specify an imaginary type
-(the imaginary part of a complex number) when paired with a floating
-type. Include `<complex.h>` to use `imaginary` instead. Neither GCC nor
-clang support this.
+`_Imaginary` là keyword tuỳ chọn, dùng để chỉ một kiểu tưởng tượng
+(phần imaginary của một số phức) khi kết hợp với kiểu floating.
+Include `<complex.h>` để dùng `imaginary` thay thế. Cả GCC và clang
+đều không hỗ trợ cái này.
 
 ``` {.c}
 imaginary float f = 2.3*I;
 ```
 
-`_Generic` is a type "switcher" that allows you to emit different code
-at compile time depending on the type of the data.
+`_Generic` là "cái chuyển kiểu", cho phép bạn sinh ra code khác nhau
+lúc compile tuỳ vào kiểu của dữ liệu.
 
-## Constant Types
+## Kiểu hằng
 
-You can declare constants to be of specific types (though it might be a
-larger type). In the following example unqualified types, case doesn't
-matter, and the `U` can come before or after the `L` or `LL`.
+Bạn có thể khai báo hằng với kiểu cụ thể (dù đôi khi nó là kiểu lớn
+hơn). Trong ví dụ dưới, với các kiểu không qualifier, hoa thường
+không quan trọng, và `U` có thể đứng trước hoặc sau `L` hoặc `LL`.
 
 ``` {.c}
-123              int or larger
-123L             long int or larger
+123              int hoặc lớn hơn
+123L             long int hoặc lớn hơn
 123LL            long long int
 
-123U             unsigned int or larger
-123UL            unsigned long int or larger
+123U             unsigned int hoặc lớn hơn
+123UL            unsigned long int hoặc lớn hơn
 123ULL           unsigned long long int
 
 123.4F           float
@@ -310,33 +308,33 @@ matter, and the `U` can come before or after the `L` or `LL`.
 "hello, world"   char* (string)
 ```
 
-You can specify the constant in other bases as well:
+Bạn cũng có thể chỉ định hằng ở cơ số khác:
 
 ``` {.c}
-123              decimal
-0x123            hexadecimal
-0123             octal
+123              thập phân
+0x123            hexa
+0123             bát phân
 ```
 
-You can also specify floating constants in base-10 exponential notation:
+Bạn cũng có thể chỉ định hằng floating theo ký hiệu luỹ thừa cơ số 10:
 
 ``` {.c}
 1.2e3            1.2 x 10^3
 ```
 
-And you can specify floats in hex! Except in this case the exponent is
-still in decimal, and the base is 2 instead of 10:
+Và bạn có thể chỉ định float ở hex! Chỉ có điều trong trường hợp
+này số mũ vẫn ở thập phân, còn cơ số là 2 thay vì 10:
 
 ``` {.c}
 0x1.2p3          0x1.2 x 2^3
 ```
 
-## Composite Types
+## Kiểu hợp
 
-### `struct` Types
+### Kiểu `struct`
 
-You can build a composite type made out of other types with `struct` and
-then declare variables to be of that type.
+Bạn có thể dựng một kiểu hợp từ các kiểu khác bằng `struct` rồi khai
+báo biến có kiểu đó.
 
 ``` {.c}
 struct animal {
@@ -349,20 +347,20 @@ struct animal b = {"goat", 4};
 struct animal c = {.name="goat", .leg_count=4};
 ```
 
-Accessing is done with the dot operator (`.`) or, if the variable is a
-pointer to a `struct`, the arrow operator (`->`).
+Truy cập bằng toán tử dấu chấm (`.`), hoặc nếu biến là con trỏ tới
+`struct`, bằng toán tử mũi tên (`->`).
 
 ``` {.c}
-struct animal *p = &b;  // b from above
+struct animal *p = &b;  // b ở trên
 
 printf("%d\n", b.leg_count);
 printf("%d\n", p->leg_count);
 ```
 
-### `union` Types
+### Kiểu `union`
 
-These are like `struct` types in usage, except that you can only use one
-field at a time. (The fields all use the same region of memory.)
+Chúng giống kiểu `struct` về cách dùng, chỉ khác là bạn chỉ dùng được
+một field tại một thời điểm. (Các field chia sẻ cùng vùng bộ nhớ.)
 
 ``` {.c}
 union dt {
@@ -371,13 +369,13 @@ union dt {
 };
 
 union dt a;
-union dt b = {6};            // Initializes "distance", the first field
-union dt c = {.distance=6};  // Initializes "distance"
-union dt d = {.time=6};      // Initializes "time"
+union dt b = {6};            // Khởi tạo "distance", field đầu
+union dt c = {.distance=6};  // Khởi tạo "distance"
+union dt d = {.time=6};      // Khởi tạo "time"
 ```
 
-Accessing is done with the dot operator (`.`) or, if the variable is a
-pointer to a `union`, the arrow operator (`->`).
+Truy cập bằng toán tử dấu chấm (`.`), hoặc nếu biến là con trỏ tới
+`union`, bằng toán tử mũi tên (`->`).
 
 ``` {.c}
 union dt *p = &b;
@@ -386,13 +384,13 @@ printf("%d\n", b.time);
 printf("%d\n", p->time);
 ```
 
-### `enum` Types
+### Kiểu `enum`
 
-Gives you a typed way to have named constant integer values. These can
-be used with `switch()`, or as an array size, or any other place
-constant values are needed.
+Cho bạn cách có kiểu để đặt tên cho các giá trị hằng integer. Chúng
+dùng được với `switch()`, hay làm kích thước mảng, hay ở bất cứ chỗ
+nào cần giá trị hằng.
 
-Names are conventionally capitalized.
+Theo thông lệ, tên viết hoa.
 
 ``` {.c}
 enum animal {
@@ -410,31 +408,32 @@ if (a == CAT)
     printf("The animal is a cat.\n");
 ```
 
-The names have numeric values starting with zero and counting up. (In
-the example above, `DOG` would be `3`.)
+Các tên có giá trị số bắt đầu từ 0 và đếm lên. (Trong ví dụ trên,
+`DOG` sẽ là `3`.)
 
-The numeric value can be overridden by specifying an integer exactly.
-Subsequent values increment from the specified one.
+Có thể ghi đè giá trị số bằng cách chỉ định một số nguyên chính xác.
+Các giá trị sau tăng từ giá trị đã chỉ định đó.
 
 ``` {.c}
 enum animal {
     ANTELOPE = 4,
-    BADGER,         // Will be 5
-    CAT,            // Will be 6
+    BADGER,         // Sẽ là 5
+    CAT,            // Sẽ là 6
     DOG = 3,
-    ELEPHANT,       // Will be 4
-    FISH            // Will be 5
+    ELEPHANT,       // Sẽ là 4
+    FISH            // Sẽ là 5
 };
 ```
 
-As above, duplicate values are not illegal, but might be of marginal
-usefulness.
+Như trên, giá trị trùng không phải là bất hợp pháp, nhưng hữu dụng
+thì cũng chẳng bao.
 
-## Initializers
+## Initializer
 
-You can do this when the variable is defined, but not elsewhere.
+Bạn có thể làm vầy khi biến được định nghĩa, nhưng không được làm ở
+chỗ khác.
 
-Initializing basic types:
+Khởi tạo các kiểu cơ bản:
 
 ``` {.c}
 int x = 12;
@@ -443,25 +442,25 @@ char c = 'a';
 char *s = "Hello, world!";
 ```
 
-Initializing array types:
+Khởi tạo các kiểu mảng:
 
 ``` {.c}
 int a[3] = {1,2,3};
-int a[] = {1,2,3};   // Same as a[3]
+int a[] = {1,2,3};   // Giống a[3]
 
-int a[3] = {1, 2};   // Same as {1, 2, 0}
-int a[3] = {1};      // Same as {1, 0, 0}
-int a[3] = {0};      // Same as {0, 0, 0}
+int a[3] = {1, 2};   // Giống {1, 2, 0}
+int a[3] = {1};      // Giống {1, 0, 0}
+int a[3] = {0};      // Giống {0, 0, 0}
 ```
 
-Initializing pointer types:
+Khởi tạo các kiểu con trỏ:
 
 ``` {.c}
 int q;
 int *p = &q;
 ```
 
-Initializing `struct`s:
+Khởi tạo `struct`:
 
 ``` {.c}
 struct s {
@@ -469,16 +468,16 @@ struct s {
     float b;
 };
 
-struct s x0 = {1, 2.2}; // Initialize fields in order
+struct s x0 = {1, 2.2}; // Khởi tạo các field theo thứ tự
 
-struct s x0 = {.a=1, .b=2.2}; // Initialize fields by name
-struct s x0 = {.b=2.2, .a=1}; // Same thing
+struct s x0 = {.a=1, .b=2.2}; // Khởi tạo các field theo tên
+struct s x0 = {.b=2.2, .a=1}; // Cùng ý nghĩa
 
-struct s x0 = {.b=2.2}; // All other fields initialized to 0
-struct s x0 = {.b=2.2, .a-=0};  // Same thing
+struct s x0 = {.b=2.2}; // Các field còn lại được khởi tạo về 0
+struct s x0 = {.b=2.2, .a-=0};  // Cùng ý nghĩa
 ```
 
-Initializing `union`s:
+Khởi tạo `union`:
 
 ``` {.c}
 union u {
@@ -486,25 +485,25 @@ union u {
     float b;
 };
 
-union u x0 = {1};  // Initialize the first field (a)
+union u x0 = {1};  // Khởi tạo field đầu tiên (a)
 
-union u x0 = {.a=1};  // Initialize fields by name
+union u x0 = {.a=1};  // Khởi tạo field theo tên
 union u x0 = {.b=2.2};
 
-//union u x0 = {1, 2};       // ILLEGAL
-//union u x0 = {.a=1, .b=2};  // ILLEGAL
+//union u x0 = {1, 2};       // BẤT HỢP PHÁP
+//union u x0 = {.a=1, .b=2};  // BẤT HỢP PHÁP
 ```
 
-## Compound Literals
+## Compound Literal
 
-You can declare "unnamed" objects in C. This is often useful for passing
-a `struct` to a function that otherwise doesn't need a name.
+Bạn có thể khai báo object "không tên" trong C. Cái này thường hữu
+dụng khi truyền một `struct` cho hàm mà không cần đặt tên nó.
 
-You use the type name in parens followed by an initializer to make the
+Bạn dùng tên kiểu trong ngoặc, theo sau là một initializer để tạo
 object.
 
-Here's an example of passing a compound literal to a function. Note that
-there's no `struct s` variable in `main()`:
+Đây là ví dụ truyền một compound literal cho hàm. Chú ý không có
+biến `struct s` nào trong `main()`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -520,27 +519,27 @@ int add(struct s x)
 
 int main(void)
 {
-    int t = add((struct s){.a=2, .b=4});  // <-- Here
+    int t = add((struct s){.a=2, .b=4});  // <-- Đây
 
     printf("%d\n", t);
 }
 ```
 
-Compound literals have the lifetime of their scope.
+Compound literal có thời gian sống đúng bằng scope của chúng.
 
-You can also pass a pointer to a compound literal by taking its address:
+Bạn cũng có thể truyền con trỏ tới một compound literal bằng cách
+lấy địa chỉ của nó:
 
 ``` {.c}
 foo(&(struct s){1, 2});
 ```
 
-## Type Aliases
+## Type Alias
 
-You can set up a type alias for convenience or abstraction.
+Bạn có thể dựng type alias cho tiện hoặc để trừu tượng hoá.
 
-Here we'll make a new type called `time_counter` that is just an `int`.
-It can only be used exactly like an `int`. It's just an alias for an
-`int`.
+Ở đây ta sẽ tạo kiểu mới tên `time_counter`, thực ra chỉ là `int`.
+Nó chỉ dùng được hệt như `int`. Nó chỉ là alias của `int`.
 
 ``` {.c}
 typedef int time_counter;
@@ -548,7 +547,7 @@ typedef int time_counter;
 time_counter t = 3490;
 ```
 
-Also works with `struct`s or `union`s:
+Cũng chạy với `struct` hay `union`:
 
 ``` {.c}
 struct foo {
@@ -558,10 +557,10 @@ struct foo {
 
 typedef struct foo funtype;
 
-funtype f = {1, 2}; // "funtype" is an alias for "struct foo";
+funtype f = {1, 2}; // "funtype" là alias của "struct foo";
 ```
 
-It also works inline, and with named or unnamed `struct`s or `union`s:
+Nó cũng chạy inline, với `struct` hay `union` có tên hoặc không tên:
 
 ``` {.c}
 typedef struct {
@@ -569,18 +568,17 @@ typedef struct {
     float baz;
 } funtype;
 
-funtype f = {1, 2}; // "funtype" is an alias for the unnamed struct
+funtype f = {1, 2}; // "funtype" là alias cho struct không tên
 ```
 
-## Additional Type-Related Specifiers
+## Specifier khác liên quan đến kiểu
 
-You can give the compiler more hints about what qualities a type should
-have using these specifiers and qualifiers.
+Bạn có thể cho compiler nhiều gợi ý hơn về tính chất mà một kiểu nên
+có thông qua các specifier và qualifier này.
 
-### Storage Class Specifiers
+### Storage Class Specifier
 
-These can be placed before a type to provide more guidance about how the
-type is used.
+Chúng có thể đặt trước một kiểu để chỉ dẫn thêm về cách dùng kiểu đó.
 
 ``` {.c}
 auto int a
@@ -590,29 +588,28 @@ extern int a
 thread_local int a
 ```
 
-`auto` is the default, so it's basically never used. Indicates automatic
-storage duration (things like local variables get freed automatically
-when they fall out of scope). In C23 this keyword changes to indicate
-type inference like C++.
+`auto` là mặc định, nên về cơ bản chẳng ai dùng. Nó chỉ ra storage
+duration tự động (những thứ như biến local được tự động giải phóng
+khi hết scope). Trong C23 keyword này đổi nghĩa thành "suy luận
+kiểu" kiểu C++.
 
-`register` indicates that accessing this variable should be as quick as
-possible. Restricts some usage of the variable giving the compiler a
-chance to optimize. Rare in daily use.
+`register` chỉ ra rằng việc truy cập biến này nên càng nhanh càng
+tốt. Nó hạn chế một số cách dùng biến để compiler có cơ hội tối ưu.
+Ít gặp trong công việc hàng ngày.
 
-`static` at function scope indicates that this variable's value should
-persist from call to call. At file scope indicates that this variable
-should not be visible outside of this source file.
+`static` ở function scope chỉ ra giá trị biến này nên tồn tại qua
+các lần gọi. Ở file scope nó chỉ ra biến này không nên visible ngoài
+file nguồn này.
 
-`extern` indicates that this variable refers to one declared in another
-source file.
+`extern` chỉ ra biến này tham chiếu tới một biến được khai báo ở
+file nguồn khác.
 
-`_Thread_local` means that every thread gets its own copy of this
-variable. You can use `thread_local` if you include `<threads.h>`.
+`_Thread_local` nghĩa là mỗi thread có bản copy riêng của biến này.
+Bạn có thể dùng `thread_local` nếu include `<threads.h>`.
 
-### Type Qualifiers
+### Type Qualifier
 
-These can be placed before a type to provide more guidance about how the
-type is used.
+Chúng có thể đặt trước một kiểu để chỉ dẫn thêm về cách dùng kiểu đó.
 
 ``` {.c}
 const int a
@@ -624,104 +621,101 @@ volatile int a
 atomic int a
 ```
 
-`const` means the value can't be modified. You can use it with pointers,
-as well:
+`const` nghĩa là giá trị không được sửa. Bạn cũng có thể dùng với
+con trỏ:
 
 ``` {.c}
-const int a = 10;        // Can't modify "a"
+const int a = 10;        // Không sửa được "a"
 
-const int *p = &b        // Can't modify the thing "p" points to ("b")
-int *const p = &b        // Can't modify "p"
-const int *const p = &b  // Can't modify "p" or the thing it points to
+const int *p = &b        // Không sửa được thứ "p" trỏ tới ("b")
+int *const p = &b        // Không sửa được "p"
+const int *const p = &b  // Không sửa được cả "p" lẫn thứ nó trỏ tới
 ```
 
-`restrict` on a pointer means that there will only be one pointer to the
-item in question, freeing the compiler to make some optimizations.
+`restrict` trên con trỏ nghĩa là sẽ chỉ có một con trỏ trỏ tới item
+đó, cho compiler tự do hơn để tối ưu.
 
-`volatile` indicates that the value in a variable might change at any
-time and should be loaded from memory instead of being kept in a
-register. Usually used with memory-mapped hardware.
+`volatile` chỉ ra giá trị trong biến có thể thay đổi bất cứ lúc
+nào, và nên được load từ bộ nhớ thay vì giữ trong register. Thường
+dùng với phần cứng memory-mapped.
 
-`_Atomic` (or `atomic` if you include `<stdatomic.h>`) tells the
-compiler that reads or writes to this type should happen atomically.
-(This might be accomplished with a lock depending on the platform and
-type.)
+`_Atomic` (hoặc `atomic` nếu bạn include `<stdatomic.h>`) bảo
+compiler rằng việc đọc hoặc ghi kiểu này phải xảy ra atomic. (Việc
+này có thể được thực hiện bằng lock, tuỳ platform và kiểu.)
 
-#### C23 Qualified Pseudo-Types: `QVoid*`, `QChar*`, etc.
+#### Pseudo-Type có qualifier của C23: `QVoid*`, `QChar*`, v.v.
 
-There are some generic functions in C23 that will return a
-`const`-qualified type if one of the parameters is `const`, but not
-otherwise.
+Trong C23 có một số hàm generic sẽ trả về kiểu đã được
+`const`-qualify nếu một trong các tham số là `const`, và không như
+vậy trong các trường hợp khác.
 
-The spec makes up a fake type for this, with a `Q` at the front (for
-"qualified"). This is not a real type and will not compile---it's just
-for documentation purposes.
+Spec tự chế một kiểu giả cho mục đích này, với chữ `Q` đằng trước
+(cho "qualified"). Đây không phải kiểu thật và sẽ không compile
+được, chỉ để làm tài liệu.
 
-These pseudotypes are:
+Các pseudo-type này là:
 
 * `QVoid *`
 * `QChar *`
 * `QWchar_t *`
 
-For example, the `strchr()` function, which searches a string for a
-character, has this prototype in the spec:
+Ví dụ, hàm `strchr()`, tìm một ký tự trong chuỗi, có prototype thế
+này trong spec:
 
 ``` {.c}
 QChar *strchr(QChar *s, int c);
 ```
 
-What is it? It basically means that if `s` is type `const char *`, then
-the return type of the function will also be `const char *`.
+Nó là gì? Nó có nghĩa là nếu `s` có kiểu `const char *`, thì kiểu
+trả về của hàm cũng sẽ là `const char *`.
 
-If `s` is merely `char *`, the return type of the function will merely
-be `char *`.
+Nếu `s` chỉ là `char *`, thì kiểu trả về của hàm cũng chỉ là
+`char *`.
 
-In other words, the `const`-ness of `s` is preserved in the return
-value.
+Nói cách khác, tính `const` của `s` được giữ nguyên ở giá trị trả
+về.
 
-Another way to look at it is that this:
+Nhìn kiểu khác, thì dòng này:
 
 ``` {.c}
 QChar *strchr(QChar *s, int c);
 ```
 
-is the same as:
+tương đương với:
 
 ``` {.c}
 char *strchr(char *s, int c);
 const char *strchr(const char *s, int c);
 ```
 
-The TLDR is when you see this, drop the leading `Q` and change the next
-letter to lowercase and you're there.
+Tóm lại khi bạn thấy cái này, bỏ `Q` đầu đi rồi đổi chữ tiếp theo
+thành chữ thường là xong.
 
-### Function Specifiers
+### Function Specifier
 
-These are used on functions to provide additional guidance for the
-compiler.
+Được dùng trên hàm để chỉ dẫn thêm cho compiler.
 
-`_Noreturn` indicates that a function will never return. It can only run
-forever or exit the program entirely. If you include `<stdnoreturn.h>`,
-you can use `noreturn` instead.
+`_Noreturn` chỉ ra rằng một hàm sẽ không bao giờ return. Nó chỉ có
+thể chạy mãi hoặc thoát hẳn chương trình. Nếu bạn include
+`<stdnoreturn.h>`, bạn có thể dùng `noreturn` thay thế.
 
-`inline` indicates that calls to this function should be as fast as
-possible. The intention here is that the code of the function be moved
-_inline_ to remove the overhead of the call and return. The compiler
-regards `inline` as a suggestion, not a requirement.
+`inline` chỉ ra rằng các lời gọi hàm này nên càng nhanh càng tốt. Ý
+định là code của hàm được dời _inline_ để bỏ overhead của lời gọi
+và return. Compiler coi `inline` là gợi ý, không phải yêu cầu.
 
 ### Alignment Specifier
 
-You can force the alignment of a variable with memory with `_Alignas`.
-If you include `<stdalign.h>` you can use `alignas` instead.
+Bạn có thể ép alignment của một biến trong bộ nhớ bằng `_Alignas`.
+Nếu bạn include `<stdalign.h>` bạn có thể dùng `alignas` thay thế.
 
-`alignas(0)` has no effect.
+`alignas(0)` không có tác dụng gì.
 
 ``` {.c}
-alignas(16) int a = 12;    // 16-byte alignment
-alignas(long) int b = 34;  // Same alignment as "long"
+alignas(16) int a = 12;    // alignment 16-byte
+alignas(long) int b = 34;  // cùng alignment với "long"
 ```
 
-## `if` Statement
+## Câu lệnh `if`
 
 ``` {.c}
 if (boolean_expression) code;
@@ -750,19 +744,19 @@ if (boolean_expression) {
 }
 ```
 
-## `for` Statement
+## Câu lệnh `for`
 
-Classic `for`-loop.
+Vòng `for` cổ điển.
 
-The bit in parens comes in three parts separated by semicolons:
+Phần trong ngoặc gồm ba phần phân cách bằng dấu chấm phẩy:
 
-* Initialization, executed once.
-* Block entry condition, evaluated every time before entering the loop
-  body.
-* Post expression, evaluated every time after the loop body.
+* Khởi tạo, chạy một lần.
+* Điều kiện vào block, được đánh giá trước mỗi lần vào thân vòng
+  lặp.
+* Biểu thức post, đánh giá sau mỗi lần chạy thân vòng lặp.
 
-For example, initialize `i` to `0`, enter the loop body while `i < 10`,
-and then increment `i` after each loop iteration:
+Ví dụ, khởi tạo `i` về `0`, vào thân vòng lặp khi `i < 10`, và tăng
+`i` sau mỗi vòng lặp:
 
 ``` {.c}
 for (i = 0; i < 10; i++) {
@@ -772,7 +766,8 @@ for (i = 0; i < 10; i++) {
 }
 ```
 
-You can declare loop-local variables by specifying their type:
+Bạn có thể khai báo biến cục bộ trong vòng lặp bằng cách chỉ định
+kiểu:
 
 ``` {.c}
 for (int i = 0; i < 10; i++) {
@@ -781,7 +776,7 @@ for (int i = 0; i < 10; i++) {
 }
 ```
 
-You can separate parts of the expressions with the comma operator:
+Bạn có thể phân tách các phần của biểu thức bằng toán tử dấu phẩy:
 
 ``` {.c}
 for (i = 0, j = 5; i < 10; i++, j *= 3) {
@@ -790,10 +785,10 @@ for (i = 0, j = 5; i < 10; i++, j *= 3) {
 }
 ```
 
-## `while` Statement
+## Câu lệnh `while`
 
-This loop won't enter if the Boolean expression is false. The
-continuation test happens before the loop.
+Vòng lặp này sẽ không vào nếu biểu thức Boolean là false. Kiểm tra
+điều kiện tiếp tục xảy ra trước thân vòng lặp.
 
 ``` {.c}
 while (boolean_expression) code;
@@ -804,10 +799,11 @@ while (boolean_expression) {
 }
 ```
 
-## `do`-`while` Statement
+## Câu lệnh `do`-`while`
 
-This loop will run at least once even if the Boolean expression is
-false. The continuation test doesn't happen until after the loop.
+Vòng lặp này sẽ chạy ít nhất một lần ngay cả khi biểu thức Boolean
+là false. Kiểm tra điều kiện tiếp tục không xảy ra cho đến sau thân
+vòng lặp.
 
 ``` {.c}
 
@@ -819,13 +815,13 @@ do {
 } while (boolean_expression);
 ```
 
-## `switch` Statement
+## Câu lệnh `switch`
 
-Performs actions based on the value of an expression. The cases that it
-is compared against must be constant values.
+Thực hiện hành động dựa trên giá trị của một biểu thức. Các case so
+khớp phải là giá trị hằng.
 
-If the optional `default` is present, that code is executed if none of
-the cases match. Braces are not required around the cases.
+Nếu có `default` tuỳ chọn, code đó được chạy khi không case nào
+khớp. Không bắt buộc có ngoặc nhọn quanh các case.
 
 ``` {.c}
 switch (expression) {
@@ -845,11 +841,11 @@ switch (expression) {
 }
 ```
 
-The final `break` in the `switch` is unnecessary if there are no cases
-after it.
+`break` cuối trong `switch` là không cần thiết nếu không còn case
+nào sau nó.
 
-If the `break` isn't present, the `case` falls through to the next one.
-It's nice to put a comment to that effect so other devs don't hate you.
+Nếu `break` không có, `case` rơi qua case kế tiếp. Nên ghi comment
+cho chuyện đó để các dev khác không ghét bạn.
 
 ``` {.c}
 switch (expression) {
@@ -864,10 +860,10 @@ switch (expression) {
 }
 ```
 
-## `break` Statement
+## Câu lệnh `break`
 
-This breaks out of a `switch` case, but it also can break out of any
-loop.
+Lệnh này thoát khỏi một case trong `switch`, nhưng cũng có thể thoát
+khỏi bất kỳ vòng lặp nào.
 
 ``` {.c}
 while (boolean_expression) {
@@ -880,10 +876,10 @@ while (boolean_expression) {
 }
 ```
 
-## `continue` Statement
+## Câu lệnh `continue`
 
-This can be used to short-circuit a loop and go to the next continuation
-condition test without completing the body of the loop.
+Có thể dùng để short-circuit một vòng lặp và đi tới kiểm tra điều
+kiện tiếp theo mà không hoàn tất thân vòng lặp.
 
 ``` {.c}
 while (boolean_expression) {
@@ -893,25 +889,24 @@ while (boolean_expression) {
     if (boolean_expression_2)
         continue;
 
-    // If boolean_expression_2, code down here will be skipped:
+    // Nếu boolean_expression_2, code dưới đây sẽ bị bỏ qua:
 
     code;
     code;
 }
 ```
 
-## `goto` Statement
+## Câu lệnh `goto`
 
-You can just jump anywhere within a function with `goto`. (You can't
-`goto` between functions, only within the same function as the `goto`.)
+Bạn có thể nhảy đến bất kỳ đâu trong một hàm bằng `goto`. (Bạn không
+thể `goto` giữa các hàm, chỉ trong cùng hàm với `goto`.)
 
-The destination of the `goto` is a _label_, which is an identifier
-followed by a colon (`:`). Labels are typically left-justified all the
-way to the margin to make them visually stand out.
+Đích của `goto` là một _label_, là một identifier theo sau là dấu
+hai chấm (`:`). Label thường được canh sát lề trái để dễ nhìn.
 
 ``` {.c}
 {
-    // Abusive demo code that should be a while loop
+    // Code minh hoạ kiểu lạm dụng mà đáng lẽ phải là vòng while
 
     int i = 0;
 
@@ -924,19 +919,18 @@ loop:
 }
 ```
 
-## `return` Statement
+## Câu lệnh `return`
 
-This is how you get back from a function. You can `return` multiple
-times or just once.
+Đây là cách bạn về từ một hàm. Bạn có thể `return` nhiều lần hoặc
+chỉ một lần.
 
-If a function with `void` return type falls off the end, the `return` is
-implicit.
+Nếu một hàm kiểu trả về `void` chạy hết, `return` là ngầm định.
 
-If the return type is not `void`, the `return` statement must specify a
-return value of the same type.
+Nếu kiểu trả về không phải `void`, câu lệnh `return` phải chỉ định
+giá trị trả về cùng kiểu.
 
-Parentheses around the return value are not necessary (as it's a
-statement, not a function).
+Không cần ngoặc quanh giá trị return (vì đây là câu lệnh, không phải
+hàm).
 
 ``` {.c}
 int increment(int a)
@@ -945,24 +939,24 @@ int increment(int a)
 }
 ```
 
-## `_Static_assert` Statement
+## Câu lệnh `_Static_assert`
 
-This is a way to prevent _compilation_ of a program if a certain
-constant condition is not met.
+Đây là cách ngăn _compilation_ một chương trình nếu một điều kiện
+hằng nào đó không thoả.
 
 ``` {.c}
 _Static_assert(__STDC_VERSION__ >= 201112L, "You need at least C11!")
 ```
 
-## Functions
+## Hàm
 
-You need to specify the return type and parameter types for the
-function, and the body goes in a block afterward.
+Bạn cần chỉ định kiểu trả về và kiểu tham số cho hàm, thân hàm đặt
+trong block sau đó.
 
-Variables in the function are local to that function.
+Biến trong hàm là local với hàm đó.
 
 ``` {.c}
-// Function that adds two numbers
+// Hàm cộng hai số
 
 int add(int x, int y)
 {
@@ -972,11 +966,11 @@ int add(int x, int y)
 }
 ```
 
-Functions that return nothing should be return type `void`. Functions
-that accept no parameters should have `void` as the parameter list.
+Hàm không return gì nên có kiểu trả về `void`. Hàm không nhận tham
+số nên có `void` làm danh sách tham số.
 
 ``` {.c}
-// All side effects, all the time!
+// Toàn tác dụng phụ, mọi lúc!
 
 void foo(void)
 {
@@ -985,36 +979,35 @@ void foo(void)
 }
 ```
 
-### `main()` Function
+### Hàm `main()`
 
-This is the function that runs when you first start the program. It will
-be one of these forms:
+Đây là hàm chạy khi bạn bắt đầu chương trình. Nó sẽ ở một trong các
+dạng sau:
 
 ``` {.c}
 int main(void)
 int main(int argc, char *argv[])
 ```
 
-The first form ignores all command line parameters.
+Dạng đầu bỏ qua mọi tham số command line.
 
-The second form stores the count of the command line parameters in
-`argc`, and stores the parameters themselves as an array of strings in
-`argv`. The first of these, `argv[0]`, is typically the name of the
-executable. The last `argv` pointer has the value `NULL`.
+Dạng thứ hai lưu số lượng tham số command line vào `argc`, và lưu
+chính các tham số đó thành mảng chuỗi trong `argv`. Cái đầu tiên,
+`argv[0]`, thường là tên của file thực thi. Con trỏ `argv` cuối cùng
+có giá trị `NULL`.
 
-The return values usually show up as exit status codes in the OS.
-If there is no `return`, falling off the end of `main()` is an implied
-`return 0`^[Note that this implication only for `main()`, and not for
-any other functions.].
+Giá trị trả về thường xuất hiện thành exit status code trong OS.
+Nếu không có `return`, chạy hết `main()` được ngầm coi là
+`return 0`^[Lưu ý ngầm định này chỉ áp dụng cho `main()`, không áp
+dụng cho bất cứ hàm nào khác.].
 
-### Variadic Functions
+### Hàm Variadic
 
-Some functions can take a variable number of arguments. Every function
-must have at least one argument. The remaining arguments are specified
-by `...` and can be read with the `va_start()`, `va_arg()`, and
-`va_end()` macros.
+Một số hàm có thể nhận số lượng tham số biến đổi. Mọi hàm đều phải
+có ít nhất một tham số. Các tham số còn lại được chỉ định bằng `...`
+và có thể đọc qua các macro `va_start()`, `va_arg()`, và `va_end()`.
 
-Here's an example that adds up a variable number of integer values.
+Đây là ví dụ cộng số lượng biến đổi các giá trị integer.
 
 ``` {.c}
 int add(int count, ...)
@@ -1022,15 +1015,15 @@ int add(int count, ...)
     int total = 0;
     va_list va;
 
-    va_start(va, count);   // Start with arguments after "count"
+    va_start(va, count);   // Bắt đầu với tham số sau "count"
 
     for (int i = 0; i < count; i++) {
-        int n = va_arg(va, int);   // Get the next int
+        int n = va_arg(va, int);   // Lấy int kế tiếp
 
         total += n;
     }
 
-    va_end(va);  // All done
+    va_end(va);  // Xong
 
     return total;
 }
