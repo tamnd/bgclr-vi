@@ -3,13 +3,13 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<limits.h>` Numeric Limits {#limits}
+# `<limits.h>` Giới Hạn Số {#limits}
 
 [i[`limits.h` header file]i]
 
-Important note: the "minimum magnitude" in the table below is the
-minimum allowed by the spec. It's very likely that the values on your
-bad-ass system exceed those, below.
+Lưu ý quan trọng: "minimum magnitude" (độ lớn tối thiểu) trong bảng
+bên dưới là giá trị tối thiểu mà spec yêu cầu. Rất có khả năng giá
+trị trên hệ thống xịn xò của bạn còn vượt xa những con số đó.
 
 [i[`CHAR_BIT` macro]i]
 [i[`SCHAR_MIN` macro]i]
@@ -31,42 +31,42 @@ bad-ass system exceed those, below.
 [i[`LLONG_MAX` macro]i]
 [i[`ULLONG_MAX` macro]i]
 
-|Macro|Minimum Magnitude|Description|
+|Macro|Độ lớn tối thiểu|Mô tả|
 |-----|----------|-----------------------|
-|`CHAR_BIT`|`8`|Number of bits in a byte|
-|`SCHAR_MIN`|`-127`|Minimum value of a `signed char`|
-|`SCHAR_MAX`|`127`|Maximum value of a `signed char`|
-|`UCHAR_MAX`|`255`|Maximum value of an `unsigned char`^[The minimum value of an `unsigned char` is `0`. Same fo an `unsigned short` and `unsigned long`. Or any unsigned type, for that matter.]|
-|`CHAR_MIN`|`0` or `SCHAR_MIN`|More detail below|
-|`CHAR_MAX`|`SCHAR_MAX` or `UCHAR_MAX`|More detail below|
-|`MB_LEN_MAX`|`1`|Maximum number of bytes in a multibyte character on any locale|
-|`SHRT_MIN`|`-32767`|Minimum value of a `short`|
-|`SHRT_MAX`|`32767`|Maximum value of a `short`|
-|`USHRT_MAX`|`65535`|Maximum value of an `unsigned short`|
-|`INT_MIN`|`-32767`|Minimum vale of an `int`|
-|`INT_MAX`|`32767`|Maximum value of an `int`|
-|`UINT_MAX`|`65535`|Maximum value of an `unsigned int`|
-|`LONG_MIN`|`-2147483647`|Minimum value of a `long`|
-|`LONG_MAX`|`2147483647`|Maximum value of a `long`|
-|`ULONG_MAX`|`4294967295`|Maximum value of an `unsigned long`|
-|`LLONG_MIN`|`-9223372036854775807`|Minimum value of a `long long`|
-|`LLONG_MAX`|`9223372036854775807`|Maximum value of a `long long`|
-|`ULLONG_MAX`|`18446744073709551615`|Maximum value of an `unsigned long long`|
+|`CHAR_BIT`|`8`|Số bit trong một byte|
+|`SCHAR_MIN`|`-127`|Giá trị nhỏ nhất của `signed char`|
+|`SCHAR_MAX`|`127`|Giá trị lớn nhất của `signed char`|
+|`UCHAR_MAX`|`255`|Giá trị lớn nhất của `unsigned char`^[Giá trị nhỏ nhất của `unsigned char` là `0`. Với `unsigned short` và `unsigned long` cũng vậy. Hay bất kỳ kiểu unsigned nào, cũng thế.]|
+|`CHAR_MIN`|`0` hoặc `SCHAR_MIN`|Xem chi tiết bên dưới|
+|`CHAR_MAX`|`SCHAR_MAX` hoặc `UCHAR_MAX`|Xem chi tiết bên dưới|
+|`MB_LEN_MAX`|`1`|Số byte tối đa trong một ký tự multibyte ở bất cứ locale nào|
+|`SHRT_MIN`|`-32767`|Giá trị nhỏ nhất của `short`|
+|`SHRT_MAX`|`32767`|Giá trị lớn nhất của `short`|
+|`USHRT_MAX`|`65535`|Giá trị lớn nhất của `unsigned short`|
+|`INT_MIN`|`-32767`|Giá trị nhỏ nhất của `int`|
+|`INT_MAX`|`32767`|Giá trị lớn nhất của `int`|
+|`UINT_MAX`|`65535`|Giá trị lớn nhất của `unsigned int`|
+|`LONG_MIN`|`-2147483647`|Giá trị nhỏ nhất của `long`|
+|`LONG_MAX`|`2147483647`|Giá trị lớn nhất của `long`|
+|`ULONG_MAX`|`4294967295`|Giá trị lớn nhất của `unsigned long`|
+|`LLONG_MIN`|`-9223372036854775807`|Giá trị nhỏ nhất của `long long`|
+|`LLONG_MAX`|`9223372036854775807`|Giá trị lớn nhất của `long long`|
+|`ULLONG_MAX`|`18446744073709551615`|Giá trị lớn nhất của `unsigned long long`|
 
-## `CHAR_MIN` and `CHAR_MAX`
+## `CHAR_MIN` và `CHAR_MAX`
 
-When it comes to the `CHAR_MIN` and `CHAR_MAX` macros, it all depends on
-if your `char` type is signed or unsigned by default. Remember that C
-leaves that up to the implementation? No? Well, it does.
+Với `CHAR_MIN` và `CHAR_MAX`, mọi thứ phụ thuộc vào việc kiểu `char`
+mặc định trên hệ bạn là signed hay unsigned. Nhớ là C để tùy
+implementation quyết định chuyện đó chứ? Không nhớ? Thật đấy.
 
-So if it's signed, the values of `CHAR_MIN` and `CHAR_MAX` are the same
-as `SCHAR_MIN` and `SCHAR_MAX`.
+Vậy nếu nó là signed, `CHAR_MIN` và `CHAR_MAX` có giá trị giống như
+`SCHAR_MIN` và `SCHAR_MAX`.
 
-And if it's unsigned, the values of `CHAR_MIN` and `CHAR_MAX` are the
-same as `0` and `UCHAR_MAX`.
+Còn nếu nó là unsigned, `CHAR_MIN` và `CHAR_MAX` giống `0` và
+`UCHAR_MAX`.
 
-Side benefit: you can tell at runtime if the system has signed or
-unsigned chars by checking to see if `CHAR_MIN` is `0`.
+Tiện thể: bạn có thể biết lúc runtime hệ có `char` signed hay
+unsigned bằng cách kiểm tra xem `CHAR_MIN` có bằng `0` không.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -78,38 +78,39 @@ int main(void)
 }
 ```
 
-On my system, `char`s are signed.
+Trên hệ của tôi, `char` là signed.
 
-## Choosing the Correct Type
+## Chọn Kiểu Cho Đúng
 
-If you want to be super portable, choose a type you know will be at
-least as big as you need by the table, above.
+Nếu bạn muốn siêu portable, hãy chọn một kiểu mà bảng bên trên đảm
+bảo ít nhất đủ to như bạn cần.
 
-That said, a lot of code, for better or (likely) worse, assumes `int`s
-are 32-bits, when in actuality it's only guaranteed to be 16.
+Nói vậy chứ, khá nhiều code---vì tốt hơn hoặc (khả năng cao hơn)
+tệ hơn---giả định rằng `int` là 32-bit, trong khi thực ra spec chỉ
+đảm bảo 16-bit thôi.
 
-If you need a guaranteed bit size, check out the `int_leastN_t` types in
-[`<stdint.h>`](#stdint).
+Nếu bạn cần kích thước bit được đảm bảo, xem các kiểu `int_leastN_t`
+trong [`<stdint.h>`](#stdint).
 
-## Whither Two's Complement?
+## Còn Two's Complement Thì Sao?
 
-If you were looking closely and have _a priori_ knowledge of the matter,
-you might have thought I erred in the minimum values of the macros,
-above.
+Nếu bạn tinh mắt và lại có hiểu biết sẵn về chủ đề này, bạn có thể
+đã nghĩ tôi viết sai giá trị nhỏ nhất của các macro bên trên.
 
-"`short` goes from `32767` to `-32767`? Shouldn't it go to `-32768?`"
+"`short` đi từ `32767` tới `-32767`? Chẳng phải nó phải tới `-32768`
+à?"
 
-No, I have it right. The spec list the minimum magnitudes for those
-macros, and some old-timey systems might have used a different encoding
-for their signed values that could only go that far.
+Không, tôi viết đúng rồi. Spec liệt kê độ lớn tối thiểu cho các
+macro đó, và một số hệ thống cổ lỗ có thể đã dùng cách encode khác
+cho số signed mà chỉ đi xa được tới đó.
 
-Virtually every modern system uses [flw[Two's
-Complement|Two%27s_complement]] for signed numbers, and those would go
-from `32767` to `-32768` for a `short`. Your system probably does, too.
+Hầu như mọi hệ thống hiện đại đều dùng [flw[Two's
+Complement|Two%27s_complement]] (bù hai) cho số signed, và với kiểu
+đó `short` sẽ đi từ `32767` tới `-32768`. Hệ của bạn chắc cũng vậy.
 
-## Demo Program
+## Chương Trình Demo
 
-Here's a program to print out the values of the macros:
+Đây là chương trình in ra giá trị các macro:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -139,7 +140,7 @@ int main(void)
 }
 ```
 
-On my 64-bit Intel system with clang, this outputs:
+Trên hệ Intel 64-bit của tôi với clang, output là:
 
 ``` {.default}
 CHAR_BIT = 8
@@ -163,5 +164,5 @@ LLONG_MAX = 9223372036854775807
 ULLONG_MAX = 18446744073709551615
 ```
 
-Looks like my system probably uses two's-complement encoding for signed
-numbers, my `char`s are signed, and my `int`s are 32-bit.
+Có vẻ hệ của tôi dùng encoding two's-complement cho số signed,
+`char` là signed, và `int` là 32-bit.
