@@ -3,15 +3,15 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<complex.h>` Complex Number Functionality {#complex}
+# `<complex.h>` Chức năng Số phức {#complex}
 
 [i[`complex.h` header file]i]
 
-The complex functions in this reference section come in three flavors
-each: `double complex`, `float complex`, and `long double complex`.
+Các hàm số phức trong phần tham chiếu này đều có ba phiên bản: `double
+complex`, `float complex`, và `long double complex`.
 
-The `float` variants end with `f` and the `long double` variants end
-with `l`, e.g. for complex cosine:
+Biến thể `float` kết thúc bằng `f` còn biến thể `long double` kết thúc
+bằng `l`, ví dụ với cosine của số phức:
 
 ``` {.c}
 ccos()   double complex
@@ -19,42 +19,41 @@ ccosf()  float complex
 ccosl()  long double complex
 ```
 
-The table below only lists the `double complex` version for brevity.
+Bảng dưới chỉ liệt kê phiên bản `double complex` cho gọn.
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`cabs()`](#man-cabs)|Compute the complex absolute value|
-|[`cacos()`](#man-cacos)|Compute the complex arc-cosine|
-|[`cacosh()`](#man-cacosh)|Compute the complex arc hyperbolic cosine|
-|[`carg()`](#man-carg)|Compute the complex argument|
-|[`casin()`](#man-casin)|Compute the complex arc-sine|
-|[`casinh()`](#man-casinh)|Compute the complex arc hyperbolic sine|
-|[`catan()`](#man-catan)|Compute the complex arc-tangent|
-|[`catanh()`](#man-catanh)|Compute the complex arc hyperbolic tangent|
-|[`ccos()`](#man-ccos)|Compute the complex cosine|
-|[`ccosh()`](#man-ccosh)|Compute the complex hyperbolic cosine|
-|[`cexp()`](#man-cexp)|Compute the complex base-$e$ exponential|
-|[`cimag()`](#man-cimag)|Returns the imaginary part of a complex number|
-|[`clog()`](#man-clog)|Compute the complex logarithm|
-|[`CMPLX()`](#man-CMPLX)|Build a complex value from real and imaginary types|
-|[`conj()`](#man-conj)|Compute the conjugate of a complex number|
-|[`cproj()`](#man-cproj)|Compute the projection of a complex number|
-|[`creal()`](#man-creal)|Returns the real part of a complex number|
-|[`csin()`](#man-csin)|Compute the complex sine|
-|[`csinh()`](#man-csinh)|Compute the complex hyperbolic sine|
-|[`csqrt()`](#man-csqrt)|Compute the complex square root|
-|[`ctan()`](#man-ctan)|Compute the complex tangent|
-|[`ctanh()`](#man-ctanh)|Compute the complex hyperbolic tangent|
+|[`cabs()`](#man-cabs)|Tính giá trị tuyệt đối của số phức|
+|[`cacos()`](#man-cacos)|Tính arc-cosine phức|
+|[`cacosh()`](#man-cacosh)|Tính arc hyperbolic cosine phức|
+|[`carg()`](#man-carg)|Tính argument phức|
+|[`casin()`](#man-casin)|Tính arc-sine phức|
+|[`casinh()`](#man-casinh)|Tính arc hyperbolic sine phức|
+|[`catan()`](#man-catan)|Tính arc-tangent phức|
+|[`catanh()`](#man-catanh)|Tính arc hyperbolic tangent phức|
+|[`ccos()`](#man-ccos)|Tính cosine phức|
+|[`ccosh()`](#man-ccosh)|Tính hyperbolic cosine phức|
+|[`cexp()`](#man-cexp)|Tính hàm mũ cơ số $e$ phức|
+|[`cimag()`](#man-cimag)|Trả về phần ảo của một số phức|
+|[`clog()`](#man-clog)|Tính logarithm phức|
+|[`CMPLX()`](#man-CMPLX)|Dựng một giá trị phức từ kiểu thực và ảo|
+|[`conj()`](#man-conj)|Tính liên hợp của một số phức|
+|[`cproj()`](#man-cproj)|Tính phép chiếu của một số phức|
+|[`creal()`](#man-creal)|Trả về phần thực của một số phức|
+|[`csin()`](#man-csin)|Tính sine phức|
+|[`csinh()`](#man-csinh)|Tính hyperbolic sine phức|
+|[`csqrt()`](#man-csqrt)|Tính căn bậc hai phức|
+|[`ctan()`](#man-ctan)|Tính tangent phức|
+|[`ctanh()`](#man-ctanh)|Tính hyperbolic tangent phức|
 
-You can test for complex number support by looking at the
-[i[`__STDC_NO_COMPLEX__`]i] `__STDC_NO_COMPLEX__` macro. If it's
-defined, complex numbers aren't available.
+Bạn có thể kiểm tra hỗ trợ số phức bằng cách xem macro
+[i[`__STDC_NO_COMPLEX__`]i] `__STDC_NO_COMPLEX__`. Nếu nó được định
+nghĩa, tức là số phức không có sẵn.
 
-There are possibly two types of numbers defined: _complex_ and
-_imaginary_. No system I'm currently aware of implements imaginary
-types.
+Có thể có hai loại số được định nghĩa: _complex_ và _imaginary_. Hiện
+tôi không biết hệ thống nào hiện thực kiểu imaginary cả.
 
-The complex types, which are a real value plus a multiple of $i$, are:
+Các kiểu complex, tức một giá trị thực cộng với bội của $i$, là:
 
 [i[`float complex` type]i]
 [i[`double complex` type]i]
@@ -66,7 +65,7 @@ double complex
 long double complex
 ```
 
-The imaginary types, which hold a multiple of $i$, are:
+Các kiểu imaginary, tức chỉ chứa bội của $i$, là:
 
 [i[`float imaginary` type]i]
 [i[`double imaginary` type]i]
@@ -79,75 +78,73 @@ long double imaginary
 ```
 
 
-The mathematical value $i=\sqrt{-1}$ is represented by the symbol
-[i[`_Complex_I` macro]i] `_Complex_I` or [i[`_Imaginary_I`
-macro]i]`_Imaginary_I`, if it exists.
+Giá trị toán học $i=\sqrt{-1}$ được biểu diễn bằng ký hiệu
+[i[`_Complex_I` macro]i] `_Complex_I` hoặc [i[`_Imaginary_I`
+macro]i]`_Imaginary_I`, nếu có.
 
 <!-- __ hackishly turn off the italic syntax highlighting -->
 
-The The macro [i[`I` macro]i] `I` will be preferentially set to
-`_Imaginary_I` (if it exists), or to `_Complex_I` otherwise.
+Macro [i[`I` macro]i] `I` sẽ được ưu tiên đặt thành `_Imaginary_I`
+(nếu có), hoặc là `_Complex_I` nếu không.
 
-You can write imaginary literals (if supported) using this notation:
+Bạn có thể viết literal ảo (nếu được hỗ trợ) theo cú pháp này:
 
 ``` {.c}
 double imaginary x = 3.4 * I;
 ```
 
-You can write complex literals using regular complex notation:
+Bạn có thể viết literal phức bằng ký pháp phức thông thường:
 
 ``` {.c}
 double complex x = 1.2 + 3.4 * I;
 ```
 
-or build them with the `CMPLX()` macro:
+hoặc dựng chúng bằng macro `CMPLX()`:
 
 ``` {.c}
-double complex x = CMPLX(1.2, 3.4);  // Like 1.2 + 3.4 * I
+double complex x = CMPLX(1.2, 3.4);  // Giống 1.2 + 3.4 * I
 ```
 
-The latter has the advantage of handing special cases of complex numbers
-correctly (like those involving infinity or signed zeroes) as if
-`_Imaginary_I` were present, even if it's not.
+Cách sau có lợi thế là xử lý đúng các trường hợp đặc biệt của số phức
+(như những trường hợp dính vô cùng hoặc số không có dấu) như thể
+`_Imaginary_I` đang có mặt, dù thực ra không có.
 
-All angular values are in radians.
+Mọi giá trị góc đều tính bằng radian.
 
-Some functions have discontinuities called _branch cuts_. Now, I'm no
-mathematician so I can't really talk sensibly about this, but if you're
-here, I like to think you know what you're doing when it comes to this
-side of things.
+Một số hàm có các điểm gián đoạn gọi là _branch cut_ (nhát cắt nhánh).
+Thú thật tôi không phải dân toán nên không bàn nghiêm túc về chuyện
+này được, nhưng nếu bạn đang ở đây thì tôi tin bạn biết mình đang làm
+gì ở mảng này.
 
-If you system has signed zeroes, you can tell which side of the cut
-you're on by the sign. And you can't if you don't. The spec elaborates:
+Nếu hệ của bạn có số không có dấu, bạn có thể biết mình đang ở phía
+nào của nhát cắt dựa vào dấu. Còn nếu không có thì chịu. Spec viết
+thêm:
 
-> Implementations that do not support a signed zero [...] cannot
-> distinguish the sides of branch cuts. These implementations shall map
-> a cut so the function is continuous as the cut is approached coming
-> around the finite endpoint of the cut in a counter clockwise
-> direction. (Branch cuts for the functions specified here have just one
-> finite endpoint.) For example, for the square root function, coming
-> counter clockwise around the finite endpoint of the cut along the
-> negative real axis approaches the cut from above, so the cut maps to
-> the positive imaginary axis.
+> Những hiện thực không hỗ trợ số không có dấu [...] không thể phân
+> biệt hai phía của nhát cắt nhánh. Các hiện thực này phải ánh xạ
+> nhát cắt sao cho hàm liên tục khi tiếp cận nhát cắt đi quanh điểm
+> đầu hữu hạn của nhát cắt theo chiều ngược kim đồng hồ. (Các nhát
+> cắt nhánh cho những hàm ở đây đều chỉ có một điểm đầu hữu hạn.) Ví
+> dụ, với hàm căn bậc hai, đi ngược kim đồng hồ quanh điểm đầu hữu
+> hạn của nhát cắt dọc theo trục thực âm thì tiếp cận nhát cắt từ
+> phía trên, vậy nên nhát cắt ánh xạ vào trục ảo dương.
 
-Finally, there's a pragma called [i[`CX_LIMITED_RANGE` macro]i]
-`CX_LIMITED_RANGE` that can be turned on and off (default is off). You
-can turn it on with:
+Cuối cùng, có một pragma tên [i[`CX_LIMITED_RANGE` macro]i]
+`CX_LIMITED_RANGE` có thể bật/tắt (mặc định là tắt). Bạn bật nó như
+thế này:
 
 ``` {.c}
 #pragma STDC CX_LIMITED_RANGE ON
 ```
 
-It allows for certain intermediate operations to underflow, overflow, or
-deal badly with infinity, presumably for a tradeoff in speed. If you're
-sure these types of errors won't occur with the numbers you're using AND
-you're trying to get as much speed out as you can, you could turn this
-macro on.
+Nó cho phép một số phép toán trung gian được tràn dưới, tràn trên,
+hoặc xử lý lỏng tay với vô cùng, đại khái là đánh đổi lấy tốc độ. Nếu
+bạn chắc chắn những lỗi kiểu đó không xảy ra với các số bạn đang dùng
+VÀ bạn đang cố vắt kiệt tốc độ, bạn có thể bật macro này lên.
 
-The spec also elaborates here:
+Spec cũng viết thêm:
 
-> The purpose of the pragma is to allow the implementation to use the
-> formulas:
+> Mục đích của pragma là cho phép hiện thực dùng các công thức:
 >
 > $(x+iy)\times(u+iv) = (xu-yv)+i(yu+xv)$
 >
@@ -155,7 +152,7 @@ The spec also elaborates here:
 >
 > $|x+iy|=\sqrt{x^2+y^2}$
 >
-> where the programmer can determine they are safe.
+> khi lập trình viên xác định được là chúng an toàn.
 
 
 [[manbreak]]
@@ -165,7 +162,7 @@ The spec also elaborates here:
 [i[`cacosf()` function]i]
 [i[`cacosl()` function]i]
 
-Compute the complex arc-cosine
+Tính arc-cosine phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -179,20 +176,20 @@ float complex cacosf(float complex z);
 long double complex cacosl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex arc-cosine of a complex number.
+Tính arc-cosine phức của một số phức.
 
-The complex number `z` will have an imaginary component in the range
-$[0,\pi]$, and the real component is unbounded.
+Số phức `z` sẽ có phần ảo trong khoảng $[0,\pi]$, còn phần thực không
+bị chặn.
 
-There are branch cuts outside the interval $[-1,+1]$ on the real axis.
+Có các nhát cắt nhánh nằm ngoài khoảng $[-1,+1]$ trên trục thực.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex arc-cosine of `z`.
+Trả về arc-cosine phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -214,7 +211,7 @@ Output:
 Result: 0.195321 + -2.788006i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ccos()`](#man-ccos),
 [`casin()`](#man-casin),
@@ -227,7 +224,7 @@ Result: 0.195321 + -2.788006i
 [i[`casinf()` function]i]
 [i[`casinl()` function]i]
 
-Compute the complex arc-sine
+Tính arc-sine phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -241,20 +238,20 @@ float complex casinf(float complex z);
 long double complex casinl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex arc-sine of a complex number.
+Tính arc-sine phức của một số phức.
 
-The complex number `z` will have an imaginary component in the range
-$[-\pi/2,+\pi/2]$, and the real component is unbounded.
+Số phức `z` sẽ có phần ảo trong khoảng $[-\pi/2,+\pi/2]$, còn phần
+thực không bị chặn.
 
-There are branch cuts outside the interval $[-1,+1]$ on the real axis.
+Có các nhát cắt nhánh nằm ngoài khoảng $[-1,+1]$ trên trục thực.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex arc-sine of `z`.
+Trả về arc-sine phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -276,7 +273,7 @@ Output:
 Result: 1.375476 + 2.788006i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`csin()`](#man-csin),
 [`cacos()`](#man-cacos),
@@ -290,7 +287,7 @@ Result: 1.375476 + 2.788006i
 [i[`catanf()` function]i]
 [i[`catanl()` function]i]
 
-Compute the complex arc-tangent
+Tính arc-tangent phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -304,21 +301,20 @@ float complex catanf(float complex z);
 long double complex catanl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex arc-tangent of a complex number.
+Tính arc-tangent phức của một số phức.
 
-The complex number `z` will have an real component in the range
-$[-\pi/2,+\pi/2]$, and the imaginary component is unbounded.
+Số phức `z` sẽ có phần thực trong khoảng $[-\pi/2,+\pi/2]$, còn phần
+ảo không bị chặn.
 
-There are branch cuts outside the interval $[-i,+i]$ on the imaginary
-axis.
+Có các nhát cắt nhánh nằm ngoài khoảng $[-i,+i]$ trên trục ảo.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex arc-tangent of `z`.
+Trả về arc-tangent phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -343,7 +339,7 @@ Output:
 Result: 1.450947 + 0.023299i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ctan()`](#man-ctan),
 [`cacos()`](#man-cacos),
@@ -356,7 +352,7 @@ Result: 1.450947 + 0.023299i
 [i[`ccosf()` function]i]
 [i[`ccosl()` function]i]
 
-Compute the complex cosine
+Tính cosine phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -370,15 +366,15 @@ float complex ccosf(float complex z);
 long double complex ccosl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex cosine of a complex number.
+Tính cosine phức của một số phức.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex cosine of `z`.
+Trả về cosine phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -400,7 +396,7 @@ Output:
 Result: -0.365087 + -2.276818i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`csin()`](#man-csin),
 [`ctan()`](#man-ctan),
@@ -413,7 +409,7 @@ Result: -0.365087 + -2.276818i
 [i[`csinf()` function]i]
 [i[`csinl()` function]i]
 
-Compute the complex sine
+Tính sine phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -427,15 +423,15 @@ float complex csinf(float complex z);
 long double complex csinl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex sine of a complex number.
+Tính sine phức của một số phức.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex sine of `z`.
+Trả về sine phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -457,7 +453,7 @@ Output:
 Result: 2.482485 + -0.334840i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ccos()`](#man-ccos),
 [`ctan()`](#man-ctan),
@@ -471,7 +467,7 @@ Result: 2.482485 + -0.334840i
 [i[`ctanf()` function]i]
 [i[`ctanl()` function]i]
 
-Compute the complex tangent
+Tính tangent phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -485,15 +481,15 @@ float complex ctanf(float complex z);
 long double complex ctanl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex tangent of a complex number.
+Tính tangent phức của một số phức.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex tangent of `z`.
+Trả về tangent phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -515,7 +511,7 @@ Output:
 Result: -0.027073 + 1.085990i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ccos()`](#man-ccos),
 [`csin()`](#man-csin),
@@ -529,7 +525,7 @@ Result: -0.027073 + 1.085990i
 [i[`cacoshf()` function]i]
 [i[`cacoshl()` function]i]
 
-Compute the complex arc hyperbolic cosine
+Tính arc hyperbolic cosine phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -543,20 +539,20 @@ float complex cacoshf(float complex z);
 long double complex cacoshl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex arc hyperbolic cosine of a complex number.
+Tính arc hyperbolic cosine phức của một số phức.
 
-There is a branch cut at values less than $1$ on the real axis.
+Có một nhát cắt nhánh tại các giá trị nhỏ hơn $1$ trên trục thực.
 
-The return value will be non-negative on the real number axis, and in
-the range $[-i\pi,+i\pi]$ on the imaginary axis.
+Giá trị trả về sẽ không âm trên trục số thực, và nằm trong khoảng
+$[-i\pi,+i\pi]$ trên trục ảo.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex arc hyperbolic cosine of `z`.
+Trả về arc hyperbolic cosine phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -578,7 +574,7 @@ Output:
 Result: 2.788006 + 0.195321i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`casinh()`](#man-casinh),
 [`catanh()`](#man-catanh),
@@ -591,7 +587,7 @@ Result: 2.788006 + 0.195321i
 [i[`casinhf()` function]i]
 [i[`casinhl()` function]i]
 
-Compute the complex arc hyperbolic sine
+Tính arc hyperbolic sine phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -605,20 +601,20 @@ float complex casinhf(float complex z);
 long double complex casinhl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex arc hyperbolic sine of a complex number.
+Tính arc hyperbolic sine phức của một số phức.
 
-There are branch cuts outside $[-i,+i]$ on the imaginary axis.
+Có các nhát cắt nhánh nằm ngoài $[-i,+i]$ trên trục ảo.
 
-The return value will be unbounded on the real number axis, and in
-the range $[-i\pi/2,+i\pi/2]$ on the imaginary axis.
+Giá trị trả về không bị chặn trên trục số thực, và nằm trong khoảng
+$[-i\pi/2,+i\pi/2]$ trên trục ảo.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex arc hyperbolic sine of `z`.
+Trả về arc hyperbolic sine phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -640,7 +636,7 @@ Output:
 Result: 2.794970 + 0.192476i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cacosh()`](#man-cacosh),
 [`catanh()`](#man-catanh),
@@ -653,7 +649,7 @@ Result: 2.794970 + 0.192476i
 [i[`catanhf()` function]i]
 [i[`catanhl()` function]i]
 
-Compute the complex arc hyperbolic tangent
+Tính arc hyperbolic tangent phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -667,20 +663,20 @@ float complex catanhf(float complex z);
 long double complex catanhl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex arc hyperbolic tangent of a complex number.
+Tính arc hyperbolic tangent phức của một số phức.
 
-There are branch cuts outside $[-1,+1]$ on the real axis.
+Có các nhát cắt nhánh nằm ngoài $[-1,+1]$ trên trục thực.
 
-The return value will be unbounded on the real number axis, and in
-the range $[-i\pi/2,+i\pi/2]$ on the imaginary axis.
+Giá trị trả về không bị chặn trên trục số thực, và nằm trong khoảng
+$[-i\pi/2,+i\pi/2]$ trên trục ảo.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex arc hyperbolic tangent of `z`.
+Trả về arc hyperbolic tangent phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -702,7 +698,7 @@ Output:
 Result: 0.120877 + 1.546821i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cacosh()`](#man-cacosh),
 [`casinh()`](#man-casinh),
@@ -715,7 +711,7 @@ Result: 0.120877 + 1.546821i
 [i[`ccoshf()` function]i]
 [i[`ccoshl()` function]i]
 
-Compute the complex hyperbolic cosine
+Tính hyperbolic cosine phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -729,15 +725,15 @@ float complex ccoshf(float complex z);
 long double complex ccoshl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex hyperbolic cosine of a complex number.
+Tính hyperbolic cosine phức của một số phức.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex hyperbolic cosine of `z`.
+Trả về hyperbolic cosine phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -759,7 +755,7 @@ Output:
 Result: -0.005475 + 1490.478826i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`csinh()`](#man-csinh),
 [`ctanh()`](#man-ctanh),
@@ -772,7 +768,7 @@ Result: -0.005475 + 1490.478826i
 [i[`csinhf()` function]i]
 [i[`csinhl()` function]i]
 
-Compute the complex hyperbolic sine
+Tính hyperbolic sine phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -786,15 +782,15 @@ float complex csinhf(float complex z);
 long double complex csinhl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex hyperbolic sine of a complex number.
+Tính hyperbolic sine phức của một số phức.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex hyperbolic sine of `z`.
+Trả về hyperbolic sine phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -816,7 +812,7 @@ Output:
 Result: -0.005475 + 1490.479161i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ccosh()`](#man-ccosh),
 [`ctanh()`](#man-ctanh),
@@ -830,7 +826,7 @@ Result: -0.005475 + 1490.479161i
 [i[`ctanhf()` function]i]
 [i[`ctanhl()` function]i]
 
-Compute the complex hyperbolic tangent
+Tính hyperbolic tangent phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -844,15 +840,15 @@ float complex ctanhf(float complex z);
 long double complex ctanhl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex hyperbolic tangent of a complex number.
+Tính hyperbolic tangent phức của một số phức.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex hyperbolic tangent of `z`.
+Trả về hyperbolic tangent phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -874,7 +870,7 @@ Output:
 Result: 1.000000 + -0.000000i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ccosh()`](#man-ccosh),
 [`csinh()`](#man-csinh),
@@ -887,7 +883,7 @@ Result: 1.000000 + -0.000000i
 [i[`cexpf()` function]i]
 [i[`cexpl()` function]i]
 
-Compute the complex base-$e$ exponential
+Tính hàm mũ cơ số $e$ phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -901,15 +897,15 @@ float complex cexpf(float complex z);
 long double complex cexpl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex base-$e$ exponential of `z`.
+Tính hàm mũ cơ số $e$ phức của `z`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex base-$e$ exponential of `z`.
+Trả về hàm mũ cơ số $e$ phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -931,7 +927,7 @@ Output:
 Result: -1.131204 + 2.471727i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cpow()`](#man-cpow),
 [`clog()`](#man-clog),
@@ -944,7 +940,7 @@ Result: -1.131204 + 2.471727i
 [i[`clogf()` function]i]
 [i[`clogl()` function]i]
 
-Compute the complex logarithm
+Tính logarithm phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -958,19 +954,19 @@ float complex clogf(float complex z);
 long double complex clogl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Compute the base-$e$ complex logarithm of `z`. There is a branch cut on
-the negative real axis.
+Tính logarithm cơ số $e$ phức của `z`. Có một nhát cắt nhánh trên
+trục thực âm.
 
-The returns value is unbounded on the real axis and in the range
-$[-i\pi,+i\pi]$ on the imaginary axis.
+Giá trị trả về không bị chặn trên trục thực và nằm trong khoảng
+$[-i\pi,+i\pi]$ trên trục ảo.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the base-$e$ complex logarithm of `z`.
+Trả về logarithm cơ số $e$ phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -992,7 +988,7 @@ Output:
 Result: 0.804719 + 1.107149i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cexp()`](#man-cexp),
 [`log()`](#man-log)
@@ -1004,7 +1000,7 @@ Result: 0.804719 + 1.107149i
 [i[`cabsf()` function]i]
 [i[`cabsl()` function]i]
 
-Compute the complex absolute value
+Tính giá trị tuyệt đối phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1018,15 +1014,15 @@ float cabsf(float complex z);
 long double cabsl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex absolute value of `z`.
+Tính giá trị tuyệt đối phức của `z`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex absolute value of `z`.
+Trả về giá trị tuyệt đối phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1048,7 +1044,7 @@ Output:
 Result: 2.236068 + 0.000000i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fabs()`](#man-fabs),
 [`abs()`](#man-abs)
@@ -1060,7 +1056,7 @@ Result: 2.236068 + 0.000000i
 [i[`cpowf()` function]i]
 [i[`cpowl()` function]i]
 
-Compute complex power
+Tính luỹ thừa phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1075,17 +1071,17 @@ long double complex cpowl(long double complex x,
                           long double complex y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex $x^y$.
+Tính $x^y$ phức.
 
-There is a branch cut for `x` along the negative real axis.
+Có một nhát cắt nhánh cho `x` dọc theo trục thực âm.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex $x^y$.
+Trả về $x^y$ phức.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1108,7 +1104,7 @@ Result:
 Result: 0.129010 + 0.000000i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`csqrt()`](#man-csqrt),
 [`cexp()`](#man-cexp)
@@ -1120,7 +1116,7 @@ Result: 0.129010 + 0.000000i
 [i[`csqrtf()` function]i]
 [i[`csqrtl()` function]i]
 
-Compute the complex square root
+Tính căn bậc hai phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1134,20 +1130,20 @@ float complex csqrtf(float complex z);
 long double complex csqrtl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex square root of `z`.
+Tính căn bậc hai phức của `z`.
 
-There is a branch cut along the negative real axis.
+Có một nhát cắt nhánh dọc theo trục thực âm.
 
-The return value is in the right half of the complex plane and includes
-the imaginary axis.
+Giá trị trả về nằm ở nửa phải của mặt phẳng phức và bao gồm cả trục
+ảo.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex square root of `z`.
+Trả về căn bậc hai phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1169,7 +1165,7 @@ Output:
 Result: 1.272020 + 0.786151i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cpow()`](#man-cpow),
 [`sqrt()`](#man-sqrt)
@@ -1181,7 +1177,7 @@ Result: 1.272020 + 0.786151i
 [i[`cargf()` function]i]
 [i[`cargl()` function]i]
 
-Compute the complex argument
+Tính argument phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1195,19 +1191,19 @@ float cargf(float complex z);
 long double cargl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the complex argument (AKA phase angle) of `z`.
+Tính argument phức (còn gọi là góc pha) của `z`.
 
-There is a branch cut along the negative real axis.
+Có một nhát cắt nhánh dọc theo trục thực âm.
 
-Returns a value in the range $[-\pi,+\pi]$.
+Trả về giá trị trong khoảng $[-\pi,+\pi]$.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex argument of `z`.
+Trả về argument phức của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1242,7 +1238,7 @@ Result: 1.107149
 [i[`cimagf()` function]i]
 [i[`cimagl()` function]i]
 
-Returns the imaginary part of a complex number
+Trả về phần ảo của một số phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1256,22 +1252,22 @@ float cimagf(float complex z);
 long double cimagl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Returns the imaginary part of `z`.
+Trả về phần ảo của `z`.
 
-As a footnote, the spec points out that any complex number `x` is part
-of the following equivalency:
+Nói ngoài lề, spec chỉ ra rằng bất kỳ số phức `x` nào cũng tuân theo
+đẳng thức sau:
 
 ``` {.c}
 x == creal(x) + cimag(x) * I;
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the imaginary part of `z`.
+Trả về phần ảo của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1287,13 +1283,13 @@ int main(void)
 }
 ```
 
-Output---just the imaginary part:
+Output---chỉ phần ảo:
 
 ``` {.default}
 Result: 2.000000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`creal()`](#man-creal)
 
@@ -1304,7 +1300,7 @@ Result: 2.000000
 [i[`CMPLXF()` macro]i]
 [i[`CMPLXL()` macro]i]
 
-Build a complex value from real and imaginary types
+Dựng một giá trị phức từ kiểu thực và ảo
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1318,30 +1314,29 @@ float complex CMPLXF(float x, float y);
 long double complex CMPLXL(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These macros build a complex value from real and imaginary types.
+Các macro này dựng một giá trị phức từ các kiểu thực và ảo.
 
-Now I know what you're thinking. "But I can already build a complex
-value from real and imaginary types using the `I` macro, like in the
-example you're about to give us."
+Chắc là bạn đang nghĩ, "Nhưng tôi đã có thể dựng giá trị phức từ kiểu
+thực và ảo bằng macro `I` rồi mà, như trong ví dụ sắp tới."
 
 ``` {.c}
 double complex x = 1 + 2 * I;
 ```
 
-And that's true.
+Và điều đó đúng.
 
-But the reality of the matter is weird and complex.
+Nhưng thực tế vấn đề lạ và phức.
 
-Maybe `I` got undefined, or maybe you redefined it.
+Có thể `I` đã bị undefine, hoặc có thể bạn đã redefine nó.
 
-Or maybe `I` was defined as `_Complex_I` which doesn't necessarily
-preserve the sign of a zero value.
+Hoặc có thể `I` được định nghĩa là `_Complex_I`, thứ không nhất thiết
+giữ được dấu của giá trị không.
 
-As the spec points out, these macros build complex numbers as if
-`_Imaginary_I` were defined (thus preserving your zero sign) even if
-it's not. That is, they are defined equivalently to:
+Như spec chỉ ra, các macro này dựng số phức như thể `_Imaginary_I`
+đang có mặt (nhờ đó giữ được dấu không của bạn) ngay cả khi nó không
+có. Cụ thể, chúng được định nghĩa tương đương với:
 
 ``` {.c}
 #define CMPLX(x, y)  ((double complex)((double)(x) + \
@@ -1354,12 +1349,11 @@ it's not. That is, they are defined equivalently to:
                      _Imaginary_I * (long double)(y)))
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex number for the given real `x` and imaginary `y`
-components.
+Trả về số phức cho các phần thực `x` và ảo `y` đã cho.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1367,7 +1361,7 @@ components.
 
 int main(void)
 {
-    double complex x = CMPLX(1, 2);  // Like 1 + 2 * I
+    double complex x = CMPLX(1, 2);  // Giống 1 + 2 * I
 
     printf("Result: %f + %fi\n", creal(x), cimag(x));
 }
@@ -1379,7 +1373,7 @@ Output:
 Result: 1.000000 + 2.000000i
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`creal()`](#man-creal),
 [`cimag()`](#man-cimag)
@@ -1391,7 +1385,7 @@ Result: 1.000000 + 2.000000i
 [i[`conjf()` function]i]
 [i[`conjl()` function]i]
 
-Compute the conjugate of a complex number
+Tính liên hợp của một số phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1405,17 +1399,17 @@ float complex conjf(float complex z);
 long double complex conjl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function computes the [flw[complex conjugate|Complex_conjugate]] of
-`z`. Apparently it does this by reversing the sign of the imaginary
-part, but dammit, I'm a programmer not a mathematician, Jim!
+Hàm này tính [flw[liên hợp phức|Complex_conjugate]] của `z`. Hình như
+nó làm vậy bằng cách đảo dấu phần ảo, nhưng trời ạ, tôi là lập trình
+viên chứ không phải dân toán, Jim ơi!
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the complex conjugate of `z`
+Trả về liên hợp phức của `z`
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1450,7 +1444,7 @@ Result: 1.000000 + -2.000000i
 [i[`cprojf()` function]i]
 [i[`cprojl()` function]i]
 
-Compute the projection of a complex number
+Tính phép chiếu của một số phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1464,32 +1458,31 @@ float complex cprojf(float complex z);
 long double complex cprojl(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the projection of `z` onto a [flw[Riemann
-sphere|Riemann_sphere]].
+Tính phép chiếu của `z` lên một [flw[mặt cầu
+Riemann|Riemann_sphere]].
 
-Now we're _really_ outside my expertise. The spec has this to say, which
-I'm quoting verbatim because I'm not knowledgable enough to rewrite it
-sensibly. Hopefully it makes sense to anyone who would need to use this
-function.
+Giờ thì _thực sự_ ngoài vùng chuyên môn của tôi rồi. Spec viết thế
+này, tôi trích nguyên văn vì không đủ hiểu biết để viết lại cho gọn.
+Mong là nó hiểu được với ai cần dùng hàm này.
 
-> `z` projects to `z` except that all complex infinities (even those with
-> one infinite part and one `NaN` part) project to positive infinity on
-> the real axis. If `z` has an infinite part, then `cproj(z)` is equivalent
-> to
+> `z` chiếu thành `z` trừ khi mọi vô cùng phức (kể cả những vô cùng
+> có một phần vô cùng và một phần `NaN`) đều chiếu thành vô cùng
+> dương trên trục thực. Nếu `z` có phần vô cùng, thì `cproj(z)`
+> tương đương với
 >
 >     INFINITY + I * copysign(0.0, cimag(z))
 
-So there you have it.
+Đấy, có vậy thôi.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the projection of `z` onto a Riemann sphere.
+Trả về phép chiếu của `z` lên một mặt cầu Riemann.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Fingers crossed this is a remotely sane example...
+Bắt chéo ngón tay cầu cho ví dụ này có tí hợp lý...
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1531,7 +1524,7 @@ Result: inf + 0.000000i
 [i[`crealf()` function]i]
 [i[`creall()` function]i]
 
-Returns the real part of a complex number
+Trả về phần thực của một số phức
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1545,22 +1538,22 @@ float crealf(float complex z);
 long double creall(long double complex z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Returns the real part of `z`.
+Trả về phần thực của `z`.
 
-As a footnote, the spec points out that any complex number `x` is part
-of the following equivalency:
+Nói ngoài lề, spec chỉ ra rằng bất kỳ số phức `x` nào cũng tuân theo
+đẳng thức sau:
 
 ``` {.c}
 x == creal(x) + cimag(x) * I;
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the real part of `z`.
+Trả về phần thực của `z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1576,13 +1569,13 @@ int main(void)
 }
 ```
 
-Output---just the real part:
+Output---chỉ phần thực:
 
 ``` {.default}
 Result: 1.000000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cimag()`](#man-cimag)
 
