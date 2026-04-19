@@ -3,58 +3,60 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<stdbit.h>` Bit-Related Functions {#stdbit}
+# `<stdbit.h>` Các Hàm Liên Quan Đến Bit {#stdbit}
 
 [i[`stdbit.h` header file]i]
 
-This header file and all the included functions are new in C23!
+Header file này cùng với toàn bộ các hàm bên trong đều là mới trong C23!
 
-Caveat: none of my compilers support this, so all the code is untested!
+Lưu ý: không có compiler nào của tôi hỗ trợ cái này, nên toàn bộ code
+chưa được kiểm thử!
 
-|Function|Description|
+|Hàm|Mô tả|
 |-------------------------|------------------------------------------|
-|[`stdc_bit_ceil()`](#man-stdc_bit_ceil)|Return the smallest power of 2 not less than a number|
-|[`stdc_bit_floor()`](#man-stdc_bit_floor)|Return the largest power of 2 not greater than a number|
-|[`stdc_bit_width()`](#man-stdc_bit_width)|Return the number of bits needed to store a value|
-|[`stdc_count_ones()`](#man-stdc_count_ones)|Count the ones in an unsigned number|
-|[`stdc_count_zeros()`](#man-stdc_count_zeros)|Count the zeros in an unsigned number|
-|[`stdc_first_leading_one()`](#man-stdc_first_leading_one)|Find the first leading one in an unsigned number|
-|[`stdc_first_leading_zero()`](#man-stdc_first_leading_zero)|Find the first leading zero in an unsigned number|
-|[`stdc_first_trailing_one()`](#man-stdc_first_trailing_one)|Find the first trailing one in an unsigned number|
-|[`stdc_first_trailing_zero()`](#man-stdc_first_trailing_zero)|Find the first trailing zero in an unsigned number|
-|[`stdc_has_single_bit()`](#man-stdc_has_single_bit)|Test to see if an unsigned integer has only a single bit set|
-|[`stdc_leading_ones()`](#man-stdc_leading_ones)|Count the leading ones in an unsigned number|
-|[`stdc_leading_zeros()`](#man-stdc_leading_zeros)|Count the leading zeros in an unsigned number|
-|[`stdc_trailing_ones()`](#man-stdc_trailing_ones)|Count the trailing ones in an unsigned number|
-|[`stdc_trailing_zeros()`](#man-stdc_trailing_zeros)|Count the trailing zeros in an unsigned number|
+|[`stdc_bit_ceil()`](#man-stdc_bit_ceil)|Trả về lũy thừa của 2 nhỏ nhất không nhỏ hơn một số|
+|[`stdc_bit_floor()`](#man-stdc_bit_floor)|Trả về lũy thừa của 2 lớn nhất không lớn hơn một số|
+|[`stdc_bit_width()`](#man-stdc_bit_width)|Trả về số bit cần dùng để lưu một giá trị|
+|[`stdc_count_ones()`](#man-stdc_count_ones)|Đếm số bit 1 trong một số unsigned|
+|[`stdc_count_zeros()`](#man-stdc_count_zeros)|Đếm số bit 0 trong một số unsigned|
+|[`stdc_first_leading_one()`](#man-stdc_first_leading_one)|Tìm bit 1 đầu tiên từ phía trước trong một số unsigned|
+|[`stdc_first_leading_zero()`](#man-stdc_first_leading_zero)|Tìm bit 0 đầu tiên từ phía trước trong một số unsigned|
+|[`stdc_first_trailing_one()`](#man-stdc_first_trailing_one)|Tìm bit 1 đầu tiên từ phía sau trong một số unsigned|
+|[`stdc_first_trailing_zero()`](#man-stdc_first_trailing_zero)|Tìm bit 0 đầu tiên từ phía sau trong một số unsigned|
+|[`stdc_has_single_bit()`](#man-stdc_has_single_bit)|Kiểm tra xem một số nguyên unsigned có đúng một bit được set không|
+|[`stdc_leading_ones()`](#man-stdc_leading_ones)|Đếm số 1 đầu (đếm số 1 đầu) trong một số unsigned|
+|[`stdc_leading_zeros()`](#man-stdc_leading_zeros)|Đếm số 0 đầu (đếm số 0 đầu) trong một số unsigned|
+|[`stdc_trailing_ones()`](#man-stdc_trailing_ones)|Đếm số 1 cuối (đếm số 1 cuối) trong một số unsigned|
+|[`stdc_trailing_zeros()`](#man-stdc_trailing_zeros)|Đếm số 0 cuối (đếm số 0 cuối) trong một số unsigned|
 
-## Existence Macro
+## Macro Kiểm Tra Sự Tồn Tại
 
-Since this is a new feature, you can test for its existence by making
-sure the `__STDC_VERSION_STDBIT_H__` [i[`__STDC_VERSION_STDBIT_H__`
-macro]] macro exists and is `202311L` or greater.
+Vì đây là một tính năng mới, bạn có thể kiểm tra sự tồn tại của nó
+bằng cách đảm bảo macro `__STDC_VERSION_STDBIT_H__`
+[i[`__STDC_VERSION_STDBIT_H__` macro]] tồn tại và có giá trị là
+`202311L` hoặc lớn hơn.
 
-## Endianess Macros {#endianess-macros}
+## Các Macro Endian {#endianess-macros}
 
 [i[Endianess]<]
 [i[`__STDC_ENDIAN_NATIVE__` macro]<]
 [i[`__STDC_ENDIAN_BIG__` macro]<]
 [i[`__STDC_ENDIAN_LITTLE__` macro]<]
 
-This header file defines a number of macros that can be used to
-determine the _endianess_ of the system. (That is, in a multibyte value,
-do the first byte represent the most significant part of the value, or
-least? Or neither?)
+Header file này định nghĩa một số macro có thể dùng để xác định
+_endian_ của hệ thống. (Nghĩa là, trong một giá trị nhiều byte, byte
+đầu tiên có biểu diễn phần có trọng số lớn nhất của giá trị không, hay
+nhỏ nhất? Hay chẳng phải cái nào?)
 
-There are two different values for the defined endianesses
-`__STDC_ENDIAN_BIG__` and `__STDC_ENDIAN_LITTLE__`.
+Có hai giá trị khác nhau cho các endian đã định nghĩa là
+`__STDC_ENDIAN_BIG__` và `__STDC_ENDIAN_LITTLE__`.
 
-Additionally, there's a macro `__STDC_ENDIAN_NATIVE__` that gives you
-the endianess of _this_ system. You can compare that against the other
-two macros to see what you've got. If it doesn't compare equal to either
-of them, you must be on some other mixed-endian system.
+Ngoài ra, còn có một macro `__STDC_ENDIAN_NATIVE__` (native endian)
+cho bạn biết endian của _hệ thống này_. Bạn có thể so sánh nó với hai
+macro kia để xem mình đang có gì. Nếu nó không bằng cái nào trong hai,
+thì chắc bạn đang ở trên một hệ thống mixed-endian nào đó.
 
-Let's see what this system is:
+Thử xem hệ thống này là gì nào:
 
 ``` {.c}
 #include <stdio.h>
@@ -81,24 +83,24 @@ int main(void)
 [i[`__STDC_ENDIAN_BIG__` macro]>]
 [i[`__STDC_ENDIAN_LITTLE__` macro]>]
 
-## General Structure of These Functions
+## Cấu Trúc Chung Của Các Hàm Này
 
-All the functions in this header follow a standard pattern, so we might
-as well go over it once here up-front to save extraneous and excessive
-verbosity later.
+Tất cả các hàm trong header này đều đi theo một khuôn mẫu chuẩn, nên
+ta cũng nên điểm qua một lần ở đây ngay từ đầu để khỏi dài dòng lê thê
+về sau.
 
-Each function comes in six amazing forms, depending on the types
-involved.
+Mỗi hàm đều có sáu dạng thần thánh, tùy theo các kiểu liên quan.
 
-First of all, they're just going to operate on unsigned integer types,
-so we'll get that out of the way.
+Trước hết, chúng chỉ làm việc trên các kiểu số nguyên unsigned, nên ta
+gạt chuyện đó ra khỏi đầu luôn.
 
-And they're _mostly_ going to return `unsigned int`.
+Và chúng _phần lớn_ sẽ trả về `unsigned int`.
 
-And they come in two subforms: the type-specific and type-generic forms.
+Và chúng đi theo hai dạng con: dạng type-specific và dạng
+type-generic.
 
-Let's look at the type specific forms first. We'll use the function that
-counts the leading zero bits in a value as an example. Here it is:
+Ta nhìn dạng type-specific trước. Ta sẽ dùng hàm đếm số bit 0 đầu
+trong một giá trị làm ví dụ. Đây:
 
 ``` {.c}
 unsigned int stdc_leading_zeros_uc(unsigned char value);
@@ -108,15 +110,14 @@ unsigned int stdc_leading_zeros_ul(unsigned long value);
 unsigned int stdc_leading_zeros_ull(unsigned long long value);
 ```
 
-Yikes. OK, what do we have?
+Ôi chao. OK, ta có gì nào?
 
-Well, in order to prevent namespace pollution, they all start with
-`stdc_`.
+Để tránh ô nhiễm namespace, tất cả đều bắt đầu bằng `stdc_`.
 
-And what about this `uc`, `us`, `ull`, etc. stuff? Those correspond to
-the type of the argument, you'll see with a little inspection.
+Còn mấy cái `uc`, `us`, `ull`, v.v. thì sao? Chúng tương ứng với kiểu
+của tham số, bạn sẽ thấy nếu để ý một chút.
 
-|Suffix|Parameter Type|
+|Hậu tố|Kiểu tham số|
 |-|-|
 |`_uc`|`unsigned char`|
 |`_us`|`unsigned short`|
@@ -124,22 +125,20 @@ the type of the argument, you'll see with a little inspection.
 |`_ul`|`unsigned long`|
 |`_ull`|`unsigned long long`|
 
-But wait! There's more!
+Nhưng khoan! Còn nữa!
 
-Each of these function families in the header also has a _generic_
-variant.
+Mỗi họ hàm này trong header còn có một biến thể _generic_.
 
-So, again with `count_leading_zeros` as an example, there's a version
-that doesn't need types to be specified, and it's just the function
-without any suffix.
+Lại lấy `count_leading_zeros` làm ví dụ, có một phiên bản không cần
+chỉ định kiểu, nó chỉ là tên hàm không có hậu tố nào.
 
 ``` {.c}
 generic_return_type stdc_leading_zeros(generic_value_type value);
 ```
 
-In that example, the words `generic_return_type` and
-`generic_value_type` are **not** C keywords. They're just placeholders
-to let you know you need to put the right thing there.
+Trong ví dụ đó, các chữ `generic_return_type` và `generic_value_type`
+**không** phải là từ khóa C. Chúng chỉ là placeholder để báo cho bạn
+biết chỗ đó cần thay bằng thứ đúng.
 
 ``` {.c}
 unsigned short x = 3490;
@@ -148,18 +147,19 @@ unsigned int a = stdc_leading_zeros(x);
 auto b = stdc_leading_zeros(1234);
 ```
 
-The generic functions work with all unsigned types, not counting `bool`.
+Các hàm generic làm việc với tất cả các kiểu unsigned, không tính
+`bool`.
 
 [[manbreak]]
 ## `stdc_leading_zeros()` {#man-stdc_leading_zeros}
 
 [i[`stdc_leading_zeros()` function]i]
 
-Count the leading zeros in an unsigned number
+Đếm số 0 đầu (đếm số 0 đầu) trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -173,17 +173,17 @@ unsigned int stdc_leading_zeros_ull(unsigned long long value);
 generic_return_type stdc_leading_zeros(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the number of leading zero bits on a particular
-value, starting from the most-significant bit. The number will be
-influenced by the size of the argument.
+Hàm này trả về số bit 0 ở đầu của một giá trị nhất định, tính từ bit
+có trọng số lớn nhất. Con số này sẽ bị ảnh hưởng bởi kích thước của
+tham số.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of leading zero bits.
+Trả về số bit 0 ở đầu.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -203,7 +203,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_leading_ones()`](#man-stdc_leading_ones),
 [`stdc_trailing_zeros()`](#man-stdc_trailing_zeros)
@@ -213,11 +213,11 @@ int main(void)
 
 [i[`stdc_leading_ones()` function]i]
 
-Count the leading ones in an unsigned number
+Đếm số 1 đầu (đếm số 1 đầu) trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -231,17 +231,17 @@ unsigned int stdc_leading_ones_ull(unsigned long long value);
 generic_return_type stdc_leading_ones(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the number of leading one bits on a particular
-value starting from the most-significant bit. The number will be
-influenced by the size of the argument.
+Hàm này trả về số bit 1 ở đầu của một giá trị nhất định, tính từ bit
+có trọng số lớn nhất. Con số này sẽ bị ảnh hưởng bởi kích thước của
+tham số.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of leading one bits.
+Trả về số bit 1 ở đầu.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -261,7 +261,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_leading_zeros()`](#man-stdc_leading_zeros),
 [`stdc_trailing_ones()`](#man-stdc_trailing_ones)
@@ -271,11 +271,11 @@ int main(void)
 
 [i[`stdc_trailing_zeros()` function]i]
 
-Count the trailing zeros in an unsigned number
+Đếm số 0 cuối (đếm số 0 cuối) trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -289,17 +289,17 @@ unsigned int stdc_trailing_zeros_ull(unsigned long long value);
 generic_return_type stdc_trailing_zeros(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the number of trailing zero bits on a particular
-value, starting from the least-significant bit. The number will be
-influenced by the size of the argument.
+Hàm này trả về số bit 0 ở cuối của một giá trị nhất định, tính từ bit
+có trọng số nhỏ nhất. Con số này sẽ bị ảnh hưởng bởi kích thước của
+tham số.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of trailing zero bits.
+Trả về số bit 0 ở cuối.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -319,7 +319,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_trailing_ones()`](#man-stdc_trailing_ones),
 [`stdc_leading_zeros()`](#man-stdc_leading_zeros)
@@ -329,11 +329,11 @@ int main(void)
 
 [i[`stdc_trailing_ones()` function]i]
 
-Count the trailing ones in an unsigned number
+Đếm số 1 cuối (đếm số 1 cuối) trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -347,17 +347,17 @@ unsigned int stdc_trailing_ones_ull(unsigned long long value);
 generic_return_type stdc_trailing_ones(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the number of trailing one bits on a particular
-value, starting from the least-significant bit. The number will be
-influenced by the size of the argument.
+Hàm này trả về số bit 1 ở cuối của một giá trị nhất định, tính từ bit
+có trọng số nhỏ nhất. Con số này sẽ bị ảnh hưởng bởi kích thước của
+tham số.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of trailing one bits.
+Trả về số bit 1 ở cuối.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -377,7 +377,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_trailing_zeros()`](#man-stdc_trailing_zeros),
 [`stdc_leading_ones()`](#man-stdc_leading_ones)
@@ -387,11 +387,11 @@ int main(void)
 
 [i[`stdc_first_leading_zero()` function]i]
 
-Find the first leading zero in an unsigned number
+Tìm bit 0 đầu tiên từ phía trước trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -405,22 +405,22 @@ unsigned int stdc_first_leading_zero_ull(unsigned long long value);
 generic_return_type stdc_first_leading_zero(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This finds the index of the first leading zero in a number. Indexes are
-numbered starting from `1` being the most significant ("leftmost") bit
-position. (This might be in contrast to how you might be used to
-numbering bit indexes.)
+Hàm này tìm chỉ số (index) của bit 0 đầu tiên từ phía trước trong một
+số. Chỉ số được đánh từ `1` là vị trí bit có trọng số lớn nhất (bit
+bên trái nhất). (Có thể cái này khác với cách bạn vẫn quen đánh số chỉ
+số bit.)
 
-It's one-based so that you can quickly use the return value as a
-Boolean expression for if it found a zero bit or not.
+Nó đánh theo cơ số 1 để bạn có thể dùng nhanh giá trị trả về như một
+biểu thức Boolean để xem có tìm thấy bit 0 hay không.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the 1-based index from the most significant bit of the first
-zero bit in the `value`, or `0` if there are no zero bits.
+Trả về chỉ số bắt đầu từ 1, tính từ bit có trọng số lớn nhất, của bit
+0 đầu tiên trong `value`, hoặc `0` nếu không có bit 0 nào.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -441,7 +441,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_first_leading_one()`](#man-stdc_first_leading_one),
 [`stdc_first_trailing_zero()`](#man-stdc_first_trailing_zero)
@@ -451,11 +451,11 @@ int main(void)
 
 [i[`stdc_first_leading_one()` function]i]
 
-Find the first leading one in an unsigned number
+Tìm bit 1 đầu tiên từ phía trước trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -469,22 +469,22 @@ unsigned int stdc_first_leading_one_ull(unsigned long long value);
 generic_return_type stdc_first_leading_one(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This finds the index of the first leading one in a number. Indexes are
-numbered starting from `1` being the most significant ("leftmost") bit
-position. (This might be in contrast to how you might be used to
-numbering bit indexes.)
+Hàm này tìm chỉ số của bit 1 đầu tiên từ phía trước trong một số. Chỉ
+số được đánh từ `1` là vị trí bit có trọng số lớn nhất (bit bên trái
+nhất). (Có thể cái này khác với cách bạn vẫn quen đánh số chỉ số
+bit.)
 
-It's one-based so that you can quickly use the return value as a
-Boolean expression for if it found a one bit or not.
+Nó đánh theo cơ số 1 để bạn có thể dùng nhanh giá trị trả về như một
+biểu thức Boolean để xem có tìm thấy bit 1 hay không.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the 1-based index from the most significant bit of the first
-one bit in the `value`, or `0` if there are no one bits.
+Trả về chỉ số bắt đầu từ 1, tính từ bit có trọng số lớn nhất, của bit
+1 đầu tiên trong `value`, hoặc `0` nếu không có bit 1 nào.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -505,7 +505,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_first_leading_zero()`](#man-stdc_first_leading_zero),
 [`stdc_first_trailing_one()`](#man-stdc_first_trailing_one)
@@ -515,11 +515,11 @@ int main(void)
 
 [i[`stdc_first_trailing_zero()` function]i]
 
-Find the first trailing zero in an unsigned number
+Tìm bit 0 đầu tiên từ phía sau trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -533,22 +533,22 @@ unsigned int stdc_first_trailing_zero_ull(unsigned long long value);
 generic_return_type stdc_first_trailing_zero(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This finds the index of the first trailing zero in a number. Indexes are
-numbered starting from `1` being the most significant ("leftmost") bit
-position. (This might be in contrast to how you might be used to
-numbering bit indexes.)
+Hàm này tìm chỉ số của bit 0 đầu tiên từ phía sau trong một số. Chỉ
+số được đánh từ `1` là vị trí bit có trọng số lớn nhất (bit bên trái
+nhất). (Có thể cái này khác với cách bạn vẫn quen đánh số chỉ số
+bit.)
 
-It's one-based so that you can quickly use the return value as a
-Boolean expression for if it found a zero bit or not.
+Nó đánh theo cơ số 1 để bạn có thể dùng nhanh giá trị trả về như một
+biểu thức Boolean để xem có tìm thấy bit 0 hay không.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the 1-based index from the most significant bit of the first
-zero bit in the `value`, or `0` if there are no zero bits.
+Trả về chỉ số bắt đầu từ 1, tính từ bit có trọng số lớn nhất, của bit
+0 đầu tiên trong `value`, hoặc `0` nếu không có bit 0 nào.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -569,7 +569,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_first_leading_zero()`](#man-stdc_first_leading_zero),
 [`stdc_first_trailing_one()`](#man-stdc_first_trailing_one)
@@ -579,11 +579,11 @@ int main(void)
 
 [i[`stdc_first_trailing_one()` function]i]
 
-Find the first trailing one in an unsigned number
+Tìm bit 1 đầu tiên từ phía sau trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -597,22 +597,22 @@ unsigned int stdc_first_trailing_one_ull(unsigned long long value);
 generic_return_type stdc_first_trailing_one(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This finds the index of the first trailing one in a number. Indexes are
-numbered starting from `1` being the most significant ("leftmost") bit
-position. (This might be in contrast to how you might be used to
-numbering bit indexes.)
+Hàm này tìm chỉ số của bit 1 đầu tiên từ phía sau trong một số. Chỉ
+số được đánh từ `1` là vị trí bit có trọng số lớn nhất (bit bên trái
+nhất). (Có thể cái này khác với cách bạn vẫn quen đánh số chỉ số
+bit.)
 
-It's one-based so that you can quickly use the return value as a
-Boolean expression for if it found a one bit or not.
+Nó đánh theo cơ số 1 để bạn có thể dùng nhanh giá trị trả về như một
+biểu thức Boolean để xem có tìm thấy bit 1 hay không.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the 1-based index from the most significant bit of the first
-one bit in the `value`, or `0` if there are no one bits.
+Trả về chỉ số bắt đầu từ 1, tính từ bit có trọng số lớn nhất, của bit
+1 đầu tiên trong `value`, hoặc `0` nếu không có bit 1 nào.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -633,7 +633,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_first_leading_one()`](#man-stdc_first_leading_one),
 [`stdc_first_trailing_zero()`](#man-stdc_first_trailing_zero)
@@ -643,11 +643,11 @@ int main(void)
 
 [i[`stdc_count_zeros()` function]i]
 
-Count the zeros in an unsigned number
+Đếm số bit 0 trong một số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -661,16 +661,16 @@ unsigned int stdc_count_zeros_ull(unsigned long long value);
 generic_return_type stdc_count_zeros(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the number of zero bits in a particular value. The
-number will be influenced by the size of the argument.
+Hàm này trả về số bit 0 trong một giá trị nhất định. Con số này sẽ bị
+ảnh hưởng bởi kích thước của tham số.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of zero bits.
+Trả về số bit 0.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -690,7 +690,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_count_ones()()`](#man-stdc_count_ones),
 [`stdc_leading_zeros()()`](#man-stdc_leading_zeros),
@@ -701,11 +701,12 @@ int main(void)
 
 [i[`stdc_count_ones()` function]i]
 
-Count the ones in an unsigned number
+Đếm số bit 1 (population count / popcount --- đếm số bit 1) trong một
+số unsigned
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -719,16 +720,16 @@ unsigned int stdc_count_ones_ull(unsigned long long value);
 generic_return_type stdc_count_ones(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the number of one bits in a particular value. The
-number will be influenced by the size of the argument.
+Hàm này trả về số bit 1 trong một giá trị nhất định. Con số này sẽ bị
+ảnh hưởng bởi kích thước của tham số.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of one bits.
+Trả về số bit 1.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -748,7 +749,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_count_zeros()()`](#man-stdc_count_zeros),
 [`stdc_leading_ones()()`](#man-stdc_leading_ones),
@@ -760,11 +761,11 @@ int main(void)
 
 [i[`stdc_has_single_bit()` function]i]
 
-Test to see if an unsigned integer has only a single bit set
+Kiểm tra xem một số nguyên unsigned có đúng một bit được set không
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -778,18 +779,19 @@ bool stdc_has_single_bit_ull(unsigned long long value);
 bool stdc_has_single_bit(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions return true if exactly one bit is `1` in an unsigned
-`value`.
+Các hàm này trả về true nếu có đúng một bit bằng `1` trong `value`
+unsigned.
 
-If true, it also means the `value` is a power of 2.
+Nếu true, nó cũng có nghĩa là `value` là một lũy thừa của 2 (lũy thừa
+của 2).
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Return true if `value` has exactly a single bit set to `1`.
+Trả về true nếu `value` có đúng một bit được set bằng `1`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -820,11 +822,11 @@ int main(void)
 
 [i[`stdc_bit_width()` function]i]
 
-Return the number of bits needed to store a value
+Trả về số bit (bit width / độ rộng bit) cần dùng để lưu một giá trị
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -838,17 +840,17 @@ unsigned int stdc_bit_width_ull(unsigned long long value);
 generic_return_type stdc_bit_width(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Given an unsigned integer value, what's the smallest number of bits
-needed to store it? That's the question this function answers.
+Cho một giá trị số nguyên unsigned, số bit nhỏ nhất cần dùng để lưu
+nó là bao nhiêu? Đó là câu hỏi mà hàm này trả lời.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the number of bits needed to store a positive `value`. Returns
-`0` if the `value` passed in is `0`.
+Trả về số bit cần dùng để lưu một `value` dương. Trả về `0` nếu
+`value` truyền vào là `0`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -879,11 +881,11 @@ int main(void)
 
 [i[`stdc_bit_floor()` function]i]
 
-Return the largest power of 2 not greater than a number
+Trả về lũy thừa của 2 (lũy thừa của 2) lớn nhất không lớn hơn một số
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -897,30 +899,29 @@ unsigned long long stdc_bit_floor_ull(unsigned long long value);
 generic_value_type stdc_bit_floor(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the largest power of 2 that is not greater than
-the `value`.
+Hàm này trả về lũy thừa của 2 lớn nhất không lớn hơn `value`.
 
-In other words "is less than or equal to" the `value`.
+Nói cách khác, "nhỏ hơn hoặc bằng" `value`.
 
-In other words, floor down to the nearest power of two.
+Nói cách khác, làm tròn xuống (floor) đến lũy thừa của 2 gần nhất.
 
-In other words, return the value of the highest set bit in a number
+Nói cách khác, trả về giá trị của bit được set cao nhất trong một số.
 
-For example:
-|`value`|Return|
+Ví dụ:
+|`value`|Giá trị trả về|
 |-|-|
 |`0b101`|`0b100`|
 |`0b1000`|`0b1000`|
 |`0b100101`|`0b100000`|
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the largest power of 2 not greater than `value`. Returns `0` if
-the `value` is `0`.
+Trả về lũy thừa của 2 lớn nhất không lớn hơn `value`. Trả về `0` nếu
+`value` là `0`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -940,7 +941,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_bit_ceil()`](#man-stdc_bit_ceil)
 
@@ -949,11 +950,11 @@ int main(void)
 
 [i[`stdc_bit_ceil()` function]i]
 
-Return the smallest power of 2 not less than a number
+Trả về lũy thừa của 2 nhỏ nhất không nhỏ hơn một số
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <stdbit.h>
@@ -967,29 +968,29 @@ unsigned long long stdc_bit_ceil_ull(unsigned long long value);
 generic_value_type stdc_bit_ceil(generic_value_type value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the smallest power of 2 that is not less than the
-`value`.
+Hàm này trả về lũy thừa của 2 nhỏ nhất không nhỏ hơn `value`.
 
-In other words "is greater than or equal to" the `value`.
+Nói cách khác, "lớn hơn hoặc bằng" `value`.
 
-In other words, ceil up to the nearest power of two.
+Nói cách khác, làm tròn lên (ceil) đến lũy thừa của 2 gần nhất.
 
-For example:
-|`value`|Return|
+Ví dụ:
+|`value`|Giá trị trả về|
 |-|-|
 |`0b101`|`0b1000`|
 |`0b1000`|`0b1000`|
 |`0b100101`|`0b1000000`|
 
-If the result doesn't fit in the return type, the behavior is undefined.
+Nếu kết quả không vừa với kiểu trả về, hành vi là không xác định
+(undefined).
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the smallest power of 2 not less than `value`.
+Trả về lũy thừa của 2 nhỏ nhất không nhỏ hơn `value`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1009,7 +1010,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`stdc_bit_floor()`](#man-stdc_bit_floor)
 
@@ -1034,8 +1035,4 @@ New in C23!
 
 ``` {.c .numberLines}
 ```
-
-### See Also {.unnumbered .unlisted}
-
-[`example()`](#man-example),
 -->
