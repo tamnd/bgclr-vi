@@ -3,34 +3,34 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<locale.h>` locale handling {#locale}
+# `<locale.h>` Xử Lý Locale {#locale}
 
 [i[`locale.h.` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`setlocale()`](#man-setlocale)|Set the locale|
-|[`localeconv()`](#man-localeconv)|Get information about the current locale|
+|[`setlocale()`](#man-setlocale)|Đặt locale|
+|[`localeconv()`](#man-localeconv)|Lấy thông tin về locale hiện tại|
 
-The "locale" is the details of how the program should run given its
-physical location on the planet.
+"Locale" là các chi tiết về cách chương trình nên chạy tùy theo vị
+trí địa lý của nó trên trái đất.
 
-For example, in one locale, a unit of money might be printed as `$123`,
-and in another `€123`.
+Ví dụ, ở locale này, một đơn vị tiền tệ có thể in ra là `$123`, còn
+ở locale khác là `€123`.
 
-Or one locale might use ASCII encoding and another UTF-8 encoding.
+Hoặc một locale dùng encoding ASCII và locale khác dùng UTF-8.
 
-By default, the program runs in the "C" locale. It has a basic set of
-characters with a single-byte encoding. If you try to print UTF-8
-characters in the C locale, nothing will print. You have to switch to a
-proper locale.
+Mặc định, chương trình chạy trong locale "C". Nó có một tập ký tự
+cơ bản với encoding single-byte. Nếu bạn thử in ký tự UTF-8 trong
+locale C, sẽ không có gì in ra. Bạn phải chuyển sang một locale
+thích hợp.
 
 [[manbreak]]
 ## `setlocale()` {#man-setlocale}
 
 [i[`setlocale()` function]i]
 
-Set the locale
+Đặt locale
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -40,54 +40,53 @@ Set the locale
 char *setlocale(int category, const char *locale);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Sets the `locale` for the given `category`.
+Đặt `locale` cho `category` chỉ định.
 
-Category is one of the following:
+Category là một trong các giá trị sau:
 
-|Category|Description|
+|Category|Mô tả|
 |-|-|
-|`LC_ALL`|All of the following categories|
-|`LC_COLLATE`|Affects the [`strcoll()`](#man-strcoll) and [`strxfrm()`](#man-strxfrm) functions|
-|`LC_CTYPE`|Affects the functions in [`<ctype.h>`](#ctype)|
-|`LC_MONETARY`|Affects the monetary information returned from [`localeconv()`](#man-localeconv)|
-|`LC_NUMERIC`|Affects the decimal point for formatted I/O and formatted string functions, and the monetary information returned from [`localeconv()`](#man-localeconv)|
-|`LC_TIME`|Affects the [`strftime()`](#man-strftime) and [`wcsftime()`](#man-wcsftime) functions|
+|`LC_ALL`|Tất cả các category dưới đây|
+|`LC_COLLATE`|Ảnh hưởng tới hàm [`strcoll()`](#man-strcoll) và [`strxfrm()`](#man-strxfrm)|
+|`LC_CTYPE`|Ảnh hưởng tới các hàm trong [`<ctype.h>`](#ctype)|
+|`LC_MONETARY`|Ảnh hưởng tới thông tin tiền tệ mà [`localeconv()`](#man-localeconv) trả về|
+|`LC_NUMERIC`|Ảnh hưởng tới dấu thập phân cho I/O định dạng và hàm xử lý chuỗi định dạng, cùng thông tin tiền tệ mà [`localeconv()`](#man-localeconv) trả về|
+|`LC_TIME`|Ảnh hưởng tới hàm [`strftime()`](#man-strftime) và [`wcsftime()`](#man-wcsftime)|
 
-And there are three portable things you can pass in for `locale`; any
-other string passed in is implementation-defined and non-portable.
+Và có ba giá trị portable bạn có thể truyền cho `locale`; mọi chuỗi
+khác đều là implementation-defined và không portable.
 
-|Locale|Description|
+|Locale|Mô tả|
 |-|-|
-|`"C"`|Set the program to the C locale|
-|`""`|(Empty string) Set the program to the native locale of this system|
-|`NULL`|Change nothing; just return the current locale|
-|Other|Set the program to an implementation-defined locale|
+|`"C"`|Đặt chương trình về locale C|
+|`""`|(Chuỗi rỗng) Đặt chương trình về locale native của hệ|
+|`NULL`|Không thay đổi gì; chỉ trả về locale hiện tại|
+|Khác|Đặt chương trình về một locale implementation-defined|
 
-The most common call, I'd wager, is this:
+Lời gọi phổ biến nhất, tôi dám cá, là:
 
 ``` {.c}
-// Set all locale settings to the local, native locale
+// Đặt mọi cài đặt locale về locale native của hệ
 
 setlocale(LC_ALL, "");
 ```
 
-Handily, `setlocale()` returns the locale that was just set, so you
-could see what the actual locale is on your system.
+Tiện là `setlocale()` trả về locale vừa được đặt, nên bạn có thể
+thấy locale thực tế trên hệ của mình là gì.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-On success, returns a pointer to the string representing the current
-locale. You may not modify this string, and it might be changed by
-subsequent calls to `setlocale()`.
+Nếu thành công, trả về con trỏ tới chuỗi biểu diễn locale hiện tại.
+Bạn không được modify chuỗi này, và nó có thể bị thay đổi bởi các
+lời gọi `setlocale()` kế tiếp.
 
-On failure, returns `NULL`.
+Nếu thất bại, trả về `NULL`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here we get the current locale. Then we set it to the native locale, and
-print out what that is.
+Ở đây ta lấy locale hiện tại. Rồi đặt nó về locale native, và in ra.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -97,38 +96,38 @@ int main(void)
 {
     char *loc;
 
-    // Get the current locale
+    // Lấy locale hiện tại
     loc = setlocale(LC_ALL, NULL);
 
     printf("Starting locale: %s\n", loc);
 
-    // Set (and get) the locale to native locale
+    // Đặt (và lấy) locale về locale native
     loc = setlocale(LC_ALL, "");
     
     printf("Native locale: %s\n", loc);
 }
 ```
 
-Output on my system:
+Output trên hệ của tôi:
 
 ``` {.default}
 Starting locale: C
 Native locale: en_US.UTF-8
 ```
 
-Note that my native locale (on a Linux box) might be different from what
-you see.
+Lưu ý locale native của tôi (trên máy Linux) có thể khác với những
+gì bạn thấy.
 
-Nevertheless, I can explicitly set it on my system without a problem, or
-to any other locale I have installed:
+Dù vậy, tôi vẫn có thể đặt nó thẳng tay trên hệ của mình, hoặc đặt
+về bất kỳ locale nào đã cài:
 
 ``` {.c .numberLines startFrom="13"}
-    loc = setlocale(LC_ALL, "en_US.UTF-8");   // Non-portable
+    loc = setlocale(LC_ALL, "en_US.UTF-8");   // Không portable
 ```
 
-But again, your system might have different locales defined.
+Nhưng lần nữa, hệ của bạn có thể có các locale khác được định nghĩa.
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`localeconv()`](#man-localeconv),
 [`strcoll()`](#man-strcoll),
@@ -144,7 +143,7 @@ But again, your system might have different locales defined.
 
 [i[`localeconv()` function]i]
 
-Get information about the current locale
+Lấy thông tin về locale hiện tại
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -154,84 +153,84 @@ Get information about the current locale
 struct lconv *localeconv(void);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function just returns a pointer to a `struct lconv`, but is still
-a bit of a powerhouse.
+Hàm này chỉ trả về một con trỏ tới `struct lconv`, nhưng vẫn là một
+tay có sức mạnh đáng kể.
 
-The returned structure contains _tons_ of information about the locale.
-Here are the fields of `struct lconv` and their meanings.
+Struct trả về chứa _cả tấn_ thông tin về locale. Dưới đây là các
+trường của `struct lconv` và ý nghĩa của chúng.
 
-First, some conventions. In the field names, below, a `_p_` means
-"positive", and `_n_` means "negative", and `int_` means
-"international". Though a lot of these are type `char` or `char*`, most
-(or the strings they point to) are actually treated as
-integers^[Remember that `char` is just a byte-sized integer.].
+Trước hết, vài quy ước. Trong tên trường bên dưới, `_p_` nghĩa là
+"positive" (dương), `_n_` nghĩa là "negative" (âm), và `int_` nghĩa
+là "international" (quốc tế). Dù khá nhiều trong số này có kiểu
+`char` hoặc `char*`, hầu hết (hoặc chuỗi mà chúng trỏ tới) thực ra
+được đối xử như integer^[Nhớ là `char` chỉ là integer cỡ một byte.].
 
-Before we go further, know that `CHAR_MAX` (from `<limits.h>`) is the
-maximum value that can be held in a `char`. And that many of the
-following `char` values use that to indicate the value isn't available
-in the given locale.
+Trước khi đi tiếp, bạn cần biết `CHAR_MAX` (từ `<limits.h>`) là giá
+trị lớn nhất mà một `char` có thể giữ. Và khá nhiều giá trị `char`
+bên dưới dùng nó để báo hiệu rằng giá trị không có sẵn trong locale
+đó.
 
-|Field|Description|
+|Trường|Mô tả|
 |-----|-----------|
-|`char *mon_decimal_point`|Decimal pointer character for money, e.g. `"."`.|
-|`char *mon_thousands_sep`|Thousands separator character for money, e.g. `","`.|
-|`char *mon_grouping`|Grouping description for money (see below).|
-|`char *positive_sign`|Positive sign for money, e.g. `"+"` or `""`.|
-|`char *negative_sign`|Negative sign for money, e.g. `"-"`.|
-|`char *currency_symbol`|Currency symbol, e.g. `"$"`.|
-|`char frac_digits`|When printing monetary amounts, how many digits to print past the decimal point, e.g. `2`.|
-|`char p_cs_precedes`|`1` if the `currency_symbol` comes before the value for a non-negative monetary amount, `0` if after.|
-|`char n_cs_precedes`|`1` if the `currency_symbol` comes before the value for a negative monetary amount, `0` if after.|
-|`char p_sep_by_space`|Determines the separation of the `currency symbol` from the value for non-negative amounts (see below).|
-|`char n_sep_by_space`|Determines the separation of the `currency symbol` from the value for negative amounts (see below).|
-|`char p_sign_posn`|Determines the `positive_sign` position for non-negative values.|
-|`char p_sign_posn`|Determines the `positive_sign` position for negative values.|
-|`char *int_curr_symbol`|International currency symbol, e.g. `"USD "`.|
-|`char int_frac_digits`|International value for `frac_digits`.|
-|`char int_p_cs_precedes`|International value for `p_cs_precedes`.|
-|`char int_n_cs_precedes`|International value for `n_cs_precedes`.|
-|`char int_p_sep_by_space`|International value for `p_sep_by_space`.|
-|`char int_n_sep_by_space`|International value for `n_sep_by_space`.|
-|`char int_p_sign_posn`|International value for `p_sign_posn`.|
-|`char int_n_sign_posn`|International value for `n_sign_posn`.|
+|`char *mon_decimal_point`|Ký tự dấu thập phân cho tiền, ví dụ `"."`.|
+|`char *mon_thousands_sep`|Ký tự phân cách hàng nghìn cho tiền, ví dụ `","`.|
+|`char *mon_grouping`|Mô tả cách nhóm cho tiền (xem bên dưới).|
+|`char *positive_sign`|Dấu dương cho tiền, ví dụ `"+"` hoặc `""`.|
+|`char *negative_sign`|Dấu âm cho tiền, ví dụ `"-"`.|
+|`char *currency_symbol`|Ký hiệu tiền tệ, ví dụ `"$"`.|
+|`char frac_digits`|Khi in số tiền, in bao nhiêu chữ số sau dấu thập phân, ví dụ `2`.|
+|`char p_cs_precedes`|`1` nếu `currency_symbol` đi trước giá trị cho số tiền không âm, `0` nếu đi sau.|
+|`char n_cs_precedes`|`1` nếu `currency_symbol` đi trước giá trị cho số tiền âm, `0` nếu đi sau.|
+|`char p_sep_by_space`|Xác định cách phân cách `currency symbol` khỏi giá trị cho số không âm (xem bên dưới).|
+|`char n_sep_by_space`|Xác định cách phân cách `currency symbol` khỏi giá trị cho số âm (xem bên dưới).|
+|`char p_sign_posn`|Xác định vị trí `positive_sign` cho số không âm.|
+|`char p_sign_posn`|Xác định vị trí `positive_sign` cho số âm.|
+|`char *int_curr_symbol`|Ký hiệu tiền tệ quốc tế, ví dụ `"USD "`.|
+|`char int_frac_digits`|Giá trị quốc tế cho `frac_digits`.|
+|`char int_p_cs_precedes`|Giá trị quốc tế cho `p_cs_precedes`.|
+|`char int_n_cs_precedes`|Giá trị quốc tế cho `n_cs_precedes`.|
+|`char int_p_sep_by_space`|Giá trị quốc tế cho `p_sep_by_space`.|
+|`char int_n_sep_by_space`|Giá trị quốc tế cho `n_sep_by_space`.|
+|`char int_p_sign_posn`|Giá trị quốc tế cho `p_sign_posn`.|
+|`char int_n_sign_posn`|Giá trị quốc tế cho `n_sign_posn`.|
 
-Even though many of these have `char` type, the value stored within is
-meant to be accessed as an integer.
+Mặc dù khá nhiều trong số này có kiểu `char`, giá trị chứa trong đó
+được truy cập như integer.
 
-All the `sep_by_space` variants deal with spacing around the currency
-sign. Valid values are:
+Tất cả biến thể `sep_by_space` xử lý khoảng cách quanh ký hiệu tiền
+tệ. Giá trị hợp lệ:
 
-|Value|Description|
+|Giá trị|Mô tả|
 |:--:|------------|
-|`0`|No space between currency symbol and value.|
-|`1`|Separate the currency symbol (and sign, if any) from the value with a space.|
-|`2`|Separate the sign symbol from the currency symbol (if adjacent) with a space, otherwise separate the sign symbol from the value with a space.|
+|`0`|Không có khoảng trắng giữa ký hiệu tiền tệ và giá trị.|
+|`1`|Phân cách ký hiệu tiền tệ (và dấu, nếu có) khỏi giá trị bằng khoảng trắng.|
+|`2`|Phân cách dấu khỏi ký hiệu tiền tệ (nếu kề nhau) bằng khoảng trắng, ngược lại phân cách dấu khỏi giá trị bằng khoảng trắng.|
 
-The `sign_posn` variants are determined by the following values:
+Các biến thể `sign_posn` được xác định bởi giá trị sau:
 
-|Value|Description|
+|Giá trị|Mô tả|
 |:--:|------------|
-|`0`|Put parens around the value and the currency symbol.|
-|`1`|Put the sign string in front of the currency symbol and value.|
-|`2`|Put the sign string after the currency symbol and value.|
-|`3`|Put the sign string directly in front of the currency symbol.|
-|`4`|Put the sign string directly behind the currency symbol.|
+|`0`|Đặt ngoặc đơn quanh giá trị và ký hiệu tiền tệ.|
+|`1`|Đặt chuỗi dấu ở trước ký hiệu tiền tệ và giá trị.|
+|`2`|Đặt chuỗi dấu sau ký hiệu tiền tệ và giá trị.|
+|`3`|Đặt chuỗi dấu ngay trước ký hiệu tiền tệ.|
+|`4`|Đặt chuỗi dấu ngay sau ký hiệu tiền tệ.|
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a pointer to the structure containing the locale information.
+Trả về con trỏ tới struct chứa thông tin locale.
 
-The program may not modify this structure.
+Chương trình không được modify struct này.
 
-Subsequent calls to `localeconv()` may overwrite this structure, as
-might calls to `setlocale()` with `LC_ALL`, `LC_MONETARY`, or
+Các lời gọi `localeconv()` kế tiếp có thể ghi đè struct này, cũng
+như các lời gọi `setlocale()` với `LC_ALL`, `LC_MONETARY`, hoặc
 `LC_NUMERIC`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a program to print the locale information for the native locale.
+Đây là chương trình in thông tin locale cho locale native.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -284,7 +283,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên hệ của tôi:
 
 ``` {.default}
 mon_decimal_point : .
@@ -310,7 +309,7 @@ int_p_sign_posn   : 1
 int_n_sign_posn   : 1
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`setlocale()`](#man-setlocale)
 
