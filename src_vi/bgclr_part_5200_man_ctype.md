@@ -3,58 +3,57 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<ctype.h>` Character Classification and Conversion {#ctype}
+# `<ctype.h>` Phân loại và Chuyển đổi Ký tự {#ctype}
 
 [i[`ctype.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`isalnum()`](#man-isalnum)|Tests if a character is alphabetic or is a digit|
-|[`isalpha()`](#man-isalpha)|Returns true if a character is alphabetic|
-|[`isblank()`](#man-isblank)|Tests if a character is word-separating whitespace|
-|[`iscntrl()`](#man-iscntrl)|Test if a character is a control character|
-|[`isdigit()`](#man-isdigit)|Tests if a character is a digit|
-|[`isgraph()`](#man-isgraph)|Tests if the character is printable and not a space|
-|[`islower()`](#man-islower)|Tests if a character is lowercase|
-|[`isprint()`](#man-isprint)|Tests if a character is printable|
-|[`ispunct()`](#man-ispunct)|Test if a character is punctuation|
-|[`isspace()`](#man-isspace)|Test if a character is whitespace|
-|[`isupper()`](#man-isupper)|Tests if a character is uppercase|
-|[`isxdigit()`](#man-isxdigit)|Tests if a character is a hexadecimal digit|
-|[`tolower()`](#man-tolower)|Convert a letter to lowercase|
-|[`toupper()`](#man-toupper)|Convert a letter to uppercase|
+|[`isalnum()`](#man-isalnum)|Kiểm tra ký tự có là chữ cái hoặc chữ số|
+|[`isalpha()`](#man-isalpha)|Trả về true nếu ký tự là chữ cái|
+|[`isblank()`](#man-isblank)|Kiểm tra ký tự có là whitespace ngăn từ|
+|[`iscntrl()`](#man-iscntrl)|Kiểm tra ký tự có là ký tự điều khiển|
+|[`isdigit()`](#man-isdigit)|Kiểm tra ký tự có là chữ số|
+|[`isgraph()`](#man-isgraph)|Kiểm tra ký tự có in được và không phải space|
+|[`islower()`](#man-islower)|Kiểm tra ký tự có là chữ thường|
+|[`isprint()`](#man-isprint)|Kiểm tra ký tự có in được|
+|[`ispunct()`](#man-ispunct)|Kiểm tra ký tự có là dấu câu|
+|[`isspace()`](#man-isspace)|Kiểm tra ký tự có là whitespace|
+|[`isupper()`](#man-isupper)|Kiểm tra ký tự có là chữ hoa|
+|[`isxdigit()`](#man-isxdigit)|Kiểm tra ký tự có là chữ số hex|
+|[`tolower()`](#man-tolower)|Chuyển chữ cái sang chữ thường|
+|[`toupper()`](#man-toupper)|Chuyển chữ cái sang chữ hoa|
 
 
-This collection of macros is good for testing characters to see if
-they're of a certain class, such as alphabetic, numeric, control
-characters, etc.
+Bộ macro này tiện để kiểm tra xem một ký tự có thuộc một nhóm nào đó
+không, chẳng hạn chữ cái, chữ số, ký tự điều khiển, v.v.
 
-Surprisingly, they take `int` arguments instead of some kind of `char`.
-This is so you can feed `EOF` in for convenience if you have an integer
-representation of that. If not `EOF`, the value passed in has to be
-representable in an `unsigned char`. Otherwise it's (dun dun DUUNNNN)
-undefined behavior. So you can forget about passing in your UTF-8
-multibyte characters.
+Đáng ngạc nhiên là chúng nhận tham số `int` thay vì kiểu `char` nào
+đó. Lý do là để bạn tiện nhét `EOF` vào nếu có biểu diễn int của nó.
+Nếu không phải `EOF`, giá trị truyền vào phải biểu diễn được bằng
+`unsigned char`. Ngược lại thì (tèn tèn TÈÈÈN) undefined behavior.
+Cho nên quên việc nhét ký tự UTF-8 nhiều byte vào đây đi.
 
-You can portably avoid this undefined behavior by casting the arguments
-to these functions to `(unsigned char)`. This is irksome and ugly,
-admittedly. The values in the basic character set are all safe to use
-since they're positive values that fit into an `unsigned char`.
+Bạn có thể tránh undefined behavior này kiểu portable bằng cách ép
+kiểu các đối số của những hàm này thành `(unsigned char)`. Công nhận
+nghe phiền và xấu. Các giá trị trong basic character set đều dùng
+được an toàn vì chúng là giá trị dương vừa vặn trong `unsigned char`.
 
-Also, the behavior of these functions varies based on locale.
+Ngoài ra, hành vi của những hàm này cũng thay đổi theo locale.
 
-In many of the pages in this section, I give some examples. These are
-from the "C" locale, and might vary if you've set a different locale.
+Trong nhiều trang ở section này, tôi có kèm vài ví dụ. Chúng chạy ở
+locale "C", và có thể khác đi nếu bạn đã đặt locale khác.
 
-Note that wide characters have their own set of classification
-functions, so don't try to use these on `wchar_t`s. Or _else_!
+Chú ý là ký tự rộng (wide character) có bộ hàm phân loại riêng của
+nó, nên đừng có thử dùng mấy hàm này trên `wchar_t`. Nghe không thì
+_biết tay_!
 
 [[manbreak]]
 ## `isalnum()` {#man-isalnum}
 
 [i[`isalnum()` function]i]
 
-Tests if a character is alphabetic or is a digit
+Kiểm tra ký tự có là chữ cái hoặc chữ số
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -64,23 +63,23 @@ Tests if a character is alphabetic or is a digit
 int isalnum(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Tests if a character is alphabetic (`A`-`Z` or `a`-`z`) or a digit
+Kiểm tra xem ký tự có là chữ cái (`A`-`Z` hoặc `a`-`z`) hoặc chữ số
 (`0`-`9`).
 
-Is equivalent to:
+Tương đương với:
 
 ``` {.c}
 isalpha(c) || isdigit(c)
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true if a character is alphabetic (`A`-`Z` or `a`-`z`) or a
-digit (`0`-`9`).
+Trả về true nếu ký tự là chữ cái (`A`-`Z` hoặc `a`-`z`) hoặc chữ số
+(`0`-`9`).
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -88,7 +87,7 @@ digit (`0`-`9`).
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isalnum('a')? "yes": "no");  // yes
     printf("%s\n", isalnum('B')? "yes": "no");  // yes
@@ -97,7 +96,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isalpha()`](#man-isalpha),
 [`isdigit()`](#man-isdigit)
@@ -108,7 +107,7 @@ int main(void)
 
 [i[`isalpha()` function]i]
 
-Returns true if a character is alphabetic
+Trả về true nếu ký tự là chữ cái
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -118,37 +117,37 @@ Returns true if a character is alphabetic
 int isalpha(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Returns true for alphabetic characters (`A`-`Z` or `a`-`z`).
+Trả về true cho các ký tự chữ cái (`A`-`Z` hoặc `a`-`z`).
 
-Technically (and in the "C" locale) equivalent to:
+Về mặt kỹ thuật (và ở locale "C") tương đương với:
 
 ``` {.c}
 isupper(c) || islower(c)
 ```
 
-Extra super technically, because I know you're dying for this to be
-extra unnecessarily complex, it can also include some locale-specific
-characters for which this is true:
+Cực kỳ siêu kỹ thuật, vì tôi biết bạn đang khát khao đoạn này phức
+tạp một cách không cần thiết, nó còn có thể bao gồm một số ký tự đặc
+thù locale mà cái này đúng:
 
 ``` {.c}
 !iscntrl(c) && !isdigit(c) && !ispunct(c) && !isspace(c)
 ```
 
-and this is true:
+và cái này đúng:
 
 ``` {.c}
 isupper(c) || islower(c)
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true for alphabetic characters (`A`-`Z` or `a`-`z`).
+Trả về true cho các ký tự chữ cái (`A`-`Z` hoặc `a`-`z`).
 
-Or for any of the other crazy stuff in the description, above.
+Hoặc bất kỳ thứ điên rồ nào khác trong phần mô tả ở trên.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -156,7 +155,7 @@ Or for any of the other crazy stuff in the description, above.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isalpha('a')? "yes": "no");  // yes
     printf("%s\n", isalpha('B')? "yes": "no");  // yes
@@ -165,7 +164,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isalnum()`](#man-isalnum)
 
@@ -174,7 +173,7 @@ int main(void)
 
 [i[`isblank()` function]i]
 
-Tests if a character is word-separating whitespace
+Kiểm tra ký tự có là whitespace ngăn từ
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -184,20 +183,19 @@ Tests if a character is word-separating whitespace
 int isblank(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-True if the character is a whitespace character used to separate words
-in a single line.
+True nếu ký tự là whitespace dùng để ngăn các từ trên cùng một dòng.
 
-For example, space (`' '`) or horizontal tab (`'\t'`). Other locales
-might define other blank characters.
+Ví dụ, space (`' '`) hoặc tab ngang (`'\t'`). Locale khác có thể định
+nghĩa các ký tự blank khác.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true if the character is a whitespace character used to separate
-words in a single line.
+Trả về true nếu ký tự là whitespace dùng để ngăn các từ trên cùng một
+dòng.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -205,7 +203,7 @@ words in a single line.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isblank(' ')? "yes": "no");   // yes
     printf("%s\n", isblank('\t')? "yes": "no");  // yes
@@ -215,7 +213,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isspace()`](#man-isspace)
 
@@ -224,7 +222,7 @@ int main(void)
 
 [i[`iscntrl()` function]i]
 
-Test if a character is a control character
+Kiểm tra ký tự có là ký tự điều khiển
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -234,21 +232,22 @@ Test if a character is a control character
 int iscntrl(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-A _control character_ is a locale-specific non-printing character.
+_Ký tự điều khiển_ (control character) là ký tự không in được, tuỳ
+theo locale.
 
-For the "C" locale, this means control characters are in the range 0x00
-to 0x1F (the character right before SPACE) and 0x7F (the DEL character).
+Với locale "C", nghĩa là các ký tự điều khiển nằm trong khoảng 0x00
+đến 0x1F (ký tự ngay trước SPACE) và 0x7F (ký tự DEL).
 
-Basically if it's not an ASCII (or Unicode less than 128) printable
-character, it's a control character in the "C" locale.
+Nói chung nếu nó không phải ký tự ASCII (hoặc Unicode nhỏ hơn 128) in
+được, thì nó là ký tự điều khiển ở locale "C".
  
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true if `c` is a control character.
+Trả về true nếu `c` là ký tự điều khiển.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -256,7 +255,7 @@ Returns true if `c` is a control character.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", iscntrl('\t')? "yes": "no");  // yes (tab)
     printf("%s\n", iscntrl('\n')? "yes": "no");  // yes (newline)
@@ -268,7 +267,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isgraph()`](#man-isgraph),
 [`isprint()`](#man-isprint)
@@ -279,7 +278,7 @@ int main(void)
 
 [i[`isdigit()` function]i]
 
-Tests if a character is a digit
+Kiểm tra ký tự có là chữ số
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -289,15 +288,15 @@ Tests if a character is a digit
 int isdigit(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Tests if `c` is a digit in the range `0`-`9`.
+Kiểm tra xem `c` có là chữ số trong khoảng `0`-`9` không.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true if the character is a digit, unsurprisingly.
+Trả về true nếu ký tự là chữ số, không có gì bất ngờ.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -305,7 +304,7 @@ Returns true if the character is a digit, unsurprisingly.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isdigit('0')? "yes": "no");   // yes
     printf("%s\n", isdigit('5')? "yes": "no");   // yes
@@ -315,7 +314,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isalnum()`](#man-isalnum),
 [`isxdigit()`](#man-isxdigit)
@@ -325,7 +324,7 @@ int main(void)
 
 [i[`isgraph()` function]i]
 
-Tests if the character is printable and not a space
+Kiểm tra ký tự có in được và không phải space
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -335,16 +334,16 @@ Tests if the character is printable and not a space
 int isgraph(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Tests if `c` is any printable character that isn't a space (`' '`).
+Kiểm tra xem `c` có là ký tự in được nào mà không phải space (`' '`)
+không.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true if `c` is any printable character that isn't a space
-(`' '`).
+Trả về true nếu `c` là ký tự in được nào mà không phải space (`' '`).
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -352,7 +351,7 @@ Returns true if `c` is any printable character that isn't a space
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isgraph('0')? "yes": "no");   // yes
     printf("%s\n", isgraph('a')? "yes": "no");   // yes
@@ -363,7 +362,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`iscntrl()`](#man-iscntrl),
 [`isprint()`](#man-isprint)
@@ -373,7 +372,7 @@ int main(void)
 
 [i[`islower()` function]i]
 
-Tests if a character is lowercase
+Kiểm tra ký tự có là chữ thường
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -383,22 +382,22 @@ Tests if a character is lowercase
 int islower(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Tests if a character is lowercase, in the range `a`-`z`.
+Kiểm tra xem ký tự có là chữ thường trong khoảng `a`-`z` không.
 
-In other locales, there could be other lowercase characters. In all
-cases, to be lowercase, the following must be true:
+Ở các locale khác, có thể có những ký tự chữ thường khác. Trong mọi
+trường hợp, để là chữ thường, điều sau đây phải đúng:
 
 ``` {.c}
 !iscntrl(c) && !isdigit(c) && !ispunct(c) && !isspace(c)
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true if the character is lowercase.
+Trả về true nếu ký tự là chữ thường.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -406,7 +405,7 @@ Returns true if the character is lowercase.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", islower('c')? "yes": "no");   // yes
     printf("%s\n", islower('0')? "yes": "no");   // no
@@ -416,7 +415,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isupper()`](#man-isupper),
 [`isalpha()`](#man-isalpha),
@@ -428,7 +427,7 @@ int main(void)
 
 [i[`isprint()` function]i]
 
-Tests if a character is printable
+Kiểm tra ký tự có in được
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -438,16 +437,17 @@ Tests if a character is printable
 int isprint(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Tests if a character is printable, including space (`' '`). So like
-`isgraph()`, except space isn't left out in the cold.
+Kiểm tra xem ký tự có in được không, kể cả space (`' '`). Nên là
+giống `isgraph()`, nhưng lần này space không bị bỏ rơi ngoài trời
+lạnh.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true if the character is printable, including space (`' '`).
+Trả về true nếu ký tự in được, kể cả space (`' '`).
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -455,7 +455,7 @@ Returns true if the character is printable, including space (`' '`).
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isprint('c')? "yes": "no");   // yes
     printf("%s\n", isprint('0')? "yes": "no");   // yes
@@ -464,7 +464,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isgraph()`](#man-isgraph),
 [`iscntrl()`](#man-iscntrl)
@@ -474,7 +474,7 @@ int main(void)
 
 [i[`ispunct()` function]i]
 
-Test if a character is punctuation
+Kiểm tra ký tự có là dấu câu
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -484,24 +484,24 @@ Test if a character is punctuation
 int ispunct(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Tests if a character is punctuation.
+Kiểm tra xem ký tự có là dấu câu.
 
-In the "C" locale, this means:
+Ở locale "C", điều đó có nghĩa là:
 
 ``` {.c}
 !isspace(c) && !isalnum(c)
 ```
 
-In other locales, there could be other punctuation characters (but they
-also can't be space or alphanumeric).
+Ở các locale khác, có thể có các ký tự dấu câu khác (nhưng cũng không
+thể là space hoặc chữ-số).
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-True if the character is punctuation.
+True nếu ký tự là dấu câu.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -509,7 +509,7 @@ True if the character is punctuation.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", ispunct(',')? "yes": "no");   // yes
     printf("%s\n", ispunct('!')? "yes": "no");   // yes
@@ -520,7 +520,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isspace()`](#man-isspace),
 [`isalnum()`](#man-isalnum)
@@ -530,7 +530,7 @@ int main(void)
 
 [i[`isspace()` function]i]
 
-Test if a character is whitespace
+Kiểm tra ký tự có là whitespace
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -540,9 +540,9 @@ Test if a character is whitespace
 int isspace(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Tests if `c` is a whitespace character. These are:
+Kiểm tra xem `c` có là ký tự whitespace không. Bao gồm:
 
 * Space (`' '`)
 * Formfeed (`'\f'`)
@@ -551,14 +551,14 @@ Tests if `c` is a whitespace character. These are:
 * Horizontal Tab (`'\t'`)
 * Vertical Tab (`'\v'`)
 
-Other locales might specify other whitespace characters. `isalnum()` is
-false for all whitespace characters.
+Các locale khác có thể xác định các ký tự whitespace khác. `isalnum()`
+là false với mọi ký tự whitespace.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-True if the character is whitespace.
+True nếu ký tự là whitespace.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -566,7 +566,7 @@ True if the character is whitespace.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isspace(' ')? "yes": "no");   // yes
     printf("%s\n", isspace('\n')? "yes": "no");  // yes
@@ -577,7 +577,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isblank()`](#man-isblank)
 
@@ -586,7 +586,7 @@ int main(void)
 
 [i[`isupper()` function]i]
 
-Tests if a character is uppercase
+Kiểm tra ký tự có là chữ hoa
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -596,22 +596,22 @@ Tests if a character is uppercase
 int isupper(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Tests if a character is uppercase, in the range `A`-`Z`.
+Kiểm tra xem ký tự có là chữ hoa trong khoảng `A`-`Z` không.
 
-In other locales, there could be other uppercase characters. In all
-cases, to be uppercase, the following must be true:
+Ở các locale khác, có thể có những ký tự chữ hoa khác. Trong mọi
+trường hợp, để là chữ hoa, điều sau đây phải đúng:
 
 ``` {.c}
 !iscntrl(c) && !isdigit(c) && !ispunct(c) && !isspace(c)
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns true if the character is uppercase.
+Trả về true nếu ký tự là chữ hoa.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -619,7 +619,7 @@ Returns true if the character is uppercase.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isupper('B')? "yes": "no");   // yes
     printf("%s\n", isupper('c')? "yes": "no");   // no
@@ -629,7 +629,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`islower()`](#man-islower),
 [`isalpha()`](#man-isalpha),
@@ -641,7 +641,7 @@ int main(void)
 
 [i[`isxdigit()` function]i]
 
-Tests if a character is a hexadecimal digit
+Kiểm tra ký tự có là chữ số hex
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -651,16 +651,16 @@ Tests if a character is a hexadecimal digit
 int isxdigit(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Returns true if the character is a hexadecimal digit. Namely if it's
-`0`-`9`, `a`-`f`, or `A`-`F`.
+Trả về true nếu ký tự là chữ số hex. Cụ thể là `0`-`9`, `a`-`f`, hoặc
+`A`-`F`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-True if the character is a hexadecimal digit.
+True nếu ký tự là chữ số hex.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -668,7 +668,7 @@ True if the character is a hexadecimal digit.
 
 int main(void)
 {
-    //             testing this char
+    //             kiểm tra ký tự này
     //                      v
     printf("%s\n", isxdigit('B')? "yes": "no");   // yes
     printf("%s\n", isxdigit('c')? "yes": "no");   // yes
@@ -678,7 +678,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isdigit()`](#man-isdigit)
 
@@ -687,7 +687,7 @@ int main(void)
 
 [i[`tolower()` function]i]
 
-Convert a letter to lowercase
+Chuyển chữ cái sang chữ thường
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -697,19 +697,19 @@ Convert a letter to lowercase
 int tolower(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If the character is uppercase (i.e. `isupper(c)` is true), this function
-returns the corresponding lowercase letter.
+Nếu ký tự là chữ hoa (tức `isupper(c)` là true), hàm này trả về chữ
+thường tương ứng.
 
-Different locales might have different upper- and lowercase letters.
+Các locale khác nhau có thể có tập chữ hoa và chữ thường khác nhau.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the lowercase value for an uppercase letter. If the letter isn't
-uppercase, returns it unchanged.
+Trả về giá trị chữ thường của một chữ hoa. Nếu ký tự không phải chữ
+hoa, trả về không đổi.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -717,15 +717,15 @@ uppercase, returns it unchanged.
 
 int main(void)
 {
-    //             changing this char
+    //             đổi ký tự này
     //                      v
-    printf("%c\n", tolower('B'));  // b (made lowercase!)
-    printf("%c\n", tolower('e'));  // e (unchanged)
-    printf("%c\n", tolower('!'));  // ! (unchanged)
+    printf("%c\n", tolower('B'));  // b (đã chuyển thường!)
+    printf("%c\n", tolower('e'));  // e (không đổi)
+    printf("%c\n", tolower('!'));  // ! (không đổi)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`toupper()`](#man-toupper),
 [`islower()`](#man-islower),
@@ -736,7 +736,7 @@ int main(void)
 
 [i[`toupper()` function]i]
 
-Convert a letter to uppercase
+Chuyển chữ cái sang chữ hoa
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -746,19 +746,19 @@ Convert a letter to uppercase
 int toupper(int c);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If the character is lower (i.e. `islower(c)` is true), this function
-returns the corresponding uppercase letter.
+Nếu ký tự là chữ thường (tức `islower(c)` là true), hàm này trả về
+chữ hoa tương ứng.
 
-Different locales might have different upper- and lowercase letters.
+Các locale khác nhau có thể có tập chữ hoa và chữ thường khác nhau.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the uppercase value for a lowercase letter. If the letter isn't
-lowercase, returns it unchanged.
+Trả về giá trị chữ hoa của một chữ thường. Nếu ký tự không phải chữ
+thường, trả về không đổi.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -766,15 +766,15 @@ lowercase, returns it unchanged.
 
 int main(void)
 {
-    //             changing this char
+    //             đổi ký tự này
     //                      v
-    printf("%c\n", toupper('B'));  // B (unchanged)
-    printf("%c\n", toupper('e'));  // E (made uppercase!)
-    printf("%c\n", toupper('!'));  // ! (unchanged)
+    printf("%c\n", toupper('B'));  // B (không đổi)
+    printf("%c\n", toupper('e'));  // E (đã chuyển hoa!)
+    printf("%c\n", toupper('!'));  // ! (không đổi)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`tolower()`](#man-tolower),
 [`islower()`](#man-islower),
