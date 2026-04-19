@@ -3,34 +3,34 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<stdarg.h>` Variable Arguments {#stdarg}
+# `<stdarg.h>` Tham Số Biến Đổi {#stdarg}
 
 [i[`stdarg.h` header file]i]
 
-|Macro|Description|
+|Macro|Mô tả|
 |--------|----------------------|
-|[`va_arg()`](#man-va_arg)|Get the next variable argument|
-|[`va_copy()`](#man-va_copy)|Copy a `va_list` and the work done so far|
-|[`va_end()`](#man-va_end)|Signify we're done processing variable arguments|
-|[`va_start()`](#man-va_start)|Initialize a `va_list` to start variable argument processing|
+|[`va_arg()`](#man-va_arg)|Lấy tham số biến đổi kế tiếp|
+|[`va_copy()`](#man-va_copy)|Copy một `va_list` và công việc đã làm tới thời điểm đó|
+|[`va_end()`](#man-va_end)|Báo hiệu ta đã xử lý xong tham số biến đổi|
+|[`va_start()`](#man-va_start)|Khởi tạo một `va_list` để bắt đầu xử lý tham số biến đổi|
 
-This header file is what allows you to write functions that take a
-variable number of arguments.
+Header file này là cái cho phép bạn viết hàm nhận số lượng tham số
+biến đổi.
 
-In addition to the macros, you get a new type that helps C keep track of
-where it is in the variable-number-of-arguments-processing: [i[`va_list`
-type]i] `va_list`. This type is opaque, and you'll be passing it around
-to the various macros to help get at the arguments.
+Ngoài các macro, bạn còn có một kiểu mới giúp C theo dõi vị trí
+đang xử lý đến đâu trong quá trình xử lý tham số biến đổi:
+[i[`va_list` type]i] `va_list`. Kiểu này là opaque, và bạn sẽ
+truyền nó quanh các macro khác nhau để giúp lấy tham số.
 
-Note that every variadic function requires at least one non-variable
-parameter. You need this to kick off processing with `va_start()`.
+Chú ý mỗi hàm variadic cần ít nhất một tham số non-variable. Bạn
+cần cái này để khởi động xử lý với `va_start()`.
 
 [[manbreak]]
 ## `va_arg()` {#man-va_arg}
 
 [i[`va_arg()` macro]i]
 
-Get the next variable argument
+Lấy tham số biến đổi kế tiếp
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -40,26 +40,26 @@ Get the next variable argument
 type va_arg(va_list ap, type);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a variable argument list you've initialized with
-`va_start()`, pass it to this one along with the type of argument you're
-trying to get, e.g.
+Nếu bạn có variable argument list đã được khởi tạo bằng
+`va_start()`, truyền nó vào đây cùng với kiểu của tham số bạn đang
+muốn lấy, ví dụ:
 
 ``` {.c}
 int   x = va_arg(args, int);
 float y = va_arg(args, float);
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Evaluates to the value and type of the next variable argument.
+Eval thành giá trị và kiểu của tham số biến đổi kế tiếp.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a demo that adds together an arbitrary number of integers. The
-first argument is the number of integers to add together. We'll make use
-of that to figure out how many times we have to call `va_arg()`.
+Đây là demo cộng số lượng integer tuỳ ý lại với nhau. Tham số đầu
+tiên là số lượng integer cần cộng. Ta sẽ dùng cái đó để biết phải
+gọi `va_arg()` bao nhiêu lần.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -70,15 +70,15 @@ int add(int count, ...)
     int total = 0;
     va_list va;
 
-    va_start(va, count);   // Start with arguments after "count"
+    va_start(va, count);   // Bắt đầu với tham số sau "count"
 
     for (int i = 0; i < count; i++) {
-        int n = va_arg(va, int);   // Get the next int
+        int n = va_arg(va, int);   // Lấy int kế tiếp
 
         total += n;
     }
 
-    va_end(va);  // All done
+    va_end(va);  // Xong hết
 
     return total;
 }
@@ -90,7 +90,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`va_start()`](#man-va_start),
 [`va_end()`](#man-va_end)
@@ -100,7 +100,7 @@ int main(void)
 
 [i[`va_copy()` macro]i]
 
-Copy a `va_list` and the work done so far
+Copy một `va_list` và công việc đã làm tới thời điểm đó
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -110,24 +110,24 @@ Copy a `va_list` and the work done so far
 void va_copy(va_list dest, va_list src);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-The main intended use of this is to save your state partway through
-processing variable arguments so you can scan ahead and then rewind back
-to the save point.
+Mục đích chính của hàm này là lưu trạng thái giữa chừng trong quá
+trình xử lý tham số biến đổi để bạn có thể scan tới rồi rewind lại
+chỗ đã lưu.
 
-You pass in a `src` `va_list` and it copies it to `dest`.
+Bạn truyền vào `src` `va_list` và nó copy sang `dest`.
 
-If you've already called this once for a particular `dest`, you can't
-call it (or `va_start()`) again with the same `dest` unless you call
-`va_end()` on that `dest` first.
+Nếu đã gọi hàm này một lần cho một `dest` cụ thể, bạn không được
+gọi lại (hay gọi `va_start()`) với cùng `dest` đó trừ khi bạn gọi
+`va_end()` cho cái `dest` đó trước.
 
 ``` {.c}
 va_copy(dest, src);
-va_copy(dest, src2);  // BAD!
+va_copy(dest, src2);  // SAI!
 
 va_copy(dest, src);
-va_start(dest, var);  // BAD!
+va_start(dest, var);  // SAI!
 
 va_copy(dest, src);
 va_end(dest);
@@ -138,40 +138,38 @@ va_end(dest);
 va_start(dest, var);  // OK!
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing.
+Không trả về gì.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's an example where we're adding together all the variable
-arguments, but then we want to go back and add on all the numbers past
-the first two, for example if the arguments are:
+Đây là ví dụ cộng tất cả tham số biến đổi lại, rồi quay lại cộng
+thêm tất cả các số từ thứ ba trở đi nữa, ví dụ nếu tham số là:
 
 ``` {.default}
 10 20 30 40
 ```
 
-First we add them all for `100`, and then we add on everything from the
-third number on, so add on `30+40` for a total of `170`.
+Đầu tiên ta cộng tất cả được `100`, rồi cộng thêm mọi thứ từ số
+thứ ba, tức cộng `30+40`, tổng ra `170`.
 
-We'll do this by saving our place in the variable argument processing
-with `va_copy` and then using that later to reprocess the trailing
-arguments.
+Ta sẽ làm vậy bằng cách lưu vị trí trong quá trình xử lý tham số
+biến đổi với `va_copy`, rồi dùng nó sau để xử lý lại phần tham số
+đuôi.
 
-(And yes, I know there's a mathematical way to do this without all the
-rewinding, but I'm having an heck of a time coming up with a good
-example!)
+(Và đúng rồi, tôi biết có cách toán học làm chuyện này mà không cần
+rewind, nhưng tôi đang khó lòng nghĩ ra ví dụ hay!)
 
 ``` {.c .numberLines}
 #include <stdio.h>
 #include <stdarg.h>
 
-// Add all the numbers together, but then add on all the numbers
-// past the second one again.
+// Cộng tất cả các số lại, rồi cộng lại lần nữa tất cả các số
+// từ sau số thứ hai.
 int contrived_adder(int count, ...)
 {
-    if (count < 3) return 0; // OK, I'm being lazy. You got me.
+    if (count < 3) return 0; // OK, tôi đang lười. Bắt được rồi đó.
 
     int total = 0;
 
@@ -181,7 +179,7 @@ int contrived_adder(int count, ...)
 
     for (int i = 0; i < count; i++) {
 
-        // If we're at the second number, save our place in
+        // Nếu ta đang ở số thứ hai, lưu chỗ vào
         // mid_args:
 
         if (i == 2)
@@ -190,13 +188,13 @@ int contrived_adder(int count, ...)
         total += va_arg(args, int);
     }
 
-    va_end(args); // Done with this
+    va_end(args); // Xong cái này
 
-    // But now let's start with mid_args and add all those on:
+    // Nhưng giờ bắt đầu với mid_args và cộng hết những cái đó:
     for (int i = 0; i < count - 2; i++)
         total += va_arg(mid_args, int);
 
-    va_end(mid_args); // Done with this, too
+    va_end(mid_args); // Xong cái này luôn
 
     return total;
 }
@@ -211,7 +209,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`va_start()`](#man-va_start),
 [`va_arg()`](#man-va_arg),
@@ -222,7 +220,7 @@ int main(void)
 
 [i[`va_end()` macro]i]
 
-Signify we're done processing variable arguments
+Báo hiệu ta đã xử lý xong tham số biến đổi
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -232,28 +230,28 @@ Signify we're done processing variable arguments
 void va_end(va_list ap);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-After you've `va_start()`ed or `va_copy`'d a new `va_list`, you **must**
-call `va_end()` with it before it goes out of scope. 
+Sau khi bạn đã `va_start()` hoặc `va_copy` một `va_list` mới, bạn
+**phải** gọi `va_end()` với nó trước khi nó ra khỏi scope. 
 
-You also have to do this if you're going to call `va_start()` or
-`va_copy()` _again_ on a variable you've already done that to.
+Bạn cũng phải làm vậy nếu định gọi `va_start()` hoặc `va_copy()`
+_lại_ trên biến mà bạn đã làm vậy rồi.
 
-Them's the rules if you want to avoid undefined behavior.
+Đó là luật nếu bạn muốn tránh undefined behavior.
 
-But just think of it as cleanup. You called `va_start()`, so you'll call
-`va_end()` when you're done.
+Nhưng cứ nghĩ nó như cleanup thôi. Bạn gọi `va_start()`, nên bạn sẽ
+gọi `va_end()` khi xong.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing.
+Không trả về gì.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a demo that adds together an arbitrary number of integers. The
-first argument is the number of integers to add together. We'll make use
-of that to figure out how many times we have to call `va_arg()`.
+Đây là demo cộng số lượng integer tuỳ ý lại với nhau. Tham số đầu
+tiên là số lượng integer cần cộng. Ta sẽ dùng cái đó để biết phải
+gọi `va_arg()` bao nhiêu lần.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -264,15 +262,15 @@ int add(int count, ...)
     int total = 0;
     va_list va;
 
-    va_start(va, count);   // Start with arguments after "count"
+    va_start(va, count);   // Bắt đầu với tham số sau "count"
 
     for (int i = 0; i < count; i++) {
-        int n = va_arg(va, int);   // Get the next int
+        int n = va_arg(va, int);   // Lấy int kế tiếp
 
         total += n;
     }
 
-    va_end(va);  // All done
+    va_end(va);  // Xong hết
 
     return total;
 }
@@ -284,7 +282,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`va_start()`](#man-va_start),
 [`va_copy()`](#man-va_copy)
@@ -294,7 +292,7 @@ int main(void)
 
 [i[`va_start()` macro]i]
 
-Initialize a `va_list` to start variable argument processing
+Khởi tạo một `va_list` để bắt đầu xử lý tham số biến đổi
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -304,34 +302,33 @@ Initialize a `va_list` to start variable argument processing
 void va_start(va_list ap, parmN);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-You've declared a variable of type `va_list` to keep track of the
-variable argument processing... now how to initialize it so you can
-start calling `va_arg()` to get those arguments?
+Bạn đã khai báo một biến kiểu `va_list` để theo dõi quá trình xử
+lý tham số biến đổi... giờ làm sao khởi tạo nó để có thể bắt đầu
+gọi `va_arg()` lấy các tham số đó?
 
-`va_start()` to the rescue!
+`va_start()` ra tay cứu nguy!
 
-What you do is pass in your `va_list`, here shown as parameter `ap`.
-Just pass the list, not a pointer to it.
+Việc bạn làm là truyền `va_list` của bạn vào, ở đây thể hiện qua
+tham số `ap`. Chỉ truyền list, không truyền pointer tới nó.
 
-Then for the second argument to `va_start()`, you give the name of the
-parameter that you want to start processing arguments _after_. This must
-be the parameter right before the `...` in the argument list.
+Rồi cho tham số thứ hai của `va_start()`, bạn đưa tên tham số mà
+bạn muốn bắt đầu xử lý tham số _sau_ nó. Cái này phải là tham số
+ngay trước `...` trong danh sách tham số.
 
-If you've already called `va_start()` on a particular `va_list` and you
-want to call `va_start()` on it again, you **must** call `va_end()`
-first!
+Nếu bạn đã gọi `va_start()` trên một `va_list` cụ thể và muốn gọi
+`va_start()` lại trên nó, bạn **phải** gọi `va_end()` trước!
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a demo that adds together an arbitrary number of integers. The
-first argument is the number of integers to add together. We'll make use
-of that to figure out how many times we have to call `va_arg()`.
+Đây là demo cộng số lượng integer tuỳ ý lại với nhau. Tham số đầu
+tiên là số lượng integer cần cộng. Ta sẽ dùng cái đó để biết phải
+gọi `va_arg()` bao nhiêu lần.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -342,15 +339,15 @@ int add(int count, ...)
     int total = 0;
     va_list va;
 
-    va_start(va, count);   // Start with arguments after "count"
+    va_start(va, count);   // Bắt đầu với tham số sau "count"
 
     for (int i = 0; i < count; i++) {
-        int n = va_arg(va, int);   // Get the next int
+        int n = va_arg(va, int);   // Lấy int kế tiếp
 
         total += n;
     }
 
-    va_end(va);  // All done
+    va_end(va);  // Xong hết
 
     return total;
 }
@@ -362,7 +359,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`va_arg()`](#man-va_arg),
 [`va_end()`](#man-va_end)
