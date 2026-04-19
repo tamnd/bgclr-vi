@@ -45,179 +45,180 @@
 [is[Carriage return==>see `\r` operator]]
 [is[Hexadecimal==>see `0x` hexadecimal]]
 
-The door slowly creaks open revealing a long hall with dusty stacks of
-books of lore...
+Cánh cửa từ từ kẽo kẹt mở ra, để lộ một hành lang dài với những chồng
+sách truyền thuyết phủ bụi...
 
-I admit, maybe not that.
+Thôi, có lẽ không phải vậy đâu.
 
-But you have found the Library Reference portion of Beej's Guide to C!
+Nhưng bạn đã tìm ra phần Tham chiếu Thư viện (Library Reference) của
+Beej's Guide to C!
 
-This isn't a tutorial, but rather is a comprehensive set of manual pages
-(or _man pages_ as Unix hackers like to say) that define _every_
-function in the C Standard Library, complete with examples.
+Đây không phải một tutorial, mà là một bộ manual page đầy đủ (hay
+_man page_ theo kiểu gọi của mấy dân Unix), định nghĩa _mọi_ hàm
+trong Thư viện chuẩn C, kèm ví dụ.
 
-> _"This book, sir, contains every word in our beloved language."_\
-> _"Every single one, sir?"_\
-> _"Every single one, sir!"_\
-> _"Ah, well in that case, sir, I hope you will not object if I also
-> offer the doctor my most enthusiastic contrafribularities."_
+> _"Thưa ngài, cuốn này chứa mọi chữ của thứ tiếng mà chúng ta yêu
+> quý."_\
+> _"Từng chữ một, thưa ngài?"_\
+> _"Từng chữ một, thưa ngài!"_\
+> _"Ồ, vậy thì, thưa ngài, tôi mong ngài không phiền nếu tôi cũng gửi
+> đến vị bác sĩ lời chúc phản-miếng-bánh-ngụm (contrafribularities)
+> nồng nhiệt nhất của mình."_
 >
-> ---Blackadder toying with Dr. Samuel Johnson
+> ---Blackadder trêu Tiến sĩ Samuel Johnson
 
-There are, in fact, a number of functions left out of this guide, most
-notably all the optional "safe" functions (with a `_s` suffix).
+Thực ra có một số hàm bị bỏ ngoài guide này, đáng chú ý nhất là mấy
+hàm "safe" tuỳ chọn (có hậu tố `_s`).
 
-But everything you're likely to want is definitely covered in here. With
-examples.
+Nhưng mọi thứ bạn có thể muốn thì chắc chắn đều có ở đây. Kèm ví dụ.
 
-Probably.
+Chắc vậy.
 
-## Audience
+## Đối tượng
 
-This guide is for people who are at least modestly proficient in C.
+Guide này dành cho người đã thạo C ở mức kha khá.
 
-If you are not one of those people and wish to become one of those
-people, I can wholeheartedly recommend with zero bias the book
-[fl[_Beej's Guide to C Programming_|https://beej.us/guide/bgc/]], freely
-available wherever the Internet is sold.
+Nếu bạn chưa thuộc nhóm đó mà muốn trở thành, tôi xin hết lòng, hoàn
+toàn không thiên vị, giới thiệu cuốn
+[fl[_Beej's Guide to C Programming_|https://beej.us/guide/bgc/]], có
+sẵn miễn phí ở bất cứ đâu Internet được bán.
 
-## How to Read This Book
+## Cách đọc cuốn này
 
-Use the contents or index to find the function or category you're after.
+Dùng mục lục hoặc index để tìm hàm hoặc chủ đề bạn cần.
 
-Then grab a bowl of your favorite cereal and devour the delicious,
-delicious verbiage.
+Rồi lấy một tô ngũ cốc yêu thích ra, và chén thoải mái đống chữ nghĩa
+ngon lành trong đây.
 
-## Platform and Compiler
+## Nền tảng và Compiler
 
-I'll try to stick to Plain Ol'-Fashioned [flw[ISO-standard C|ANSI_C]].
-Well, for the most part. Here and there I might go crazy and start
-talking about [flw[POSIX|POSIX]] or something, but we'll see.
+Tôi sẽ cố bám vào [flw[ISO-standard C|ANSI_C]] cổ điển. Ừ, phần lớn
+là vậy. Thi thoảng tôi có thể nổi hứng nói về
+[flw[POSIX|POSIX]] hay gì đó, để xem đã.
 
-**Unix** users (e.g. Linux, BSD, etc.) try running `cc` or `gcc` from
-the command line--you might already have a compiler installed. If you
-don't, search your distribution for installing `gcc` or `clang`.
+**Unix** (Linux, BSD, v.v.) thử gõ `cc` hoặc `gcc` ngoài command
+line, có thể bạn đã có sẵn compiler rồi. Nếu chưa, tìm cách cài `gcc`
+hoặc `clang` trên distro của bạn.
 
-**Windows** users should check out [fl[Visual Studio
-Community|https://visualstudio.microsoft.com/vs/community/]]. Or, if
-you're looking for a more Unix-like experience (recommended!), install
-[fl[WSL|https://docs.microsoft.com/en-us/windows/wsl/install-win10]] and
-`gcc`.
+**Windows** thử [fl[Visual Studio
+Community|https://visualstudio.microsoft.com/vs/community/]]. Hoặc,
+nếu bạn muốn trải nghiệm kiểu Unix (khuyến khích!), cài
+[fl[WSL|https://docs.microsoft.com/en-us/windows/wsl/install-win10]]
+rồi cài `gcc`.
 
-**Mac** users will want to install
-[fl[XCode|https://developer.apple.com/xcode/]], and in particular the
-command line tools.
+**Mac** thì cài
+[fl[XCode|https://developer.apple.com/xcode/]], nhớ bật command line
+tools.
 
-There are a lot of compilers out there, and virtually all of them will
-work for this book. And a C++ compiler will compile a lot of (but not
-all!) C code. Best use a proper C compiler if you can.
+Có rất nhiều compiler, và hầu như cái nào cũng dùng được cho cuốn
+này. Và compiler C++ sẽ compile được khá nhiều code C (nhưng không
+phải tất cả!). Tốt nhất là dùng compiler C thực thụ nếu có.
 
-## Official Homepage
+## Trang chủ chính thức
 
-This official location of this document is
-[fl[`https://beej.us/guide/bgclr/`|https://beej.us/guide/bgclr/]]. There
-used to be a note here about migrating off Chico State's computers (my
-alma mater), but that's something that happened roughly a zillion years
-ago and the wording remained here only because it was copied over from
-the Network Guide, [_breath_] which I apparently haven't read in its
-entirety for quite some time.
+Địa chỉ chính thức của tài liệu này là
+[fl[`https://beej.us/guide/bgclr/`|https://beej.us/guide/bgclr/]].
+Trước đây ở đây có một ghi chú về việc di chuyển khỏi máy chủ ở Chico
+State (trường cũ của tôi), nhưng đó là chuyện tỷ năm trước rồi và
+câu chữ vẫn còn đây chỉ vì nó được copy từ Network Guide sang, [_hít
+thở_] mà tôi đã khá lâu rồi không đọc lại toàn bộ.
 
-The End.
+Hết chuyện.
 
-## Email Policy
+## Chính sách Email
 
-I'm generally available to help out with email questions so feel free to
-write in, but I can't guarantee a response. I lead a pretty busy life
-and there are times when I just can't answer a question you have. When
-that's the case, I usually just delete the message. It's nothing
-personal; I just won't ever have the time to give the detailed answer
-you require.
+Nói chung tôi luôn sẵn lòng giúp trả lời câu hỏi qua email, cứ viết
+thoải mái, nhưng tôi không đảm bảo sẽ trả lời. Tôi sống khá bận, có
+những lúc đơn giản là không trả lời nổi. Những lúc đó tôi thường xoá
+luôn tin nhắn. Không phải chuyện cá nhân gì đâu; chỉ là tôi không bao
+giờ đủ thời gian để đưa ra câu trả lời chi tiết mà bạn cần.
 
-As a rule, the more complex the question, the less likely I am to
-respond. If you can narrow down your question before mailing it and be
-sure to include any pertinent information (like platform, compiler,
-error messages you're getting, and anything else you think might help me
-troubleshoot), you're much more likely to get a response.
+Theo kinh nghiệm, câu hỏi càng phức tạp, tôi càng ít khả năng trả
+lời. Nếu bạn chịu khó thu hẹp câu hỏi trước khi gửi, và nhớ kèm mọi
+thông tin liên quan (như nền tảng, compiler, các thông báo lỗi bạn
+gặp, và bất cứ gì bạn nghĩ sẽ giúp tôi debug), bạn có cơ hội được
+trả lời cao hơn nhiều.
 
-If you don't get a response, hack on it some more, try to find the
-answer, and if it's still elusive, then write me again with the
-information you've found and hopefully it will be enough for me to help
-out.
+Nếu bạn không được trả lời, cứ cày thêm, thử tự tìm ra đáp án, và
+nếu nó vẫn lẩn trốn, hãy viết lại cho tôi với thông tin bạn đã thu
+thập được, và hy vọng chừng đó là đủ để tôi giúp được.
 
-Now that I've badgered you about how to write and not write me, I'd just
-like to let you know that I _fully_ appreciate all the praise the guide
-has received over the years. It's a real morale boost, and it gladdens
-me to hear that it is being used for good! `:-)` Thank you!
+Giờ khi đã cằn nhằn bạn về cách nên và không nên viết thư cho tôi,
+tôi cũng muốn nói là tôi _hết sức_ trân trọng mọi lời khen mà cuốn
+guide nhận được qua nhiều năm nay. Đó là một liều tinh thần thực sự,
+và tôi mừng khi biết nó đang được dùng cho mục đích tốt! `:-)` Cảm
+ơn nhé!
 
-## Mirroring
+## Mirror
 
-You are more than welcome to mirror this site, whether publicly or
-privately. If you publicly mirror the site and want me to link to it
-from the main page, drop me a line at
+Bạn hoàn toàn được hoan nghênh mirror trang này, dù công khai hay
+riêng tư. Nếu bạn mirror công khai và muốn tôi link tới từ trang
+chính, gửi cho tôi một dòng ở
 [`beej@beej.us`](mailto:beej@beej.us).
 
-## Note for Translators
+## Ghi chú cho người dịch
 
-If you want to translate the guide into another language, write me at
-[`beej@beej.us`](beej@beej.us) and I'll link to your translation from
-the main page. Feel free to add your name and contact info to the
-translation.
+Nếu bạn muốn dịch guide sang ngôn ngữ khác, viết cho tôi ở
+[`beej@beej.us`](beej@beej.us) và tôi sẽ link tới bản dịch của bạn
+từ trang chính. Bạn có thể thêm tên và thông tin liên hệ của mình
+vào bản dịch.
 
-Please note the license restrictions in the Copyright and Distribution
-section, below.
+Lưu ý các ràng buộc giấy phép ở mục Bản quyền và Phân phối bên dưới.
 
-## Copyright and Distribution
+## Bản quyền và Phân phối
 
-Beej's Guide to C Programming--Library Reference is Copyright © 2021
-Brian "Beej Jorgensen" Hall.
+Beej's Guide to C Programming, Library Reference là Copyright ©
+2021 Brian "Beej Jorgensen" Hall.
 
-With specific exceptions for source code and translations, below, this
-work is licensed under the Creative Commons Attribution-Noncommercial-No
-Derivative Works 3.0 License. To view a copy of this license, visit
+Với một số ngoại lệ cụ thể cho source code và bản dịch (xem bên
+dưới), tác phẩm này được cấp phép theo Creative Commons
+Attribution-Noncommercial-No Derivative Works 3.0 License. Để xem
+bản sao của giấy phép, vào
 [`https://creativecommons.org/licenses/by-nc-nd/3.0/`](https://creativecommons.org/licenses/by-nc-nd/3.0/)
-or send a letter to Creative Commons, 171 Second Street, Suite 300, San
+hoặc gửi thư tới Creative Commons, 171 Second Street, Suite 300, San
 Francisco, California, 94105, USA.
 
-One specific exception to the "No Derivative Works" portion of the
-license is as follows: this guide may be freely translated into any
-language, provided the translation is accurate, and the guide is
-reprinted in its entirety. The same license restrictions apply to the
-translation as to the original guide. The translation may also include
-the name and contact information for the translator.
+Một ngoại lệ cụ thể đối với phần "No Derivative Works" của giấy
+phép là: guide này có thể được dịch tự do sang bất cứ ngôn ngữ nào,
+miễn là bản dịch chính xác và guide được in lại trọn vẹn. Các ràng
+buộc giấy phép áp dụng cho bản dịch giống như với bản gốc. Bản dịch
+cũng có thể kèm tên và thông tin liên hệ của người dịch.
 
-The C source code presented in this document is hereby granted to the
-public domain, and is completely free of any license restriction.
+Source code C xuất hiện trong tài liệu này được tuyên bố đưa vào
+public domain, hoàn toàn không bị ràng buộc giấy phép.
 
-Educators are freely encouraged to recommend or supply copies of this
-guide to their students.
+Các nhà giáo dục được khuyến khích tự do giới thiệu hoặc cung cấp
+bản sao của guide này cho học viên của mình.
 
-Contact [`beej@beej.us`](beej@beej.us) for more information.
+Liên hệ [`beej@beej.us`](beej@beej.us) để biết thêm.
 
-## Dedication
+## Lời đề tặng
 
-The hardest things about writing these guides are:
+Những chuyện khó nhất khi viết mấy cuốn guide này là:
 
-* Learning the material in enough detail to be able to explain it
-* Figuring out the best way to explain it clearly, a seemingly-endless
-  iterative process
-* Putting myself out there as a so-called _authority_, when really
-  I'm just a regular human trying to make sense of it all, just like
-  everyone else
-* Keeping at it when so many other things draw my attention
+* Học đủ sâu để có thể giải thích được
+* Tìm ra cách giải thích sao cho rõ, một quá trình lặp đi lặp lại
+  tưởng chừng vô tận
+* Đặt mình ra đó như một cái gọi là _chuyên gia_, trong khi thực ra
+  tôi chỉ là một con người bình thường đang cố hiểu mọi thứ, giống
+  mọi người khác
+* Giữ lửa với nó khi nhiều thứ khác cứ đòi sự chú ý của tôi
 
-A lot of people have helped me through this process, and I want to
-acknowledge those who have made this book possible.
+Rất nhiều người đã giúp tôi qua quá trình này, và tôi muốn ghi công
+những ai đã góp phần làm nên cuốn sách này.
 
-* Everyone on the Internet who decided to help share their knowledge in
-  one form or another. The free sharing of instructive information is
-  what makes the Internet the great place that it is.
-* The volunteers at [fl[cppreference.com|https://en.cppreference.com/]]
-  who provide the bridge that leads from the spec to the real world.
-* The helpful and knowledgeable folks on
-  [fl[comp.lang.c|https://groups.google.com/g/comp.lang.c]] and 
-  [fl[r/C_Programming|https://www.reddit.com/r/C_Programming/]] who got
-  me through the tougher parts of the language.
-* Everyone who submitted corrections and pull-requests on everything
-  from misleading instructions to typos.
+* Mọi người trên Internet đã quyết định chia sẻ kiến thức của mình
+  theo cách này hay cách khác. Việc chia sẻ kiến thức hướng dẫn một
+  cách tự do chính là thứ làm nên một Internet tuyệt vời như ta
+  thấy.
+* Các tình nguyện viên ở
+  [fl[cppreference.com|https://en.cppreference.com/]], những người
+  xây cây cầu nối từ spec sang thực tế.
+* Những người tốt bụng và hiểu biết ở
+  [fl[comp.lang.c|https://groups.google.com/g/comp.lang.c]] và
+  [fl[r/C_Programming|https://www.reddit.com/r/C_Programming/]],
+  những người đã kéo tôi qua các phần khó của ngôn ngữ.
+* Tất cả những ai đã gửi corrections và pull-request cho đủ thứ từ
+  hướng dẫn gây hiểu lầm đến lỗi chính tả.
 
-Thank you! ♥
+Cảm ơn! ♥
