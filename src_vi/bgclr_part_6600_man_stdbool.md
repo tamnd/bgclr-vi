@@ -3,35 +3,35 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<stdbool.h>` Boolean Types {#stdbool}
+# `<stdbool.h>` Kiểu Boolean {#stdbool}
 
 [i[`stdbool.h` header file]i]
 
-This is a small header file that defines a number of convenient Boolean
-macros. If you really need that kind of thing.
+Đây là header file nhỏ định nghĩa vài macro Boolean tiện tay. Nếu
+bạn thực sự cần mấy thứ này.
 
 [i[`bool` macro]i]
 [i[`true` macro]i]
 [i[`false` macro]i]
 
-|Macro  |Description                         |
+|Macro  |Mô tả                         |
 |-------|------------------------------------|
-|`bool` |Type for Boolean, expands to `_Bool`|
-|`true` |True value, expands to `1`          |
-|`false`|False value, expands to `0`         |
+|`bool` |Kiểu cho Boolean, expand thành `_Bool`|
+|`true` |Giá trị true, expand thành `1`          |
+|`false`|Giá trị false, expand thành `0`         |
 
-There's one more macro that I'm not putting in the table because it's
-such a long name it'll blow up the table alignment:
+Còn một macro nữa tôi không cho vào bảng vì tên dài ngoằng sẽ phá
+nát bảng:
 
 ``` {.c}
 __bool_true_false_are_defined
 ```
 
-which expands to `1`.
+expand thành `1`.
 
-## Example
+## Ví dụ
 
-Here's a lame example that shows off these macros.
+Đây là ví dụ hết sức tầm thường để show off mấy macro này.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -61,20 +61,20 @@ x is now 0
 
 ## `_Bool`?
 
-What's the deal with `_Bool`? Why didn't they just make it `bool`?
+`_Bool` là sao? Sao họ không đặt luôn là `bool`?
 
-Well, there was a lot of C code out there where people had defined their
-own `bool` type and adding an official `bool` would have broken those
-`typedef`s. 
+Chà, ngoài kia có cả đống code C mà người ta đã tự định nghĩa kiểu
+`bool` của riêng mình, và thêm một `bool` chính thức sẽ làm hỏng
+những `typedef` đó.
 
-But C has already reserved all identifiers that start with an underscore
-followed by a capital letter, so it was clear to make up a new `_Bool`
-type and go with that.
+Nhưng C đã reserve sẵn mọi định danh bắt đầu bằng dấu gạch dưới
+theo sau là chữ cái viết hoa, nên rõ ràng cách làm là nặn ra kiểu
+`_Bool` mới và xài nó.
 
-And, if you know your code can handle it, you can include this header to
-get all this juicy syntax.
+Và, nếu bạn biết code của mình xử được, bạn có thể include header
+này để lấy đống syntax ngon nghẻ này.
 
-One more note on conversions: unlike converting to `int`, the _only_
-thing that converts to `false` in a `_Bool` is a scalar zero value.
-Anything at all that's not zero, like `-3490`, `0.12`, or `NaN`,
-converts to `true`.
+Một ghi chú nữa về chuyện chuyển đổi: khác với chuyển sang `int`,
+thứ _duy nhất_ chuyển thành `false` trong một `_Bool` là giá trị
+scalar bằng không. Bất cứ thứ gì khác không, như `-3490`, `0.12`,
+hay `NaN`, đều chuyển thành `true`.
