@@ -3,21 +3,21 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<tgmath.h>` Type-Generic Math Functions {#tgmath}
+# `<tgmath.h>` Hàm Toán Type-Generic {#tgmath}
 
 [i[`tgmath.h` header file]i]
 
-These are type-generic macros that are wrappers around the math
-functions in [`<math.h>`](#math) and [`<complex.h>`](#complex). This
-header includes both of those.
+Đây là các macro type-generic wrap quanh các hàm toán trong
+[`<math.h>`](#math) và [`<complex.h>`](#complex). Header này
+include cả hai cái đó.
 
-But on the surface, you can think of them as being able to use, say, the
-`sqrt()` function with any type without needed to think about if it's
-`double` or `long double` or even `complex`.
+Nhưng nhìn bề mặt, bạn có thể nghĩ về chúng như khả năng dùng, ví
+dụ, hàm `sqrt()` với bất kỳ kiểu nào mà không cần nghĩ xem nó là
+`double` hay `long double` hay thậm chí `complex`.
 
-These are the defined macros---some of them don't have a counterpart in
-the real or complex space. Type suffixes are omitted in the table on the
-Real and Complex columns. None of the generic macros have type suffixes.
+Đây là các macro được định nghĩa---vài cái không có đối ứng trong
+không gian thực hoặc phức. Type suffix được bỏ qua trong bảng ở
+các cột Real và Complex. Không macro generic nào có type suffix.
 
 [i[`acos()` function]i]
 [i[`asin()` function]i]
@@ -80,7 +80,7 @@ Real and Complex columns. None of the generic macros have type suffixes.
 [i[`cproj()` function]i]
 [i[`creal()` function]i]
 
-|Real Function|Complex Function|Generic Macro|
+|Hàm Thực|Hàm Phức|Macro Generic|
 |-|-|-|
 |`acos`|`cacos`|`acos`|
 |`asin`|`casin`|`asin`|
@@ -143,10 +143,10 @@ Real and Complex columns. None of the generic macros have type suffixes.
 |---|`cproj`|`cproj`|
 |---|`creal`|`creal`|
 
-## Example
+## Ví dụ
 
-Here's an example where we call the type-generic `sqrt()` function on a
-variety of types.
+Đây là ví dụ ta gọi hàm `sqrt()` type-generic trên nhiều kiểu khác
+nhau.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -162,7 +162,7 @@ int main(void)
     long double y_result;
     double complex z_result;
 
-    // We call the same sqrt() function--it's type-generic!
+    // Ta gọi cùng hàm sqrt()--nó là type-generic!
     x_result = sqrt(x);
     y_result = sqrt(y);
     z_result = sqrt(z);
