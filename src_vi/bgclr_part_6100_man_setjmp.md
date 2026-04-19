@@ -3,30 +3,30 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<setjmp.h>` Non-local Goto {#setjmp}
+# `<setjmp.h>` Goto Không Cục Bộ {#setjmp}
 
 [i[`setjmp.h` header file]i]
 
-These functions enable you to rewind the call stack to an earlier point,
-with a bunch of gotchas. It is rarely used.
+Các hàm này cho phép bạn tua ngược call stack về một điểm trước đó,
+với một đống cái bẫy đi kèm. Hiếm khi được dùng.
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|`longjmp()`|Return to the previously-placed bookmark|
-|`setjmp()`|Bookmark this place to return to later|
+|`longjmp()`|Quay về chỗ đánh dấu đã đặt trước đó|
+|`setjmp()`|Đánh dấu chỗ này để quay về sau|
 
-There's also a new opaque type, `jmp_buf`, that holds all the
-information needed to pull off this magic trick.
+Còn có một kiểu mờ (opaque type) mới, `jmp_buf`, giữ toàn bộ thông
+tin cần thiết để làm được trò ảo thuật này.
 
-If you want your automatic local variables to be correct after a call to
-`longjmp()`. declare them as `volatile` where you called `setjmp()`.
+Nếu bạn muốn biến local tự động của mình vẫn đúng sau lời gọi
+`longjmp()`, khai báo chúng là `volatile` ở chỗ bạn gọi `setjmp()`.
 
 [[manbreak]]
 ## `setjmp()` {#man-setjmp}
 
 [i[`setjmp()` function]i]
 
-Save this location as one to return to later
+Lưu vị trí này để quay về sau
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -36,38 +36,37 @@ Save this location as one to return to later
 int setjmp(jmp_buf env);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is how you save your position so you can `longjmp()` back it,
-later. Think of it as setting up a warp destination for later use.
+Đây là cách bạn lưu vị trí để sau này có thể `longjmp()` quay về.
+Coi như đang set điểm warp để dùng sau.
 
-Basically, you call this, giving it an `env` it can fill in with all the
-information it needs to come back here later. This `env` is one you'll
-pass to `longjmp()` later when you want to teleport back here.
+Về cơ bản, bạn gọi hàm này, đưa cho nó một `env` để nó điền vào mọi
+thông tin cần thiết để quay lại đây sau. Cái `env` này là thứ bạn
+sẽ truyền cho `longjmp()` sau này khi muốn teleport về đây.
 
-And the really funky part is this can return two different ways:
+Và phần funky thực sự là hàm này có thể trả về theo hai kiểu khác
+nhau:
 
-1. It can return `0` from the call where you set up the jump
-   destination.
+1. Có thể trả về `0` từ lời gọi set up điểm jump đích.
 
-2. If can return non-zero when you actually warp back here as the result
-   of a call to `longjmp()`.
+2. Có thể trả về non-zero khi bạn thực sự warp về đây từ lời gọi
+   `longjmp()`.
 
-What you can do is check the return value to see which case has occurred.
+Bạn có thể kiểm tra giá trị trả về để biết case nào đang xảy ra.
 
-You're only allowed to call `setjmp()` in a limited number of
-circumstances.
+Bạn chỉ được gọi `setjmp()` trong một số trường hợp giới hạn.
 
-1. As a standalone expression:
+1. Như một biểu thức đứng riêng:
 
    ``` {.c}
    setjmp(env);
    ```
 
-   You can also cast it to `(void)` if you really wanted to do such a
-   thing.
+   Bạn cũng có thể cast nó về `(void)` nếu vì lý do gì đó muốn làm
+   vậy.
 
-2. As the complete controlling expression in an `if` or `switch`. 
+2. Như biểu thức điều khiển đầy đủ trong `if` hoặc `switch`. 
 
    ``` {.c}
    if (setjmp(env)) { ... }
@@ -75,15 +74,14 @@ circumstances.
    switch (setjmp(env)) { ... }
    ```
 
-   But not this as it's not the complete controlling expression in this
-   case:
+   Nhưng không được thế này, vì nó không phải biểu thức điều khiển
+   đầy đủ trong trường hợp này:
 
    ``` {.c}
    if (x == 2 && setjmp()) { ... }   // Undefined behavior
    ```
 
-3. The same as (2), above, except with a comparison to an integer
-   constant:
+3. Giống (2) phía trên, trừ việc có so sánh với integer constant:
 
    ``` {.c}
    if (setjmp(env) == 0) { ... }
@@ -91,33 +89,34 @@ circumstances.
    if (setjmp(env) > 2) { ... }
    ```
 
-4. As the operand to the not (`!`) operator:
+4. Như toán hạng cho toán tử phủ định (`!`):
 
    ``` {.c}
    if (!setjmp(env)) { ... }
    ```
 
-Anything else is (you guessed it) undefined behavior!
+Mọi thứ khác đều là (bạn đoán đúng rồi) undefined behavior!
 
-This can be a macro or a function, but you'll treat it the same way in
-any case.
+Đây có thể là macro hoặc hàm, nhưng bạn xử nó cùng cách trong mọi
+trường hợp.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-This one is funky. It returns one of two things:
+Cái này funky. Nó trả về một trong hai thứ:
 
-Returns `0` if this was the call to `setjmp()` to set it up.
+Trả về `0` nếu đây là lời gọi `setjmp()` để set up.
 
-Returns non-zero if being here was the result of a call to `longjmp()`.
-(Namely, it returns the value passed into the `longjmp()` function.)
+Trả về non-zero nếu việc đang ở đây là kết quả của lời gọi
+`longjmp()`. (Cụ thể, nó trả về giá trị được truyền vào hàm
+`longjmp()`.)
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a function that calls `setjmp()` to set things up (where it
-returns `0`), then calls a couple levels deep into functions, and
-finally short-circuits the return path by `longjmp()`ing back to the
-place where `setjmp()` was called, earlier. This time, it passes `3490`
-as a value, which `setjmp()` returns.
+Đây là một hàm gọi `setjmp()` để set up (nơi nó trả về `0`), rồi
+gọi xuống sâu vài level vào các hàm, và cuối cùng cắt ngang đường
+return bằng `longjmp()` quay về chỗ `setjmp()` đã được gọi trước
+đó. Lần này, nó truyền `3490` làm giá trị, và `setjmp()` sẽ trả về
+giá trị đó.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -128,15 +127,15 @@ jmp_buf env;
 void depth2(void)
 {
     printf("Entering depth 2\n");
-    longjmp(env, 3490);           // Jump back to setjmp()!!
-    printf("Leaving depth 2\n");  // This won't happen
+    longjmp(env, 3490);           // Nhảy về setjmp()!!
+    printf("Leaving depth 2\n");  // Cái này không chạy
 }
 
 void depth1(void)
 {
     printf("Entering depth 1\n");
     depth2();
-    printf("Leaving depth 1\n");  // This won't happen
+    printf("Leaving depth 1\n");  // Cái này không chạy
 }
 
 int main(void)
@@ -145,7 +144,7 @@ int main(void)
         case 0:
             printf("Calling into functions, setjmp() returned 0\n");
             depth1();
-            printf("Returned from functions\n");  // This won't happen
+            printf("Returned from functions\n");  // Cái này không chạy
             break;
 
         case 3490:
@@ -155,7 +154,7 @@ int main(void)
 }
 ```
 
-When run, this outputs:
+Chạy thì output:
 
 ``` {.default}
 Calling into functions, setjmp() returned 0
@@ -164,10 +163,10 @@ Entering depth 2
 Bailed back to main, setjmp() returned 3490
 ```
 
-Notice that the second `printf()` in `case 0` didn't run; it got jumped
-over by `longjmp()`!
+Chú ý `printf()` thứ hai trong `case 0` không chạy; nó bị
+`longjmp()` nhảy qua!
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`longjmp()`](#man-longjmp)
 
@@ -176,7 +175,7 @@ over by `longjmp()`!
 
 [i[`longjmp()` function]i]
 
-Return to the previous `setjmp()` location
+Quay về vị trí `setjmp()` trước đó
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -186,53 +185,51 @@ Return to the previous `setjmp()` location
 _Noreturn void longjmp(jmp_buf env, int val);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This returns to a previous call to `setjmp()` back in the call history.
-`setjmp()` will return the `val` passed into `longjmp()`.
+Hàm này trả về một lời gọi `setjmp()` trước đó trong call history.
+`setjmp()` sẽ trả về giá trị `val` được truyền vào `longjmp()`.
 
-The `env` passed to `setjmp()` should be the same one you pass into
+`env` truyền cho `setjmp()` nên là chính cái bạn truyền cho
 `longjmp()`.
 
-There are a bunch of potential issues with doing this, so you'll want to
-be careful that you avoid undefined behavior by not doing the following:
+Có cả đống vấn đề tiềm tàng khi làm chuyện này, nên bạn phải cẩn
+thận tránh undefined behavior bằng cách không làm mấy điều sau:
 
-1. Don't call `longjmp()` if the corresponding `setjmp()` was in a
-   different thread.
+1. Đừng gọi `longjmp()` nếu lời gọi `setjmp()` tương ứng nằm trong
+   thread khác.
 
-2. Don't call `longjmp()` if you didn't call `setjmp()` first.
+2. Đừng gọi `longjmp()` nếu bạn chưa gọi `setjmp()` trước đó.
 
-3. Don't call `longjmp()` if the function that called `setjmp()` has
-   completed.
+3. Đừng gọi `longjmp()` nếu hàm đã gọi `setjmp()` đã hoàn thành.
 
-4. Don't call `longjmp()` if the call to `setjmp()` had a variable
-   length array (VLA) in scope and the scope has ended.
+4. Đừng gọi `longjmp()` nếu lời gọi `setjmp()` có một variable
+   length array (VLA) trong scope và scope đó đã kết thúc.
 
-5. Don't call `longjmp()` if there are any VLAs in any active scopes
-   between the `setjmp()` and the `longjmp()`. A good rule of thumb here
-   is to not mix VLAs and `longjmp()`.
+5. Đừng gọi `longjmp()` nếu có bất kỳ VLA nào trong các scope đang
+   active giữa `setjmp()` và `longjmp()`. Nguyên tắc nằm lòng ở đây
+   là đừng mix VLA với `longjmp()`.
 
-Though `longjmp()` attempts to restore the machine to the state at the
-`setjmp()`, including local variables, there are some things that aren't
-brought back to life:
+Dù `longjmp()` cố gắng khôi phục máy về trạng thái lúc `setjmp()`,
+gồm cả biến local, vẫn có vài thứ không được hồi sinh lại:
 
-* Non-volatile local variables that might have changed
+* Biến local không phải volatile mà có thể đã thay đổi
 * Floating point status flags
-* Open files
-* Any other component of the abstract machine
+* File đang mở
+* Bất kỳ thành phần nào khác của abstract machine
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-This one is also funky in that it is one of the few functions in C that
-never returns!
+Cái này cũng funky ở chỗ nó là một trong số ít hàm của C không bao
+giờ trả về!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a function that calls `setjmp()` to set things up (where it
-returns `0`), then calls a couple levels deep into functions, and
-finally short-circuits the return path by `longjmp()`ing back to the
-place where `setjmp()` was called, earlier. This time, it passes `3490`
-as a value, which `setjmp()` returns.
+Đây là một hàm gọi `setjmp()` để set up (nơi nó trả về `0`), rồi
+gọi xuống sâu vài level vào các hàm, và cuối cùng cắt ngang đường
+return bằng `longjmp()` quay về chỗ `setjmp()` đã được gọi trước
+đó. Lần này, nó truyền `3490` làm giá trị, và `setjmp()` sẽ trả về
+giá trị đó.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -243,15 +240,15 @@ jmp_buf env;
 void depth2(void)
 {
     printf("Entering depth 2\n");
-    longjmp(env, 3490);           // Jump back to setjmp()!!
-    printf("Leaving depth 2\n");  // This won't happen
+    longjmp(env, 3490);           // Nhảy về setjmp()!!
+    printf("Leaving depth 2\n");  // Cái này không chạy
 }
 
 void depth1(void)
 {
     printf("Entering depth 1\n");
     depth2();
-    printf("Leaving depth 1\n");  // This won't happen
+    printf("Leaving depth 1\n");  // Cái này không chạy
 }
 
 int main(void)
@@ -260,7 +257,7 @@ int main(void)
         case 0:
             printf("Calling into functions, setjmp() returned 0\n");
             depth1();
-            printf("Returned from functions\n");  // This won't happen
+            printf("Returned from functions\n");  // Cái này không chạy
             break;
 
         case 3490:
@@ -270,7 +267,7 @@ int main(void)
 }
 ```
 
-When run, this outputs:
+Chạy thì output:
 
 ``` {.default}
 Calling into functions, setjmp() returned 0
@@ -279,10 +276,10 @@ Entering depth 2
 Bailed back to main, setjmp() returned 3490
 ```
 
-Notice that the second `printf()` in `case 0` didn't run; it got jumped
-over by `longjmp()`!
+Chú ý `printf()` thứ hai trong `case 0` không chạy; nó bị
+`longjmp()` nhảy qua!
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`setjmp()`](#man-setjmp)
 
