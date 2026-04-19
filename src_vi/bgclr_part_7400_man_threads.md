@@ -4,53 +4,53 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<threads.h>` Multithreading Functions {#threads}
+# `<threads.h>` Các Hàm Multithreading {#threads}
 
 [i[`threads.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |-|-|
-|[`call_once()`](#man-call_once)|Call a function one time no matter how many threads try|
-|[`cnd_broadcast()`](#man-cnd_broadcast)|Wake up all threads waiting on a condition variable|
-|[`cnd_destroy()`](#man-cnd_destroy)|Free up resources from a condition variable|
-|[`cnd_init()`](#man-cnd_init)|Initialize a condition variable to make it ready for use|
-|[`cnd_signal()`](#man-cnd_signal)|Wake up a thread waiting on a condition variable|
-|[`cnd_timedwait()`](#man-cnd_timedwait)|Wait on a condition variable with a timeout|
-|[`cnd_wait()`](#man-cnd_wait)|Wait for a signal on a condition variable|
-|[`mtx_destroy()`](#man-mtx_destroy)|Cleanup a mutex when done with it|
-|[`mtx_init()`](#man-mtx_init)|Initialize a mutex for use|
-|[`mtx_lock()`](#man-mtx_lock)|Acquire a lock on a mutex|
-|[`mtx_timedlock()`](#man-mtx_timedlock)|Lock a mutex allowing for timeout|
-|[`mtx_trylock()`](#man-mtx_trylock)|Try to lock a mutex, returning if not possible|
-|[`mtx_unlock()`](#man-mtx_unlock)|Free a mutex when you're done with the critical section|
-|[`thrd_create()`](#man-thrd_create)|Create a new thread of execution|
-|[`thrd_current()`](#man-thrd_current)|Get the ID of the calling thread|
-|[`thrd_detach()`](#man-thrd_detach)|Automatically clean up threads when they exit|
-|[`thrd_equal()`](#man-thrd_equal)|Compare two thread descriptors for equality|
-|[`thrd_exit()`](#man-thrd_exit)|Stop and exit this thread|
-|[`thrd_join()`](#man-thrd_join)|Wait for a thread to exit|
-|[`thrd_yield()`](#man-thrd_yield)|Stop running that other threads might run|
-|[`tss_create()`](#man-tss_create)|Create new thread-specific storage|
-|[`tss_delete()`](#man-tss_delete)|Clean up a thread-specific storage variable|
-|[`tss_get()`](#man-tss_get)|Get thread-specific data|
-|[`tss_set()`](#man-tss_set)|Set thread-specific data|
+|[`call_once()`](#man-call_once)|Gọi một hàm đúng một lần dù có bao nhiêu thread cùng thử|
+|[`cnd_broadcast()`](#man-cnd_broadcast)|Đánh thức tất cả thread đang chờ trên một condition variable|
+|[`cnd_destroy()`](#man-cnd_destroy)|Giải phóng tài nguyên của một condition variable|
+|[`cnd_init()`](#man-cnd_init)|Khởi tạo một condition variable để sẵn sàng dùng|
+|[`cnd_signal()`](#man-cnd_signal)|Đánh thức một thread đang chờ trên một condition variable|
+|[`cnd_timedwait()`](#man-cnd_timedwait)|Chờ trên một condition variable có timeout|
+|[`cnd_wait()`](#man-cnd_wait)|Chờ một signal trên một condition variable|
+|[`mtx_destroy()`](#man-mtx_destroy)|Dọn dẹp một mutex khi xong việc|
+|[`mtx_init()`](#man-mtx_init)|Khởi tạo một mutex để dùng|
+|[`mtx_lock()`](#man-mtx_lock)|Giành lock trên một mutex|
+|[`mtx_timedlock()`](#man-mtx_timedlock)|Khoá một mutex cho phép timeout|
+|[`mtx_trylock()`](#man-mtx_trylock)|Thử khoá một mutex, trả về ngay nếu không được|
+|[`mtx_unlock()`](#man-mtx_unlock)|Giải phóng một mutex khi xong critical section|
+|[`thrd_create()`](#man-thrd_create)|Tạo một thread thực thi mới|
+|[`thrd_current()`](#man-thrd_current)|Lấy ID của thread đang gọi|
+|[`thrd_detach()`](#man-thrd_detach)|Tự động dọn dẹp thread khi thoát|
+|[`thrd_equal()`](#man-thrd_equal)|So sánh hai thread descriptor xem có bằng nhau không|
+|[`thrd_exit()`](#man-thrd_exit)|Dừng và thoát thread này|
+|[`thrd_join()`](#man-thrd_join)|Chờ một thread thoát|
+|[`thrd_yield()`](#man-thrd_yield)|Dừng chạy để các thread khác có thể chạy|
+|[`tss_create()`](#man-tss_create)|Tạo thread-specific storage mới|
+|[`tss_delete()`](#man-tss_delete)|Dọn dẹp một biến thread-specific storage|
+|[`tss_get()`](#man-tss_get)|Lấy dữ liệu thread-specific|
+|[`tss_set()`](#man-tss_set)|Đặt dữ liệu thread-specific|
 
-We have a bunch of good things at our disposal with this one:
+Cái header này cho chúng ta cả đống thứ hay ho:
 
-* Threads
-* Mutexes
-* Condition Variables
-* Thread-Specific Storage
-* And, last but not least, the always-fun `call_once()` function!
+* Threads (thread)
+* Mutex
+* Condition Variable (biến điều kiện)
+* Thread-Specific Storage (bộ nhớ riêng cho thread)
+* Và, cuối cùng nhưng không kém phần vui vẻ, hàm `call_once()` luôn thú vị!
 
-Enjoy!
+Tận hưởng nào!
 
 [[manbreak]]
 ## `call_once()` {#man-call_once}
 
 [i[`call_once()` function]i]
 
-Call a function one time no matter how many threads try
+Gọi một hàm đúng một lần dù có bao nhiêu thread cùng thử
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -60,35 +60,35 @@ Call a function one time no matter how many threads try
 void call_once(once_flag *flag, void (*func)(void));
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a bunch of threads running over the same piece of code that
-calls a function, but you only want that function to run one time,
-`call_once()` can help you out.
+Nếu bạn có một đống thread cùng chạy trên cùng đoạn code có gọi một
+hàm, nhưng bạn chỉ muốn hàm đó chạy đúng một lần, thì `call_once()` có
+thể giúp bạn.
 
-The catch is the function that is called doesn't return anything and
-takes no arguments.
+Điểm bất tiện là hàm được gọi không trả về gì và không nhận tham số nào
+cả.
 
-If you need more than that, you'll have to set a threadsafe flag such as
-`atomic_flag`, or one that you protect with a mutex.
+Nếu cần nhiều hơn thế, bạn sẽ phải tự đặt một cờ threadsafe, kiểu như
+`atomic_flag`, hoặc một cờ được bảo vệ bằng mutex.
 
-To use this, you need to pass it a pointer to a function to execute,
-`func`, and also a pointer to a flag of type `once_flag`.
+Để dùng được nó, bạn cần truyền vào một con trỏ tới hàm cần thực thi,
+`func`, và cả một con trỏ tới cờ kiểu `once_flag`.
 
-`once_flag` is an opaque type, so all you need to know is that you
-initialize it to the value `ONCE_FLAG_INIT`.
+`once_flag` là kiểu opaque, nên tất cả những gì bạn cần biết là bạn
+khởi tạo nó bằng giá trị `ONCE_FLAG_INIT`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing.
+Không trả về gì cả.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
 #include <threads.h>
 
-once_flag of = ONCE_FLAG_INIT;  // Initialize it like this
+once_flag of = ONCE_FLAG_INIT;  // Khởi tạo như thế này
 
 void run_once_function(void)
 {
@@ -120,7 +120,7 @@ int main(void)
 }
 ```
 
-Output (might vary per run):
+Output (có thể khác giữa các lần chạy):
 
 ``` {.default}
 Thread running!
@@ -142,7 +142,7 @@ Thread running!
 
 [i[`cnd_broadcast()` function]i]
 
-Wake up all threads waiting on a condition variable
+Đánh thức tất cả thread đang chờ trên một condition variable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -152,51 +152,50 @@ Wake up all threads waiting on a condition variable
 int cnd_broadcast(cnd_t *cond);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is just like `cnd_signal()` in that it wakes up threads that are
-waiting on a condition variable.... except instead of just rousing one
-thread, it wakes them all.
+Hàm này giống hệt `cnd_signal()` ở chỗ nó đánh thức các thread đang chờ
+trên một condition variable... khác biệt là thay vì chỉ khều dậy một
+thread, nó đánh thức toàn bộ.
 
-Of course, only one will get the mutex, and the rest will have to wait
-their turn. But instead of being asleep waiting for a signal, they'll be
-asleep waiting to reacquire the mutex. They're rearin' to go, in other
-words.
+Tất nhiên, chỉ một thread sẽ lấy được mutex, và mấy thread còn lại phải
+chờ đến lượt. Nhưng thay vì ngủ để chờ signal, chúng sẽ ngủ để chờ
+giành lại mutex. Nói cách khác, chúng đã sẵn sàng nhảy vào cuộc.
 
-This can make a difference in a specific set of circumstances where
-`cnd_signal()` might leave you hanging.
+Điều này tạo nên khác biệt trong một tình huống cụ thể mà `cnd_signal()`
+có thể để bạn kẹt cứng.
 
-If you're relying on subsequent threads to issue the next
-`cnd_signal()`, but you have the `cnd_wait()` in a `while` loop^[Which
-you should because of spurious wakeups.] that doesn't allow any threads
-to escape, you'll be stuck. No more threads will be woken up from the
-wait.
+Nếu bạn dựa vào các thread tiếp theo để phát `cnd_signal()` kế tiếp,
+nhưng `cnd_wait()` của bạn lại nằm trong vòng `while`^[Đúng ra nên như
+vậy vì có spurious wakeup.] không cho thread nào thoát ra được, bạn sẽ
+kẹt luôn. Không còn thread nào được đánh thức từ việc chờ nữa.
 
-But if you `cnd_broadcast()`, all the threads will be woken, and
-presumably at least one of them will be allowed to escape the `while`
-loop, freeing it up to broadcast the next wakeup when its work is done.
+Nhưng nếu bạn `cnd_broadcast()`, tất cả thread đều được đánh thức, và
+giả định là ít nhất một trong số đó sẽ được phép thoát khỏi vòng
+`while`, rồi nó lại broadcast cho lần đánh thức tiếp theo khi xong
+việc.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `thrd_success` or `thrd_error` depending on how well things
-went.
+Trả về `thrd_success` hoặc `thrd_error` tuỳ theo mọi chuyện diễn ra thế
+nào.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-In the example below, we launch a bunch of threads, but they're only
-allowed to run if their ID matches the current ID. If it doesn't, they
-go back to waiting.
+Trong ví dụ dưới đây, chúng ta khởi động một đống thread, nhưng chúng
+chỉ được phép chạy nếu ID của chúng khớp với ID hiện tại. Nếu không,
+chúng quay lại chờ.
 
-If you `cnd_signal()` to wake the next thread, it might not be the one
-with the proper ID to run. If it's not, it goes back to sleep and we
-hang (because no thread is awake to hit `cnd_signal()` again).
+Nếu bạn dùng `cnd_signal()` để đánh thức thread tiếp theo, có thể nó
+không phải là thread có ID đúng để chạy. Nếu không phải, nó quay lại
+ngủ và chúng ta treo (vì không còn thread nào đang thức để gọi
+`cnd_signal()` lần nữa).
 
-But if you `cnd_broadcast()` to wake them all, then they'll all try (one
-after another) to get out of the `while` loop. And one of them will make
-it.
+Nhưng nếu bạn `cnd_broadcast()` để đánh thức tất cả, tất cả chúng sẽ
+lần lượt thử thoát khỏi vòng `while`. Và một trong số đó sẽ thành công.
 
-Try switching the `cnd_broadcast()` to `cnd_signal()` to see likely
-deadlocks. It doesn't happen every time, but usually does.
+Thử đổi `cnd_broadcast()` sang `cnd_signal()` để thấy deadlock có khả
+năng xảy ra. Không xảy ra mỗi lần, nhưng thường là có.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -255,7 +254,7 @@ int main(void)
 }
 ```
 
-Example run with `cnd_broadcast()`:
+Một lần chạy mẫu với `cnd_broadcast()`:
 
 ``` {.default}
 THREAD 4: waiting
@@ -285,7 +284,7 @@ THREAD 4: woke up, my turn! Let's go!
 THREAD 4: signaling thread 5 to run
 ```
 
-Example run with `cnd_signal()`:
+Một lần chạy mẫu với `cnd_signal()`:
 
 ``` {.default}
 THREAD 4: waiting
@@ -299,13 +298,13 @@ THREAD 4: waiting
 [deadlock at this point]
 ```
 
-See how `THREAD 0` signaled that it was `THREAD 1`'s turn? But---bad
-news---it was `THREAD 4` that got woken up. So no one continued the
-process.  `cnd_broadcast()` would have woken them all, so eventually
-`THREAD 1` would have run, gotten out of the `while`, and broadcast for
-the next thread to run.
+Thấy `THREAD 0` đã signal rằng tới lượt `THREAD 1` chưa? Nhưng---tin
+xấu---`THREAD 4` lại là đứa được đánh thức. Thế là không còn ai tiếp
+tục quá trình. `cnd_broadcast()` thì sẽ đánh thức tất cả, nên sau cùng
+`THREAD 1` sẽ chạy, thoát khỏi `while`, và broadcast để thread tiếp
+theo chạy.
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cnd_signal()`](#man-signal),
 [`mtx_lock()`](#man-mtx_lock),
@@ -316,7 +315,7 @@ the next thread to run.
 
 [i[`cnd_destroy()` function]i]
 
-Free up resources from a condition variable
+Giải phóng tài nguyên của một condition variable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -326,19 +325,19 @@ Free up resources from a condition variable
 void cnd_destroy(cnd_t *cond);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is the opposite of `cnd_init()` and should be called when all
-threads are done using a condition variable.
+Đây là cặp đối nghịch của `cnd_init()` và nên được gọi khi tất cả
+thread đã dùng xong một condition variable.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-General-purpose condition variable example here, but you can see the
-`cnd_destroy()` down at the end.
+Ví dụ condition variable tổng quát ở đây, nhưng bạn có thể thấy
+`cnd_destroy()` ở gần cuối.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -372,7 +371,7 @@ int main(void)
     printf("Main creating thread\n");
     thrd_create(&t, run, NULL);
 
-    // Sleep 0.1s to allow the other thread to wait
+    // Ngủ 0.1s để thread kia có thời gian vào trạng thái chờ
     thrd_sleep(&(struct timespec){.tv_nsec=100000000L}, NULL);
 
     mtx_lock(&mutex);
@@ -383,7 +382,7 @@ int main(void)
     thrd_join(t, NULL);
 
     mtx_destroy(&mutex);
-    cnd_destroy(&condvar);  // <-- DESTROY CONDITION VARIABLE
+    cnd_destroy(&condvar);  // <-- HUỶ CONDITION VARIABLE
 }
 ```
 
@@ -396,7 +395,7 @@ Main: signaling thread
 Thread: running again!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cnd_init()`](#man-cnd_init)
 
@@ -405,7 +404,7 @@ Thread: running again!
 
 [i[`cnd_init()` function]i]
 
-Initialize a condition variable to make it ready for use
+Khởi tạo một condition variable để sẵn sàng dùng
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -415,23 +414,23 @@ Initialize a condition variable to make it ready for use
 int cnd_init(cnd_t *cond);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is the opposite of `cnd_destroy()`. This prepares a condition
-variable for use, doing behind-the-scenes work on it.
+Đây là cặp đối nghịch của `cnd_destroy()`. Hàm này chuẩn bị một
+condition variable để dùng, làm đủ thứ việc hậu trường trên nó.
 
-Don't use a condition variable without calling this first!
+Đừng dùng một condition variable mà chưa gọi hàm này trước!
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-If all goes well, returns `thrd_success`. It all doesn't go well, it
-could return `thrd_nomem` if the system is out of memory, or
-`thread_error` in the case of any other error.
+Nếu mọi chuyện suôn sẻ, trả về `thrd_success`. Nếu không suôn sẻ, nó
+có thể trả về `thrd_nomem` khi hệ thống hết bộ nhớ, hoặc `thread_error`
+trong trường hợp lỗi khác.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-General-purpose condition variable example here, but you can see the
-`cnd_init()` down at the start of `main()`.
+Ví dụ condition variable tổng quát ở đây, nhưng bạn có thể thấy
+`cnd_init()` ở đầu `main()`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -460,12 +459,12 @@ int main(void)
     thrd_t t;
 
     mtx_init(&mutex, mtx_plain);
-    cnd_init(&condvar);      // <-- INITIALIZE CONDITION VARIABLE
+    cnd_init(&condvar);      // <-- KHỞI TẠO CONDITION VARIABLE
 
     printf("Main creating thread\n");
     thrd_create(&t, run, NULL);
 
-    // Sleep 0.1s to allow the other thread to wait
+    // Ngủ 0.1s để thread kia có thời gian vào trạng thái chờ
     thrd_sleep(&(struct timespec){.tv_nsec=100000000L}, NULL);
 
     mtx_lock(&mutex);
@@ -489,7 +488,7 @@ Main: signaling thread
 Thread: running again!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cnd_destroy()`](#man-cnd_destroy)
 
@@ -498,7 +497,7 @@ Thread: running again!
 
 [i[`cnd_signal()` function]i]
 
-Wake up a thread waiting on a condition variable
+Đánh thức một thread đang chờ trên một condition variable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -508,24 +507,24 @@ Wake up a thread waiting on a condition variable
 int cnd_signal(cnd_t *cond);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a thread (or a bunch of threads) waiting on a condition
-variable, this function will wake one of them up to run.
+Nếu bạn có một thread (hoặc một đống thread) đang chờ trên một
+condition variable, hàm này sẽ đánh thức một trong số đó để chạy.
 
-Compare to `cnd_broadcast()` that wakes up all the threads. See the
-[`cnd_broadcast()`](#man-cnd_broadcast) page for more information on
-when you're want to use that versus this.
+So với `cnd_broadcast()` vốn đánh thức tất cả thread. Xem trang
+[`cnd_broadcast()`](#man-cnd_broadcast) để biết thêm thông tin về lúc
+nào nên dùng cái kia và lúc nào nên dùng cái này.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `thrd_success` or `thrd_error` depending on how happy your
-program is.
+Trả về `thrd_success` hoặc `thrd_error` tuỳ xem chương trình của bạn
+đang vui hay buồn.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-General-purpose condition variable example here, but you can see the
-`cnd_signal()` in the middle of `main()`.
+Ví dụ condition variable tổng quát ở đây, nhưng bạn có thể thấy
+`cnd_signal()` ở giữa `main()`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -559,12 +558,12 @@ int main(void)
     printf("Main creating thread\n");
     thrd_create(&t, run, NULL);
 
-    // Sleep 0.1s to allow the other thread to wait
+    // Ngủ 0.1s để thread kia có thời gian vào trạng thái chờ
     thrd_sleep(&(struct timespec){.tv_nsec=100000000L}, NULL);
 
     mtx_lock(&mutex);
     printf("Main: signaling thread\n");
-    cnd_signal(&condvar);    // <-- SIGNAL CHILD THREAD HERE!
+    cnd_signal(&condvar);    // <-- SIGNAL THREAD CON TẠI ĐÂY!
     mtx_unlock(&mutex);
 
     thrd_join(t, NULL);
@@ -583,7 +582,7 @@ Main: signaling thread
 Thread: running again!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cnd_init()`](#man-cnd_init),
 [`cnd_destroy()`](#man-cnd_destroy)
@@ -593,7 +592,7 @@ Thread: running again!
 
 [i[`cnd_timedwait()` function]i]
 
-Wait on a condition variable with a timeout
+Chờ trên một condition variable có timeout
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -604,37 +603,36 @@ int cnd_timedwait(cnd_t *restrict cond, mtx_t *restrict mtx,
                   const struct timespec *restrict ts);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is like [`cnd_wait()`](#man-cnd_wait) except we get to specify a
-timeout, as well.
+Hàm này giống [`cnd_wait()`](#man-cnd_wait) chỉ khác là chúng ta được
+phép chỉ định thêm một timeout.
 
-Note that the thread still must reacquire the mutex to get more work
-done even after the timeout. The the main difference is that regular
-`cnd_wait()` will only try to get the mutex after a `cnd_signal()` or
-`cnd_broadcast()`, whereas `cnd_timedwait()` will do that, too,  **and**
-try to get the mutex after the timeout.
+Lưu ý là thread vẫn phải giành lại mutex để làm thêm việc kể cả sau
+khi timeout. Khác biệt chính là `cnd_wait()` thông thường chỉ thử
+giành mutex sau khi có `cnd_signal()` hoặc `cnd_broadcast()`, trong khi
+`cnd_timedwait()` cũng làm vậy, **và** còn thử giành mutex sau khi
+timeout.
 
-The timeout is specified as an absolute UTC time since Epoch. You can
-get this with the [`timespec_get()`](#man-timespec_get) function and
-then add values on to the result to timeout later than now, as shown in
-the example.
+Timeout được chỉ định dưới dạng thời gian tuyệt đối (thời gian tuyệt
+đối) theo UTC tính từ Epoch. Bạn có thể lấy giá trị này qua hàm
+[`timespec_get()`](#man-timespec_get) rồi cộng thêm vào kết quả để
+timeout muộn hơn thời điểm hiện tại, như trong ví dụ.
 
-Beware that you can't have more than 999999999 nanoseconds in the
-`tv_nsec` field of the `struct timespec`. Mod those so they stay in
-range.
+Coi chừng chuyện bạn không được có nhiều hơn 999999999 nano giây
+(nanosecond) trong trường `tv_nsec` của `struct timespec`. Dùng phép
+mod để chúng nằm trong khoảng cho phép.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-If the thread wakes up for a non-timeout reason (e.g. signal or
-broadcast), returns `thrd_success`. If woken up due to timeout, returns
-`thrd_timedout`. Otherwise returns `thrd_error`.
+Nếu thread thức dậy vì lý do không phải timeout (ví dụ signal hay
+broadcast), trả về `thrd_success`. Nếu thức dậy do timeout, trả về
+`thrd_timedout`. Ngược lại trả về `thrd_error`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This example has a thread wait on a condition variable for a maximum of
-1.75 seconds. And it always times out because no one ever sends a
-signal. Tragic.
+Ví dụ này cho một thread chờ trên một condition variable tối đa 1.75
+giây. Và nó luôn timeout vì chả có ai gửi signal cả. Bi kịch.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -652,14 +650,14 @@ int run(void *arg)
 
     struct timespec ts;
 
-    // Get the time now
+    // Lấy thời gian hiện tại
     timespec_get(&ts, TIME_UTC);
 
-    // Add on 1.75 seconds from now
+    // Cộng thêm 1.75 giây kể từ bây giờ
     ts.tv_sec += 1;
     ts.tv_nsec += 750000000L;
 
-    // Handle nsec overflow
+    // Xử lý tràn nsec
     ts.tv_sec += ts.tv_nsec / 1000000000L;
     ts.tv_nsec = ts.tv_nsec % 1000000000L;
 
@@ -695,7 +693,7 @@ int main(void)
     printf("Main creating thread\n");
     thrd_create(&t, run, NULL);
 
-    // Sleep 3s to allow the other thread to timeout
+    // Ngủ 3s để thread kia có thời gian timeout
     thrd_sleep(&(struct timespec){.tv_sec=3}, NULL);
 
     thrd_join(t, NULL);
@@ -713,7 +711,7 @@ Thread: waiting...
 Thread: timed out!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cnd_wait()`](#man-cnd_wait),
 [`timespec_get()`](#man-timespec_get)
@@ -723,7 +721,7 @@ Thread: timed out!
 
 [i[`cnd_wait()` function]i]
 
-Wait for a signal on a condition variable
+Chờ một signal trên một condition variable
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -733,21 +731,21 @@ Wait for a signal on a condition variable
 int cnd_wait(cnd_t *cond, mtx_t *mtx);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This puts the calling thread to sleep until it is awakened by a call to
-`cnd_signal()` or `cnd_broadcast()`.
+Hàm này đưa thread đang gọi vào giấc ngủ cho tới khi nó được đánh thức
+bởi một lời gọi `cnd_signal()` hoặc `cnd_broadcast()`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-If everything's fantastic, returns `thrd_success`. Otherwise it returns
-`thrd_error` to report that something has gone fantastically, horribly
-awry.
+Nếu mọi thứ tuyệt vời, trả về `thrd_success`. Ngược lại, nó trả về
+`thrd_error` để báo rằng có gì đó đã sai nghiêm trọng đến mức kinh
+hoàng.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-General-purpose condition variable example here, but you can see the
-`cnd_wait()` in the `run()` function.
+Ví dụ condition variable tổng quát ở đây, nhưng bạn có thể thấy
+`cnd_wait()` trong hàm `run()`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -763,7 +761,7 @@ int run(void *arg)
     mtx_lock(&mutex);
 
     printf("Thread: waiting...\n");
-    cnd_wait(&condvar, &mutex);       // <-- WAIT HERE!
+    cnd_wait(&condvar, &mutex);       // <-- CHỜ TẠI ĐÂY!
     printf("Thread: running again!\n");
 
     mtx_unlock(&mutex);
@@ -781,12 +779,12 @@ int main(void)
     printf("Main creating thread\n");
     thrd_create(&t, run, NULL);
 
-    // Sleep 0.1s to allow the other thread to wait
+    // Ngủ 0.1s để thread kia có thời gian vào trạng thái chờ
     thrd_sleep(&(struct timespec){.tv_nsec=100000000L}, NULL);
 
     mtx_lock(&mutex);
     printf("Main: signaling thread\n");
-    cnd_signal(&condvar);    // <-- SIGNAL CHILD THREAD HERE!
+    cnd_signal(&condvar);    // <-- SIGNAL THREAD CON TẠI ĐÂY!
     mtx_unlock(&mutex);
 
     thrd_join(t, NULL);
@@ -805,7 +803,7 @@ Main: signaling thread
 Thread: running again!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cnd_timedwait()`](#man-cnd_timedwait)
 
@@ -814,7 +812,7 @@ Thread: running again!
 
 [i[`mtx_destroy()` function]i]
 
-Cleanup a mutex when done with it
+Dọn dẹp một mutex khi xong việc
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -824,21 +822,21 @@ Cleanup a mutex when done with it
 void mtx_destroy(mtx_t *mtx);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-The opposite of [`mtx_init()`](#man-mtx_init), this function frees up
-any resources associated with the given mutex.
+Ngược lại của [`mtx_init()`](#man-mtx_init), hàm này giải phóng mọi
+tài nguyên liên quan đến mutex được truyền vào.
 
-You should call this when all threads are done using the mutex.
+Bạn nên gọi hàm này khi tất cả thread đã xong việc với mutex đó.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing, the selfish ingrate!
+Không trả về gì cả, cái đồ vô ơn ích kỷ!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-General-purpose mutex example here, but you can see the `mtx_destroy()`
-down at the end.
+Ví dụ mutex tổng quát ở đây, nhưng bạn có thể thấy `mtx_destroy()` ở
+gần cuối.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -877,7 +875,7 @@ int main(void)
     for (int i = 0; i < THREAD_COUNT; i++)
         thrd_join(t[i], NULL);
 
-    mtx_destroy(&mutex);   // <-- DESTROY THE MUTEX HERE
+    mtx_destroy(&mutex);   // <-- HUỶ MUTEX TẠI ĐÂY
 }
 ```
 
@@ -891,7 +889,7 @@ Thread: I got 3!
 Thread: I got 4!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mtx_init()`](#man-mtx_init)
 
@@ -900,7 +898,7 @@ Thread: I got 4!
 
 [i[`mtx_init()` function]i]
 
-Initialize a mutex for use
+Khởi tạo một mutex để dùng
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -910,44 +908,44 @@ Initialize a mutex for use
 int mtx_init(mtx_t *mtx, int type);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Before you can use a mutex variable, you have to initialize it with this
-call to get it all prepped and ready to go.
+Trước khi bạn có thể dùng một biến mutex, bạn phải khởi tạo nó bằng
+lời gọi này để chuẩn bị mọi thứ sẵn sàng.
 
-But wait! It's not quite that simple. You have to tell it what `type` of
-mutex you want to create.
+Nhưng khoan! Không đơn giản thế đâu. Bạn phải nói cho nó biết bạn muốn
+tạo `type` mutex loại gì.
 
-|Type|Description|
+|Loại|Mô tả|
 |-|-|
-|`mtx_plain`|Regular ol' mutex|
-|`mtx_timed`|Mutex that supports timeouts|
-|`mtx_plain|mtx_recursive`|Recursive mutex|
-|`mtx_timed|mtx_recursive`|Recursive mutex that supports timeouts|
+|`mtx_plain`|Mutex xưa nay thường thấy|
+|`mtx_timed`|Mutex hỗ trợ timeout|
+|`mtx_plain|mtx_recursive`|Mutex recursive (đệ quy)|
+|`mtx_timed|mtx_recursive`|Mutex recursive hỗ trợ timeout|
 
-As you can see, you can make a plain or timed mutex _recursive_ by
-bitwise-ORing the value with `mtx_recursive`.
+Như bạn thấy, bạn có thể biến mutex plain hoặc timed thành _recursive_
+bằng cách OR bit với `mtx_recursive`.
 
-"Recursive" means that the holder of a lock can call `mtx_lock()`
-multiple times on the same lock. (They have to unlock it an equal number
-of times before anyone else can take the mutex.) This might ease coding
-from time to time, especially if you call a function that needs to lock
-the mutex when you already hold the mutex.
+"Recursive" nghĩa là kẻ đang giữ lock có thể gọi `mtx_lock()` nhiều
+lần trên cùng một lock. (Nó phải unlock cũng bằng số lần tương đương
+thì người khác mới lấy được mutex.) Điều này có thể giúp code dễ chịu
+hơn trong một số trường hợp, đặc biệt nếu bạn gọi một hàm cần khoá
+mutex mà bạn đã đang giữ mutex đó rồi.
 
-And the timeout gives a thread a chance to _try_ to get the lock for a
-while, but then bail out if it can't get it in that timeframe. You use
-the [`mtx_timedlock()`](#man-mtx_timedlock) function with `mtx_timed`
-mutexes.
+Và timeout cho thread một cơ hội _thử_ giành lock trong một khoảng
+thời gian, rồi bỏ cuộc nếu không giành được trong khung thời gian đó.
+Bạn dùng hàm [`mtx_timedlock()`](#man-mtx_timedlock) với mutex kiểu
+`mtx_timed`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `thrd_success` in a perfect world, and potentially `thrd_error`
-in an imperfect one.
+Trả về `thrd_success` trong một thế giới hoàn hảo, và có thể là
+`thrd_error` trong một thế giới không hoàn hảo.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-General-purpose mutex example here, but you can see the `mtx_init()`
-down at the top of `main()`:
+Ví dụ mutex tổng quát ở đây, nhưng bạn có thể thấy `mtx_init()` ở đầu
+`main()`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -978,7 +976,7 @@ int main(void)
 {
     thrd_t t[THREAD_COUNT];
 
-    mtx_init(&mutex, mtx_plain);  // <-- CREATE THE MUTEX HERE
+    mtx_init(&mutex, mtx_plain);  // <-- TẠO MUTEX TẠI ĐÂY
 
     for (int i = 0; i < THREAD_COUNT; i++)
         thrd_create(t + i, run, NULL);
@@ -986,7 +984,7 @@ int main(void)
     for (int i = 0; i < THREAD_COUNT; i++)
         thrd_join(t[i], NULL);
 
-    mtx_destroy(&mutex);   // <-- DESTROY THE MUTEX HERE
+    mtx_destroy(&mutex);   // <-- HUỶ MUTEX TẠI ĐÂY
 }
 ```
 
@@ -1000,7 +998,7 @@ Thread: I got 3!
 Thread: I got 4!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mtx_destroy()`](#man-mtx_destroy)
 
@@ -1009,7 +1007,7 @@ Thread: I got 4!
 
 [i[`mtx_lock()` function]i]
 
-Acquire a lock on a mutex
+Giành lock trên một mutex
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1019,26 +1017,27 @@ Acquire a lock on a mutex
 int mtx_lock(mtx_t *mtx);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you're a thread and want to enter a critical section, do I have the
-function for you!
+Nếu bạn là một thread và muốn bước vào critical section (đoạn tới hạn),
+tôi có một hàm hợp ý bạn đây!
 
-A thread that calls this function will wait until it can acquire the
-mutex, then it will grab it, wake up, and run!
+Một thread gọi hàm này sẽ chờ cho tới khi giành được mutex, rồi nó sẽ
+tóm lấy, tỉnh dậy và chạy!
 
-If the mutex is recursive and is already locked by this thread, it will
-be locked again and the lock count will increase. If the mutex is not
-recursive and the thread already holds it, this call will error out.
+Nếu mutex là recursive và đã bị khoá bởi chính thread này rồi, nó sẽ
+được khoá lần nữa và số đếm lock sẽ tăng lên. Nếu mutex không phải
+recursive và thread đã giữ nó rồi, lời gọi này sẽ báo lỗi.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `thrd_success` on goodness and `thrd_error` on badness.
+Trả về `thrd_success` khi mọi thứ tốt đẹp và `thrd_error` khi trục
+trặc.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-General-purpose mutex example here, but you can see the `mtx_lock()`
-in the `run()` function:
+Ví dụ mutex tổng quát ở đây, nhưng bạn có thể thấy `mtx_lock()` trong
+hàm `run()`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1053,7 +1052,7 @@ int run(void *arg)
 
     static int count = 0;
 
-    mtx_lock(&mutex);  // <-- LOCK HERE
+    mtx_lock(&mutex);  // <-- KHOÁ TẠI ĐÂY
 
     printf("Thread: I got %d!\n", count);
     count++;
@@ -1069,7 +1068,7 @@ int main(void)
 {
     thrd_t t[THREAD_COUNT];
 
-    mtx_init(&mutex, mtx_plain);  // <-- CREATE THE MUTEX HERE
+    mtx_init(&mutex, mtx_plain);  // <-- TẠO MUTEX TẠI ĐÂY
 
     for (int i = 0; i < THREAD_COUNT; i++)
         thrd_create(t + i, run, NULL);
@@ -1077,7 +1076,7 @@ int main(void)
     for (int i = 0; i < THREAD_COUNT; i++)
         thrd_join(t[i], NULL);
 
-    mtx_destroy(&mutex);   // <-- DESTROY THE MUTEX HERE
+    mtx_destroy(&mutex);   // <-- HUỶ MUTEX TẠI ĐÂY
 }
 ```
 
@@ -1091,7 +1090,7 @@ Thread: I got 3!
 Thread: I got 4!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mtx_unlock()`](#man-mtx_unlock),
 [`mtx_trylock()`](#man-mtx_trylock),
@@ -1102,7 +1101,7 @@ Thread: I got 4!
 
 [i[`mtx_timedlock()` function]i]
 
-Lock a mutex allowing for timeout
+Khoá một mutex cho phép timeout
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1112,32 +1111,32 @@ Lock a mutex allowing for timeout
 int mtx_timedlock(mtx_t *restrict mtx, const struct timespec *restrict ts);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is just like [`mtx_lock()`](#man-mtx_lock) except you can add a
-timeout if you don't want to wait forever.
+Giống hệt [`mtx_lock()`](#man-mtx_lock) chỉ khác là bạn có thể thêm
+timeout nếu không muốn chờ mãi mãi.
 
-The timeout is specified as an absolute UTC time since Epoch. You can
-get this with the [`timespec_get()`](#man-timespec_get) function and
-then add values on to the result to timeout later than now, as shown in
-the example.
+Timeout được chỉ định dưới dạng thời gian tuyệt đối theo UTC tính từ
+Epoch. Bạn có thể lấy giá trị này qua hàm
+[`timespec_get()`](#man-timespec_get) rồi cộng thêm vào kết quả để
+timeout muộn hơn thời điểm hiện tại, như trong ví dụ.
 
-Beware that you can't have more than 999999999 nanoseconds in the
-`tv_nsec` field of the `struct timespec`. Mod those so they stay in
-range.
+Coi chừng chuyện bạn không được có nhiều hơn 999999999 nano giây trong
+trường `tv_nsec` của `struct timespec`. Dùng phép mod để chúng nằm
+trong khoảng cho phép.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-If everything works and the mutex is obtained, returns `thrd_success`.
-If a timeout happens first, returns `thrd_timedout`.
+Nếu mọi chuyện ổn và mutex được giành, trả về `thrd_success`. Nếu
+timeout xảy ra trước, trả về `thrd_timedout`.
 
-Otherwise, returns `thrd_error`. Because if nothing is right, everything
-is wrong.
+Ngoài ra trả về `thrd_error`. Vì nếu chả có gì đúng thì mọi thứ đều
+sai.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This example has a thread wait on a mutex for a maximum of 1.75 seconds.
-And it always times out because no one ever sends a signal.
+Ví dụ này cho một thread chờ trên mutex tối đa 1.75 giây. Và nó luôn
+timeout vì chả có ai gửi signal cả.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1152,14 +1151,14 @@ int run(void *arg)
 
     struct timespec ts;
 
-    // Get the time now
+    // Lấy thời gian hiện tại
     timespec_get(&ts, TIME_UTC);
 
-    // Add on 1.75 seconds from now
+    // Cộng thêm 1.75 giây kể từ bây giờ
     ts.tv_sec += 1;
     ts.tv_nsec += 750000000L;
 
-    // Handle nsec overflow
+    // Xử lý tràn nsec
     ts.tv_sec += ts.tv_nsec / 1000000000L;
     ts.tv_nsec = ts.tv_nsec % 1000000000L;
 
@@ -1196,7 +1195,7 @@ int main(void)
     printf("Main creating thread\n");
     thrd_create(&t, run, NULL);
 
-    // Sleep 3s to allow the other thread to timeout
+    // Ngủ 3s để thread kia có thời gian timeout
     thrd_sleep(&(struct timespec){.tv_sec=3}, NULL);
 
     mtx_unlock(&mutex);
@@ -1215,7 +1214,7 @@ Thread: waiting for lock...
 Thread: timed out!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mtx_lock()`](#man-mtx_lock),
 [`mtx_trylock()`](#man-mtx_trylock),
@@ -1226,7 +1225,7 @@ Thread: timed out!
 
 [i[`mtx_trylock()` function]i]
 
-Try to lock a mutex, returning if not possible
+Thử khoá một mutex, trả về ngay nếu không được
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1236,23 +1235,23 @@ Try to lock a mutex, returning if not possible
 int mtx_trylock(mtx_t *mtx);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This works just like [`mtx_lock`](#man-mtx_lock) except that it returns
-instantly if a lock can't be obtained.
+Hàm này hoạt động giống hệt [`mtx_lock`](#man-mtx_lock) chỉ khác là nó
+trả về ngay lập tức nếu không thể giành được lock.
 
-The spec notes that there's a chance that `mtx_trylock()` might
-spuriously fail with `thrd_busy` even if there are no other threads
-holding the lock. I'm not sure why this is, but you should defensively
-code against it.
+Spec có ghi rằng có khả năng `mtx_trylock()` có thể thất bại kiểu
+spurious với `thrd_busy` ngay cả khi không có thread nào khác đang giữ
+lock. Tôi không chắc tại sao lại vậy, nhưng bạn nên viết code phòng thủ
+chống lại điều này.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `thrd_success` if all's well. Or `thrd_busy` if some other
-thread holds the lock. Or `thrd_error`, which means something went
-right. I mean "wrong".
+Trả về `thrd_success` nếu mọi chuyện ổn. Hoặc `thrd_busy` nếu có thread
+khác đang giữ lock. Hoặc `thrd_error`, nghĩa là có gì đó đã đi đúng. À
+ý tôi là "sai".
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1265,7 +1264,7 @@ int run(void *arg)
 {
     int id = *(int*)arg;
 
-    int r = mtx_trylock(&mutex);   // <-- TRY TO GRAB THE LOCK
+    int r = mtx_trylock(&mutex);   // <-- THỬ GIÀNH LOCK
 
     switch (r) {
         case thrd_success:
@@ -1307,7 +1306,7 @@ int main(void)
 }
 ```
 
-Output (varies by run):
+Output (khác nhau giữa các lần chạy):
 
 ``` {.default}
 Thread 0: grabbed lock!
@@ -1317,7 +1316,7 @@ Thread 3: grabbed lock!
 Thread 2: lock already taken :(
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mtx_lock()`](#man-mtx_lock),
 [`mtx_timedlock()`](#man-mtx_timedlock),
@@ -1328,7 +1327,7 @@ Thread 2: lock already taken :(
 
 [i[`mtx_unlock()` function]i]
 
-Free a mutex when you're done with the critical section
+Giải phóng một mutex khi xong critical section
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1338,21 +1337,21 @@ Free a mutex when you're done with the critical section
 int mtx_unlock(mtx_t *mtx);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-After you've done all the dangerous stuff you have to do, wherein the
-involved threads should not be stepping on each other's toes... you can
-free up your stranglehold on the mutex by calling `mtx_unlock()`.
+Sau khi bạn đã làm xong hết mấy thứ nguy hiểm, nơi mà các thread liên
+quan không được giẫm chân lên nhau... bạn có thể buông tay siết chặt
+của mình khỏi mutex bằng cách gọi `mtx_unlock()`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `thrd_success` on success. Or `thrd_error` on error. It's not
-very original in this regard.
+Trả về `thrd_success` khi thành công. Hoặc `thrd_error` khi lỗi. Không
+gì sáng tạo lắm trong khoản này.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-General-purpose mutex example here, but you can see the `mtx_unlock()`
-in the `run()` function:
+Ví dụ mutex tổng quát ở đây, nhưng bạn có thể thấy `mtx_unlock()`
+trong hàm `run()`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1372,7 +1371,7 @@ int run(void *arg)
     printf("Thread: I got %d!\n", count);
     count++;
 
-    mtx_unlock(&mutex);  // <-- UNLOCK HERE
+    mtx_unlock(&mutex);  // <-- UNLOCK TẠI ĐÂY
 
     return 0;
 }
@@ -1405,7 +1404,7 @@ Thread: I got 3!
 Thread: I got 4!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mtx_lock()`](#man-mtx_lock),
 [`mtx_timedlock()`](#man-mtx_timedlock),
@@ -1416,7 +1415,7 @@ Thread: I got 4!
 
 [i[`thrd_create()` function]i]
 
-Create a new thread of execution
+Tạo một thread thực thi mới
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1426,47 +1425,45 @@ Create a new thread of execution
 int thrd_create(thrd_t *thr, thrd_start_t func, void *arg);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Now _you_ have the POWER!
+Giờ thì _bạn_ có QUYỀN NĂNG!
 
-Right?
+Phải không nào?
 
-This is how you launch new threads to make your program do multiple
-things at once^[Well, as at least as many things as you have free cores.
-Your OS will schedule them as it can.]!
+Đây là cách bạn khởi động thread mới để chương trình làm nhiều việc
+cùng lúc^[Ừm, ít nhất là chừng nào bạn có đủ core rảnh. OS sẽ lên lịch
+cho chúng tuỳ khả năng.]!
 
-In order to make this happen, you need to pass a pointer to a `thrd_t`
-that will be used to represent the thread you're spawning.
+Để làm được chuyện này, bạn cần truyền vào một con trỏ tới `thrd_t` sẽ
+được dùng để đại diện cho thread mà bạn đang spawn (tạo).
 
-That thread will start running the function you pass a pointer to in
-`func`. This is a value of type `thrd_start_t`, which is a pointer to a
-function that returns an `int` and takes a single `void*` as a
-parameter, i.e.:
+Thread đó sẽ bắt đầu chạy hàm mà bạn truyền con trỏ vào qua tham số
+`func`. Đây là một giá trị kiểu `thrd_start_t`, tức là con trỏ tới một
+hàm trả về `int` và nhận một tham số `void*` duy nhất, ví dụ:
 
 ``` {.c}
 int thread_run_func(void *arg)
 ```
 
-And, as you might have guessed, the pointer you pass to `thrd_create()`
-for the `arg` parameter is passed on to the `func` function. This is how
-you can give additional information to the thread when it starts up.
+Và, như bạn có thể đoán, con trỏ bạn truyền vào `thrd_create()` cho
+tham số `arg` sẽ được chuyển tiếp đến hàm `func`. Đây là cách bạn cung
+cấp thêm thông tin cho thread khi nó khởi động.
 
-Of course, for `arg`, you have to be sure to pass a pointer to an object
-that is thread-safe or per-thread.
+Tất nhiên, với `arg`, bạn phải chắc chắn truyền con trỏ tới một object
+thread-safe hoặc mỗi thread một cái riêng.
 
-If the thread returns from the function, it exits just as if it had
-called `thrd_exit()`.
+Nếu thread trả về từ hàm đó, nó thoát y như thể đã gọi `thrd_exit()`.
 
-Finally, the value that the `func` function returns can be picked up by
-the parent thread with `thrd_join()`.
+Cuối cùng, giá trị mà hàm `func` trả về có thể được thread cha nhặt
+bằng `thrd_join()`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-In the case of goodness, returns `thrd_success`. If you're out of
-memory, will return `thrd_nomem`. Otherwise, `thrd_error`.
+Trong trường hợp tốt đẹp, trả về `thrd_success`. Nếu bạn hết bộ nhớ,
+sẽ trả về `thrd_nomem`. Ngược lại, `thrd_error`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1486,10 +1483,10 @@ int run(void *arg)
 int main(void)
 {
     thrd_t t[THREAD_COUNT];
-    int id[THREAD_COUNT];  // One of these per thread
+    int id[THREAD_COUNT];  // Mỗi thread một cái
 
     for (int i = 0; i < THREAD_COUNT; i++) {
-        id[i] = i; // Let's pass in the thread number as the ID
+        id[i] = i; // Truyền số thứ tự thread làm ID
         thrd_create(t + i, run, id + i);
     }
 
@@ -1503,7 +1500,7 @@ int main(void)
 }
 ```
 
-Output (might vary from run to run):
+Output (có thể khác nhau giữa các lần chạy):
 
 ``` {.default}
 Thread 1: I'm alive!!
@@ -1518,7 +1515,7 @@ Thread 4: I'm alive!!
 Main: thread 4 exited with code 4
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`thrd_exit()`](#man-thrd_exit),
 [`thrd_join()`](#man-thrd_join)
@@ -1528,7 +1525,7 @@ Main: thread 4 exited with code 4
 
 [i[`thrd_current()` function]i]
 
-Get the ID of the calling thread
+Lấy ID của thread đang gọi
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1538,38 +1535,38 @@ Get the ID of the calling thread
 thrd_t thrd_current(void);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Each thread has an opaque ID of type `thrd_t`. This is the value we see
-get initialized when we call [`thrd_create()`](#man-thrd_create).
+Mỗi thread có một ID opaque kiểu `thrd_t`. Đây là giá trị mà ta thấy
+được khởi tạo khi gọi [`thrd_create()`](#man-thrd_create).
 
-But what if you want to get the ID of the currently running thread?
+Nhưng nếu bạn muốn lấy ID của thread đang chạy thì sao?
 
-No problem! Just call this function and it will be returned to you.
+Không vấn đề gì! Gọi hàm này thôi là nó trả về cho bạn.
 
-Why? Who knows!
+Để làm gì ư? Ai mà biết!
 
-Well, to be honest, I could see it being used a couple places.
+Thực ra, thành thật mà nói, tôi có thể thấy nó được dùng ở vài chỗ.
 
-1. You could use it to have a thread detach itself with `thrd_detach()`.
-   I'm not sure why you'd want to do this, however.
-2. You could use it to compare this thread's ID with another you have
-   stored in a variable somewhere by using the `thrd_equal()` function.
-   Seems like the most legit use.
+1. Bạn có thể dùng để một thread tự detach (detach) chính mình bằng
+   `thrd_detach()`. Tôi không rõ tại sao bạn lại muốn làm điều này.
+2. Bạn có thể dùng để so sánh ID của thread hiện tại với một ID khác
+   mà bạn lưu trong biến nào đó bằng hàm `thrd_equal()`. Cái này nghe
+   hợp lý nhất.
 3. ...
-4. Profit!
+4. Kiếm lời!
 
-If anyone has another use, please let me know.
+Nếu ai có cách dùng khác, cho tôi biết nhé.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the calling thread's ID.
+Trả về ID của thread đang gọi.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a general example that shows getting the current thread ID and
-comparing it to a previously-recorded thread ID and taking exciting
-action based on the result! Starring Arnold Schwarzenegger! 
+Đây là ví dụ chung chung cho thấy cách lấy ID thread hiện tại và so
+sánh với một ID thread đã ghi trước đó rồi đưa ra hành động kịch tính
+dựa trên kết quả! Với sự tham gia của Arnold Schwarzenegger!
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1581,7 +1578,7 @@ int run(void *arg)
 {
     (void)arg;
 
-    thrd_t my_id = thrd_current();   // <-- GET MY THREAD ID
+    thrd_t my_id = thrd_current();   // <-- LẤY ID THREAD CỦA TÔI
 
     if (thrd_equal(my_id, first_thread_id))
         printf("I'm the first thread!\n");
@@ -1609,11 +1606,12 @@ Output:
 Come on, you got what you want, Cohaagen! Give deez people ay-ah!
 ```
 
-No, wait, that's an Arnold Schwarzenegger quote from _Total Recall_, one
-of the best science fiction films of all time. Watch it now and then
-come back to finish this reference page.
+À không, đợi đã, đó là câu thoại của Arnold Schwarzenegger trong
+_Total Recall_, một trong những phim khoa học viễn tưởng hay nhất mọi
+thời đại. Xem nó ngay rồi quay lại đọc tiếp trang tham khảo này.
 
-Man--what an ending! And Johnny Cab? So excellent. Anyway!
+Trời---kết phim mới đỉnh làm sao! Còn Johnny Cab? Xuất sắc. Thôi tiếp
+nào!
 
 Output:
 
@@ -1622,7 +1620,7 @@ I'm the first thread!
 I'm not the first!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`thrd_equal()`](#man-thrd_equal),
 [`thrd_detach()`](#man-thrd_detach)
@@ -1632,7 +1630,7 @@ I'm not the first!
 
 [i[`thrd_detach()` function]i]
 
-Automatically clean up threads when they exit
+Tự động dọn dẹp thread khi thoát
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1642,23 +1640,24 @@ Automatically clean up threads when they exit
 int thrd_detach(thrd_t thr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Normally you have to `thrd_join()` to get resources associated with a
-deceased thread cleaned up. (Most notably, its exit status is still
-floating around waiting to get picked up.)
+Bình thường bạn phải `thrd_join()` để mấy tài nguyên liên quan đến
+thread đã chết được dọn dẹp. (Đáng chú ý nhất là exit status của nó
+vẫn còn lởn vởn chờ được nhặt.)
 
-But if you call `thrd_detach()` on the thread first, manual cleanup
-isn't necessary. They just exit and are cleaned up by the OS.
+Nhưng nếu bạn gọi `thrd_detach()` trên thread trước, thì không cần dọn
+thủ công nữa. Chúng cứ thế thoát và được OS dọn dẹp.
 
-(Note that when the main thread dies, all the threads die in any case.)
+(Lưu ý rằng khi main thread chết thì tất cả thread đều chết, dù trong
+trường hợp nào.)
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-`thrd_success` if the thread successfully detaches, `thrd_error`
-otherwise.
+`thrd_success` nếu thread được detach thành công, ngược lại là
+`thrd_error`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1686,14 +1685,14 @@ int main(void)
         thrd_detach(t);
     }
 
-    // No need to thrd_join()!
+    // Không cần thrd_join()!
 
-    // Sleep a quarter second to let them all finish
+    // Ngủ 1/4 giây để chúng kịp chạy xong hết
     thrd_sleep(&(struct timespec){.tv_nsec=250000000}, NULL);
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`thrd_join()`](#man-thrd_join),
 [`thrd_exit()`](#man-thrd_exit)
@@ -1703,7 +1702,7 @@ int main(void)
 
 [i[`thrd_equal()` function]i]
 
-Compare two thread descriptors for equality
+So sánh hai thread descriptor xem có bằng nhau không
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1713,24 +1712,24 @@ Compare two thread descriptors for equality
 int thrd_equal(thrd_t thr0, thrd_t thr1);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have two thread descriptors in `thrd_t` variables, you can test
-them for equality with this function.
+Nếu bạn có hai thread descriptor trong các biến `thrd_t`, bạn có thể
+kiểm tra chúng có bằng nhau không bằng hàm này.
 
-For example, maybe one of the threads has special powers the others
-don't, and the run function needs to be able to tell them apart, as in
-the example.
+Ví dụ, có thể một trong các thread có "siêu năng lực" đặc biệt mà các
+thread khác không có, và hàm run cần phân biệt được chúng, như trong
+ví dụ.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns non-zero if the threads are equal. Returns `0` if they're not.
+Trả về khác 0 nếu hai thread bằng nhau. Trả về `0` nếu không.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a general example that shows getting the current thread ID and
-comparing it to a previously-recorded thread ID and taking boring action
-based on the result.
+Đây là ví dụ chung chung cho thấy cách lấy ID thread hiện tại và so
+sánh với một ID thread đã ghi trước đó rồi đưa ra hành động nhàm chán
+dựa trên kết quả.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1744,7 +1743,7 @@ int run(void *arg)
 
     thrd_t my_id = thrd_current();
 
-    if (thrd_equal(my_id, first_thread_id))  // <-- COMPARE!
+    if (thrd_equal(my_id, first_thread_id))  // <-- SO SÁNH!
         printf("I'm the first thread!\n");
     else
         printf("I'm not the first!\n");
@@ -1771,7 +1770,7 @@ I'm the first thread!
 I'm not the first!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`thrd_current()`](#man-thrd_current)
 
@@ -1780,7 +1779,7 @@ I'm not the first!
 
 [i[`thrd_exit()` function]i]
 
-Stop and exit this thread
+Dừng và thoát thread này
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1790,36 +1789,35 @@ Stop and exit this thread
 _Noreturn void thrd_exit(int res);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-A thread commonly exits by returning from its run function. But if it
-wants to exit early (perhaps from deeper in the call stack), this
-function will get that done.
+Thread thường thoát bằng cách return từ hàm run của nó. Nhưng nếu nó
+muốn thoát sớm (có thể từ sâu trong call stack), hàm này sẽ làm việc
+đó.
 
-The `res` code can be picked up by a thread calling `thrd_join()`, and
-is equivalent to returning a value from the run function.
+Mã `res` có thể được một thread khác nhặt lấy qua `thrd_join()`, và nó
+tương đương với việc trả về một giá trị từ hàm run.
 
-Like with returning from the run function, this will also properly clean
-up all the thread-specific storage associated with this thread---all the
-destructors for the threads TSS variables will be called. If there are
-any remaining TSS variables with destructors after the first round of
-destruction^[For example, if a destructor caused more variables to be
-set.], the remaining destructors will be called. This happens repeatedly
-until there are no more, or the number of rounds of carnage reaches
-`TSS_DTOR_ITERATIONS`.
+Như khi return từ hàm run, hàm này cũng sẽ dọn dẹp đúng cách toàn bộ
+thread-specific storage liên quan đến thread này---tất cả destructor
+cho các biến TSS của thread sẽ được gọi. Nếu vẫn còn biến TSS với
+destructor sau đợt dọn dẹp đầu tiên^[Ví dụ, nếu một destructor làm cho
+nhiều biến khác được đặt lại.], các destructor còn lại sẽ được gọi.
+Việc này lặp lại cho tới khi không còn gì nữa, hoặc số vòng tàn sát
+đạt `TSS_DTOR_ITERATIONS`.
 
-If the main thread calls this, it's as if you called
+Nếu main thread gọi hàm này, nó như thể bạn đã gọi
 `exit(EXIT_SUCCESS)`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-This function never returns because the thread calling it is killed in
-the process. Trippy!
+Hàm này không bao giờ trả về vì thread gọi nó bị giết trong quá trình
+này. Ảo diệu thiệt!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Threads in this example exit early with result `22` if they get a `NULL`
-value for `arg`.
+Các thread trong ví dụ này thoát sớm với kết quả `22` nếu chúng nhận
+được giá trị `NULL` cho `arg`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1866,7 +1864,7 @@ Thread 3 exited with code 0
 Thread 4 exited with code 0
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`thrd_join()`](#man-thrd_join)
 
@@ -1875,7 +1873,7 @@ Thread 4 exited with code 0
 
 [i[`thrd_join()` function]i]
 
-Wait for a thread to exit
+Chờ một thread thoát
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1885,17 +1883,17 @@ Wait for a thread to exit
 int thrd_join(thrd_t thr, int *res);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-When a parent thread fires off some child threads, it can wait for them
-to complete with this call
+Khi thread cha bắn ra một đống thread con, nó có thể chờ chúng chạy
+xong bằng lời gọi này
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Threads in this example exit early with result `22` if they get a `NULL`
-value for `arg`. The parent thread picks up this result code with
+Các thread trong ví dụ này thoát sớm với kết quả `22` nếu chúng nhận
+được giá trị `NULL` cho `arg`. Thread cha nhặt mã kết quả này bằng
 `thrd_join()`.
 
 ``` {.c .numberLines}
@@ -1943,13 +1941,13 @@ Thread 3 exited with code 0
 Thread 4 exited with code 0
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`thrd_exit()`](#man-thrd_exit)
 
 ## `thrd_sleep()` {#man-thrd_sleep}
 
-Sleep for a specific number of seconds and nanoseconds
+Ngủ trong một số giây và nano giây nhất định
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1959,40 +1957,39 @@ Sleep for a specific number of seconds and nanoseconds
 int thrd_sleep(const struct timespec *duration, struct timespec *remaining);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function puts the current thread to sleep for a while^[Unix-like
-systems have a `sleep()` syscall that sleeps for an integer number of
-seconds. But `thrd_sleep()` is likely more portable and gives subsecond
-resolution, besides!] allowing other threads to run.
+Hàm này đưa thread hiện tại vào giấc ngủ (ngủ) một lúc^[Các hệ kiểu
+Unix có syscall `sleep()` ngủ theo số giây nguyên. Nhưng `thrd_sleep()`
+có lẽ portable hơn và thêm nữa còn cho độ phân giải dưới-giây!] cho
+phép các thread khác chạy.
 
-The calling thread will wake up after the time has elapsed, or if it
-gets interrupted by a signal or something.
+Thread đang gọi sẽ thức dậy sau khi hết thời gian, hoặc nếu nó bị
+signal ngắt hoặc gì đó.
 
-If it doesn't get interrupted, it'll sleep at least as long as you
-asked. Maybe a tad longer. You know how hard it can be to get out of
-bed.
+Nếu không bị ngắt, nó sẽ ngủ ít nhất là bằng chừng bạn yêu cầu. Có khi
+lâu hơn chút. Bạn biết đấy, rời khỏi giường khó cỡ nào.
 
-The structure looks like this:
+Cấu trúc nhìn như thế này:
 
 ``` {.c}
 struct timespec {
-    time_t tv_sec;   // Seconds
-    long   tv_nsec;  // Nanoseconds (billionths of a second)
+    time_t tv_sec;   // Giây
+    long   tv_nsec;  // Nano giây (phần tỷ của một giây)
 };
 ```
 
-Don't set `tv_nsec` greater than 999,999,999. I can't see what
-officially happens if you do, but on my system `thrd_sleep()` returns
-`-2` and fails.
+Đừng đặt `tv_nsec` lớn hơn 999,999,999. Tôi không rõ chuyện gì sẽ
+chính thức xảy ra nếu bạn làm vậy, nhưng trên máy tôi thì
+`thrd_sleep()` trả về `-2` và thất bại.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `0` on timeout, or `-1` if interrupted by a signal. Or any
-negative value on some other error. Weirdly, the spec allows this "other
-error negative value" to also be `-1`, so good luck with that.
+Trả về `0` khi hết thời gian, hoặc `-1` nếu bị signal ngắt. Hoặc bất
+kỳ giá trị âm nào khác khi có lỗi khác. Kỳ lạ là spec cho phép "giá trị
+âm khác cho lỗi khác" cũng là `-1`, nên chúc may mắn với chuyện đó.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2000,14 +1997,14 @@ error negative value" to also be `-1`, so good luck with that.
 
 int main(void)
 {
-    // Sleep for 3.25 seconds
+    // Ngủ 3.25 giây
     thrd_sleep(&(struct timespec){.tv_sec=3, .tv_nsec=250000000}, NULL);
 
     return 0;
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`thrd_yield()`](#man-thrd_yield)
 
@@ -2016,7 +2013,7 @@ int main(void)
 
 [i[`thrd_yield()` function]i]
 
-Stop running that other threads might run
+Dừng chạy để các thread khác có thể chạy
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2026,27 +2023,27 @@ Stop running that other threads might run
 void thrd_yield(void);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a thread that's hogging the CPU and you want to give your
-other threads time to run, you can call `thrd_yield()`. If the system
-sees fit, it will put the calling thread to sleep and one of the other
-threads will run instead.
+Nếu bạn có một thread đang hốc hết CPU và bạn muốn cho các thread khác
+thời gian chạy, bạn có thể gọi `thrd_yield()`. Nếu hệ thống thấy hợp
+lý, nó sẽ đưa thread đang gọi vào giấc ngủ và một trong các thread
+khác sẽ chạy thay.
 
-It's a good way to be "polite" to the other threads in your program if
-you want the encourage them to run instead.
+Đây là cách hay để "lịch sự" với các thread khác trong chương trình
+nếu bạn muốn khuyến khích chúng chạy thay.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This example's kinda poor because the OS is probably going to reschedule
-threads on the output anyway, but it gets the point across.
+Ví dụ này hơi tệ vì OS dù sao cũng sẽ tự lên lịch lại các thread trên
+output, nhưng nó thể hiện được ý chính.
 
-The main thread is giving other threads a chance to run after every
-block of dumb work it does.
+Main thread cho các thread khác một cơ hội chạy sau mỗi khối công việc
+ngu ngốc mà nó làm.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2064,7 +2061,7 @@ int run(void *arg)
                 total++;
 
             printf("Main thread yielding\n");
-            thrd_yield();                       // <-- YIELD HERE
+            thrd_yield();                       // <-- YIELD TẠI ĐÂY
         }
     } else
         printf("Other thread running!\n");
@@ -2088,9 +2085,9 @@ int main(void)
 }
 ```
 
-The output will vary from run to run. Notice that even after
-`thrd_yield()` other threads might not yet be ready to run and the main
-thread will continue.
+Output sẽ khác giữa các lần chạy. Để ý rằng kể cả sau `thrd_yield()`,
+các thread khác có thể vẫn chưa sẵn sàng chạy và main thread sẽ tiếp
+tục.
 
 ``` {.default}
 Main thread yielding
@@ -2114,7 +2111,7 @@ Other thread running!
 Other thread running!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`thrd_sleep()`](#man-thrd_sleep)
 
@@ -2123,7 +2120,7 @@ Other thread running!
 
 [i[`tss_create()` function]i]
 
-Create new thread-specific storage
+Tạo thread-specific storage mới
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2133,42 +2130,40 @@ Create new thread-specific storage
 int tss_create(tss_t *key, tss_dtor_t dtor);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This helps when you need per-thread storage of different values.
+Hàm này giúp bạn khi cần lưu các giá trị khác nhau theo từng thread.
 
-A common place this comes up is if you have a file scope variable that
-is shared between a bunch of functions and often returned. That's not
-threadsafe. One way to refactor is to replace it with thread-specific
-storage so that each thread gets their own code and doesn't step on
-other thread's toes.
+Một chỗ hay gặp là khi bạn có một biến ở phạm vi file được chia sẻ
+giữa cả đống hàm và thường xuyên bị trả về. Cái đó không threadsafe.
+Một cách refactor là thay nó bằng thread-specific storage để mỗi
+thread có code riêng của mình và không giẫm chân lên nhau.
 
-To make this work, you pass in a pointer to a `tss_t` key---this is the
-variable you will use in subsequent `tss_set()` and `tss_get()` calls to
-set and get the value associated with the key.
+Để làm việc này, bạn truyền vào con trỏ tới một khoá `tss_t`---đây là
+biến bạn sẽ dùng trong các lời gọi `tss_set()` và `tss_get()` sau đó
+để đặt và lấy giá trị gắn với khoá này.
 
-The interesting part of this is the `dtor` destructor pointer of type
-`tss_dtor_t`. This is actually a pointer to a function that takes a
-`void*` argument and returns `void`, i.e.
+Phần thú vị là con trỏ destructor `dtor` kiểu `tss_dtor_t`. Nó thực ra
+là con trỏ tới một hàm nhận tham số `void*` và trả về `void`, tức là
 
 ``` {.c}
 void dtor(void *p) { ... }
 ```
 
-This function will be called per thread when the thread exits with
-`thrd_exit()` (or returns from the run function).
+Hàm này sẽ được gọi cho mỗi thread khi thread thoát bằng `thrd_exit()`
+(hoặc return từ hàm run).
 
-It's unspecified behavior to call this function while other threads'
-destructors are running.
+Gọi hàm này khi các destructor của thread khác đang chạy là hành vi
+không xác định (unspecified behavior).
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This is a general-purpose TSS example. Note the TSS variable is created
-near the top of `main()`.
+Đây là ví dụ TSS chung chung. Để ý biến TSS được tạo ở gần đầu
+`main()`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2179,29 +2174,29 @@ tss_t str;
 
 void some_function(void)
 {
-    // Retrieve the per-thread value of this string
+    // Lấy giá trị per-thread của chuỗi này
     char *tss_string = tss_get(str);
 
-    // And print it
+    // Và in nó ra
     printf("TSS string: %s\n", tss_string);
 }
 
 int run(void *arg)
 {
-    int serial = *(int*)arg;  // Get this thread's serial number
+    int serial = *(int*)arg;  // Lấy số thứ tự của thread này
     free(arg);
 
-    // malloc() space to hold the data for this thread
+    // malloc() chỗ chứa dữ liệu cho thread này
     char *s = malloc(64);
-    sprintf(s, "thread %d! :)", serial);  // Happy little string
+    sprintf(s, "thread %d! :)", serial);  // Một chuỗi nho nhỏ vui tươi
 
-    // Set this TSS variable to point at the string
+    // Đặt biến TSS này trỏ tới chuỗi
     tss_set(str, s);
 
-    // Call a function that will get the variable
+    // Gọi một hàm sẽ lấy biến
     some_function();
 
-    return 0; // Equivalent to thrd_exit(0); fires destructors
+    return 0; // Tương đương thrd_exit(0); kích hoạt destructor
 }
 
 #define THREAD_COUNT 15
@@ -2210,11 +2205,11 @@ int main(void)
 {
     thrd_t t[THREAD_COUNT];
 
-    // Make a new TSS variable, the free() function is the destructor
-    tss_create(&str, free);                  // <-- CREATE TSS VAR!
+    // Tạo biến TSS mới, hàm free() là destructor
+    tss_create(&str, free);                  // <-- TẠO BIẾN TSS!
 
     for (int i = 0; i < THREAD_COUNT; i++) {
-        int *n = malloc(sizeof *n);  // Holds a thread serial number
+        int *n = malloc(sizeof *n);  // Chứa số thứ tự thread
         *n = i;
         thrd_create(t + i, run, n);
     }
@@ -2223,7 +2218,7 @@ int main(void)
         thrd_join(t[i], NULL);
     }
 
-    // And all threads are done, so let's free this
+    // Và tất cả thread đã xong, nên giải phóng cái này
     tss_delete(str);
 }
 ```
@@ -2248,7 +2243,7 @@ TSS string: thread 11! :)
 TSS string: thread 14! :)
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`tss_delete()`](#man-tss_delete),
 [`tss_set()`](#man-tss_set),
@@ -2260,7 +2255,7 @@ TSS string: thread 14! :)
 
 [i[`tss_delete()` function]i]
 
-Clean up a thread-specific storage variable
+Dọn dẹp một biến thread-specific storage
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2270,23 +2265,23 @@ Clean up a thread-specific storage variable
 void tss_delete(tss_t key);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is the opposite of `tss_create()`. You create (initialize) the TSS
-variable before using it, then, when all the threads are done that need
-it, you delete (deinitialize/free) it with this.
+Đây là cặp đối nghịch của `tss_create()`. Bạn tạo (khởi tạo) biến TSS
+trước khi dùng, rồi khi tất cả thread cần dùng đã xong, bạn xoá
+(huỷ/giải phóng) nó bằng hàm này.
 
-This doesn't call any destructors! Those are all called by
-`thrd_exit()`!
+Hàm này không gọi destructor nào cả! Mấy cái đó đều do `thrd_exit()`
+gọi!
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This is a general-purpose TSS example. Note the TSS variable is deleted
-near the bottom of `main()`.
+Đây là ví dụ TSS chung chung. Để ý biến TSS được xoá ở gần cuối
+`main()`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2297,29 +2292,29 @@ tss_t str;
 
 void some_function(void)
 {
-    // Retrieve the per-thread value of this string
+    // Lấy giá trị per-thread của chuỗi này
     char *tss_string = tss_get(str);
 
-    // And print it
+    // Và in nó ra
     printf("TSS string: %s\n", tss_string);
 }
 
 int run(void *arg)
 {
-    int serial = *(int*)arg;  // Get this thread's serial number
+    int serial = *(int*)arg;  // Lấy số thứ tự của thread này
     free(arg);
 
-    // malloc() space to hold the data for this thread
+    // malloc() chỗ chứa dữ liệu cho thread này
     char *s = malloc(64);
-    sprintf(s, "thread %d! :)", serial);  // Happy little string
+    sprintf(s, "thread %d! :)", serial);  // Một chuỗi nho nhỏ vui tươi
 
-    // Set this TSS variable to point at the string
+    // Đặt biến TSS này trỏ tới chuỗi
     tss_set(str, s);
 
-    // Call a function that will get the variable
+    // Gọi một hàm sẽ lấy biến
     some_function();
 
-    return 0; // Equivalent to thrd_exit(0); fires destructors
+    return 0; // Tương đương thrd_exit(0); kích hoạt destructor
 }
 
 #define THREAD_COUNT 15
@@ -2328,11 +2323,11 @@ int main(void)
 {
     thrd_t t[THREAD_COUNT];
 
-    // Make a new TSS variable, the free() function is the destructor
+    // Tạo biến TSS mới, hàm free() là destructor
     tss_create(&str, free);
 
     for (int i = 0; i < THREAD_COUNT; i++) {
-        int *n = malloc(sizeof *n);  // Holds a thread serial number
+        int *n = malloc(sizeof *n);  // Chứa số thứ tự thread
         *n = i;
         thrd_create(t + i, run, n);
     }
@@ -2341,8 +2336,8 @@ int main(void)
         thrd_join(t[i], NULL);
     }
 
-    // And all threads are done, so let's free this
-    tss_delete(str);    // <-- DELETE TSS VARIABLE!
+    // Và tất cả thread đã xong, nên giải phóng cái này
+    tss_delete(str);    // <-- XOÁ BIẾN TSS!
 }
 ```
 
@@ -2366,7 +2361,7 @@ TSS string: thread 11! :)
 TSS string: thread 14! :)
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`tss_create()`](#man-tss_create),
 [`tss_set()`](#man-tss_set),
@@ -2378,7 +2373,7 @@ TSS string: thread 14! :)
 
 [i[`tss_get()` function]i]
 
-Get thread-specific data
+Lấy dữ liệu thread-specific
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2388,23 +2383,23 @@ Get thread-specific data
 void *tss_get(tss_t key);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Once you've set a variable with `tss_set()`, you can retrieve the value
-with `tss_get()`---just pass in the key and you'll get a pointer to the
-value back.
+Một khi bạn đã đặt một biến bằng `tss_set()`, bạn có thể lấy giá trị
+qua `tss_get()`---chỉ cần truyền vào khoá là bạn nhận lại được con trỏ
+tới giá trị.
 
-Don't call this from a destructor.
+Đừng gọi hàm này từ trong destructor.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the value stored for the given `key`, or `NULL` if there's
-trouble.
+Trả về giá trị đã lưu cho `key` được cho, hoặc `NULL` nếu có trục
+trặc.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This is a general-purpose TSS example. Note the TSS variable is
-retrieved in `some_function()`, below.
+Đây là ví dụ TSS chung chung. Để ý biến TSS được lấy trong
+`some_function()`, bên dưới.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2415,29 +2410,29 @@ tss_t str;
 
 void some_function(void)
 {
-    // Retrieve the per-thread value of this string
-    char *tss_string = tss_get(str);    // <-- GET THE VALUE
+    // Lấy giá trị per-thread của chuỗi này
+    char *tss_string = tss_get(str);    // <-- LẤY GIÁ TRỊ
 
-    // And print it
+    // Và in nó ra
     printf("TSS string: %s\n", tss_string);
 }
 
 int run(void *arg)
 {
-    int serial = *(int*)arg;  // Get this thread's serial number
+    int serial = *(int*)arg;  // Lấy số thứ tự của thread này
     free(arg);
 
-    // malloc() space to hold the data for this thread
+    // malloc() chỗ chứa dữ liệu cho thread này
     char *s = malloc(64);
-    sprintf(s, "thread %d! :)", serial);  // Happy little string
+    sprintf(s, "thread %d! :)", serial);  // Một chuỗi nho nhỏ vui tươi
 
-    // Set this TSS variable to point at the string
+    // Đặt biến TSS này trỏ tới chuỗi
     tss_set(str, s);
 
-    // Call a function that will get the variable
+    // Gọi một hàm sẽ lấy biến
     some_function();
 
-    return 0; // Equivalent to thrd_exit(0); fires destructors
+    return 0; // Tương đương thrd_exit(0); kích hoạt destructor
 }
 
 #define THREAD_COUNT 15
@@ -2446,11 +2441,11 @@ int main(void)
 {
     thrd_t t[THREAD_COUNT];
 
-    // Make a new TSS variable, the free() function is the destructor
+    // Tạo biến TSS mới, hàm free() là destructor
     tss_create(&str, free);
 
     for (int i = 0; i < THREAD_COUNT; i++) {
-        int *n = malloc(sizeof *n);  // Holds a thread serial number
+        int *n = malloc(sizeof *n);  // Chứa số thứ tự thread
         *n = i;
         thrd_create(t + i, run, n);
     }
@@ -2459,7 +2454,7 @@ int main(void)
         thrd_join(t[i], NULL);
     }
 
-    // And all threads are done, so let's free this
+    // Và tất cả thread đã xong, nên giải phóng cái này
     tss_delete(str);
 }
 ```
@@ -2484,7 +2479,7 @@ TSS string: thread 11! :)
 TSS string: thread 14! :)
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`tss_set()`](#man-tss_set)
 
@@ -2493,7 +2488,7 @@ TSS string: thread 14! :)
 
 [i[`tss_set()` function]i]
 
-Set thread-specific data
+Đặt dữ liệu thread-specific
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2503,30 +2498,29 @@ Set thread-specific data
 int tss_set(tss_t key, void *val);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Once you've set up your TSS variable with `tss_create()`, you can set it
-on a per thread basis with `tss_set()`.
+Một khi bạn đã thiết lập biến TSS bằng `tss_create()`, bạn có thể đặt
+nó theo từng thread qua `tss_set()`.
 
-`key` is the identifier for this data, and `val` is a pointer to it.
+`key` là định danh của dữ liệu này, còn `val` là con trỏ tới dữ liệu.
 
-The destructor specified in `tss_create()` will be called for the value
-set when the thread exits.
+Destructor được chỉ định trong `tss_create()` sẽ được gọi cho giá trị
+được đặt khi thread thoát.
 
-Also, if there's a destructor _and_ there is already at value for this
-key in place, the destructor will not be called for the already-existing
-value. In fact, this function will never cause a destructor to be
-called. So you're on your own, there---best clean up the old value
-before overwriting it with the new one.
+Ngoài ra, nếu có destructor _và_ đã có giá trị sẵn cho khoá này rồi,
+destructor sẽ không được gọi cho giá trị đã có. Thực tế, hàm này không
+bao giờ khiến destructor được gọi. Nên bạn phải tự lo lấy---tốt nhất là
+dọn dẹp giá trị cũ trước khi ghi đè bằng giá trị mới.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `thrd_success` when happy, and `thrd_error` when not.
+Trả về `thrd_success` khi vui, và `thrd_error` khi không.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This is a general-purpose TSS example. Note the TSS variable is
-set in `run()`, below.
+Đây là ví dụ TSS chung chung. Để ý biến TSS được đặt trong `run()`,
+bên dưới.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2537,29 +2531,29 @@ tss_t str;
 
 void some_function(void)
 {
-    // Retrieve the per-thread value of this string
+    // Lấy giá trị per-thread của chuỗi này
     char *tss_string = tss_get(str);
 
-    // And print it
+    // Và in nó ra
     printf("TSS string: %s\n", tss_string);
 }
 
 int run(void *arg)
 {
-    int serial = *(int*)arg;  // Get this thread's serial number
+    int serial = *(int*)arg;  // Lấy số thứ tự của thread này
     free(arg);
 
-    // malloc() space to hold the data for this thread
+    // malloc() chỗ chứa dữ liệu cho thread này
     char *s = malloc(64);
-    sprintf(s, "thread %d! :)", serial);  // Happy little string
+    sprintf(s, "thread %d! :)", serial);  // Một chuỗi nho nhỏ vui tươi
 
-    // Set this TSS variable to point at the string
-    tss_set(str, s);    // <-- SET THE TSS VARIABLE
+    // Đặt biến TSS này trỏ tới chuỗi
+    tss_set(str, s);    // <-- ĐẶT BIẾN TSS
 
-    // Call a function that will get the variable
+    // Gọi một hàm sẽ lấy biến
     some_function();
 
-    return 0; // Equivalent to thrd_exit(0); fires destructors
+    return 0; // Tương đương thrd_exit(0); kích hoạt destructor
 }
 
 #define THREAD_COUNT 15
@@ -2568,11 +2562,11 @@ int main(void)
 {
     thrd_t t[THREAD_COUNT];
 
-    // Make a new TSS variable, the free() function is the destructor
+    // Tạo biến TSS mới, hàm free() là destructor
     tss_create(&str, free);
 
     for (int i = 0; i < THREAD_COUNT; i++) {
-        int *n = malloc(sizeof *n);  // Holds a thread serial number
+        int *n = malloc(sizeof *n);  // Chứa số thứ tự thread
         *n = i;
         thrd_create(t + i, run, n);
     }
@@ -2581,7 +2575,7 @@ int main(void)
         thrd_join(t[i], NULL);
     }
 
-    // And all threads are done, so let's free this
+    // Và tất cả thread đã xong, nên giải phóng cái này
     tss_delete(str);
 }
 ```
@@ -2606,7 +2600,7 @@ TSS string: thread 11! :)
 TSS string: thread 14! :)
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`tss_get()`](#man-tss_get)
 
