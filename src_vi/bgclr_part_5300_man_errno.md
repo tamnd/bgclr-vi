@@ -3,85 +3,84 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<errno.h>` Error Information {#errno}
+# `<errno.h>` Thông tin Lỗi {#errno}
 
 [i[`errno.h` header file]i]
 
-|Variable|Description|
+|Biến|Mô tả|
 |-|-|
-|[`errno`](#man-errno)|Holds the error status of the last call|
+|[`errno`](#man-errno)|Giữ trạng thái lỗi của lời gọi gần nhất|
 
-This header defines a single variable^[Really it's just required to be
-a modifiable lvalue, so not necessarily a variable. But you can treat it
-as such.], `errno`, that can be checked to see if an error has occurred.
+Header này định nghĩa duy nhất một biến^[Thật ra nó chỉ cần là
+modifiable lvalue, nên không nhất thiết là biến. Nhưng bạn cứ xem nó
+như biến cũng được.], `errno`, có thể kiểm tra để xem đã xảy ra lỗi
+hay chưa.
 
-`errno` is set to `0` on startup, but no library function sets it to
-`0`. If you're going to use solely it to check for errors, set it to `0`
-before the call and then check it after. Not only that, but if there's
-no error, all library functions will leave the value of `errno`
-unchanged.
+`errno` được set thành `0` lúc khởi động, nhưng không có hàm thư viện
+nào set nó về `0`. Nếu bạn chỉ dựa vào nó để kiểm tra lỗi, set nó về
+`0` trước khi gọi rồi kiểm tra sau đó. Không chỉ vậy, nếu không có
+lỗi, mọi hàm thư viện sẽ để giá trị `errno` nguyên không đổi.
 
-Often, though, you'll get some error indication from the function you're
-calling then check `errno` to see what went wrong.
+Tuy nhiên, thông thường bạn sẽ nhận được tín hiệu lỗi nào đó từ hàm
+được gọi rồi mới kiểm tra `errno` để xem chuyện gì đã sai.
 
-This is commonly used in conjunction with [`perror()`](#man-perror) to
-get a human-readable error message that corresponds to the specific
-error.
+Cái này thường dùng chung với [`perror()`](#man-perror) để lấy một
+thông báo lỗi dạng con người đọc được ứng với lỗi cụ thể.
 
-Important Safety Tip: You should never make your own variable called
-`errno`---that's undefined behavior.
+Mẹo An Toàn Quan Trọng: Đừng bao giờ tự tạo biến của riêng bạn tên
+là `errno`---đó là undefined behavior.
 
-Note that the C Spec defines less than a handful of values `errno` can
-take on. [fl[Unix defines a bunch
-more|https://man.archlinux.org/man/errno.3.en]], [fl[as does
-Windows|https://docs.microsoft.com/en-us/cpp/c-runtime-library/errno-constants?view=msvc-160]].
+Chú ý là spec C chỉ định nghĩa vài ba giá trị mà `errno` có thể nhận.
+[fl[Unix định nghĩa thêm kha
+khá|https://man.archlinux.org/man/errno.3.en]], [fl[Windows cũng
+vậy|https://docs.microsoft.com/en-us/cpp/c-runtime-library/errno-constants?view=msvc-160]].
 
 [[manbreak]]
 ## `errno` {#man-errno}
 
 [i[`errno` variable]i]
 
-Holds the error status of the last call
+Giữ trạng thái lỗi của lời gọi gần nhất
 
 ### Synopsis {.unnumbered .unlisted}
 
 ``` {.c}
-errno   // Type is undefined, but it's assignable
+errno   // Kiểu không xác định, nhưng gán được
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Indicates the error status of the last call (note that not all calls
-will set this value).
+Cho biết trạng thái lỗi của lời gọi gần nhất (chú ý không phải mọi
+lời gọi đều set giá trị này).
 
-|Value|Description|
+|Giá trị|Mô tả|
 |-|-|
-|`0`|No error|
-|`EDOM`|Domain error (from math)|
-|`EILSEQ`|Encoding error (from character conversion)|
-|`ERANGE`|Range error (from math)|
+|`0`|Không lỗi|
+|`EDOM`|Lỗi miền xác định (từ toán)|
+|`EILSEQ`|Lỗi encoding (từ chuyển đổi ký tự)|
+|`ERANGE`|Lỗi miền giá trị (từ toán)|
 
-If you're doing a number of math functions, you might come across `EDOM`
-or `ERANGE`.
+Nếu bạn đang làm một loạt hàm toán, bạn có thể gặp `EDOM` hoặc
+`ERANGE`.
 
-With multibyte/wide character conversion functions, you might see
+Với các hàm chuyển đổi ký tự multibyte/wide, bạn có thể thấy
 `EILSEQ`.
 
-And your system might define any other number of values that `errno`
-could be set to, all of which will begin with the letter `E`.
+Và hệ thống của bạn có thể định nghĩa thêm bao nhiêu giá trị khác mà
+`errno` có thể nhận, tất cả đều bắt đầu bằng chữ `E`.
 
-Fun Fact: you can use `EDOM`, `EILSEQ`, and `ERANGE` with preprocessor
-directives such as `#ifdef`. But, frankly, I'm not sure why you'd do
-that other than to test their existence.
+Chuyện Vui: bạn có thể dùng `EDOM`, `EILSEQ`, và `ERANGE` với các chỉ
+thị preprocessor như `#ifdef`. Nhưng thật lòng, tôi không chắc bạn
+sẽ làm vậy để làm gì ngoài việc kiểm tra sự tồn tại của chúng.
 
 <!--
 ### Return Value {.unnumbered .unlisted}
 -->
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-The following prints an error message, since passing `2.0` to `acos()`
-is outside the function's domain.
+Đoạn sau in ra thông báo lỗi, vì truyền `2.0` vào `acos()` là ngoài
+miền xác định của hàm.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -92,9 +91,9 @@ int main(void)
 {
     double x;
 
-    errno = 0;       // Make sure this is clear before the call
+    errno = 0;       // Đảm bảo clear trước khi gọi
 
-    x = acos(2.0);   // Invalid argument to acos()
+    x = acos(2.0);   // Đối số không hợp lệ cho acos()
 
     if (errno == EDOM)
         perror("acos");
@@ -111,9 +110,8 @@ Output:
 acos: Numerical argument out of domain
 ```
 
-The following prints an error message (on my system), since passing
-`1e+30` to `exp()` produces a result that's outside the range of a
-`double`.
+Đoạn sau in ra thông báo lỗi (trên hệ của tôi), vì truyền `1e+30` vào
+`exp()` tạo ra kết quả ngoài miền giá trị của `double`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -124,9 +122,9 @@ int main(void)
 {
     double x;
 
-    errno = 0;       // Make sure this is clear before the call
+    errno = 0;       // Đảm bảo clear trước khi gọi
 
-    x = exp(1e+30);  // Pass in some too-huge number
+    x = exp(1e+30);  // Truyền vào số quá khổng lồ
 
     if (errno == ERANGE)
         perror("exp");
@@ -143,9 +141,9 @@ Output:
 exp: Numerical result out of range
 ```
 
-This example tries to convert an invalid character into a wide
-character, failing. This sets `errno` to `EILSEQ`. We then use
-`perror()` to print an error message.
+Ví dụ này thử chuyển một ký tự không hợp lệ sang ký tự rộng (wide),
+thất bại. Nó set `errno` thành `EILSEQ`. Rồi ta dùng `perror()` để in
+ra thông báo lỗi.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -158,7 +156,7 @@ int main(void)
 {
 	setlocale(LC_ALL, "");
 
-    char *bad_str = "\xff";  // Probably invalid char in this locale
+    char *bad_str = "\xff";  // Có lẽ là char không hợp lệ ở locale này
     wchar_t wc;
     size_t result;
     mbstate_t ps;
@@ -182,7 +180,7 @@ Output:
 mbrtowc: Invalid or incomplete multibyte or wide character
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`perror()`](#man-perror),
 [`mbrtoc16()`](#man-mbrtoc16),
