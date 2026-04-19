@@ -3,82 +3,84 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<time.h>` Date and Time Functions {#time}
+# `<time.h>` Các hàm về ngày và giờ {#time}
 
 [i[`time.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`clock()`](#man-clock)|How much processor time has been used by this process|
-|[`difftime()`](#man-difftime)|Compute the difference between two times|
-|[`mktime()`](man-mktime)|Convert a `struct tm` into a `time_t`|
-|[`time()`](#man-time)|Get the current calendar time|
-|[`timespec_get()`](#man-timespec_get)|Get a higher resolution time, probably now|
-|[`asctime()`](#man-asctime)|Return a human-readable version of a `struct tm`|
-|[`ctime()`](#man-ctime)|Return a human-readable version of a `time_t`|
-|[`gmtime()`](#man-gmtime)|Convert a calendar time into a UTC broken-down time|
-|[`localtime()`](#man-localtime)|Convert a calendar time into a broken-down local time|
-|[`strftime()`](#man-strftime)|Formatted date and time output|
+|[`clock()`](#man-clock)|Xem tiến trình này đã dùng bao nhiêu thời gian CPU|
+|[`difftime()`](#man-difftime)|Tính chênh lệch giữa hai mốc thời gian|
+|[`mktime()`](man-mktime)|Chuyển `struct tm` thành `time_t`|
+|[`time()`](#man-time)|Lấy calendar time (thời gian lịch) hiện tại|
+|[`timespec_get()`](#man-timespec_get)|Lấy thời gian có độ phân giải cao hơn, thường là ngay bây giờ|
+|[`asctime()`](#man-asctime)|Trả về phiên bản dễ đọc cho người của `struct tm`|
+|[`ctime()`](#man-ctime)|Trả về phiên bản dễ đọc cho người của `time_t`|
+|[`gmtime()`](#man-gmtime)|Chuyển calendar time thành broken-down time (thời gian đã tách thành trường) theo UTC|
+|[`localtime()`](#man-localtime)|Chuyển calendar time thành broken-down time theo giờ địa phương|
+|[`strftime()`](#man-strftime)|In output ngày giờ có định dạng|
 
 
-When it comes to time and C, there are two main types to look for:
+Khi nói đến thời gian trong C, có hai kiểu chính cần để ý:
 
-* [i[`time_t` type]i] **`time_t`** holds a _calendar time_. This is an
-  potentially opaque numeric type that represents an absolute time that
-  can be converted to UTC^[When you say GMT, unless you're talking
-  specifically about the time zone and not the time, you probably mean
-  "UTC".] or local time.
+* [i[`time_t` type]i] **`time_t`** chứa một _calendar time_ (thời gian
+  lịch). Đây là một kiểu số có tiềm năng là opaque (không lộ bên
+  trong), đại diện cho một thời điểm tuyệt đối và có thể chuyển đổi
+  sang UTC^[Khi bạn nói GMT, trừ khi bạn đang nói cụ thể về múi giờ
+  chứ không phải về thời điểm, có lẽ thứ bạn muốn nói là "UTC".] hoặc
+  giờ địa phương.
 
-* [i[`struct tm` type]i] **`struct tm`** holds a _broken-down time_.
-  This has things like the day of the week, the day of the month, the
-  hour, the minute, the second, etc.
+* [i[`struct tm` type]i] **`struct tm`** chứa một _broken-down time_
+  (thời gian đã tách thành trường). Nó có các thứ như ngày trong
+  tuần, ngày trong tháng, giờ, phút, giây, v.v.
 
-On POSIX systems and Windows, `time_t` is an integer and represents the
-number of seconds that have elapsed since January 1, 1970 at 00:00 UTC.
+Trên các hệ thống POSIX và Windows, `time_t` là một số nguyên và đại
+diện cho số giây đã trôi qua kể từ 1 tháng 1 năm 1970 lúc 00:00 UTC.
 
-A `struct tm` contains the following fields:
+Một `struct tm` chứa các trường sau:
 
 ``` {.c}
 struct tm {
-    int tm_sec;    // seconds after the minute -- [0, 60]
-    int tm_min;    // minutes after the hour -- [0, 59]
-    int tm_hour;   // hours since midnight -- [0, 23]
-    int tm_mday;   // day of the month -- [1, 31]
-    int tm_mon;    // months since January -- [0, 11]
-    int tm_year;   // years since 1900
-    int tm_wday;   // days since Sunday -- [0, 6]
-    int tm_yday;   // days since January 1 -- [0, 365]
-    int tm_isdst;  // Daylight Saving Time flag
+    int tm_sec;    // số giây sau phút -- [0, 60]
+    int tm_min;    // số phút sau giờ -- [0, 59]
+    int tm_hour;   // số giờ kể từ nửa đêm -- [0, 23]
+    int tm_mday;   // ngày trong tháng -- [1, 31]
+    int tm_mon;    // số tháng kể từ tháng Một -- [0, 11]
+    int tm_year;   // số năm kể từ 1900
+    int tm_wday;   // số ngày kể từ Chủ Nhật -- [0, 6]
+    int tm_yday;   // số ngày kể từ 1 tháng 1 -- [0, 365]
+    int tm_isdst;  // cờ Daylight Saving Time
 };
 ```
 
-You can convert between the two with `mktime()`, `gmtime()`, and
-`localtime()`.
+Bạn có thể chuyển qua lại giữa hai kiểu này bằng `mktime()`,
+`gmtime()`, và `localtime()`.
 
-You can print time information to strings with `ctime()`, `asctime()`,
-and `strftime()`.
+Bạn có thể in thông tin thời gian ra chuỗi bằng `ctime()`, `asctime()`,
+và `strftime()`.
 
-## Thread Safety Warning
+## Cảnh báo về Thread Safety
 
-`asctime()`, `ctime()`: These two functions return a pointer to a
-`static` memory region. They both might return the same pointer. If
-you need thread safety, you'll need a mutex across them. If you need
-both results at once, `strcpy()` one of them out.
+`asctime()`, `ctime()`: Hai hàm này trả về con trỏ tới một vùng nhớ
+`static`. Cả hai có thể trả về cùng một con trỏ. Nếu bạn cần
+thread-safe (an toàn với thread), bạn sẽ cần một mutex bao quanh
+chúng. Nếu bạn cần cả hai kết quả cùng lúc, `strcpy()` một trong hai
+ra chỗ khác.
 
-All these problems with `asctime()` and `ctime()` can be avoided by
-using the more flexible and thread-safe `strftime()` function instead.
+Mọi vấn đề với `asctime()` và `ctime()` có thể né được bằng cách dùng
+hàm `strftime()` thay thế---nó linh hoạt và thread-safe hơn.
 
-`localtime()`, `gmtime()`: These other two functions also return a
-pointer to a `static` memory region. They both might return the same
-pointer. If you need thread safety, you'll need a mutex across them. If
-you need both results at once, copy the `struct` to another.
+`localtime()`, `gmtime()`: Hai hàm này cũng trả về con trỏ tới một
+vùng nhớ `static`. Cả hai có thể trả về cùng một con trỏ. Nếu bạn cần
+thread-safe, bạn sẽ cần một mutex bao quanh chúng. Nếu bạn cần cả hai
+kết quả cùng lúc, hãy sao chép `struct` sang một chỗ khác.
 
 [[manbreak]]
 ## `clock()` {#man-clock}
 
 [i[`clock()` function]i]
 
-How much processor time has been used by this process
+Xem tiến trình này đã dùng bao nhiêu thời gian CPU
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -88,41 +90,42 @@ How much processor time has been used by this process
 clock_t clock(void);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Your processor is juggling a lot of things right now. Just because a
-process has been alive for 20 minutes doesn't mean that it used 20
-minutes of "CPU time".
+Bộ xử lý của bạn lúc này đang tung hứng rất nhiều thứ. Chỉ vì một
+tiến trình đã sống được 20 phút không có nghĩa là nó đã dùng 20 phút
+"thời gian CPU".
 
-Most of the time your average process spends asleep, and that doesn't
-count toward the CPU time spent.
+Phần lớn thời gian, tiến trình trung bình của bạn ngồi không (đang
+ngủ), và cái đó không tính vào thời gian CPU đã dùng.
 
-This function returns an opaque type representing the number of "clock
-ticks"^[The spec doesn't actually say "clock ticks", but I... am.] the
-process has spent in operation.
+Hàm này trả về một kiểu opaque đại diện cho số "clock tick" (tick
+đồng hồ)^[Spec thực ra không nói "clock tick", nhưng tôi... thì nói.]
+mà tiến trình đã tiêu tốn để chạy.
 
-You can get the number of seconds out of that by dividing by the macro
-`CLOCKS_PER_SEC`. This is an integer, so you will have to cast part of
-the expression to a floating type to get a fractional time.
+Bạn có thể lấy ra số giây từ đó bằng cách chia cho macro
+`CLOCKS_PER_SEC`. Đây là số nguyên, nên bạn sẽ phải ép một phần của
+biểu thức sang kiểu số thực để có thời gian có phần lẻ.
 
-Note that this is not the "wall clock time" of the program. If you want
-to get that loosely use `time()` and `difftime()` (which might only
-offer 1-second resolution) or `timespec_get()` (which might only also
-offer low resolution, but at least it _might_ go to nanosecond level).
+Chú ý rằng đây không phải "wall clock time" (thời gian đồng hồ treo
+tường) của chương trình. Nếu bạn muốn lấy cái đó thì dùng một cách
+đại khái `time()` và `difftime()` (có thể chỉ cho độ phân giải 1
+giây) hoặc `timespec_get()` (cũng có thể chỉ cho độ phân giải thấp,
+nhưng ít ra nó _có thể_ xuống tới mức nano giây).
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the amount of CPU time spent by this process. This comes back in
-a form that can be divided by `CLOCKS_PER_SEC` to determine the time in
-seconds.
+Trả về lượng thời gian CPU mà tiến trình này đã dùng. Giá trị này trả
+về dưới dạng có thể chia cho `CLOCKS_PER_SEC` để ra được thời gian
+tính bằng giây.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
 #include <time.h>
 
-// Deliberately naive Fibonacci
+// Fibonacci cố tình ngây thơ
 long long int fib(long long int n) {
     if (n <= 1) return n;
 
@@ -137,14 +140,14 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy của tôi:
 
 ``` {.default}
 The 42nd Fibonacci Number is 267914296
 CPU time: 1.863078
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`time()`](#man-time),
 [`difftime()`](#man-difftime),
@@ -156,7 +159,7 @@ CPU time: 1.863078
 
 [i[`difftime()` function]i]
 
-Compute the difference between two times
+Tính chênh lệch giữa hai mốc thời gian
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -166,22 +169,22 @@ Compute the difference between two times
 double difftime(time_t time1, time_t time0);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Since the `time_t` type is technically opaque, you can't just
-straight-up subtract to get the difference between two of them^[Unless
-you're on a POSIX system where `time_t` is definitely an integer, in
-which case you can subtract. But you should still use `difftime()` for
-maximum portability.]. Use this function to do it.
+Vì kiểu `time_t` về mặt kỹ thuật là opaque, bạn không thể cứ thế lấy
+thẳng ra rồi trừ đi để có chênh lệch giữa hai cái^[Trừ khi bạn đang ở
+trên một hệ thống POSIX nơi `time_t` chắc chắn là số nguyên, lúc đó
+bạn có thể trừ. Nhưng bạn vẫn nên dùng `difftime()` để portable
+(khả chuyển) tối đa.]. Hãy dùng hàm này để làm việc đó.
 
-There is no guarantee as to the resolution of this difference, but it's
-probably to the second.
+Không có gì đảm bảo về độ phân giải của chênh lệch này, nhưng chắc
+tới mức giây.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the difference between two `time_t`s in seconds.
+Trả về chênh lệch giữa hai `time_t` tính bằng giây.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -189,12 +192,12 @@ Returns the difference between two `time_t`s in seconds.
 
 int main(void)
 {
-    // April 12, 1982 and change
+    // 12 tháng 4, 1982 và lẻ
     struct tm time_a = { .tm_year=82, .tm_mon=3, .tm_mday=12,
         .tm_hour=4, .tm_min=00, .tm_sec=04, .tm_isdst=-1,
     };
 
-    // November 15, 2020 and change
+    // 15 tháng 11, 2020 và lẻ
     struct tm time_b = { .tm_year=120, .tm_mon=10, .tm_mday=15,
         .tm_hour=16, .tm_min=27, .tm_sec=00, .tm_isdst=-1,
     };
@@ -204,7 +207,7 @@ int main(void)
 
     double diff = difftime(cal_b, cal_a);
 
-    double years = diff / 60 / 60 / 24 / 365.2425;  // close enough
+    double years = diff / 60 / 60 / 24 / 365.2425;  // gần đủ rồi
 
     printf("%f seconds (%f years) between events\n", diff, years);
 }
@@ -216,7 +219,7 @@ Output:
 1217996816.000000 seconds (38.596783 years) between events
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`time()`](#man-time),
 [`mktime()`](#man-mktime)
@@ -227,7 +230,7 @@ Output:
 
 [i[`mktime()` function]i]
 
-Convert a `struct tm` with local time into a `time_t`
+Chuyển `struct tm` với giờ địa phương thành `time_t`
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -237,41 +240,43 @@ Convert a `struct tm` with local time into a `time_t`
 time_t mktime(struct tm *timeptr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a local date and time and want it converted to a `time_t`
-(so that you can `difftime()` it or whatever), you can convert it with
-this function.
+Nếu bạn có ngày và giờ ở local (giờ địa phương) và muốn chuyển nó
+sang `time_t` (để rồi `difftime()` nó hay làm gì đó), bạn có thể
+chuyển đổi bằng hàm này.
 
-Basically you fill out the fields in your `struct tm` in local time and
-`mktime()` will convert those to the UTC `time_t` equivalent.
+Về cơ bản bạn điền vào các trường trong `struct tm` của mình theo
+giờ địa phương, và `mktime()` sẽ chuyển chúng sang `time_t` UTC
+tương ứng.
 
-A couple notes:
+Vài lưu ý:
 
-* Don't bother filling out `tm_wday` or `tm_yday`. `mktime()` will fill
-  these out for you.
+* Đừng bận tâm điền `tm_wday` hay `tm_yday`. `mktime()` sẽ điền
+  chúng giúp bạn.
 
-* You can set `tm_isdst` to `0` to indicate your time isn't Daylight
-  Saving Time (DST), `1` to indicate it is, and `-1` to have `mktime()`
-  fill it in according to your locale's preference.
+* Bạn có thể đặt `tm_isdst` thành `0` để báo rằng giờ của bạn không
+  phải Daylight Saving Time (DST / giờ tiết kiệm ánh sáng), `1` để
+  báo là có, và `-1` để `mktime()` tự điền theo sở thích của locale.
 
-If you don't have a C23 compiler and you need input in UTC, see the
-non-standard functions
-[fl[`timegm()`|https://man.archlinux.org/man/timegm.3.en]] for
-Unix-likes and
+Nếu bạn không có compiler C23 và cần nhập input theo UTC, xem các
+hàm không chuẩn
+[fl[`timegm()`|https://man.archlinux.org/man/timegm.3.en]] cho các
+hệ Unix-like và
 [fl[`_mkgmtime()`|https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/mkgmtime-mkgmtime32-mkgmtime64?view=msvc-160]]
-for Windows.
+cho Windows.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the local time in the `struct tm` as a `time_t` calendar time.
+Trả về giờ địa phương trong `struct tm` dưới dạng `time_t` calendar
+time.
 
-Returns `(time_t)(-1)` on error.
+Trả về `(time_t)(-1)` nếu có lỗi.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-In the following example, we have `mktime()` tell us if that time was
-DST or not.
+Trong ví dụ sau, chúng ta để `mktime()` cho biết thời điểm đó có
+phải DST hay không.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -280,13 +285,13 @@ DST or not.
 int main(void)
 {
     struct tm broken_down_time = {
-        .tm_year=82,   // years since 1900
-        .tm_mon=3,     // months since January -- [0, 11]
-        .tm_mday=12,   // day of the month -- [1, 31]
-        .tm_hour=4,    // hours since midnight -- [0, 23]
-        .tm_min=00,    // minutes after the hour -- [0, 59]
-        .tm_sec=04,    // seconds after the minute -- [0, 60]
-        .tm_isdst=-1,  // Daylight Saving Time flag
+        .tm_year=82,   // số năm kể từ 1900
+        .tm_mon=3,     // số tháng kể từ tháng Một -- [0, 11]
+        .tm_mday=12,   // ngày trong tháng -- [1, 31]
+        .tm_hour=4,    // số giờ kể từ nửa đêm -- [0, 23]
+        .tm_min=00,    // số phút sau giờ -- [0, 59]
+        .tm_sec=04,    // số giây sau phút -- [0, 60]
+        .tm_isdst=-1,  // cờ Daylight Saving Time
     };
 
     time_t calendar_time = mktime(&broken_down_time);
@@ -294,17 +299,17 @@ int main(void)
     char *days[] = {"Sunday", "Monday", "Tuesday",
         "Wednesday", "Furzeday", "Friday", "Saturday"};
 
-    // This will print what was in broken_down_time
+    // Cái này sẽ in ra những gì có trong broken_down_time
     printf("Local time : %s", asctime(localtime(&calendar_time)));
     printf("Is DST     : %d\n", broken_down_time.tm_isdst);
     printf("Day of week: %s\n\n", days[broken_down_time.tm_wday]);
 
-    // This will print UTC for the local time, above
+    // Cái này sẽ in UTC cho giờ địa phương ở trên
     printf("UTC        : %s", asctime(gmtime(&calendar_time)));
 }
 ```
 
-Output (for me in Pacific Time---UTC is 8 hours ahead):
+Output (đối với tôi ở Pacific Time---UTC đi trước 8 tiếng):
 
 ``` {.default}
 Local time : Mon Apr 12 04:00:04 1982
@@ -314,7 +319,7 @@ Day of week: Monday
 UTC        : Mon Apr 12 12:00:04 1982
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`timegm()`](#man-timegm),
 [`localtime()`](#man-localtime),
@@ -326,11 +331,11 @@ UTC        : Mon Apr 12 12:00:04 1982
 
 [i[`timegm()` function]i]
 
-Convert a `struct tm` with UTC time into a `time_t`
+Chuyển `struct tm` với giờ UTC thành `time_t`
 
 ### Synopsis {.unnumbered .unlisted}
 
-New in C23!
+Mới trong C23!
 
 ``` {.c}
 #include <time.h>
@@ -338,38 +343,39 @@ New in C23!
 time_t timegm(struct tm *timeptr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a UTC date and time and want it converted to a `time_t`
-(so that you can `difftime()` it or whatever), you can convert it with
-this function.
+Nếu bạn có ngày và giờ ở UTC và muốn chuyển nó sang `time_t` (để
+rồi `difftime()` nó hay làm gì đó), bạn có thể chuyển đổi bằng hàm
+này.
 
-Basically you fill out the fields in your `struct tm` in local time and
-`mktime()` will convert those to the UTC `time_t` equivalent.
+Về cơ bản bạn điền các trường trong `struct tm` của mình theo giờ
+địa phương, và `mktime()` sẽ chuyển chúng sang `time_t` UTC tương
+ứng.
 
-A couple notes:
+Vài lưu ý:
 
-* Don't bother filling out `tm_wday` or `tm_yday`. `mktime()` will fill
-  these out for you.
+* Đừng bận tâm điền `tm_wday` hay `tm_yday`. `mktime()` sẽ điền
+  chúng giúp bạn.
 
-* The spec doesn't say anything about the `tm_isdst` Daylight Saving
-  flag, but since UTC is immune to DST, I'm assuming it is ignored or
-  set to `0` for us.
+* Spec không nói gì về cờ Daylight Saving `tm_isdst`, nhưng vì UTC
+  miễn nhiễm với DST, tôi đoán là nó bị bỏ qua hoặc được đặt thành
+  `0` giùm ta.
 
-If you don't have a C23 compiler and you need input in UTC, see the
-non-standard functions
-[fl[`timegm()`|https://man.archlinux.org/man/timegm.3.en]] for
-Unix-likes and
+Nếu bạn không có compiler C23 và cần nhập input theo UTC, xem các
+hàm không chuẩn
+[fl[`timegm()`|https://man.archlinux.org/man/timegm.3.en]] cho các
+hệ Unix-like và
 [fl[`_mkgmtime()`|https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/mkgmtime-mkgmtime32-mkgmtime64?view=msvc-160]]
-for Windows.
+cho Windows.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the UTC time in the `struct tm` as a `time_t` calendar time.
+Trả về giờ UTC trong `struct tm` dưới dạng `time_t` calendar time.
 
-Returns `(time_t)(-1)` on error.
+Trả về `(time_t)(-1)` nếu có lỗi.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -378,13 +384,13 @@ Returns `(time_t)(-1)` on error.
 int main(void)
 {
     struct tm broken_down_time = {
-        .tm_year=82,   // years since 1900
-        .tm_mon=3,     // months since January -- [0, 11]
-        .tm_mday=12,   // day of the month -- [1, 31]
-        .tm_hour=4,    // hours since midnight -- [0, 23]
-        .tm_min=00,    // minutes after the hour -- [0, 59]
-        .tm_sec=04,    // seconds after the minute -- [0, 60]
-        .tm_isdst=-1,  // Daylight Saving Time flag
+        .tm_year=82,   // số năm kể từ 1900
+        .tm_mon=3,     // số tháng kể từ tháng Một -- [0, 11]
+        .tm_mday=12,   // ngày trong tháng -- [1, 31]
+        .tm_hour=4,    // số giờ kể từ nửa đêm -- [0, 23]
+        .tm_min=00,    // số phút sau giờ -- [0, 59]
+        .tm_sec=04,    // số giây sau phút -- [0, 60]
+        .tm_isdst=-1,  // cờ Daylight Saving Time
     };
 
     time_t calendar_time = timegm(&broken_down_time);
@@ -392,16 +398,16 @@ int main(void)
     char *days[] = {"Sunday", "Monday", "Tuesday",
         "Wednesday", "Furzeday", "Friday", "Saturday"};
 
-    // This will print what was in broken_down_time
+    // Cái này sẽ in ra những gì có trong broken_down_time
     printf("UTC        : %s", asctime(gmtime(&calendar_time)));
     printf("Day of week: %s\n\n", days[broken_down_time.tm_wday]);
 
-    // This will print UTC for the local time, above
+    // Cái này sẽ in UTC cho giờ địa phương ở trên
     printf("Local time : %s", asctime(localtime(&calendar_time)));
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`mktime()`](#man-mktime),
 [`timegm()`](#man-timegm),
@@ -414,7 +420,7 @@ int main(void)
 
 [i[`time()` function]i]
 
-Get the current calendar time
+Lấy calendar time hiện tại
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -424,25 +430,25 @@ Get the current calendar time
 time_t time(time_t *timer);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Returns the current calendar time right now. I mean, now. No, now!
+Trả về calendar time ngay lúc này. Ý tôi là, bây giờ. Không, bây giờ!
 
-If `timer` is not `NULL`, it gets loaded with the current time, as well.
+Nếu `timer` không phải `NULL`, nó cũng sẽ được nạp thời gian hiện tại.
 
-This can be converted into a `struct tm` with `localtime()` or
-`gmtime()`, or printed directly with `ctime()`.
+Giá trị này có thể chuyển thành `struct tm` bằng `localtime()` hoặc
+`gmtime()`, hoặc in trực tiếp bằng `ctime()`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the current calendar time. Also loads `timer` with the current
-time if it's not `NULL`.
+Trả về calendar time hiện tại. Cũng nạp `timer` với thời gian hiện
+tại nếu nó không phải `NULL`.
 
-Or returns `(time_t)(-1)` if the time isn't available because you've
-fallen out of the space-time continuum and/or the system doesn't support
-times.
+Hoặc trả về `(time_t)(-1)` nếu không lấy được thời gian vì bạn đã
+rơi khỏi dòng không-thời gian và/hoặc hệ thống không hỗ trợ thời
+gian.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -456,13 +462,13 @@ int main(void)
 }
 ```
 
-Example output:
+Ví dụ output:
 
 ``` {.default}
 The local time is Mon Mar  1 18:45:14 2021
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`localtime()`](#man-localtime),
 [`gmtime()`](#man-gmtime),
@@ -473,7 +479,7 @@ The local time is Mon Mar  1 18:45:14 2021
 
 [i[`timespec_get()` function]i]
 
-Get a higher resolution time, probably now
+Lấy thời gian có độ phân giải cao hơn, thường là ngay bây giờ
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -483,38 +489,40 @@ Get a higher resolution time, probably now
 int timespec_get(struct timespec *ts, int base);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function loads the current time UTC (unless directed otherwise)
-into the given `struct timespec`, `ts`.
+Hàm này nạp thời gian UTC hiện tại (trừ khi được chỉ định khác) vào
+`struct timespec`, `ts`, bạn đưa vào.
 
-That structure has two fields:
+Struct đó có hai trường:
 
 ``` {.c}
 struct timespec {
-    time_t tv_sec;   // Whole seconds
-    long   tv_nsec;  // Nanoseconds, 0-999999999
+    time_t tv_sec;   // Số nguyên giây
+    long   tv_nsec;  // Nano giây, 0-999999999
 }
 ```
 
-Nanoseconds are billionths of a second. You can divide by 1000000000.0
-to convert to seconds.
+Nano giây là một phần tỷ của giây. Bạn có thể chia cho 1000000000.0
+để chuyển sang giây.
 
-The `base` parameter has only one defined value, by the spec:
-`TIME_UTC`. So portably make it that. This will load `ts` with the
-current time in seconds since a system-defined [flw[Epoch|Unix_time]],
-often January 1, 1970 at 00:00 UTC.
+Tham số `base` theo spec chỉ có một giá trị được định nghĩa:
+`TIME_UTC`. Vậy nên để đảm bảo tính khả chuyển thì đặt nó là cái
+đó. Việc này sẽ nạp vào `ts` thời gian hiện tại tính bằng số giây kể
+từ một [flw[Epoch|Unix_time]] (mốc thời gian) do hệ thống định
+nghĩa, thường là 1 tháng 1 năm 1970 lúc 00:00 UTC.
 
-Your implementation might define other values for `base`.
+Implementation (bản cài đặt) của bạn có thể định nghĩa các giá trị
+khác cho `base`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-When `base` is `TIME_UTC`, loads `ts` with the current UTC time.
+Khi `base` là `TIME_UTC`, hàm nạp vào `ts` thời gian UTC hiện tại.
 
-On success, returns `base`, valid values for which will always be
-non-zero. On error, returns `0`.
+Khi thành công, trả về `base`, các giá trị hợp lệ của nó sẽ luôn
+khác không. Khi có lỗi, trả về `0`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 struct timespec ts;
@@ -527,23 +535,23 @@ double float_time = ts.tv_sec + ts.tv_nsec/1000000000.0;
 printf("%f seconds since epoch\n", float_time);
 ```
 
-Example output:
+Ví dụ output:
 
 ``` {.default}
 1614654187 s, 825540756 ns
 1614654187.825541 seconds since epoch
 ```
 
-Here's a helper function to add values to a `struct timespec` that
-handles negative values and nanosecond overflow.
+Đây là một hàm tiện ích để cộng giá trị vào một `struct timespec`,
+có xử lý giá trị âm và tràn nano giây.
 
 ``` {.c}
 #include <stdlib.h>
 
-// Add delta seconds and delta nanoseconds to ts.
-// Negative values are allowed. Each component is added individually.
+// Cộng delta giây và delta nano giây vào ts.
+// Cho phép giá trị âm. Mỗi thành phần được cộng riêng rẽ.
 //
-// Subtract 1.5 seconds from the current value:
+// Trừ đi 1.5 giây khỏi giá trị hiện tại:
 //
 // timespec_add(&ts, -1, -500000000L);
 
@@ -569,20 +577,21 @@ struct timespec *timespec_add(struct timespec *ts, long dsec, long dnsec)
 }
 ```
 
-And here are some functions to convert from `long double` to `struct
-timespec` and back, just in case you like thinking in decimals. This is
-more limited in significant figures than using the integer values.
+Và đây là vài hàm để chuyển từ `long double` sang `struct timespec`
+và ngược lại, phòng khi bạn thích suy nghĩ dưới dạng số thập phân.
+Cách này có ít chữ số có nghĩa hơn so với dùng các giá trị số
+nguyên.
 
 ``` {.c}
 #include <math.h>
 
-// Convert a struct timespec into a long double
+// Chuyển struct timespec thành long double
 long double timespec_to_ld(struct timespec *ts)
 {
     return ts->tv_sec + ts->tv_nsec / 1000000000.0;
 }
 
-// Convert a long double to a struct timespec
+// Chuyển long double thành struct timespec
 struct timespec ld_to_timespec(long double t)
 {
     long double f;
@@ -594,7 +603,7 @@ struct timespec ld_to_timespec(long double t)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`time()`](#man-time),
 [`mtx_timedlock()`](#man-mtx_timedlock),
@@ -605,7 +614,7 @@ struct timespec ld_to_timespec(long double t)
 
 [i[`asctime()` function]i]
 
-Return a human-readable version of a `struct tm`
+Trả về phiên bản dễ đọc cho người của `struct tm`
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -615,37 +624,36 @@ Return a human-readable version of a `struct tm`
 char *asctime(const struct tm *timeptr)
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This takes a time in a `struct tm` and returns a string with that date
-in the form:
+Hàm này lấy thời gian trong `struct tm` và trả về một chuỗi chứa
+ngày đó ở dạng:
 
 ``` {.default}
 Sun Sep 16 01:03:52 1973
 ```
 
-with a newline included at the end, rather unhelpfully.
-([`strftime()`](#man-strftime) will give you more flexibility.)
+có kèm một newline ở cuối, khá là không hữu ích.
+([`strftime()`](#man-strftime) sẽ cho bạn nhiều linh hoạt hơn.)
 
-It's just like `ctime()`, except it takes a `struct tm` instead of a
-`time_t`.
+Nó y hệt `ctime()`, chỉ khác là nhận `struct tm` thay vì `time_t`.
 
-**WARNING**: This function returns a pointer to a `static char*` region
-that isn't thread-safe and might be shared with the `ctime()` function.
-If you need thread safety, use `strftime()` or use a mutex that covers
-`ctime()` and `asctime()`.
+**CẢNH BÁO**: Hàm này trả về con trỏ tới một vùng `static char*` mà
+không phải thread-safe và có thể dùng chung với hàm `ctime()`. Nếu
+bạn cần thread-safe, hãy dùng `strftime()` hoặc dùng một mutex bao
+cả `ctime()` lẫn `asctime()`.
 
-Behavior is undefined for:
+Hành vi là không xác định đối với:
 
-* Years less than 1000
-* Years greater than 9999
-* Any members of `timeptr` are out of range
+* Năm nhỏ hơn 1000
+* Năm lớn hơn 9999
+* Bất cứ thành viên nào của `timeptr` nằm ngoài khoảng
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a pointer to the human-readable date string.
+Trả về con trỏ tới chuỗi ngày dễ đọc cho người.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -660,14 +668,14 @@ int main(void)
 }
 ```
 
-Sample output:
+Ví dụ output:
 
 ``` {.default}
 Local: Mon Mar  1 21:17:34 2021
 UTC  : Tue Mar  2 05:17:34 2021
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ctime()`](#man-ctime),
 [`localtime()`](#man-localtime),
@@ -678,7 +686,7 @@ UTC  : Tue Mar  2 05:17:34 2021
 
 [i[`ctime()` function]i]
 
-Return a human-readable version of a `time_t`
+Trả về phiên bản dễ đọc cho người của `time_t`
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -688,37 +696,36 @@ Return a human-readable version of a `time_t`
 char *ctime(const time_t *timer);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This takes a time in a `time_t` and returns a string with the local time
-and date in the form:
+Hàm này nhận thời gian trong một `time_t` và trả về một chuỗi chứa
+giờ địa phương và ngày ở dạng:
 
 ``` {.default}
 Sun Sep 16 01:03:52 1973
 ```
 
-with a newline included at the end, rather unhelpfully.
-([`strftime()`](#man-strftime) will give you more flexibility.)
+có kèm một newline ở cuối, khá là không hữu ích.
+([`strftime()`](#man-strftime) sẽ cho bạn nhiều linh hoạt hơn.)
 
-It's just like `asctime()`, except it takes a `time_t` instead of a
-`struct tm`.
+Nó y hệt `asctime()`, chỉ khác là nhận `time_t` thay vì `struct tm`.
 
-**WARNING**: This function returns a pointer to a `static char*` region
-that isn't thread-safe and might be shared with the `asctime()`
-function. If you need thread safety, use `strftime()` or use a mutex
-that covers `ctime()` and `asctime()`.
+**CẢNH BÁO**: Hàm này trả về con trỏ tới một vùng `static char*` mà
+không phải thread-safe và có thể dùng chung với hàm `asctime()`. Nếu
+bạn cần thread-safe, hãy dùng `strftime()` hoặc dùng một mutex bao
+cả `ctime()` lẫn `asctime()`.
 
-Behavior is undefined for:
+Hành vi là không xác định đối với:
 
-* Years less than 1000
-* Years greater than 9999
-* Any members of `timeptr` are out of range
+* Năm nhỏ hơn 1000
+* Năm lớn hơn 9999
+* Bất cứ thành viên nào của `timeptr` nằm ngoài khoảng
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-A pointer to the human-readable local time and data string.
+Một con trỏ tới chuỗi giờ địa phương và ngày dễ đọc cho người.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 time_t now = time(NULL);
@@ -726,13 +733,13 @@ time_t now = time(NULL);
 printf("Local: %s", ctime(&now));
 ```
 
-Sample output:
+Ví dụ output:
 
 ``` {.default}
 Local: Mon Mar  1 21:32:23 2021
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`asctime()`](#man-asctime)
 
@@ -741,7 +748,7 @@ Local: Mon Mar  1 21:32:23 2021
 
 [i[`gmtime()` function]i]
 
-Convert a calendar time into a UTC broken-down time
+Chuyển calendar time thành broken-down time theo UTC
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -751,29 +758,29 @@ Convert a calendar time into a UTC broken-down time
 struct tm *gmtime(const time_t *timer);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a `time_t`, you can run it through this function to get a
-`struct tm` back full of the corresponding broken-down UTC time
-information.
+Nếu bạn có một `time_t`, bạn có thể cho nó chạy qua hàm này để nhận
+về một `struct tm` đầy thông tin broken-down time theo UTC tương
+ứng.
 
-This is just like `localtime()`, except it does UTC instead of local
-time.
+Nó y hệt `localtime()`, chỉ khác là làm theo UTC thay vì giờ địa
+phương.
 
-Once you have that `struct tm`, you can feed it to `strftime()` to print
-it out.
+Khi đã có `struct tm` đó, bạn có thể đưa nó cho `strftime()` để in
+ra.
 
-**WARNING**: This function returns a pointer to a `static struct tm*`
-region that isn't thread-safe and might be shared with the `localtime()`
-function. If you need thread safety use a mutex that covers `gmtime()`
-and `localtime()`.
+**CẢNH BÁO**: Hàm này trả về con trỏ tới một vùng `static struct
+tm*` mà không phải thread-safe và có thể dùng chung với hàm
+`localtime()`. Nếu bạn cần thread-safe, hãy dùng một mutex bao cả
+`gmtime()` lẫn `localtime()`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a pointer to the broken-down UTC time, or `NULL` if it can't be
-obtained.
+Trả về con trỏ tới broken-down time theo UTC, hoặc `NULL` nếu không
+lấy được.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -788,14 +795,14 @@ int main(void)
 }
 ```
 
-Sample output:
+Ví dụ output:
 
 ``` {.default}
 UTC  : Tue Mar  2 05:40:05 2021
 Local: Mon Mar  1 21:40:05 2021
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`localtime()`](#man-localtime),
 [`asctime()`](#man-asctime),
@@ -806,7 +813,7 @@ Local: Mon Mar  1 21:40:05 2021
 
 [i[`localtime()` function]i]
 
-Convert a calendar time into a broken-down local time
+Chuyển calendar time thành broken-down time theo giờ địa phương
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -816,28 +823,29 @@ Convert a calendar time into a broken-down local time
 struct tm *localtime(const time_t *timer);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a `time_t`, you can run it through this function to get a
-`struct tm` back full of the corresponding broken-down local time
-information.
+Nếu bạn có một `time_t`, bạn có thể cho nó chạy qua hàm này để nhận
+về một `struct tm` đầy thông tin broken-down time theo giờ địa
+phương tương ứng.
 
-This is just like `gmtime()`, except it does local time instead of UTC.
+Nó y hệt `gmtime()`, chỉ khác là làm theo giờ địa phương thay vì
+UTC.
 
-Once you have that `struct tm`, you can feed it to `strftime()` to print
-it out.
+Khi đã có `struct tm` đó, bạn có thể đưa nó cho `strftime()` để in
+ra.
 
-**WARNING**: This function returns a pointer to a `static struct tm*`
-region that isn't thread-safe and might be shared with the `gmtime()`
-function. If you need thread safety use a mutex that covers `gmtime()`
-and `localtime()`.
+**CẢNH BÁO**: Hàm này trả về con trỏ tới một vùng `static struct
+tm*` mà không phải thread-safe và có thể dùng chung với hàm
+`gmtime()`. Nếu bạn cần thread-safe, hãy dùng một mutex bao cả
+`gmtime()` lẫn `localtime()`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a pointer to the broken-down local time, or `NULL` if it can't
-be obtained.
+Trả về con trỏ tới broken-down time theo giờ địa phương, hoặc `NULL`
+nếu không lấy được.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -852,14 +860,14 @@ int main(void)
 }
 ```
 
-Sample output:
+Ví dụ output:
 
 ``` {.default}
 Local: Mon Mar  1 21:40:05 2021
 UTC  : Tue Mar  2 05:40:05 2021
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`gmtime()`](#man-gmtime),
 [`asctime()`](#man-asctime),
@@ -870,7 +878,7 @@ UTC  : Tue Mar  2 05:40:05 2021
 
 [i[`strftime()` function]i]
 
-Formatted date and time output
+In output ngày giờ có định dạng
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -882,11 +890,11 @@ size_t strftime(char * restrict s, size_t maxsize,
                 const struct tm * restrict timeptr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is the [`sprintf()`](#man-printf) of date and time functions. It'll
-take a `struct tm` and produce a string in just about whatever form you
-desire, for example:
+Đây là [`sprintf()`](#man-printf) dành cho các hàm ngày giờ. Nó sẽ
+nhận một `struct tm` và tạo ra một chuỗi ở gần như bất cứ dạng nào
+bạn muốn, ví dụ:
 
 ``` {.default}
 2021-03-01
@@ -894,133 +902,133 @@ Monday, March 1 at 9:54 PM
 It's Monday!
 ```
 
-It's a super flexible version of `asctime()`. And thread-safe, besides,
-since it doesn't rely on a static buffer to hold the results.
+Đây là phiên bản siêu linh hoạt của `asctime()`. Và còn thread-safe
+nữa, vì nó không dựa vào một buffer static để giữ kết quả.
 
-Basically what you do is give it a destination, `s`, and its max size in
-bytes in `maxsize`. Also, provide a `format` string that's analogous to
-`printf()`'s format string, but with different format specifiers. And
-lastly, a `struct tm` with the broken-down time information to use for
-printing.
+Về cơ bản thứ bạn làm là đưa cho nó một điểm đích `s`, và kích thước
+tối đa tính bằng byte của nó trong `maxsize`. Ngoài ra, cung cấp một
+chuỗi `format` tương tự như chuỗi format của `printf()`, nhưng với
+các format specifier khác. Và cuối cùng là một `struct tm` chứa
+thông tin broken-down time để dùng cho việc in.
 
-The `format` string works like this, for example:
+Chuỗi `format` hoạt động như thế này, ví dụ:
 
 ``` {.c}
 "It's %A, %B %d!"
 ```
 
-Which produces:
+Sẽ cho ra:
 
 ``` {.default}
 It's Monday, March 1!
 ```
 
-The `%A` is the full day-of-week name, the `%B` is the full month name,
-and the `%d` is the day of the month. `strftime()` substitutes the right
-thing to produce the result. Brilliant!
+`%A` là tên đầy đủ của ngày-trong-tuần, `%B` là tên đầy đủ của
+tháng, và `%d` là ngày trong tháng. `strftime()` thay thế đúng thứ
+cần để tạo ra kết quả. Tuyệt vời!
 
-So what are all the format specifiers? Glad you asked!
+Vậy thì có những format specifier nào? Mừng là bạn đã hỏi!
 
-I'm going to be lazy and just drop this table in right from the spec.
+Tôi sẽ lười và chép nguyên cái bảng này từ spec.
 
-|Specifier|Description|
+|Specifier|Mô tả|
 |----|-----------------------------------|
-|`%a`|Locale’s abbreviated weekday name. [`tm_wday`]|
-|`%A`|Locale’s full weekday name. [`tm_wday`]|
-|`%b`|Locale’s abbreviated month name. [`tm_mon`]|
-|`%B`|Locale’s full month name. [`tm_mon`]|
-|`%c`|Locale’s appropriate date and time representation.|
-|`%C`|Year divided by 100 and truncated to an integer, as a decimal number (00–99). [`tm_year`]|
-|`%d`|Day of the month as a decimal number (01–31). [`tm_mday`]|
-|`%D`|Equivalent to `"%m/%d/%y"`. [`tm_mon`, `tm_mday`, `tm_year`]|
-|`%e`|Day of the month as a decimal number (1–31); a single digit is preceded by a space. [`tm_mday`]|
-|`%F`|Equivalent to "%Y-%m-%d" (the ISO 8601 date format). [`tm_year`, `tm_mon`, `tm_mday`]|
-|`%g`|Last 2 digits of the week-based year (see below) as a decimal number (00–99). [`tm_year`, `tm_wday`, `tm_yday`]|
-|`%G`|Week-based year (see below) as a decimal number (e.g., 1997). [`tm_year`, `tm_wday`, `tm_yday`]|
-|`%h`|Equivalent to "%b". [`tm_mon`]|
-|`%H`|Hour (24-hour clock) as a decimal number (00–23). [`tm_hour`]|
-|`%I`|Hour (12-hour clock) as a decimal number (01–12). [`tm_hour`]|
-|`%j`|Day of the year as a decimal number (001–366). [`tm_yday`]|
-|`%m`|Month as a decimal number (01–12).|
-|`%M`|Minute as a decimal number (00–59). [`tm_min`]|
-|`%n`|A new-line character.|
-|`%p`|Locale’s equivalent of the AM/PM designations associated with a 12-hour clock. [`tm_hour`]|
-|`%r`|Locale’s 12-hour clock time. [`tm_hour`, `tm_min`, `tm_sec`]|
-|`%R`|Equivalent to `"%H:%M"`. [`tm_hour`, `tm_min`]|
-|`%S`|Second as a decimal number (00–60). [`tm_sec`]|
-|`%t`|A horizontal-tab character.|
-|`%T`|Equivalent to `"%H:%M:%S"` (the ISO 8601 time format). [`tm_hour`, `tm_min`, `tm_sec`]|
-|`%u`|ISO 8601 weekday as a decimal number (1–7), where Monday is 1. [`tm_wday`]|
-|`%U`|Week number of the year (the first Sunday as the first day of week 1) as a decimal number (00–53). [`tm_year`, `tm_wday`, `tm_yday`]|
-|`%V`|ISO 8601 week number (see below) as a decimal number (01–53). [`tm_year`, `tm_wday`, `tm_yday`]|
-|`%w`|Weekday as a decimal number (0–6), where Sunday is 0.|
-|`%W`|Week number of the year (the first Monday as the first day of week 1) as a decimal number (00–53). [`tm_year`, `tm_wday`, `tm_yday`]|
-|`%x`|Locale’s appropriate date representation.|
-|`%X`|Locale’s appropriate time representation.|
-|`%y`|Last 2 digits of the year as a decimal number (00–99). [`tm_year`]|
-|`%Y`|Year as a decimal number (e.g., 1997). [`tm_year`]|
-|`%z`|Offset from UTC in the ISO 8601 format `"-0430"` (meaning 4 hours 30 minutes behind UTC, west of Greenwich), or by no characters if no time zone is determinable. [`tm_isdst`]
-|`%Z`|Locale’s time zone name or abbreviation, or by no characters if no time zone is determinable. [`tm_isdst`]|
-|`%%`|A plain ol' %|
+|`%a`|Tên viết tắt ngày-trong-tuần theo locale. [`tm_wday`]|
+|`%A`|Tên đầy đủ ngày-trong-tuần theo locale. [`tm_wday`]|
+|`%b`|Tên viết tắt của tháng theo locale. [`tm_mon`]|
+|`%B`|Tên đầy đủ của tháng theo locale. [`tm_mon`]|
+|`%c`|Cách biểu diễn ngày và giờ phù hợp theo locale.|
+|`%C`|Năm chia cho 100 rồi cắt lấy số nguyên, dưới dạng số thập phân (00--99). [`tm_year`]|
+|`%d`|Ngày trong tháng dưới dạng số thập phân (01--31). [`tm_mday`]|
+|`%D`|Tương đương `"%m/%d/%y"`. [`tm_mon`, `tm_mday`, `tm_year`]|
+|`%e`|Ngày trong tháng dưới dạng số thập phân (1--31); một chữ số đơn được đặt trước bởi một dấu cách. [`tm_mday`]|
+|`%F`|Tương đương "%Y-%m-%d" (định dạng ngày ISO 8601). [`tm_year`, `tm_mon`, `tm_mday`]|
+|`%g`|Hai chữ số cuối của năm dựa-trên-tuần (xem dưới) dưới dạng số thập phân (00--99). [`tm_year`, `tm_wday`, `tm_yday`]|
+|`%G`|Năm dựa-trên-tuần (xem dưới) dưới dạng số thập phân (ví dụ 1997). [`tm_year`, `tm_wday`, `tm_yday`]|
+|`%h`|Tương đương "%b". [`tm_mon`]|
+|`%H`|Giờ (đồng hồ 24 giờ) dưới dạng số thập phân (00--23). [`tm_hour`]|
+|`%I`|Giờ (đồng hồ 12 giờ) dưới dạng số thập phân (01--12). [`tm_hour`]|
+|`%j`|Ngày trong năm dưới dạng số thập phân (001--366). [`tm_yday`]|
+|`%m`|Tháng dưới dạng số thập phân (01--12).|
+|`%M`|Phút dưới dạng số thập phân (00--59). [`tm_min`]|
+|`%n`|Một ký tự new-line.|
+|`%p`|Cái tương đương theo locale của ký hiệu AM/PM gắn với đồng hồ 12 giờ. [`tm_hour`]|
+|`%r`|Giờ dạng 12 giờ theo locale. [`tm_hour`, `tm_min`, `tm_sec`]|
+|`%R`|Tương đương `"%H:%M"`. [`tm_hour`, `tm_min`]|
+|`%S`|Giây dưới dạng số thập phân (00--60). [`tm_sec`]|
+|`%t`|Một ký tự tab ngang.|
+|`%T`|Tương đương `"%H:%M:%S"` (định dạng giờ ISO 8601). [`tm_hour`, `tm_min`, `tm_sec`]|
+|`%u`|Ngày trong tuần theo ISO 8601 dưới dạng số thập phân (1--7), với thứ Hai là 1. [`tm_wday`]|
+|`%U`|Số tuần trong năm (Chủ Nhật đầu tiên là ngày đầu của tuần 1) dưới dạng số thập phân (00--53). [`tm_year`, `tm_wday`, `tm_yday`]|
+|`%V`|Số tuần theo ISO 8601 (xem dưới) dưới dạng số thập phân (01--53). [`tm_year`, `tm_wday`, `tm_yday`]|
+|`%w`|Ngày trong tuần dưới dạng số thập phân (0--6), với Chủ Nhật là 0.|
+|`%W`|Số tuần trong năm (thứ Hai đầu tiên là ngày đầu của tuần 1) dưới dạng số thập phân (00--53). [`tm_year`, `tm_wday`, `tm_yday`]|
+|`%x`|Cách biểu diễn ngày phù hợp theo locale.|
+|`%X`|Cách biểu diễn giờ phù hợp theo locale.|
+|`%y`|Hai chữ số cuối của năm dưới dạng số thập phân (00--99). [`tm_year`]|
+|`%Y`|Năm dưới dạng số thập phân (ví dụ 1997). [`tm_year`]|
+|`%z`|Độ lệch so với UTC ở định dạng ISO 8601 `"-0430"` (nghĩa là chậm hơn UTC 4 tiếng 30 phút, phía tây Greenwich), hoặc không có ký tự nào nếu không xác định được múi giờ. [`tm_isdst`]
+|`%Z`|Tên hoặc viết tắt múi giờ theo locale, hoặc không có ký tự nào nếu không xác định được múi giờ. [`tm_isdst`]|
+|`%%`|Một dấu % bình thường|
 
-Phew. That's love.
+Phù. Đúng là tình yêu.
 
-`%G`, `%g`, and `%v` are a little funky in that they use something
-called the ISO 8601 week-based year. I'd never heard of it. But, again
-stealing from the spec, these are the rules:
+`%G`, `%g`, và `%v` hơi khác người ở chỗ chúng dùng thứ gọi là năm
+dựa-trên-tuần ISO 8601. Tôi chưa từng nghe tới. Nhưng, lại chép từ
+spec, các quy tắc là:
 
-> `%g`, `%G`, and `%V` give values according to the ISO 8601 week-based
-> year. In this system, weeks begin on a Monday and week 1 of the year
-> is the week that includes January 4th, which is also the week that
-> includes the first Thursday of the year, and is also the first week
-> that contains at least four days in the year. If the first Monday of
-> January is the 2nd, 3rd, or 4th, the preceding days are part of the
-> last week of the preceding year; thus, for Saturday 2nd January 1999,
-> `%G` is replaced by `1998` and `%V` is replaced by `53`. If December 29th,
-> 30th, or 31st is a Monday, it and any following days are part of week
-> 1 of the following year. Thus, for Tuesday 30th December 1997, `%G` is
-> replaced by `1998` and `%V` is replaced by `01`.
+> `%g`, `%G`, và `%V` cho các giá trị theo năm dựa-trên-tuần ISO
+> 8601. Trong hệ này, tuần bắt đầu vào thứ Hai và tuần 1 của năm là
+> tuần bao gồm ngày 4 tháng 1, cũng là tuần bao gồm thứ Năm đầu tiên
+> của năm, và cũng là tuần đầu tiên chứa ít nhất bốn ngày trong
+> năm. Nếu thứ Hai đầu tiên của tháng Một là ngày 2, 3, hoặc 4, các
+> ngày trước đó thuộc về tuần cuối cùng của năm trước; do đó, với
+> thứ Bảy ngày 2 tháng 1 năm 1999, `%G` được thay bằng `1998` và
+> `%V` được thay bằng `53`. Nếu ngày 29, 30, hoặc 31 tháng 12 là
+> thứ Hai, ngày đó và các ngày tiếp theo là phần của tuần 1 của năm
+> kế tiếp. Do đó, với thứ Ba ngày 30 tháng 12 năm 1997, `%G` được
+> thay bằng `1998` và `%V` được thay bằng `01`.
 
-Learn something new every day! If you want to know more, [flw[Wikipedia
-has a page on it|ISO_week_date]].
+Mỗi ngày học được điều mới! Nếu bạn muốn biết thêm, [flw[Wikipedia
+có một trang về nó|ISO_week_date]].
 
-If you're in the "C" locale, the specifiers produce the following
-(again, stolen from the spec):
+Nếu bạn đang ở locale "C", các specifier sinh ra như sau (lại chép
+từ spec):
 
-|Specifier|Description|
+|Specifier|Mô tả|
 |----|-----------------------------------|
-|`%a`|The first three characters of `%A`.|
-|`%A`|One of `Sunday`, `Monday`, ... , `Saturday`.|
-|`%b`|The first three characters of `%B`.|
-|`%B`|One of `January`, `February`, ... , `December`.|
-|`%c`|Equivalent to `%a %b %e %T %Y`.|
-|`%p`|One of `AM` or `PM`.|
-|`%r`|Equivalent to `%I:%M:%S %p`.|
-|`%x`|Equivalent to `%m/%d/%y`.|
-|`%X`|Equivalent to `%T`.|
-|`%Z`|Implementation-defined.|
+|`%a`|Ba ký tự đầu của `%A`.|
+|`%A`|Một trong `Sunday`, `Monday`, ... , `Saturday`.|
+|`%b`|Ba ký tự đầu của `%B`.|
+|`%B`|Một trong `January`, `February`, ... , `December`.|
+|`%c`|Tương đương `%a %b %e %T %Y`.|
+|`%p`|Một trong `AM` hoặc `PM`.|
+|`%r`|Tương đương `%I:%M:%S %p`.|
+|`%x`|Tương đương `%m/%d/%y`.|
+|`%X`|Tương đương `%T`.|
+|`%Z`|Tuỳ implementation.|
 
-There are additional variants of the format specifiers that indicate you
-want to use a locale's alternative format. These don't exist for all
-locales. It's one of the format specifies above, with either an `E` or
-`O` prefix:
+Có thêm các biến thể của format specifier để báo rằng bạn muốn dùng
+định dạng thay thế của locale. Chúng không tồn tại với tất cả các
+locale. Đó là một trong các format specifier ở trên, với tiền tố
+`E` hoặc `O`:
 
 ``` {.default}
 %Ec %EC %Ex %EX %Ey %EY %Od %Oe %OH %OI
 %Om %OM %OS %Ou %OU %OV %Ow %OW %Oy
 ```
 
-The `E` and `O` prefixes are ignored in the "C" locale.
+Các tiền tố `E` và `O` bị bỏ qua ở locale "C".
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the total number of bytes put into the result string, not
-including the NUL terminator.
+Trả về tổng số byte đã đặt vào chuỗi kết quả, không tính ký tự NUL
+kết thúc.
 
-If the result doesn't fit in the string, zero is returned and the value
-in `s` is indeterminate.
+Nếu kết quả không vừa trong chuỗi, trả về 0 và giá trị trong `s`
+là không xác định.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1031,32 +1039,32 @@ int main(void)
     char s[128];
     time_t now = time(NULL);
 
-    // %c: print date as per current locale
+    // %c: in ngày theo locale hiện tại
     strftime(s, sizeof s, "%c", localtime(&now));
     puts(s);   // Sun Feb 28 22:29:00 2021
 
-    // %A: full weekday name
-    // %B: full month name
-    // %d: day of the month
+    // %A: tên đầy đủ ngày-trong-tuần
+    // %B: tên đầy đủ của tháng
+    // %d: ngày trong tháng
     strftime(s, sizeof s, "%A, %B %d", localtime(&now));
     puts(s);   // Sunday, February 28
 
-    // %I: hour (12 hour clock)
-    // %M: minute
-    // %S: second
-    // %p: AM or PM
+    // %I: giờ (đồng hồ 12 giờ)
+    // %M: phút
+    // %S: giây
+    // %p: AM hoặc PM
     strftime(s, sizeof s, "It's %I:%M:%S %p", localtime(&now));
     puts(s);   // It's 10:29:00 PM
 
     // %F: ISO 8601 yyyy-mm-dd
     // %T: ISO 8601 hh:mm:ss
-    // %z: ISO 8601 time zone offset
+    // %z: độ lệch múi giờ ISO 8601
     strftime(s, sizeof s, "ISO 8601: %FT%T%z", localtime(&now));
     puts(s);   // ISO 8601: 2021-02-28T22:29:00-0800
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ctime()`](#man-ctime),
 [`asctime()`](#man-asctime)
