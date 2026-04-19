@@ -7,33 +7,33 @@
 
 [i[`assert.h` header file]i]
 
-|Macro|Description|
+|Macro|Mô tả|
 |--------|----------------------|
-|`assert()`|Runtime assertion|
-|`static_assert()`|Compile-time assertion|
+|`assert()`|Assertion lúc chạy|
+|`static_assert()`|Assertion lúc compile|
 
-This functionality has to do with things that Should Never Happen™. If
-you have something that should never be true and you want your program
-to bomb out because it happened, this is the header file for you.
+Chức năng này liên quan tới những thứ Không-Bao-Giờ-Nên-Xảy-Ra™. Nếu
+có điều gì đó lẽ ra không bao giờ đúng và bạn muốn chương trình nổ
+tung khi nó xảy ra, đây là header dành cho bạn.
 
-There are two types of assertions: compile-time assertions (called
-"static assertions") and runtime assertions. If the assertion _fails_
-(i.e. the thing that you need to be true is not true) then the program
-will bomb out either at compile-time or runtime.
+Có hai loại assertion: assertion lúc compile (gọi là "static
+assertion") và assertion lúc chạy (runtime). Nếu assertion _thất
+bại_ (nghĩa là thứ bạn cần đúng thì hoá ra không đúng), chương trình
+sẽ nổ tung ở compile-time hoặc runtime.
 
-## Macros
+## Macro
 
 [i[`NDEBUG` macro]i<]
 
-If you define the macro `NDEBUG` **before** you include `<assert.h>`,
-then the `assert()` macro will have no effect. You can define `NDEBUG`
-to be anything, but `1` seems like a good value.
+Nếu bạn define macro `NDEBUG` **trước khi** include `<assert.h>`,
+macro `assert()` sẽ không còn tác dụng. Bạn có thể define `NDEBUG`
+thành bất cứ thứ gì, nhưng `1` có vẻ là giá trị hợp lý.
 
-Since `assert()` causes your program to bomb out at runtime, you might
-not desire this behavior when you go into production. Defining `NDEBUG`
-causes `assert()` to be ignored.
+Vì `assert()` làm chương trình nổ tung lúc chạy, chắc là bạn không
+muốn hành vi đó khi lên production. Define `NDEBUG` sẽ khiến
+`assert()` bị bỏ qua.
 
-`NDEBUG` has no effect on `static_assert()`.
+`NDEBUG` không ảnh hưởng tới `static_assert()`.
 
 [i[`NDEBUG` macro]i>]
 
@@ -42,7 +42,7 @@ causes `assert()` to be ignored.
 
 [i[`assert()` macro]i]
 
-Bomb out at runtime if a condition fails
+Nổ tung lúc chạy nếu một điều kiện thất bại
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -52,27 +52,27 @@ Bomb out at runtime if a condition fails
 void assert(scalar expression);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-You pass in an expression to this macro. If it evaluates to false, the
-program will crash with an assertion failure (by calling the `abort()`
-function).
+Bạn truyền một biểu thức vào macro này. Nếu nó đánh giá ra false,
+chương trình sẽ crash với assertion failure (bằng cách gọi hàm
+`abort()`).
 
-Basically, you're saying, "Hey, I'm assuming this condition is true, and
-if it's not, I don't want to continue running."
+Về cơ bản, bạn đang nói, "Này, tôi đang giả định điều kiện này là
+true, và nếu không phải vậy, tôi không muốn chạy tiếp nữa."
 
-This is used while debugging to make sure no unexpected conditions
-arise. And if you find during development that the condition does arise,
-maybe you should modify the code to handle it before going to
-production.
+Cái này được dùng khi debug để đảm bảo không có điều kiện bất ngờ
+nào phát sinh. Và nếu trong quá trình phát triển bạn thấy điều kiện
+đó có phát sinh thật, có thể bạn nên sửa code để xử lý nó trước khi
+lên production.
 
-If you've defined the macro `NDEBUG` to any value before `<assert.h>`
-was included, the `assert()` macro is ignored. This is a good idea
-before production.
+Nếu bạn đã define macro `NDEBUG` thành bất kỳ giá trị nào trước khi
+`<assert.h>` được include, macro `assert()` sẽ bị bỏ qua. Đây là ý
+hay trước khi ra production.
 
-Unlike `static_assert()`, this macro doesn't allow you to print an
-arbitrary message. If you want to do this, you can roll your own assert
-as a preprocessor macro:
+Khác với `static_assert()`, macro này không cho bạn in một thông báo
+tuỳ ý. Nếu bạn muốn làm vậy, có thể tự viết một assert riêng dạng
+preprocessor macro:
 
 ``` {.c}
 #define ASSERT(c, m) \
@@ -85,23 +85,22 @@ do { \
 } while(0)
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-This macro doesn't return (since it calls `abort()` which never
-returns).
+Macro này không return (vì nó gọi `abort()`, không bao giờ return).
 
-If `NDEBUG` is set, the macro evaluates to `((void)0)`, which does
-nothing.
+Nếu `NDEBUG` được set, macro đánh giá ra `((void)0)`, không làm gì
+cả.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a function that divides the size of our goat herd. But we're
-assuming we'll never get a `0` passed to us.
+Đây là hàm chia kích thước đàn dê của ta. Nhưng ta giả định sẽ
+không bao giờ bị truyền `0` vào.
 
-So we assert that `amount != 0`... and if it is, the program aborts/
+Nên ta assert `amount != 0`... và nếu có, chương trình abort.
 
 ``` {.c .numberLines}
-//#define NDEBUG 1   // uncomment this to disable the assert
+//#define NDEBUG 1   // bỏ comment để tắt assert
 
 #include <stdio.h>
 #include <assert.h>
@@ -119,18 +118,18 @@ int main(void)
 {
     divide_goat_herd_by(2);  // OK
 
-    divide_goat_herd_by(0);  // Causes the assert to fire
+    divide_goat_herd_by(0);  // Kích hoạt assert
 }
 ```
 
-When I run this and pass `0` to the function, I get the following on my
-system (the exact output may vary):
+Khi tôi chạy và truyền `0` cho hàm, tôi nhận được output sau trên hệ
+của tôi (output cụ thể có thể khác):
 
 ``` {.default}
 assert: assert.c:10: divide_goat_herd_by: Assertion `amount != 0' failed.
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`static_assert()`](#man-static_assert),
 [`abort()`](#man-abort)
@@ -140,7 +139,7 @@ assert: assert.c:10: divide_goat_herd_by: Assertion `amount != 0' failed.
 
 [i[`static_assert()` macro]i]
 
-Bomb out at compile-time if a condition fails
+Nổ tung lúc compile nếu một điều kiện thất bại
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -150,31 +149,30 @@ Bomb out at compile-time if a condition fails
 static_assert(constant-expression, string-literal);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This macro prevents your program from even compiling if a condition
-isn't true.
+Macro này ngăn chương trình của bạn được compile luôn nếu một điều
+kiện không đúng.
 
-And it prints the string literal you give it.
+Và nó in ra string literal bạn đưa cho nó.
 
-Basically if `constant-expression` is false, then compilation will cease
-and the `string-literal` will be printed.
+Cơ bản là nếu `constant-expression` là false, việc compile sẽ
+dừng và `string-literal` sẽ được in ra.
 
-The constant expression must be truly constant--just values, no
-variables. And the same is true for the string literal: no variables,
-just a literal string in double quotes. (It has to be this way since
-the program's not running at this point.)
+Constant expression phải thực sự là hằng, chỉ giá trị, không biến.
+String literal cũng vậy: không biến, chỉ là literal string đặt
+trong dấu ngoặc kép. (Phải như vậy vì chương trình chưa chạy ở thời
+điểm này.)
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Not applicable, as this is a compile-time feature.
+Không áp dụng, vì đây là chức năng compile-time.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a partial example with an algorithm that presumably has poor
-performance or memory issues if the size of the local array is too
-large. We prevent that eventuality at compile-time by catching it with
-the `static_assert()`.
+Đây là một ví dụ phần, với một thuật toán mà hiệu năng hay bộ nhớ
+chắc là tệ nếu kích thước mảng local quá lớn. Ta phòng trường hợp
+đó ngay lúc compile bằng cách bắt nó với `static_assert()`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -194,7 +192,8 @@ int main(void)
 }
 ```
 
-On my system, when I try to compile it, this prints (your output may vary):
+Trên hệ của tôi, khi tôi cố compile, nó in ra (output có thể khác
+trên hệ khác):
 
 ``` {.default}
 In file included from static_assert.c:2:
@@ -204,7 +203,7 @@ static_assert.c:8:5: error: static assertion failed: "ARRAY_SIZE too small"
       |     ^~~~~~~~~~~~~
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`assert()`](#man-assert)
 
