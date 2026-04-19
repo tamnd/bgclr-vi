@@ -3,17 +3,17 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<iso646.h>` Alternative Operator Spellings {#iso646}
+# `<iso646.h>` Cách Viết Thay Thế Cho Toán Tử {#iso646}
 
 [i[`iso646.h` header file]i]
 
-ISO-646 is a character encoding standard that's very similar to ASCII.
-But it's missing a few notable characters, like `|`, `^`, and `~`.
+ISO-646 là một chuẩn mã hóa ký tự rất giống ASCII. Nhưng nó thiếu vài
+ký tự đáng chú ý như `|`, `^`, và `~`.
 
-Since these are operators or parts of operators in C, this header file
-defines a number of macros you can use in case those characters aren't
-found on your keyboard. (And also C++ can use these same alternate
-spellings.)
+Vì đây là các toán tử hoặc thành phần của toán tử trong C, header
+này định nghĩa một số macro bạn có thể dùng phòng khi bàn phím của
+bạn không có những ký tự đó. (Và C++ cũng xài được cùng bộ thay thế
+này.)
 
 [i[`and` macro]i]
 [i[`and_eq` macro]i]
@@ -27,7 +27,7 @@ spellings.)
 [i[`xor` macro]i]
 [i[`xor_eq` macro]i]
 
-|Operator|`<iso646.h>` equivalent|
+|Toán tử|Tương đương trong `<iso646.h>`|
 |-|-|
 |`&&`|`and`|
 |`&=`|`and_eq`|
@@ -41,10 +41,10 @@ spellings.)
 |`^`|`xor`|
 |`^=`|`xor_eq`|
 
-Interestingly, there is no `eq` for `==`, and `&` and `!` are included
-despite being in ISO-646.
+Điều thú vị là không có `eq` cho `==`, và `&` với `!` vẫn được đưa
+vào dù chúng có trong ISO-646.
 
-Example usage:
+Ví dụ dùng:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -60,5 +60,5 @@ int main(void)
 }
 ```
 
-I've personally never seen this file included, but I'm sure it gets used
-from time to time.
+Cá nhân tôi chưa từng thấy file này được include, nhưng chắc thỉnh
+thoảng cũng có người dùng.
