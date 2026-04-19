@@ -1,12 +1,9 @@
 name: Release
 
-# PAUSED during the translation marathon: only manual runs. Once all 32
-# chapters are translated and CI is re-enabled, restore the tag trigger:
-#
-#   push:
-#     tags:
-#       - 'v*-vi.*'
 on:
+  push:
+    tags:
+      - 'v*-vi.*'
   workflow_dispatch:
     inputs:
       tag:
