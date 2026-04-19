@@ -3,43 +3,44 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<wctype.h>` Wide Character Classification and Transformation {#wctype}
+# `<wctype.h>` Phân Loại và Biến Đổi Wide Character {#wctype}
 
 [i[`wctype.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`iswalnum()`](#man-iswalnum)|Test if a wide character is alphanumeric.|
-|[`iswalpha()`](#man-iswalpha)|Tests if a wide character is alphabetic|
-|[`iswblank()`](#man-iswblank)|Tests if this is a wide blank character|
-|[`iswcntrl()`](#man-iswcntrl)|Tests if this is a wide control character.|
-|[`iswctype()`](#man-iswctype)|Determine wide character classification|
-|[`iswdigit()`](#man-iswdigit)|Test if this wide character is a digit|
-|[`iswgraph()`](#man-iswgraph)|Test to see if a wide character is a printable non-space|
-|[`iswlower()`](#man-iswlower)|Tests if a wide character is lowercase|
-|[`iswprint()`](#man-iswprint)|Tests if a wide character is printable|
-|[`iswpunct()`](#man-iswpunct)|Test if a wide character is punctuation|
-|[`iswspace()`](#man-iswspace)|Test if a wide character is whitespace|
-|[`iswupper()`](#man-iswupper)|Tests if a wide character is uppercase|
-|[`iswxdigit()`](#man-iswxdigit)|Tests if a wide character is a hexadecimal digit|
-|[`towctrans()`](#man-towctrans)|Convert wide characters to upper or lowercase|
-|[`towlower()`](#man-towlower)|Convert an uppercase wide character to lowercase|
-|[`towupper()`](#man-towupper)|Convert a lowercase wide character to uppercase|
-|[`wctrans()`](#man-wctrans)|Helper function for `towctrans()`|
-|[`wctype()`](#man-wctype)|Helper function for `iswctype()`|
+|[`iswalnum()`](#man-iswalnum)|Kiểm tra wide character có là chữ cái hoặc chữ số.|
+|[`iswalpha()`](#man-iswalpha)|Kiểm tra wide character có là chữ cái|
+|[`iswblank()`](#man-iswblank)|Kiểm tra đây có phải wide blank character|
+|[`iswcntrl()`](#man-iswcntrl)|Kiểm tra đây có phải wide control character.|
+|[`iswctype()`](#man-iswctype)|Xác định phân loại wide character|
+|[`iswdigit()`](#man-iswdigit)|Kiểm tra wide character có là chữ số|
+|[`iswgraph()`](#man-iswgraph)|Kiểm tra wide character có in được mà không phải space|
+|[`iswlower()`](#man-iswlower)|Kiểm tra wide character có là chữ thường|
+|[`iswprint()`](#man-iswprint)|Kiểm tra wide character có in được|
+|[`iswpunct()`](#man-iswpunct)|Kiểm tra wide character có là dấu câu|
+|[`iswspace()`](#man-iswspace)|Kiểm tra wide character có là whitespace|
+|[`iswupper()`](#man-iswupper)|Kiểm tra wide character có là chữ hoa|
+|[`iswxdigit()`](#man-iswxdigit)|Kiểm tra wide character có là chữ số hex|
+|[`towctrans()`](#man-towctrans)|Chuyển wide character sang chữ hoa hoặc chữ thường|
+|[`towlower()`](#man-towlower)|Chuyển wide character hoa sang chữ thường|
+|[`towupper()`](#man-towupper)|Chuyển wide character thường sang chữ hoa|
+|[`wctrans()`](#man-wctrans)|Hàm phụ trợ cho `towctrans()`|
+|[`wctype()`](#man-wctype)|Hàm phụ trợ cho `iswctype()`|
 
-This is like [`<ctype.h>`](#ctype) except for wide characters.
+Cái này giống [`<ctype.h>`](#ctype) nhưng dành cho wide character (ký tự
+rộng).
 
-With it you can test for character classifications (like "is this
-character whitespace?") or do basic character conversions (like "force
-this character to lowercase").
+Với nó bạn có thể kiểm tra phân loại ký tự (kiểu "ký tự này có phải
+whitespace không?") hoặc làm vài chuyển đổi ký tự cơ bản (kiểu "ép ký
+tự này thành chữ thường").
 
 [[manbreak]]
 ## `iswalnum()` {#man-iswalnum}
 
 [i[`iswalnum()` function]i]
 
-Test if a wide character is alphanumeric.
+Kiểm tra wide character có là chữ cái hoặc chữ số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -51,14 +52,16 @@ int iswalnum(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Basically tests if a character is alphabetic (`A`-`Z` or `a`-`z`) or a digit
-(`0`-`9`). But some other characters might also qualify based on the locale.
+Về cơ bản là kiểm tra xem một ký tự có là chữ cái (`A`-`Z` hoặc `a`-`z`)
+hoặc chữ số (`0`-`9`). Nhưng vài ký tự khác cũng có thể tính là hợp lệ
+tùy theo locale.
 
-This is equivalent to testing if `iswalpha()` or `iswdigit()` is true.
+Cái này tương đương với việc kiểm tra `iswalpha()` hoặc `iswdigit()` có
+true không.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if the character is alphanumeric.
+Trả về true nếu ký tự là chữ cái hoặc chữ số.
 
 ### Example {.unnumbered .unlisted}
 
@@ -88,7 +91,7 @@ int main(void)
 
 [i[`iswalpha()` function]i]
 
-Tests if a wide character is alphabetic
+Kiểm tra wide character có là chữ cái
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -100,16 +103,16 @@ int iswalpha(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Basically tests if a character is alphabetic (`A`-`Z` or `a`-`z`). But
-some other characters might also qualify based on the locale. (If other
-characters qualify, they won't be control characters, digits,
-punctuation, or spaces.)
+Về cơ bản là kiểm tra một ký tự có là chữ cái (`A`-`Z` hoặc `a`-`z`).
+Nhưng vài ký tự khác cũng có thể tính là hợp lệ tùy theo locale. (Nếu
+ký tự khác được tính, chúng sẽ không phải ký tự điều khiển, chữ số, dấu
+câu hay space.)
 
-This is the same as testing for `iswupper()` or `iswlower()`.
+Cái này giống như kiểm tra `iswupper()` hoặc `iswlower()`.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if the character is alphabetic.
+Trả về true nếu ký tự là chữ cái.
 
 ### Example {.unnumbered .unlisted}
 
@@ -139,7 +142,7 @@ int main(void)
 
 [i[`iswblank()` function]i]
 
-Tests if this is a wide blank character
+Kiểm tra đây có phải wide blank character
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -151,15 +154,15 @@ int iswblank(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Blank characters are whitespace that are also used as word separators on
-the same line. In the "C" locale, the only blank characters are space
-and tab.
+Blank character là whitespace đồng thời được dùng làm dấu ngăn từ trên
+cùng một dòng. Ở locale "C", các blank character duy nhất là space và
+tab.
 
-Other locales might define other blank characters.
+Các locale khác có thể định nghĩa blank character khác.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if this is a blank character.
+Trả về true nếu đây là blank character.
 
 ### Example {.unnumbered .unlisted}
 
@@ -189,7 +192,7 @@ int main(void)
 
 [i[`iswcntrl()` function]i]
 
-Tests if this is a wide control character.
+Kiểm tra đây có phải wide control character.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -201,22 +204,23 @@ int iswcntrl(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-The spec is pretty barren, here. But I'm just going to assume that it
-works like the non-wide version. So let's look at that.
+Spec khá trống trải ở chỗ này. Nhưng tôi cứ giả định là nó hoạt động
+giống bản không-wide. Vậy thì xem bản kia.
 
-A _control character_ is a locale-specific non-printing character.
+_Control character_ (ký tự điều khiển) là ký tự không in được, phụ
+thuộc locale.
 
-For the "C" locale, this means control characters are in the range 0x00
-to 0x1F (the character right before SPACE) and 0x7F (the DEL character).
+Với locale "C", nghĩa là control character nằm trong khoảng 0x00 đến
+0x1F (ngay trước ký tự SPACE) và 0x7F (ký tự DEL).
 
-Basically if it's not an ASCII (or Unicode less than 128) printable
-character, it's a control character in the "C" locale.
+Về cơ bản nếu không phải ký tự ASCII in được (hoặc Unicode nhỏ hơn
+128), thì đó là control character trong locale "C".
 
-Probably.
+Chắc là vậy.
  
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if this is a control character.
+Trả về true nếu đây là control character.
 
 ### Example {.unnumbered .unlisted}
 
@@ -247,7 +251,7 @@ int main(void)
 
 [i[`iswdigit()` function]i]
 
-Test if this wide character is a digit
+Kiểm tra wide character có là chữ số
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -259,11 +263,11 @@ int iswdigit(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Tests if the wide character is a digit (`0`-`9`).
+Kiểm tra wide character có là chữ số (`0`-`9`).
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if the character is a digit.
+Trả về true nếu ký tự là chữ số.
 
 ### Example {.unnumbered .unlisted}
 
@@ -293,7 +297,7 @@ int main(void)
 
 [i[`iswgraph()` function]i]
 
-Test to see if a wide character is a printable non-space
+Kiểm tra wide character có in được mà không phải space
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -305,14 +309,14 @@ int iswgraph(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Returns true if this is a printable (non-control) character and also not
-a whitespace character.
+Trả về true nếu đây là ký tự in được (không phải control) và cũng
+không phải whitespace.
 
-Basically if `iswprint()` is true and `iswspace()` is false.
+Về cơ bản nếu `iswprint()` true và `iswspace()` false.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if this is a printable non-space character.
+Trả về true nếu đây là ký tự in được mà không phải space.
 
 ### Example {.unnumbered .unlisted}
 
@@ -344,7 +348,7 @@ int main(void)
 
 [i[`iswlower()` function]i]
 
-Tests if a wide character is lowercase
+Kiểm tra wide character có là chữ thường
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -356,10 +360,10 @@ int iswlower(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Tests if a character is lowercase, in the range `a`-`z`.
+Kiểm tra một ký tự có là chữ thường, trong khoảng `a`-`z`.
 
-In other locales, there could be other lowercase characters. In all
-cases, to be lowercase, the following must be true:
+Ở các locale khác, có thể có ký tự chữ thường khác. Trong mọi trường
+hợp, để là chữ thường thì những điều sau phải đúng:
 
 ``` {.c}
 !iswcntrl(c) && !iswdigit(c) && !iswpunct(c) && !iswspace(c)
@@ -367,7 +371,7 @@ cases, to be lowercase, the following must be true:
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if the wide character is lowercase.
+Trả về true nếu wide character là chữ thường.
 
 ### Example {.unnumbered .unlisted}
 
@@ -400,7 +404,7 @@ int main(void)
 
 [i[`iswprint()` function]i]
 
-Tests if a wide character is printable
+Kiểm tra wide character có in được
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -412,12 +416,12 @@ int iswprint(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Tests if a wide character is printable, including space (`' '`). So like
-`isgraph()`, except space isn't left out in the cold.
+Kiểm tra wide character có in được, bao gồm cả space (`' '`). Nên giống
+như `isgraph()`, chỉ khác là space không bị bỏ rơi ngoài trời lạnh.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if the wide character is printable, including space (`' '`).
+Trả về true nếu wide character in được, bao gồm cả space (`' '`).
 
 ### Example {.unnumbered .unlisted}
 
@@ -447,7 +451,7 @@ int main(void)
 
 [i[`iswpunct()` function]i]
 
-Test if a wide character is punctuation
+Kiểm tra wide character có là dấu câu
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -459,9 +463,9 @@ int iswpunct(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Tests if a wide character is punctuation.
+Kiểm tra wide character có là dấu câu.
 
-This means for any given locale:
+Ở bất kỳ locale nào, điều này có nghĩa là:
 
 ``` {.c}
 !isspace(c) && !isalnum(c)
@@ -469,11 +473,11 @@ This means for any given locale:
 
 ### Return Value {.unnumbered .unlisted}
 
-True if the wide character is punctuation.
+True nếu wide character là dấu câu.
 
 ### Example {.unnumbered .unlisted}
 
-Results may vary based on locale.
+Kết quả có thể khác nhau tùy locale.
 
 ``` {.c .numberLines}
 #include <wchar.h>
@@ -503,7 +507,7 @@ int main(void)
 
 [i[`iswspace()` function]i]
 
-Test if a wide character is whitespace
+Kiểm tra wide character có là whitespace
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -515,7 +519,7 @@ int iswspace(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Tests if `c` is a whitespace character. These are probably:
+Kiểm tra `c` có là ký tự whitespace. Chắc là bao gồm:
 
 * Space (`' '`)
 * Formfeed (`'\f'`)
@@ -524,17 +528,16 @@ Tests if `c` is a whitespace character. These are probably:
 * Horizontal Tab (`'\t'`)
 * Vertical Tab (`'\v'`)
 
-Other locales might specify other whitespace characters. `iswalnum()`,
-`iswgraph()`, and `iswpunct()` are all false for all whitespace
-characters.
+Các locale khác có thể đặc tả ký tự whitespace khác. `iswalnum()`,
+`iswgraph()`, và `iswpunct()` đều false với mọi ký tự whitespace.
 
 ### Return Value {.unnumbered .unlisted}
 
-True if the character is whitespace.
+True nếu ký tự là whitespace.
 
 ### Example {.unnumbered .unlisted}
 
-Results may vary based on locale.
+Kết quả có thể khác nhau tùy locale.
 
 ``` {.c .numberLines}
 #include <wchar.h>
@@ -563,7 +566,7 @@ int main(void)
 
 [i[`iswupper()` function]i]
 
-Tests if a wide character is uppercase
+Kiểm tra wide character có là chữ hoa
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -575,9 +578,9 @@ int iswupper(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Tests if a character is uppercase in the current locale.
+Kiểm tra một ký tự có là chữ hoa trong locale hiện tại.
 
-To be uppercase, the following must be true:
+Để là chữ hoa, những điều sau phải đúng:
 
 ``` {.c}
 !iscntrl(c) && !isdigit(c) && !ispunct(c) && !isspace(c)
@@ -585,7 +588,7 @@ To be uppercase, the following must be true:
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if the wide character is uppercase.
+Trả về true nếu wide character là chữ hoa.
 
 ### Example {.unnumbered .unlisted}
 
@@ -618,7 +621,7 @@ int main(void)
 
 [i[`iswxdigit()` function]i]
 
-Tests if a wide character is a hexadecimal digit
+Kiểm tra wide character có là chữ số hex
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -630,12 +633,12 @@ int iswxdigit(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-Returns true if the wide character is a hexadecimal digit. Namely if
-it's `0`-`9`, `a`-`f`, or `A`-`F`.
+Trả về true nếu wide character là chữ số hex. Cụ thể là nếu nó thuộc
+`0`-`9`, `a`-`f`, hoặc `A`-`F`.
 
 ### Return Value {.unnumbered .unlisted}
 
-True if the character is a hexadecimal digit.
+True nếu ký tự là chữ số hex.
 
 ### Example {.unnumbered .unlisted}
 
@@ -665,7 +668,7 @@ int main(void)
 
 [i[`iswctype()` function]i]
 
-Determine wide character classification
+Xác định phân loại wide character
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -677,31 +680,30 @@ int iswctype(wint_t wc, wctype_t desc);
 
 ### Description {.unnumbered .unlisted}
 
-This is the Swiss Army knife of classification functions; it's all the
-other ones rolled into one.
+Đây là con dao Thụy Sĩ của các hàm phân loại; nó gom hết mấy hàm kia
+vào một.
 
-You call it with something like this:
+Bạn gọi nó kiểu này:
 
 ``` {.c}
 if (iswctype(c, wctype("digit")))  // or "alpha" or "space" or...
 ```
 
-and it behaves just like you'd called:
+và nó hành xử y như bạn đã gọi:
 
 ``` {.c}
 if (iswdigit(c))
 ```
 
-The difference is that you can specify the type of matching you want to
-do as a string at runtime, which might be convenient.
+Khác biệt là bạn có thể đặc tả kiểu matching muốn làm dưới dạng chuỗi
+lúc runtime, nghe thì tiện.
 
-`iswctype()` relies on the return value from the
-[`wctype()`](#man-wctype) call to get its work done.
+`iswctype()` dựa vào giá trị trả về của lời gọi
+[`wctype()`](#man-wctype) để làm việc.
 
-Stolen from the spec, here are the `iswctype()` calls and their
-equivalents:
+Chôm từ spec, đây là các lời gọi `iswctype()` và các hàm tương đương:
 
-|`iswctype()` call|Hard-coded equivalent|
+|Lời gọi `iswctype()`|Tương đương hard-code|
 |-|-|
 |`iswctype(c, wctype("alnum"))`|`iswalnum(c)`|
 |`iswctype(c, wctype("alpha"))`|`iswalpha(c)`|
@@ -716,18 +718,17 @@ equivalents:
 |`iswctype(c, wctype("upper"))`|`iswupper(c)`|
 |`iswctype(c, wctype("xdigit"))`|`iswxdigit(c)`|
 
-See the [`wctype()` documentation](#man-wctype) for how that helper
-function works.
+Xem [tài liệu `wctype()`](#man-wctype) để biết hàm phụ trợ đó hoạt
+động ra sao.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns true if the wide character `wc` matches the character class in
-`desc`.
+Trả về true nếu wide character `wc` khớp với lớp ký tự ở `desc`.
 
 ### Example {.unnumbered .unlisted}
 
-Test for a given character classification at when the classification
-isn't known at compile time:
+Kiểm tra một phân loại ký tự nào đó khi không biết phân loại tại thời
+điểm compile:
 
 ``` {.c .numberLines}
 #include <stdio.h>  // for fflush(stdout)
@@ -783,7 +784,7 @@ Yes! 'x' is alnum!
 
 [i[`wctype()` function]i]
 
-Helper function for `iswctype()`
+Hàm phụ trợ cho `iswctype()`
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -795,13 +796,12 @@ wctype_t wctype(const char *property);
 
 ### Description {.unnumbered .unlisted}
 
-This function returns an opaque value for the given `property` that is
-meant to be passed as the second argument to
-[`iswctype()`](#man-iswctype).
+Hàm này trả về một giá trị opaque cho `property` cho trước, dùng để
+truyền làm tham số thứ hai cho [`iswctype()`](#man-iswctype).
 
-The returned value is of type `wctype_t`.
+Giá trị trả về có kiểu `wctype_t`.
 
-Valid properties in all locales are:
+Các property hợp lệ trong mọi locale là:
 
 ``` {.c}
 "alnum"   "alpha"   "blank"   "cntrl"
@@ -809,22 +809,22 @@ Valid properties in all locales are:
 "punct"   "space"   "upper"   "xdigit"
 ```
 
-Other properties might be defined as determined by the `LC_CTYPE`
-category of the current locale.
+Các property khác có thể được định nghĩa tùy category `LC_CTYPE` của
+locale hiện tại.
 
-See the [`iswctype()` reference page](#man-iswctype) for more usage
-details.
+Xem [trang tham khảo `iswctype()`](#man-iswctype) để biết chi tiết sử
+dụng.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the `wctype_t` value associated with the given `property`.
+Trả về giá trị `wctype_t` tương ứng với `property` cho trước.
 
-If an invalid value is passed for `property`, returns `0`.
+Nếu truyền giá trị không hợp lệ cho `property`, trả về `0`.
 
 ### Example {.unnumbered .unlisted}
 
-Test for a given character classification at when the classification
-isn't known at compile time:
+Kiểm tra một phân loại ký tự nào đó khi không biết phân loại tại thời
+điểm compile:
 
 ``` {.c .numberLines}
 #include <stdio.h>  // for fflush(stdout)
@@ -880,7 +880,7 @@ Yes! 'x' is alnum!
 
 [i[`towlower()` function]i]
 
-Convert an uppercase wide character to lowercase
+Chuyển wide character hoa sang chữ thường
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -892,17 +892,17 @@ wint_t towlower(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-If the character is upper (i.e. `iswupper(c)` is true), this function
-returns the corresponding lowercase letter.
+Nếu ký tự là chữ hoa (tức `iswupper(c)` true), hàm này trả về chữ
+thường tương ứng.
 
-Different locales might have different upper and lowercase letters.
+Các locale khác nhau có thể có chữ hoa và chữ thường khác nhau.
 
 ### Return Value {.unnumbered .unlisted}
 
-If the letter `wc` is uppercase, a lowercase version of that letter will
-be returned according to the current locale.
+Nếu chữ cái `wc` là chữ hoa, phiên bản chữ thường của chữ đó sẽ được
+trả về theo locale hiện tại.
 
-If the letter is not uppercase, `wc` is returned unchanged.
+Nếu chữ cái không phải chữ hoa, `wc` được trả về nguyên không đổi.
 
 ### Example {.unnumbered .unlisted}
 
@@ -932,7 +932,7 @@ int main(void)
 
 [i[`towupper()` function]i]
 
-Convert a lowercase wide character to uppercase
+Chuyển wide character thường sang chữ hoa
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -944,17 +944,17 @@ wint_t towupper(wint_t wc);
 
 ### Description {.unnumbered .unlisted}
 
-If the character is lower (i.e. `iswlower(c)` is true), this function
-returns the corresponding uppercase letter.
+Nếu ký tự là chữ thường (tức `iswlower(c)` true), hàm này trả về chữ
+hoa tương ứng.
 
-Different locales might have different upper and lowercase letters.
+Các locale khác nhau có thể có chữ hoa và chữ thường khác nhau.
 
 ### Return Value {.unnumbered .unlisted}
 
-If the letter `wc` is lowercase, an uppercase version of that letter
-will be returned according to the current locale.
+Nếu chữ cái `wc` là chữ thường, phiên bản chữ hoa của chữ đó sẽ được
+trả về theo locale hiện tại.
 
-If the letter is not lowercase, `wc` is returned unchanged.
+Nếu chữ cái không phải chữ thường, `wc` được trả về nguyên không đổi.
 
 ### Example {.unnumbered .unlisted}
 
@@ -984,7 +984,7 @@ int main(void)
 
 [i[`towctrans()` function]i]
 
-Convert wide characters to upper or lowercase
+Chuyển wide character sang chữ hoa hoặc chữ thường
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -996,43 +996,42 @@ wint_t towctrans(wint_t wc, wctrans_t desc);
 
 ### Description {.unnumbered .unlisted}
 
-This is the Swiss Army knife of character conversion functions; it's all
-the other ones rolled into one. And by "all the other ones" I mean
-`towupper()` and `towlower()`, since those are the only ones there are.
+Đây là con dao Thụy Sĩ của các hàm chuyển đổi ký tự; nó gom hết mấy
+hàm kia vào một. Và "mấy hàm kia" ở đây nghĩa là `towupper()` và
+`towlower()`, vì đó là tất cả những gì có.
 
-You call it with something like this:
+Bạn gọi nó kiểu này:
 
 ``` {.c}
 if (towctrans(c, wctrans("toupper")))  // or "tolower"
 ```
 
-and it behaves just like you'd called:
+và nó hành xử y như bạn đã gọi:
 
 ``` {.c}
 towupper(c);
 ```
 
-The difference is that you can specify the type of conversion you want
-to do as a string at runtime, which might be convenient.
+Khác biệt là bạn có thể đặc tả kiểu chuyển đổi muốn làm dưới dạng
+chuỗi lúc runtime, nghe thì tiện.
 
-`towctrans()` relies on the return value from the
-[`wctrans()`](#man-wctrans) call to get its work done.
+`towctrans()` dựa vào giá trị trả về của lời gọi
+[`wctrans()`](#man-wctrans) để làm việc.
 
-|`towctrans()` call|Hard-coded equivalent|
+|Lời gọi `towctrans()`|Tương đương hard-code|
 |-|-|
 |`towctrans(c, wctrans("toupper"))`|`towupper(c)`|
 |`towctrans(c, wctrans("tolower"))`|`towlower(c)`|
 
-See the [`wctrans()` documentation](#man-wctrans) for how that helper
-function works.
+Xem [tài liệu `wctrans()`](#man-wctrans) để biết hàm phụ trợ đó hoạt
+động ra sao.
 
 ### Return Value {.unnumbered .unlisted}
 
-Returns the character `wc` as if run through `towupper()` or
-`towlower()`, depending on the value of `desc`.
+Trả về ký tự `wc` như thể đã chạy qua `towupper()` hoặc `towlower()`,
+tùy giá trị của `desc`.
 
-If the character already matches the classification, it is returned
-as-is.
+Nếu ký tự đã khớp sẵn với phân loại, nó được trả về nguyên xi.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1065,7 +1064,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 Enter a character and conversion type: b toupper
@@ -1092,7 +1091,7 @@ Enter a character and conversion type: ! toupper
 
 [i[`wctrans()` function]i]
 
-Helper function for `towctrans()`
+Hàm phụ trợ cho `towctrans()`
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1104,20 +1103,20 @@ wctrans_t wctrans(const char *property);
 
 ### Description {.unnumbered .unlisted}
 
-This is a helper function for generating the second argument to
+Đây là hàm phụ trợ để sinh tham số thứ hai cho
 [`towctrans()`](#man-towctrans).
 
-You can pass in one of two things for the `property`:
+Bạn có thể truyền vào một trong hai thứ cho `property`:
 
-* `toupper` to make `towctrans()` behave like `towupper()`
-* `tolower` to make `towctrans()` behave like `towlower()`
+* `toupper` để `towctrans()` hành xử như `towupper()`
+* `tolower` để `towctrans()` hành xử như `towlower()`
 
 ### Return Value {.unnumbered .unlisted}
 
-On success, returns a value that can be used as the `desc` argument to
+Nếu thành công, trả về giá trị có thể dùng làm tham số `desc` cho
 `towctrans()`.
 
-Otherwise, if the `property` isn't recognized, returns `0`.
+Ngược lại, nếu `property` không nhận ra, trả về `0`.
 
 ### Example {.unnumbered .unlisted}
 
@@ -1150,7 +1149,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 Enter a character and conversion type: b toupper
