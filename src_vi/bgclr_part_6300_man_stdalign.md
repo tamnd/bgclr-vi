@@ -3,25 +3,24 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<stdalign.h>` Macros for Alignment {#stdalign}
+# `<stdalign.h>` Macro Cho Alignment {#stdalign}
 
 [i[`stdalign.h` header file]i]
 
-If you're coding up something low-level like a memory allocator that
-interfaces with your OS, you might need this header file. But most C
-devs go their careers without using it.
+Nếu bạn đang code thứ gì đó low-level như một memory allocator giao
+tiếp với OS, bạn có thể cần header này. Nhưng hầu hết dev C trải cả
+sự nghiệp mà chưa bao giờ dùng nó.
 
-[flw[_Alignment_|Data_structure_alignment]] is all about multiples of
-addresses on which objects can be stored. Can you store this at any
-address? Or must it be a starting address that's divisible by 2? Or 8?
-Or 16?
+[flw[_Alignment_|Data_structure_alignment]] là về bội số của địa chỉ
+mà object có thể được lưu. Object có thể lưu ở bất kỳ địa chỉ nào?
+Hay phải là địa chỉ chia hết cho 2? Hay 8? Hay 16?
 
-|Name|Description
+|Tên|Mô tả
 |-|-|
-|[`alignas()`](#man-alignas)|Specify alignment, expands to `_Alignas`|
-|[`alignof()`](#man-alignof)|Get alignment, expands to `_Alignof`|
+|[`alignas()`](#man-alignas)|Chỉ định alignment, expand thành `_Alignas`|
+|[`alignof()`](#man-alignof)|Lấy alignment, expand thành `_Alignof`|
 
-These two additional macros are defined to be `1`:
+Hai macro bổ sung sau được định nghĩa bằng `1`:
 
 [i[`__alignas_is_defined` macro]i]
 [i[`__alignof_is_defined` macro]i]
@@ -31,8 +30,8 @@ __alignas_is_defined
 __alignof_is_defined
 ```
 
-Quick note: alignments greater than that of `max_align_t` are known as
-_overalignments_ and are implementation-defined.
+Ghi chú nhanh: các alignment lớn hơn của `max_align_t` được gọi là
+_overalignment_ và là implementation-defined.
 
 
 ## `alignas()` `_Alignas()` {#man-alignas}
@@ -40,7 +39,7 @@ _overalignments_ and are implementation-defined.
 [i[`alignas()` alignment specifier]i]
 [i[`_Alignas()` alignment specifier]i]
 
-Force a variable to have a certain alignment
+Bắt biến phải có một alignment nhất định
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -56,36 +55,36 @@ _Alignas(type-name)
 _Alignas(constant-expression)
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Use this _alignment specifier_ to force the alignment of particular
-variables. For instance, we can declare `c` to be `char`, but aligned as
-if it were an `int`:
+Dùng _alignment specifier_ này để bắt buộc alignment cho biến cụ
+thể. Ví dụ, ta có thể khai báo `c` là `char`, nhưng align giống như
+nó là `int`:
 
 ``` {.c}
 char alignas(int) c;
 ```
 
-You can put a constant integer expression in there, as well. The
-compiler will probably impose limits on what these values can be. Small
-powers of 2 (1, 2, 4, 8, and 16) are generally safe bets.
+Bạn cũng có thể đặt biểu thức integer hằng vào đó. Compiler có lẽ
+sẽ áp limit lên giá trị mà biểu thức này có thể nhận. Lũy thừa nhỏ
+của 2 (1, 2, 4, 8, và 16) thường là đặt cược an toàn.
 
 ``` {.c}
-char alignas(8) c;   // align on 8-byte boundaries
+char alignas(8) c;   // align theo ranh giới 8-byte
 ```
 
-For convenience, you can also specify `0` if you want the default
-alignment (as if you hadn't said `alignas()` at all):
+Cho tiện, bạn cũng có thể chỉ định `0` nếu muốn alignment mặc định
+(như thể bạn không nói `alignas()` gì cả):
 
 ``` {.c}
-char alignas(0) c;   // use default alignment for this type
+char alignas(0) c;   // dùng alignment mặc định cho kiểu này
 ```
 
 <!--
 ### Return Value {.unnumbered .unlisted}
 -->
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdalign.h>
@@ -110,16 +109,16 @@ int main(void)
 }
 ```
 
-Output on my system follows. Notice the difference between the pairs of
-values.
+Output trên hệ của tôi bên dưới. Chú ý sự khác biệt giữa các cặp
+giá trị.
 
-* `i` and `j`, both `int`s, are aligned on 4-byte boundaries.
-* `a` and `b` have been forced to the boundary of the type
-  `max_align_t`, which is every 16 bytes on my system.
-* `c` and `d` have been forced to the same alignment as `int`, which is
-  4 bytes, just like with `i` and `j`.
-* `e` and `f` do not have an alignment specified, so they were stored
-  with their default alignment of 1 byte.
+* `i` và `j`, đều là `int`, align theo ranh giới 4-byte.
+* `a` và `b` bị bắt về ranh giới của kiểu `max_align_t`, tức mỗi 16
+  byte trên hệ của tôi.
+* `c` và `d` bị bắt về cùng alignment với `int`, tức 4 byte, giống
+  như `i` và `j`.
+* `e` và `f` không có alignment chỉ định, nên chúng được lưu với
+  alignment mặc định là 1 byte.
 
 ``` {.default}
 i: 0x7ffee7dfb4cc    <-- difference of 4 bytes
@@ -135,7 +134,7 @@ e: 0x7ffee7dfb4a7    <-- difference of 1 byte
 f: 0x7ffee7dfb4a6
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`alignof`](#man-alignof),
 [`max_align_t`](#man-max_align_t),
@@ -147,7 +146,7 @@ f: 0x7ffee7dfb4a6
 [i[`alignof()` operator]i]
 [i[`_Alignof()` operator]i]
 
-Get the alignment of a type
+Lấy alignment của một kiểu
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -161,20 +160,19 @@ alignof(type-name)
 _Alignof(type-name)
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This evaluates to a value of type `size_t` that gives the alignment of a
-particular type on your system.
+Biểu thức này eval thành một giá trị kiểu `size_t` cho biết
+alignment của một kiểu cụ thể trên hệ của bạn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the alignment value, i.e. the address of the beginning of the
-given type of object must begin on an address boundary divisible by this
-number.
+Trả về giá trị alignment, tức là địa chỉ bắt đầu của object kiểu đã
+cho phải ở ranh giới chia hết cho số này.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Print out the alignments of a variety of different types.
+In ra alignment của đủ loại kiểu khác nhau.
 
 ``` {.c .numberLines}
 #include <stdalign.h>
@@ -201,7 +199,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên hệ của tôi:
 
 ``` {.default}
 char       : 1
@@ -215,7 +213,7 @@ struct t   : 16
 max_align_t: 16
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`alignas`](#man-alignas),
 [`max_align_t`](#man-max_align_t),
