@@ -1,0 +1,42 @@
+# vim swap files
+
+.*.sw[op]
+
+# Build products
+
+stage/
+src/bgclr.html
+src/bgclr.epub
+src/bgclr-wide.html
+src/bg-css.html
+src/bg-css-wide.html
+src/bgclr_*.pdf
+src/split
+src/split-wide
+src/bgclr_temp*
+
+# Vietnamese build products (src_vi/)
+src_vi/bgclr.html
+src_vi/bgclr.epub
+src_vi/bgclr-wide.html
+src_vi/bg-css.html
+src_vi/bg-css-wide.html
+src_vi/bgclr_*.pdf
+src_vi/split
+src_vi/split-wide
+src_vi/bgclr_temp*
+
+# Staged site (generated, deployed via GH Actions)
+docs/
+
+__pycache__
+
+# Misc
+
+foo
+foo.[ch]
+bar
+bar.[ch]
+baz
+baz.[ch]
+.vscode/*

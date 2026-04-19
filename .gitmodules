@@ -1,0 +1,3 @@
+[submodule "bgbspd"]
+	path = bgbspd
+	url = https://github.com/beejjorgensen/bgbspd.git

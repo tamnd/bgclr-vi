@@ -1,0 +1,136 @@
+name: Release
+
+# PAUSED during the translation marathon: only manual runs. Once all 32
+# chapters are translated and CI is re-enabled, restore the tag trigger:
+#
+#   push:
+#     tags:
+#       - 'v*-vi.*'
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (must already be pushed, e.g. v0.9.12-vi.1)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF#refs/tags/}"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Releasing tag: $TAG"
+
+      - name: Checkout at tag
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ steps.tag.outputs.tag }}
+          submodules: recursive
+
+      - name: Read upstream provenance
+        id: upstream
+        run: |
+          # Pull upstream version and commit from UPSTREAM.md for release notes.
+          UPSTREAM_COMMIT="$(grep -oE '\*\*Commit:\*\* `[a-f0-9]+`' UPSTREAM.md | head -1 | sed -E 's/.*`([a-f0-9]+)`.*/\1/')"
+          UPSTREAM_VERSION="$(grep -oE '\*\*Version:\*\* [^(]+' UPSTREAM.md | head -1 | sed -E 's/\*\*Version:\*\* //' | xargs)"
+          echo "commit=$UPSTREAM_COMMIT" >> "$GITHUB_OUTPUT"
+          echo "version=$UPSTREAM_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Upstream: $UPSTREAM_VERSION @ $UPSTREAM_COMMIT"
+
+      # Shared build image lives in tamnd/beej-vi-docker. Cold pull ~30s
+      # vs the ~13 min it would take to install texlive-full from scratch.
+      - name: Build guide
+        env:
+          BUILD_IMAGE: ghcr.io/tamnd/beej-vi-docker:latest
+        run: |
+          docker pull "$BUILD_IMAGE"
+          docker run --rm \
+            -v "$PWD:/guide" \
+            -w /guide \
+            -e BGBS_THREADS=4 \
+            "$BUILD_IMAGE" \
+            bash scripts/build_vi.sh
+
+      - name: Package release artifacts
+        id: package
+        run: |
+          TAG="${{ steps.tag.outputs.tag }}"
+          STAGE="release/$TAG"
+          rm -rf release && mkdir -p "$STAGE"
+
+          # PDFs
+          cp docs/pdf/*.pdf "$STAGE/"
+
+          # EPUB
+          cp docs/epub/bgclr.epub "$STAGE/"
+
+          # HTML bundles (split + split-wide) — already zipped by build.
+          cp docs/html/bgclr.zip      "$STAGE/bgclr_html.zip"
+          cp docs/html/bgclr-wide.zip "$STAGE/bgclr_html_wide.zip"
+
+          # Source examples
+          cp docs/source/bgclr_source.zip "$STAGE/"
+
+          # Full site tarball for anyone mirroring the whole thing.
+          tar -czf "$STAGE/bgclr_site.tar.gz" -C docs .
+
+          ls -la "$STAGE"
+          echo "dir=$STAGE" >> "$GITHUB_OUTPUT"
+
+      - name: Generate release notes
+        id: notes
+        run: |
+          TAG="${{ steps.tag.outputs.tag }}"
+          UPSTREAM_VERSION="${{ steps.upstream.outputs.version }}"
+          UPSTREAM_COMMIT="${{ steps.upstream.outputs.commit }}"
+          UPSTREAM_COMMIT_SHORT="$(echo "$UPSTREAM_COMMIT" | cut -c1-10)"
+
+          {
+            echo "# $TAG"
+            echo
+            echo "Vietnamese translation of **Beej's Guide to C Programming, Library Reference**,"
+            echo "based on upstream $UPSTREAM_VERSION"
+            echo "(commit [\`$UPSTREAM_COMMIT_SHORT\`](https://github.com/beejjorgensen/bgclr/commit/$UPSTREAM_COMMIT))."
+            echo
+            echo "## Artifacts"
+            echo
+            echo "- HTML: \`bgclr_html.zip\` (standard width), \`bgclr_html_wide.zip\` (wide)"
+            echo "- EPUB: \`bgclr.epub\`"
+            echo "- PDF (US Letter): \`bgclr_usl_c_1.pdf\`, \`bgclr_usl_c_2.pdf\`, \`bgclr_usl_bw_1.pdf\`, \`bgclr_usl_bw_2.pdf\`"
+            echo "- PDF (A4): \`bgclr_a4_c_1.pdf\`, \`bgclr_a4_c_2.pdf\`, \`bgclr_a4_bw_1.pdf\`, \`bgclr_a4_bw_2.pdf\`"
+            echo "  (\`_c_\` = color, \`_bw_\` = black & white; \`_1\` = single-sided, \`_2\` = double-sided)"
+            echo "- Source examples: \`bgclr_source.zip\`"
+            echo "- Full site mirror: \`bgclr_site.tar.gz\` (extract and open \`index.html\`)"
+            echo
+            echo "## Reading online"
+            echo
+            echo "Latest build is published at <https://tamnd.github.io/bgclr-vi/>."
+            echo
+            echo "## Upstream reference"
+            echo
+            echo "- Repo: <https://github.com/beejjorgensen/bgclr>"
+            echo "- Original English: <https://beej.us/guide/bgclr/>"
+          } > release_notes.md
+
+          cat release_notes.md
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: ${{ steps.tag.outputs.tag }}
+          body_path: release_notes.md
+          files: ${{ steps.package.outputs.dir }}/*
+          draft: false
+          prerelease: false
+          fail_on_unmatched_files: true

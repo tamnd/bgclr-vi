@@ -1,0 +1,64 @@
+name: Build and deploy to GitHub Pages
+
+# PAUSED during the translation marathon: only manual runs. Once all 32
+# chapters in src_vi/ are translated, restore the `push` and
+# `pull_request` triggers so every merge to main rebuilds Pages.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      # Pulls the shared build image (texlive-full + pandoc + Libertinus).
+      # See https://github.com/tamnd/beej-vi-docker. Cold pull ~30s vs
+      # the ~13 min it would take to install texlive-full from scratch.
+      - name: Build guide
+        env:
+          BUILD_IMAGE: ghcr.io/tamnd/beej-vi-docker:latest
+        run: |
+          docker pull "$BUILD_IMAGE"
+          docker run --rm \
+            -v "$PWD:/guide" \
+            -w /guide \
+            -e BGBS_THREADS=4 \
+            "$BUILD_IMAGE" \
+            bash scripts/build_vi.sh
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
+
+      - name: Upload build outputs as workflow artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: bgclr-vi-docs
+          path: docs
+          retention-days: 14
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
