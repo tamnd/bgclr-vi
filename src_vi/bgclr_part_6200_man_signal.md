@@ -3,26 +3,26 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<signal.h>` signal handling {#signal}
+# `<signal.h>` Xử Lý Signal {#signal}
 
 [i[`signal.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`signal()`](#man-signal)|Set a signal handler for a given signal|
-|[`raise()`](#man-raise)|Cause a signal to be raised|
+|[`signal()`](#man-signal)|Đặt signal handler cho một signal|
+|[`raise()`](#man-raise)|Làm cho một signal được raise lên|
 
-Handle signals in a portable way, kind of!
+Xử lý signal kiểu portable, đại khái!
 
-These signals get raised for a variety of reasons such as CTRL-C being
-hit, requests to terminate for external programs, memory access
-violations, and so on.
+Các signal này được raise vì đủ lý do như người dùng bấm CTRL-C, yêu
+cầu terminate từ chương trình ngoài, vi phạm truy cập bộ nhớ, vân
+vân.
 
-Your OS likely defines a plethora of other signals, as well.
+OS của bạn nhiều khả năng còn định nghĩa thêm cả đống signal khác.
 
-This system is pretty limited, as seen below. If you're on Unix, it's
-almost certain your OS has far superior signal handling capabilities
-than the C standard library. Check out
+Hệ thống này khá giới hạn, như bạn sẽ thấy bên dưới. Nếu bạn trên
+Unix, gần như chắc chắn OS của bạn có khả năng xử lý signal xịn hơn
+hẳn so với thư viện chuẩn C. Xem
 [flm[`sigaction`|sigaction.2.en]].
 
 [[manbreak]]
@@ -30,7 +30,7 @@ than the C standard library. Check out
 
 [i[`signal()` function]i]
 
-Set a signal handler for a given signal
+Đặt signal handler cho một signal
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -40,77 +40,78 @@ Set a signal handler for a given signal
 void (*signal(int sig, void (*func)(int)))(int);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-How's _that_ for a function declaration?
+Cái khai báo hàm _đó_ nhìn sao ta?
 
-Let's ignore it for a moment and just talk about what this function
-does.
+Thôi bỏ qua nó một chút, nói về hàm này làm gì đã.
 
-When a signal is raised, _something_ is going to happen. This function
-lets you decide to do one of these things when the signal is raised:
+Khi một signal được raise, _điều gì đó_ sẽ xảy ra. Hàm này cho phép
+bạn chọn một trong các việc sau để làm khi signal xảy ra:
 
-* Ignore the signal
-* Perform the default action
-* Have a specific function called
+* Bỏ qua signal
+* Thực hiện hành động mặc định
+* Có một hàm cụ thể được gọi
 
-The `signal()` function takes two arguments. The first, `sig`, is the
-name of the signal to handle.
+Hàm `signal()` nhận hai tham số. Tham số đầu, `sig`, là tên signal
+cần xử lý.
 
-|Signal|Description|
+|Signal|Mô tả|
 |-|-|
-|`SIGABRT`|Raised when `abort()` is called|
-|`SIGFPE`|Floating-point arithmetic exception|
-|`SIGILL`|CPU tried to execute an illegal instruction|
-|`SIGINT`|Interrupt signal, as if `CTRL-C` were pressed|
-|`SIGSEGV`|Segmention Violation: attempted to access restricted memory|
-|`SIGTERM`|Termination request[^b43b]|
+|`SIGABRT`|Được raise khi `abort()` được gọi|
+|`SIGFPE`|Exception số học floating-point|
+|`SIGILL`|CPU thử thực thi lệnh không hợp lệ|
+|`SIGINT`|Signal interrupt, như khi `CTRL-C` được bấm|
+|`SIGSEGV`|Segmentation Violation: thử truy cập bộ nhớ bị cấm|
+|`SIGTERM`|Yêu cầu terminate[^b43b]|
 
-[^b43b]: As if might be sent from Unix's `kill` command.]
+[^b43b]: Như kiểu được gửi từ lệnh `kill` trên Unix.]
 
-So that's the first bit when you call `signal()`---tell it the signal in
-question:
+Vậy đó là phần đầu khi bạn gọi `signal()`---nói cho nó biết signal
+cần xử:
 
 ``` {.c}
 signal(SIGINT, ...
 ```
 
-But what's that `func` parameter?
+Nhưng tham số `func` kia là gì?
 
-For spoilers, it's a pointer to a function that takes an `int` argument
-and returns `void`. We can use this to call an arbitrary function when
-the signal occurs.
+Tiết lộ luôn, đó là pointer tới một hàm nhận tham số `int` và trả
+về `void`. Ta có thể dùng nó để gọi một hàm tuỳ ý khi signal xảy
+ra.
 
-Before we do that, though, let's look at the easy ones: telling the
-system to ignore the signal or perform the default action (which it does
-by default if you never call `signal()`).
+Trước khi làm chuyện đó, xem mấy cái dễ trước: bảo hệ thống bỏ qua
+signal hoặc thực hiện hành động mặc định (đây là cái nó làm mặc
+định nếu bạn không bao giờ gọi `signal()`).
 
-You can set `func` to one of two special values to make this happen:
+Bạn có thể đặt `func` bằng một trong hai giá trị đặc biệt để làm
+chuyện này:
 
-|`func`|Description|
+|`func`|Mô tả|
 |-|-|
-|`SIG_DFL`|Perform the default action on this signal|
-|`SIG_IGN`|Ignore this signal|
+|`SIG_DFL`|Thực hiện hành động mặc định cho signal này|
+|`SIG_IGN`|Bỏ qua signal này|
 
-For example:
+Ví dụ:
 
 ``` {.c}
-signal(SIGTERM, SIG_DFL);  // Default action on SIGTERM
-signal(SIGINT, SIG_IGN);   // Ignore SIGINT
+signal(SIGTERM, SIG_DFL);  // Hành động mặc định với SIGTERM
+signal(SIGINT, SIG_IGN);   // Bỏ qua SIGINT
 ```
 
-But what if you want to have your own handler do something instead of
-the default or ignoring it? You can pass in your own function to be
-called. That's what the crazy function signature is partially about.
-It's saying that the argument can be a pointer to a function that takes
-an `int` argument and returns `void`.
+Nhưng nếu bạn muốn handler của riêng mình làm gì đó thay vì default
+hay ignore thì sao? Bạn có thể truyền vào một hàm của bạn để được
+gọi. Đó là lý do cái function signature điên rồ kia tồn tại (một
+phần). Nó nói rằng tham số có thể là con trỏ tới hàm nhận tham số
+`int` và trả về `void`.
 
-So if you wanted to call your handler, you could have code like this:
+Vậy nếu bạn muốn gọi handler của mình, bạn có thể viết code thế
+này:
 
 ``` {.c}
 int handler(int sig)
 {
-    // Handle the signal
+    // Xử lý signal
 }
 
 int main(void)
@@ -118,58 +119,59 @@ int main(void)
     signal(SIGINT, handler);
 ```
 
-What can you do in the signal handler? Not much.
+Trong signal handler bạn có thể làm gì? Không nhiều.
 
-If the signal is due to `abort()` or `raise()`, the handler can't call
+Nếu signal là do `abort()` hoặc `raise()`, handler không được gọi
 `raise()`.
 
-If the signal is **not** due to `abort()` or `raise()`, you're only
-allowed to call these functions from the standard library (though the
-spec doesn't prohibit calling other non-library functions):
+Nếu signal **không** phải do `abort()` hoặc `raise()`, bạn chỉ được
+gọi mấy hàm sau từ thư viện chuẩn (dù spec không cấm gọi các hàm
+non-library khác):
 
 * [`abort()`](#man-abort)
 * [`_Exit()`](#man-exit)
 * [`quick_exit()`](#man-exit)
-* Functions in [`<stdatomic.h>`](#stdatomic) when the atomic arguments
-  are lock-free
-* `signal()` with a first argument equivalent to the argument that was
-  passed into the handler
+* Hàm trong [`<stdatomic.h>`](#stdatomic) khi tham số atomic là
+  lock-free
+* `signal()` với tham số đầu bằng tham số được truyền vào handler
 
-In addition, if the signal was **not** due to `abort()` or `raise()`,
-the handler can't access any object with static or thread-storage
-duration unless it's lock-free.
+Thêm nữa, nếu signal **không** phải do `abort()` hoặc `raise()`,
+handler không được truy cập bất kỳ object nào có static hoặc
+thread-storage duration trừ khi nó là lock-free.
 
-An exception is that you can assign to a variable of type `volatile
-sig_atomic_t`. The spec is unclear on if you can read from a variable of
-that type. I think you can safely do that, but the minute you decide to
-read and write that variable in your handler, you've opened up the
-possibility of a race condition. Probably best to just set it as a flag
-that the signal has occurred and let the outside world deal with it.
+Ngoại lệ là bạn có thể gán cho biến kiểu `volatile sig_atomic_t`.
+Spec không rõ liệu bạn có đọc được biến kiểu đó không. Tôi nghĩ bạn
+làm vậy an toàn, nhưng lúc bạn quyết định vừa đọc vừa ghi biến đó
+trong handler, bạn đã mở cửa cho khả năng race condition. Chắc tốt
+nhất là chỉ set nó như một flag báo signal đã xảy ra và để thế giới
+bên ngoài xử lý.
 
-It's up to the implementation, but the signal handler might be reset to
-`SIG_DFL` just before the handler is called.
+Tuỳ implementation, nhưng signal handler có thể bị reset về
+`SIG_DFL` ngay trước khi handler được gọi.
 
-It's undefined behavior to call `signal()` in a multithreaded program.
+Gọi `signal()` trong chương trình multithread là undefined
+behavior.
 
-It's undefined behavior to return from the handler for `SIGFPE`,
-`SIGILL`, `SIGSEGV`, or any implementation-defined value. You must exit.
+Return từ handler cho `SIGFPE`, `SIGILL`, `SIGSEGV`, hoặc bất kỳ
+giá trị implementation-defined nào là undefined behavior. Bạn phải
+exit.
 
-The implementation might or might not prevent other signals from arising
-while in the signal handler.
+Implementation có thể ngăn hoặc không ngăn các signal khác phát
+sinh khi đang ở trong signal handler.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-On success, `signal()` returns a pointer to the previous signal handler
-set by a call to `signal()` for that particular signal number. If you
-haven't called it set, returns `SIG_DFL`.
+Khi thành công, `signal()` trả về con trỏ tới signal handler trước
+đó đã được đặt qua lời gọi `signal()` cho signal number đó. Nếu bạn
+chưa từng gọi `signal()` để đặt, trả về `SIG_DFL`.
 
-On failure, `SIG_ERR` is returned and `errno` is set to a positive
-value.
+Khi thất bại, `SIG_ERR` được trả về và `errno` được set thành một
+giá trị dương.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Here's a program that causes `SIGINT` to be ignored. Commonly you
-trigger this signal by hitting `CTRL-C`.
+Đây là chương trình khiến `SIGINT` bị bỏ qua. Thông thường bạn
+trigger signal này bằng cách bấm `CTRL-C`.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -194,8 +196,8 @@ You can't hit CTRL-C to exit this program. Try it!
 Press return to exit, instead.^C^C^C^C^C^C^C^C^C^C^C
 ```
 
-This program sets the signal handler, then raises the signal. The signal
-handler fires.
+Chương trình này đặt signal handler, rồi raise signal. Signal
+handler được kích hoạt.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -203,13 +205,13 @@ handler fires.
 
 void handler(int sig)
 {
-    // Undefined behavior to call printf() if this handler was not
-    // as the result of a raise(), i.e. if you hit CTRL-C.
+    // Undefined behavior khi gọi printf() nếu handler này không
+    // phải do raise(), tức là nếu bạn bấm CTRL-C.
 
     printf("Got signal %d!\n", sig);
 
-    // Common to reset the handler just in case the implementation set
-    // it to SIG_DFL when the signal occurred.
+    // Thường reset handler phòng khi implementation set nó về
+    // SIG_DFL khi signal xảy ra.
 
     signal(sig, handler);
 }
@@ -232,8 +234,8 @@ Got signal 2!
 Got signal 2!
 ```
 
-This example catches `SIGINT` but then sets a flag to `1`. Then the main
-loop sees the flag and exits.
+Ví dụ này bắt `SIGINT` rồi set một flag thành `1`. Rồi main loop
+thấy flag và exit.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -255,7 +257,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`raise()`](#man-raise),
 [`abort()`](#man-abort)
@@ -265,7 +267,7 @@ int main(void)
 
 [i[`raise()` function]i]
 
-Cause a signal to be raised
+Làm cho một signal được raise lên
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -275,27 +277,27 @@ Cause a signal to be raised
 int raise(int sig);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Causes the signal handler for the signal `sig` to be called. If the
-handler is `SIG_DFL` or `SIG_IGN`, then the default action or no action
-happens.
+Làm cho signal handler cho signal `sig` được gọi. Nếu handler là
+`SIG_DFL` hoặc `SIG_IGN`, thì hành động mặc định hoặc không gì cả
+sẽ xảy ra.
 
-`raise()` returns after the signal handler has finished running.
+`raise()` trả về sau khi signal handler đã chạy xong.
 
-Interestingly, if you cause a signal to happen with `raise()`, you can
-call library functions from within the signal handler without causing
-undefined behavior. I'm not sure how this fact is practically useful,
-though.
+Thú vị là, nếu bạn gây ra signal bằng `raise()`, bạn có thể gọi các
+hàm thư viện từ trong signal handler mà không gây undefined
+behavior. Tuy nhiên tôi không chắc sự thật đó hữu dụng thực tế ở
+chỗ nào.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `0` on success. Nonzero otherwise.
+Trả về `0` khi thành công. Khác `0` nếu không.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This program sets the signal handler, then raises the signal. The signal
-handler fires.
+Chương trình này đặt signal handler, rồi raise signal. Signal
+handler được kích hoạt.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -303,13 +305,13 @@ handler fires.
 
 void handler(int sig)
 {
-    // Undefined behavior to call printf() if this handler was not
-    // as the result of a raise(), i.e. if you hit CTRL-C.
+    // Undefined behavior khi gọi printf() nếu handler này không
+    // phải do raise(), tức là nếu bạn bấm CTRL-C.
 
     printf("Got signal %d!\n", sig);
 
-    // Common to reset the handler just in case the implementation set
-    // it to SIG_DFL when the signal occurred.
+    // Thường reset handler phòng khi implementation set nó về
+    // SIG_DFL khi signal xảy ra.
 
     signal(sig, handler);
 }
@@ -332,7 +334,7 @@ Got signal 2!
 Got signal 2!
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`signal()`](#man-signal)
 
