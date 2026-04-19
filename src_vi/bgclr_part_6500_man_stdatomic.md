@@ -3,49 +3,49 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<stdatomic.h>` Atomic-Related Functions {#stdatomic}
+# `<stdatomic.h>` Các Hàm Liên Quan Đến Atomic {#stdatomic}
 
 [i[`stdatomic.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |-|-|
-|[`atomic_compare_exchange_strong_explicit()`](#man-atomic_compare_exchange)|Atomic compare and exchange, strong, explicit|
-|[`atomic_compare_exchange_strong()`](#man-atomic_compare_exchange)|Atomic compare and exchange, strong|
-|[`atomic_compare_exchange_weak_explicit()`](#man-atomic_compare_exchange)|Atomic compare and exchange, weak, explicit|
-|[`atomic_compare_exchange_weak()`](#man-atomic_compare_exchange)|Atomic compare and exchange, weak|
-|[`atomic_exchange_explicit()`](#man-atomic_exchange)|Replace a value in an atomic object, explicit|
-|[`atomic_exchange()`](#man-atomic_exchange)|Replace a value in an atomic object|
-|[`atomic_fetch_add_explicit()`](#man-atomic_fetch)|Atomically add to an atomic integer, explicit|
-|[`atomic_fetch_add()`](#man-atomic_fetch)|Atomically add to an atomic integer|
-|[`atomic_fetch_and_explicit()`](#man-atomic_fetch)|Atomically bitwise-AND an atomic integer, explicit|
-|[`atomic_fetch_and()`](#man-atomic_fetch)|Atomically bitwise-AND an atomic integer|
-|[`atomic_fetch_or_explicit()`](#man-atomic_fetch)|Atomically bitwise-OR an atomic integer, explicit|
-|[`atomic_fetch_or()`](#man-atomic_fetch)|Atomically bitwise-OR an atomic integer|
-|[`atomic_fetch_sub_explicit()`](#man-atomic_fetch)|Atomically subtract from an atomic integer, explicit|
-|[`atomic_fetch_sub()`](#man-atomic_fetch)|Atomically subtract from an atomic integer|
-|[`atomic_fetch_xor_explicit()`](#man-atomic_fetch)|Atomically bitwise-XOR an atomic integer, explicit|
-|[`atomic_fetch_xor()`](#man-atomic_fetch)|Atomically bitwise-XOR an atomic integer|
-|[`atomic_flag_clear_explicit()`](#man-atomic_flag_clear)|Clear an atomic flag, explicit|
-|[`atomic_flag_clear()`](#man-atomic_flag_clear)|Clear an atomic flag|
-|[`atomic_flag_test_and_set_explicit()`](#man-atomic_flag_test_and_set)|Test and set an atomic flag, explicit|
-|[`atomic_flag_test_and_set()`](#man-atomic_flag_test_and_set)|Test and set an atomic flag|
-|[`atomic_init()`](#man-atomic_init)|Initialize an atomic variable|
-|[`atomic_is_lock_free()`](#man-atomic_is_lock_free)|Determine if an atomic type is lock free|
-|[`atomic_load_explicit()`](#man-atomic_load)|Return a value from an atomic variable, explicit|
-|[`atomic_load()`](#man-atomic_load)|Return a value from an atomic variable|
-|[`atomic_signal_fence()`](#man-atomic_signal_fence)|Fence for intra-thread signal handlers|
-|[`atomic_store_explicit()`](#man-atomic_store)|Store a value in an atomic variable, explicit|
-|[`atomic_store()`](#man-atomic_store)|Store a value in an atomic variable|
-|[`atomic_thread_fence()`](#man-atomic_thread_fence)|Set up a fence|
-|[`ATOMIC_VAR_INIT()`](#man-ATOMIC_VAR_INIT)|Create an initializer for an atomic variable|
-|[`kill_dependency()`](#man-kill_dependency)|End a dependency chain|
+|[`atomic_compare_exchange_strong_explicit()`](#man-atomic_compare_exchange)|Compare-and-exchange nguyên tử, strong, explicit|
+|[`atomic_compare_exchange_strong()`](#man-atomic_compare_exchange)|Compare-and-exchange nguyên tử, strong|
+|[`atomic_compare_exchange_weak_explicit()`](#man-atomic_compare_exchange)|Compare-and-exchange nguyên tử, weak, explicit|
+|[`atomic_compare_exchange_weak()`](#man-atomic_compare_exchange)|Compare-and-exchange nguyên tử, weak|
+|[`atomic_exchange_explicit()`](#man-atomic_exchange)|Thay giá trị trong một object nguyên tử, explicit|
+|[`atomic_exchange()`](#man-atomic_exchange)|Thay giá trị trong một object nguyên tử|
+|[`atomic_fetch_add_explicit()`](#man-atomic_fetch)|Cộng nguyên tử vào một số nguyên atomic, explicit|
+|[`atomic_fetch_add()`](#man-atomic_fetch)|Cộng nguyên tử vào một số nguyên atomic|
+|[`atomic_fetch_and_explicit()`](#man-atomic_fetch)|AND bit nguyên tử một số nguyên atomic, explicit|
+|[`atomic_fetch_and()`](#man-atomic_fetch)|AND bit nguyên tử một số nguyên atomic|
+|[`atomic_fetch_or_explicit()`](#man-atomic_fetch)|OR bit nguyên tử một số nguyên atomic, explicit|
+|[`atomic_fetch_or()`](#man-atomic_fetch)|OR bit nguyên tử một số nguyên atomic|
+|[`atomic_fetch_sub_explicit()`](#man-atomic_fetch)|Trừ nguyên tử khỏi một số nguyên atomic, explicit|
+|[`atomic_fetch_sub()`](#man-atomic_fetch)|Trừ nguyên tử khỏi một số nguyên atomic|
+|[`atomic_fetch_xor_explicit()`](#man-atomic_fetch)|XOR bit nguyên tử một số nguyên atomic, explicit|
+|[`atomic_fetch_xor()`](#man-atomic_fetch)|XOR bit nguyên tử một số nguyên atomic|
+|[`atomic_flag_clear_explicit()`](#man-atomic_flag_clear)|Xoá một atomic flag, explicit|
+|[`atomic_flag_clear()`](#man-atomic_flag_clear)|Xoá một atomic flag|
+|[`atomic_flag_test_and_set_explicit()`](#man-atomic_flag_test_and_set)|Test-and-set một atomic flag, explicit|
+|[`atomic_flag_test_and_set()`](#man-atomic_flag_test_and_set)|Test-and-set một atomic flag|
+|[`atomic_init()`](#man-atomic_init)|Khởi tạo một biến atomic|
+|[`atomic_is_lock_free()`](#man-atomic_is_lock_free)|Xác định xem một kiểu atomic có lock-free không|
+|[`atomic_load_explicit()`](#man-atomic_load)|Trả về giá trị từ một biến atomic, explicit|
+|[`atomic_load()`](#man-atomic_load)|Trả về giá trị từ một biến atomic|
+|[`atomic_signal_fence()`](#man-atomic_signal_fence)|Fence cho signal handler trong cùng thread|
+|[`atomic_store_explicit()`](#man-atomic_store)|Lưu một giá trị vào biến atomic, explicit|
+|[`atomic_store()`](#man-atomic_store)|Lưu một giá trị vào biến atomic|
+|[`atomic_thread_fence()`](#man-atomic_thread_fence)|Dựng một fence|
+|[`ATOMIC_VAR_INIT()`](#man-ATOMIC_VAR_INIT)|Tạo initializer cho một biến atomic|
+|[`kill_dependency()`](#man-kill_dependency)|Kết thúc một chuỗi dependency|
 
-You might need to add `-latomic` to your compilation command line on
-Unix-like operating systems.
+Trên các hệ điều hành kiểu Unix, bạn có thể cần thêm `-latomic` vào
+dòng lệnh biên dịch.
 
-## Atomic Types
+## Các Kiểu Atomic
 
-A bunch of types are predefined by this header:
+Header này định nghĩa sẵn một đống kiểu:
 
 [i[`atomic_bool` type]i]
 [i[`atomic_char` type]i]
@@ -85,7 +85,7 @@ A bunch of types are predefined by this header:
 [i[`atomic_intmax_t` type]i]
 [i[`atomic_uintmax_t` type]i]
 
-|Atomic type|Longhand equivalent|
+|Kiểu atomic|Dạng đầy đủ tương đương|
 |-|-|
 |`atomic_bool`|`_Atomic _Bool`|
 |`atomic_char`|`_Atomic char`|
@@ -125,25 +125,25 @@ A bunch of types are predefined by this header:
 |`atomic_intmax_t`|`_Atomic intmax_t`|
 |`atomic_uintmax_t`|`_Atomic uintmax_t`|
 
-You can make your own additional types with the [i[`_Atomic` type
-qualifier]i] `_Atomic` type qualifier:
+Bạn có thể tự làm thêm kiểu của mình bằng [i[`_Atomic` type
+qualifier]i] type qualifier `_Atomic`:
 
 ``` {.c}
 _Atomic double x;
 ```
 
-or the [i[`_Atomic()` type specifier]i] `_Atomic()` type specifier:
+hoặc [i[`_Atomic()` type specifier]i] type specifier `_Atomic()`:
 
 ``` {.c}
 _Atomic(double) x;
 ```
 
-## Lock-free Macros {#lock-free-macros}
+## Các Macro Lock-free {#lock-free-macros}
 
-These macros let you know if a type is lock-free or not. Maybe.
+Các macro này cho bạn biết một kiểu có lock-free hay không. Có thể.
 
-They can be used at compile time with `#if`. They apply to both signed
-and unsigned types.
+Chúng có thể dùng ở compile time với `#if`. Chúng áp dụng cho cả kiểu
+signed và unsigned.
 
 [i[`ATOMIC_BOOL_LOCK_FREE` macro]i]
 [i[`ATOMIC_CHAR_LOCK_FREE` macro]i]
@@ -156,7 +156,7 @@ and unsigned types.
 [i[`ATOMIC_LLONG_LOCK_FREE` macro]i]
 [i[`ATOMIC_POINTER_LOCK_FREE` macro]i]
 
-|Atomic Type|Lock Free Macro|
+|Kiểu Atomic|Macro Lock-Free|
 |-|-|
 |`atomic_bool`|`ATOMIC_BOOL_LOCK_FREE`|
 |`atomic_char`|`ATOMIC_CHAR_LOCK_FREE`|
@@ -169,38 +169,38 @@ and unsigned types.
 |`atomic_llong`|`ATOMIC_LLONG_LOCK_FREE`|
 |`atomic_intptr_t`|`ATOMIC_POINTER_LOCK_FREE`|
 
-These macros can interestingly have _three_ different values:
+Thú vị là các macro này có thể có tới _ba_ giá trị khác nhau:
 
-|Value|Meaning|
+|Giá trị|Ý nghĩa|
 |-|-|
-|`0`|Never lock-free.|
-|`1`|_Sometimes_ lock-free[^916a].|
-|`2`|Always lock-free.|
+|`0`|Không bao giờ lock-free.|
+|`1`|_Đôi khi_ lock-free[^916a].|
+|`2`|Luôn lock-free.|
 
-[^916a]: Maybe it depends on the run-time environment and can't be known
-at compile-time.
+[^916a]: Có thể nó phụ thuộc vào môi trường run-time và không thể biết
+ở compile-time.
 
 ## Atomic Flag
 
-The [i[`atomic_flag` type]i] `atomic_flag` opaque type is the only time
-guaranteed to be lock-free. Though your PC implementation probably does
-a lot more.
+Kiểu mờ (opaque type) [i[`atomic_flag` type]i] `atomic_flag` là thứ
+duy nhất được đảm bảo là lock-free. Dù implementation trên PC của bạn
+chắc sẽ làm được nhiều hơn thế.
 
-It is accessed through the
-[`atomic_flag_test_and_set()`](#man-atomic_flag_test_and_set) and
-[`atomic_flag_clear()`](#man-atomic_flag_clear) functions.
+Nó được truy cập qua các hàm
+[`atomic_flag_test_and_set()`](#man-atomic_flag_test_and_set) và
+[`atomic_flag_clear()`](#man-atomic_flag_clear).
 
-Before use, it can be initialized to a clear state with:
+Trước khi dùng, có thể khởi tạo nó về trạng thái clear bằng:
 
 ``` {.c}
 atomic_flag f = ATOMIC_FLAG_INIT;
 ```
 
-## Memory Order
+## Memory Order (Thứ tự bộ nhớ)
 
-This header introduces a new `enum` type called `memory_order`. This is
-used by a bunch of the functions to specify memory orders other than
-sequential consistency.
+Header này giới thiệu một kiểu `enum` mới tên là `memory_order`. Nó
+được dùng bởi một đống hàm để chỉ định các memory order (thứ tự bộ
+nhớ) khác với sequential consistency (tính nhất quán tuần tự).
 
 [i[`memory_order_seq_cst` enumerated type]i]
 [i[`memory_order_acq_rel` enumerated type]i]
@@ -209,7 +209,7 @@ sequential consistency.
 [i[`memory_order_consume` enumerated type]i]
 [i[`memory_order_relaxed` enumerated type]i]
 
-|`memory_order`|Description|
+|`memory_order`|Mô tả|
 |-|-|
 |`memory_order_seq_cst`|Sequential Consistency|
 |`memory_order_acq_rel`|Acquire/Release|
@@ -218,17 +218,17 @@ sequential consistency.
 |`memory_order_consume`|Consume|
 |`memory_order_relaxed`|Relaxed|
 
-You can feed these into atomic functions with the `_explicit` suffix.
+Bạn có thể truyền mấy thứ này vào các hàm atomic có hậu tố `_explicit`.
 
-The non-`_explcit` versions of the functions are the same as if you'd
-called the `_explicit` counterpart with `memory_order_seq_cst`.
+Các phiên bản không có `_explicit` hoạt động y như khi bạn gọi phiên
+bản `_explicit` tương ứng với `memory_order_seq_cst`.
 
 [[manbreak]]
 ## `ATOMIC_VAR_INIT()` {#man-ATOMIC_VAR_INIT}
 
 [i[`ATOMIC_VAR_INIT()` macro]i]
 
-Create an initializer for an atomic variable
+Tạo một initializer cho biến atomic
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -238,30 +238,31 @@ Create an initializer for an atomic variable
 #define ATOMIC_VAR_INIT(C value)   // Deprecated
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This macro expands to an initializer, so you can use it when a variable
-is defined.
+Macro này mở rộng thành một initializer, nên bạn có thể dùng nó khi
+định nghĩa biến.
 
-The type of the `value` should be the base type of the atomic variable.
+Kiểu của `value` phải là kiểu cơ sở của biến atomic.
 
-The initialization itself is _not_ an atomic operation, ironically.
+Buồn cười là, bản thân việc khởi tạo _không_ phải thao tác nguyên tử
+(atomic).
 
-[fl[CPPReference says this is
+[fl[CPPReference nói rằng cái này đã bị
 deprecated|https://en.cppreference.com/w/cpp/atomic/ATOMIC_VAR_INIT]]
-and likely to be removed. Standards document
+và nhiều khả năng sẽ bị bỏ. Tài liệu tiêu chuẩn
 [fl[p1138r0|http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1138r0.pdf]]
-elaborates that the macro is limited in that it can't properly
-initialize atomic `struct`s, and its original _raison d'être_ turned out
-to not be useful.
+giải thích thêm rằng macro này bị hạn chế ở chỗ không thể khởi tạo
+đúng các atomic `struct`, và lý do tồn tại ban đầu của nó hoá ra chẳng
+hữu dụng.
 
-Just initialize the variable straight-up, instead.
+Cứ khởi tạo biến trực tiếp đi là xong.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Expands to an initializer suitable for this atomic variable.
+Mở rộng thành initializer phù hợp cho biến atomic này.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -274,7 +275,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_init()`](#man-atomic_init)
 
@@ -283,7 +284,7 @@ int main(void)
 
 [i[`atomic_init()` function]i]
 
-Initialize an atomic variable
+Khởi tạo một biến atomic
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -293,25 +294,24 @@ Initialize an atomic variable
 void atomic_init(volatile A *obj, C value);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-You can use this to initialize an atomic variable.
+Bạn có thể dùng nó để khởi tạo một biến atomic.
 
-The type of the `value` should be the base type of the atomic variable.
+Kiểu của `value` phải là kiểu cơ sở của biến atomic.
 
-The initialization itself is _not_ an atomic operation, ironically.
+Buồn cười là, bản thân việc khởi tạo _không_ phải thao tác nguyên tử.
 
-As far as I can tell, there's no difference between this and assigning
-directly to the atomic variable. The spec says it's there to allow the
-compiler to inject any additional initialization that needs doing, but
-everything seems fine without it. If anyone has more info, send it my
-way.
+Theo như tôi thấy, chẳng có gì khác biệt giữa cái này và việc gán trực
+tiếp cho biến atomic. Spec nói nó có mặt để cho phép compiler chèn
+thêm bất kỳ việc khởi tạo bổ sung nào cần làm, nhưng mọi thứ vẫn ổn
+nếu không có nó. Nếu ai đó có thêm thông tin, gửi cho tôi nhé.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -327,7 +327,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ATOMIC_VAR_INIT()`](#man-ATOMIC_VAR_INIT),
 [`atomic_store()`](#man-atomic_store),
@@ -338,7 +338,7 @@ int main(void)
 
 [i[`kill_dependency()` function]i]
 
-End a dependency chain
+Kết thúc một chuỗi dependency
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -348,22 +348,22 @@ End a dependency chain
 type kill_dependency(type y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is potentially useful for optimizing if you're using
-`memory_order_consume` anywhere.
+Cái này có khả năng hữu ích để tối ưu nếu bạn đang dùng
+`memory_order_consume` ở đâu đó.
 
-And if you know what you're doing. If unsure, learn more before trying
-to use this.
+Và nếu bạn biết mình đang làm gì. Nếu không chắc, tìm hiểu thêm trước
+khi thử dùng.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the value passed in.
+Trả về giá trị được truyền vào.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-In this example, `i` carries a dependency into `x`. And would do into
-`y`, except for the call to `kill_dependency()`.
+Trong ví dụ này, `i` mang theo một dependency vào `x`. Và cũng sẽ mang
+vào `y`, nhưng vì có lời gọi `kill_dependency()` nên không.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -395,7 +395,7 @@ int main(void)
 
 [i[`atomic_thread_fence()` function]i]
 
-Set up a fence
+Dựng một fence (hàng rào)
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -405,28 +405,28 @@ Set up a fence
 void atomic_thread_fence(memory_order order);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This sets up a memory fence with the specified `order`.
+Hàm này dựng một memory fence (rào cản bộ nhớ) với `order` chỉ định.
 
-|`order`|Description|
+|`order`|Mô tả|
 |-|-|
-|`memory_order_seq_cst`|Sequentially consistency acquire/release fence|
-|`memory_order_acq_rel`|Acquire/release dence|
-|`memory_order_release`|Release fence|
-|`memory_order_acquire`|Acquire fence|
-|`memory_order_consume`|Acquire fence (again)|
-|`memory_order_relaxed`|No fence at all---no point in calling with this|
+|`memory_order_seq_cst`|Fence acquire/release theo sequential consistency|
+|`memory_order_acq_rel`|Fence acquire/release|
+|`memory_order_release`|Fence release|
+|`memory_order_acquire`|Fence acquire|
+|`memory_order_consume`|Fence acquire (again)|
+|`memory_order_relaxed`|Không có fence gì cả---gọi với cái này chẳng có ý nghĩa gì|
 
-You might try to avoid using these and just stick with the different
-modes with [`atomic_store_explicit()`](#man-atomic_store) and
-[`atomic_load_explicit()`](#man-atomic_load). Or not.
+Bạn có thể cố tránh dùng mấy cái này và cứ bám vào các chế độ khác
+nhau với [`atomic_store_explicit()`](#man-atomic_store) và
+[`atomic_load_explicit()`](#man-atomic_load). Hoặc không.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -480,7 +480,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_store_explicit()`](#man-atomic_store),
 [`atomic_load_explicit()`](#man-atomic_load),
@@ -491,7 +491,7 @@ int main(void)
 
 [i[`atomic_signal_fence()` function]i]
 
-Fence for intra-thread signal handlers
+Fence cho signal handler trong cùng thread
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -501,23 +501,24 @@ Fence for intra-thread signal handlers
 void atomic_signal_fence(memory_order order);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This works like `atomic_thread_fence()` except its purpose is within in
-a single thread; notably for use in a signal handler in that thread.
+Hàm này hoạt động giống `atomic_thread_fence()` nhưng mục đích là
+trong phạm vi một thread duy nhất; đáng chú ý là để dùng trong signal
+handler của thread đó.
 
-Since signals can happen at any time, we might need a way to be certain
-that any writes by the thread that happened before the signal handler be
-visible within that signal handler.
+Vì signal có thể xảy ra bất cứ lúc nào, ta có thể cần một cách để chắc
+chắn rằng mọi write của thread xảy ra trước signal handler sẽ nhìn
+thấy được bên trong signal handler đó.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Partial demo. (Note that it's technically undefined behavior to call
-`printf()` in a signal handler.)
+Demo một phần. (Lưu ý rằng về mặt kỹ thuật thì việc gọi `printf()`
+trong signal handler là undefined behavior.)
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -553,7 +554,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_thread_fence()`](#man-atomic_thread_fence),
 [`signal()`](#man-signal)
@@ -563,7 +564,7 @@ int main(void)
 
 [i[`atomic_is_lock_free()` function]i]
 
-Determine if an atomic type is lock free
+Xác định xem một kiểu atomic có lock-free không
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -573,28 +574,28 @@ Determine if an atomic type is lock free
 _Bool atomic_is_lock_free(const volatile A *obj);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Determines if the variable `obj` of type `A` is lock-free. Can be used
-with any type.
+Xác định xem biến `obj` kiểu `A` có lock-free không. Dùng được với bất
+kỳ kiểu nào.
 
-Unlike the [lock-free macros](#lock-free-macros) which can be used at
-compile-time, this is strictly a run-time function. So in places where
-the macros say "maybe", this function will definitely tell you one way
-or another if the atomic variable is lock-free.
+Khác với các [macro lock-free](#lock-free-macros) có thể dùng ở
+compile-time, đây thuần tuý là hàm run-time. Vì vậy ở những chỗ mà
+macro trả lời "có thể", hàm này sẽ chắc chắn cho bạn biết biến atomic
+có lock-free hay không.
 
-This is useful when you're defining your own atomic variables and want
-to know their lock-free status.
+Cái này hữu ích khi bạn tự định nghĩa biến atomic của mình và muốn
+biết trạng thái lock-free của chúng.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-True if the variable is lock-free, false otherwise.
+True nếu biến lock-free, false nếu không.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Test if a couple `struct`s and an atomic `double` are lock-free. On my
-system, the larger `struct` is too big to be lock-free, but the other
-two are OK.
+Kiểm tra xem một cặp `struct` và một `double` atomic có lock-free
+không. Trên hệ thống của tôi, `struct` lớn hơn thì to quá không
+lock-free được, nhưng hai cái còn lại thì OK.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -620,7 +621,7 @@ int main(void)
 }
 ```
 
-Output on my system (YMMV):
+Output trên hệ thống của tôi (YMMV):
 
 ``` {.default}
 a is lock-free: 1
@@ -628,16 +629,16 @@ b is lock-free: 1
 c is lock-free: 0
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
-[Lock-free Macros](#lock-free-macros)
+[Các Macro Lock-free](#lock-free-macros)
 
 [[manbreak]]
 ## `atomic_store()` {#man-atomic_store}
 
 [i[`atomic_store()` function]i]
 
-Store a value in an atomic variable
+Lưu một giá trị vào biến atomic
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -650,13 +651,13 @@ void atomic_store_explicit(volatile A *object,
                            C desired, memory_order order);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Store a value in an atomic variable, possible synchronized.
+Lưu một giá trị vào biến atomic, có thể được đồng bộ.
 
-This is like a plain assignment, but with more flexibility.
+Cái này giống như một phép gán thông thường, nhưng linh hoạt hơn.
 
-These have the same storage effect for an `atomic_int x`:
+Mấy cái sau có cùng hiệu ứng lưu trữ với một `atomic_int x`:
 
 ``` {.c}
 x = 10;
@@ -664,21 +665,21 @@ atomic_store(&x, 10);
 atomic_store_explicit(&x, 10, memory_order_seq_cst);
 ```
 
-But the last function, `atomic_store_explicit()`, lets you specify the
-memory order.
+Nhưng hàm cuối, `atomic_store_explicit()`, cho bạn chỉ định memory
+order.
 
-Since this is a "release-y" operation, none of the "acquire-y" memory
-orders are legal. `order` can be only be `memory_order_seq_cst`,
-`memory_order_release`, or `memory_order_relaxed`.
+Vì đây là thao tác kiểu "release-y", không có memory order kiểu
+"acquire-y" nào hợp lệ. `order` chỉ có thể là `memory_order_seq_cst`,
+`memory_order_release`, hoặc `memory_order_relaxed`.
 
-`order` cannot be `memory_order_acq_rel`, `memory_order_acquire`, or
-`memory_order_consume`.
+`order` không thể là `memory_order_acq_rel`, `memory_order_acquire`,
+hoặc `memory_order_consume`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -698,7 +699,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_init()`](#man-atomic_init),
 [`atomic_load()`](#man-atomic_load),
@@ -716,7 +717,7 @@ int main(void)
 
 [i[`atomic_load()` function]i]
 
-Return a value from an atomic variable
+Trả về giá trị từ một biến atomic
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -728,25 +729,26 @@ C atomic_load(const volatile A *object);
 C atomic_load_explicit(const volatile A *object, memory_order order);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-For a pointer to an `object` of type `A`, atomically returns its value
-`C`. This is a generic function that can be used with any type.
+Với một con trỏ tới `object` kiểu `A`, nguyên tử trả về giá trị `C`
+của nó. Đây là hàm generic có thể dùng với bất kỳ kiểu nào.
 
-The function `atomic_load_explicit()` lets you specify the memory order.
+Hàm `atomic_load_explicit()` cho bạn chỉ định memory order.
 
-Since this is an "acquire-y" operation, none of the "release-y" memory
-orders are legal. `order` can be only be `memory_order_seq_cst`,
-`memory_order_acquire`, `memory_order_consume`, or
+Vì đây là thao tác kiểu "acquire-y", không có memory order kiểu
+"release-y" nào hợp lệ. `order` chỉ có thể là `memory_order_seq_cst`,
+`memory_order_acquire`, `memory_order_consume`, hoặc
 `memory_order_relaxed`.
 
-`order` cannot be `memory_order_acq_rel` or `memory_order_release`.
+`order` không thể là `memory_order_acq_rel` hoặc
+`memory_order_release`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the value stored in `object`.
+Trả về giá trị được lưu trong `object`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -762,7 +764,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_store()`](#man-atomic_store),
 [`atomic_store_explicit()`](#man-atomic_store)
@@ -772,7 +774,7 @@ int main(void)
 
 [i[`atomic_exchange()` function]i]
 
-Replace a value in an atomic object
+Thay giá trị trong một object nguyên tử
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -785,22 +787,22 @@ C atomic_exchange_explicit(volatile A *object, C desired,
                            memory_order order);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Sets the value in `object` to `desired`.
+Đặt giá trị trong `object` thành `desired`.
 
-`object` is type `A`, some atomic type.
+`object` có kiểu `A`, một kiểu atomic nào đó.
 
-`desired` is type `C`, the respective non-atomic type to `A`.
+`desired` có kiểu `C`, kiểu non-atomic tương ứng với `A`.
 
-This is very similar to `atomic_store()`, except the previous value is
-atomically returned.
+Cái này rất giống `atomic_store()`, trừ việc giá trị trước đó được trả
+về một cách nguyên tử.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the previous value of `object`.
+Trả về giá trị trước đó của `object`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -824,7 +826,7 @@ x is  20
 x was 10
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_init()`](#man-atomic_init),
 [`atomic_load()`](#man-atomic_load),
@@ -841,7 +843,7 @@ x was 10
 
 [i[`atomic_compare_exchange_*()` function]i]
 
-Atomic compare and exchange
+Compare-and-exchange nguyên tử
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -865,26 +867,25 @@ _Bool atomic_compare_exchange_weak_explicit(volatile A *object,
                                             memory_order failure);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-The venerable basis for some many things lock-free: compare and
-exchange.
+Nền tảng lâu đời cho vô số thứ lock-free: compare-and-exchange (CAS).
 
-In the above prototypes, `A` is the type of the atomic object, and `C`
-is the equivalent base type.
+Trong các prototype ở trên, `A` là kiểu của object atomic, và `C` là
+kiểu cơ sở tương đương.
 
-Ignoring the `_explicit` versions for a moment, what these do is:
+Bỏ qua các phiên bản `_explicit` một lúc, các hàm này làm:
 
-* If the value pointed to by `object` is equal to the value pointed to by
-  `expected`, then the value pointed to by `object` is set to `desired`.
-  And the function returns `true` indicating the exchange did take place.
+* Nếu giá trị được trỏ tới bởi `object` bằng giá trị được trỏ tới bởi
+  `expected`, thì giá trị được trỏ tới bởi `object` được đặt thành
+  `desired`. Và hàm trả về `true` cho biết trao đổi đã diễn ra.
 
-* Else the value pointed to by `expected` (yes, `expected`) is set to
-  `desired` and the function returns `false` indicating the exchange did
-  not take place.
+* Ngược lại, giá trị được trỏ tới bởi `expected` (vâng, `expected`)
+  được đặt thành `desired` và hàm trả về `false` cho biết trao đổi
+  không diễn ra.
 
-Pseudocode for the exchange would look like this^[This effectively does
-the same thing, but it's clearly not atomic.]:
+Pseudocode cho trao đổi sẽ trông như thế này^[Hiệu quả thì cái này làm
+cùng việc, nhưng rõ ràng nó không nguyên tử.]:
 
 ``` {.c}
 bool compare_exchange(atomic_A *object, C *expected, C desired)
@@ -899,33 +900,33 @@ bool compare_exchange(atomic_A *object, C *expected, C desired)
 }
 ```
 
-The `_weak` variants might spontaneously fail, so even if `*object ==
-*desired`, it might not change the value and will return `false`. So
-you'll want that in a loop if you use it^[The spec says, "This spurious
-failure enables implementation of compare-and-exchange on a broader
-class of machines, e.g. load-locked store-conditional machines."  And
-adds, "When a compare-and-exchange is in a loop, the weak version will
-yield better performance on some platforms. When a weak
-compare-and-exchange would require a loop and a strong one would not,
-the strong one is preferable."].
+Các biến thể `_weak` có thể thất bại một cách tự phát, nên ngay cả khi
+`*object == *desired`, nó có thể không đổi giá trị và sẽ trả về
+`false`. Vì thế bạn sẽ muốn đặt nó trong vòng lặp nếu dùng^[Spec nói:
+"Cái thất bại tự phát này cho phép cài đặt compare-and-exchange trên
+một lớp máy rộng hơn, ví dụ như các máy load-locked store-conditional."
+Và thêm: "Khi compare-and-exchange nằm trong vòng lặp, phiên bản weak
+sẽ cho hiệu năng tốt hơn trên một số nền tảng. Khi một
+compare-and-exchange weak sẽ cần vòng lặp còn strong thì không, thì
+strong được ưu tiên hơn."].
 
-The `_explicit` variants have two memory orders: `success` if `*object`
-is set to `desired`, and `failure` if it is not.
+Các biến thể `_explicit` có hai memory order: `success` nếu `*object`
+được đặt thành `desired`, và `failure` nếu không.
 
-These are test-and-set functions, so you can use `memory_order_acq_rel`
-with the `_explicit` variants.
+Đây là các hàm test-and-set, nên bạn có thể dùng
+`memory_order_acq_rel` với các biến thể `_explicit`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `true` if `*object` was `*expected`. Otherwise, `false`.
+Trả về `true` nếu `*object` là `*expected`. Ngược lại, `false`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-A contrived example where multiple threads add `2` to a shared value in
-a lock-free way.
+Một ví dụ gượng ép, nơi nhiều thread cộng `2` vào một giá trị chia sẻ
+theo cách lock-free.
 
-(It would be better to use `+= 2` to get this done in real life unless
-you were using some `_explicit` wizardry.)
+(Ngoài đời thực thì tốt hơn là dùng `+= 2` để làm việc này, trừ khi
+bạn đang dùng phép thuật `_explicit` nào đó.)
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -967,9 +968,10 @@ int main(void)
 }
 ```
 
-Just replacing this with `value = value + 2` causes data trampling.
+Chỉ cần thay cái này bằng `value = value + 2` thôi là gây ra chuyện
+đạp dữ liệu.
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_load()`](#man-atomic_load),
 [`atomic_load_explicit()`](#man-atomic_load),
@@ -984,7 +986,7 @@ Just replacing this with `value = value + 2` causes data trampling.
 
 [i[`atomic_fetch_*()` function]i]
 
-Atomically modify atomic variables
+Sửa đổi biến atomic một cách nguyên tử
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -997,10 +999,10 @@ C atomic_fetch_KEY_explicit(volatile A *object, M operand,
                             memory_order order);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These are actually a group of 10 functions. You substitute one of the
-following for `KEY` to perform that operation:
+Thật ra đây là một nhóm gồm 10 hàm. Bạn thay `KEY` bằng một trong các
+từ dưới để thực hiện thao tác đó:
 
 * `add`
 * `sub`
@@ -1008,24 +1010,24 @@ following for `KEY` to perform that operation:
 * `xor`
 * `and`
 
-So these functions can add or subtract values to or from an atomic
-variable, or can perform bitwise-OR, XOR, or AND on them.
+Vậy các hàm này có thể cộng hoặc trừ giá trị vào/khỏi một biến atomic,
+hoặc có thể thực hiện OR, XOR, hoặc AND bit trên chúng.
 
-Use it with integer or pointer types. Though the spec is a little vague
-on the matter, other types make C unhappy. It goes out of its way to
-avoid undefined behavior with signed integers, as well:
+Dùng với các kiểu integer hoặc pointer. Dù spec có hơi mơ hồ về vấn đề
+này, các kiểu khác sẽ làm C không vui. Nó còn cố tránh undefined
+behavior với signed integer:
 
 C18 §7.17.7.5 ¶3:
 
-> For signed integer types, arithmetic is defined to use two’s
-> complement representation with silent wrap-around on overflow; there
-> are no undefined results.
+> Đối với các kiểu signed integer, số học được định nghĩa dùng biểu
+> diễn bù hai với quấn vòng im lặng khi tràn; không có kết quả
+> undefined nào.
 
-In the synopsis, above, `A` is an atomic type, and `M` is the
-corresponding non-atomic type for `A` (or `ptrdiff_t` for atomic
-pointers), and `C` is the corresponding non-atomic type for `A`.
+Trong synopsis ở trên, `A` là kiểu atomic, và `M` là kiểu non-atomic
+tương ứng với `A` (hoặc `ptrdiff_t` cho pointer atomic), và `C` là
+kiểu non-atomic tương ứng với `A`.
 
-For example, here are some operations on an `atomic_int`.
+Ví dụ, đây là một số thao tác trên một `atomic_int`.
 
 ``` {.c}
 atomic_fetch_add(&x, 20);
@@ -1033,9 +1035,9 @@ atomic_fetch_sub(&x, 37);
 atomic_fetch_xor(&x, 3490);
 ```
 
-They are the same as `+=`, `-=`, `|=`, `^=` and `&=`, except the return
-value is the _previous_ value of the atomic object. (With the assignment
-operators, the value of the expression is that _after_ its evaluation.)
+Chúng tương đương `+=`, `-=`, `|=`, `^=` và `&=`, trừ việc giá trị trả
+về là giá trị _trước đó_ của object atomic. (Với các toán tử gán, giá
+trị của biểu thức là giá trị _sau_ khi đánh giá.)
 
 ``` {.c}
 atomic_int x = 10;
@@ -1043,7 +1045,7 @@ int prev = atomic_fetch_add(&x, 20);
 printf("%d %d\n", prev, x);  // 10 30
 ```
 
-versus:
+so với:
 
 ``` {.c}
 atomic_int x = 10;
@@ -1051,14 +1053,14 @@ int prev = (x += 20);
 printf("%d %d\n", prev, x);  // 30 30
 ```
 
-And, of course, the `_explicit` version allows you to specify a memory
-order and all the assignment operators are `memory_order_seq_cst`.
+Và, tất nhiên, phiên bản `_explicit` cho phép bạn chỉ định memory
+order còn tất cả các toán tử gán đều là `memory_order_seq_cst`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the previous value of the atomic object before the modification.
+Trả về giá trị trước đó của object atomic trước khi sửa đổi.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1079,7 +1081,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_exchange()`](#man-atomic_exchange),
 [`atomic_exchange_explicit()`](#man-atomic_exchange),
@@ -1094,7 +1096,7 @@ int main(void)
 
 [i[`atomic_flag_test_and_set()` function]i]
 
-Test and set an atomic flag
+Test-and-set một atomic flag
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1107,24 +1109,23 @@ _Bool atomic_flag_test_and_set_explicit(volatile atomic_flag *object,
                                         memory_order order);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-One of the venerable old functions of lock-free programming, this
-function sets the given atomic flag in `object`, and returns the
-previous value of the flag.
+Một trong các hàm lâu đời đáng kính của lập trình lock-free, hàm này
+set atomic flag được chỉ định trong `object`, và trả về giá trị trước
+đó của flag.
 
-As usual, the `_explicit` allows you to specify an alternate memory
-order.
+Như thường lệ, `_explicit` cho phép bạn chỉ định memory order khác.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `true` if the flag was set previously, and `false` if it wasn't.
+Trả về `true` nếu flag đã được set trước đó, và `false` nếu chưa.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Using test-and-set to implement a spin lock^[Don't use this unless you
-know what you're doing---use the thread mutex functionality instead.
-It'll let your blocked thread sleep and stop chewing up CPU.]:
+Dùng test-and-set để cài đặt một spin lock^[Đừng dùng cái này trừ khi
+bạn biết mình đang làm gì---dùng chức năng mutex của thread thay vào
+đó. Nó sẽ cho phép thread bị chặn ngủ và ngừng gặm CPU.]:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1172,7 +1173,7 @@ int main(void)
 }
 ```
 
-Example output (varies run to run):
+Output ví dụ (thay đổi giữa các lần chạy):
 
 ``` {.default}
 Thread 0: waiting for lock...
@@ -1185,7 +1186,7 @@ Thread 1: set s to {10, 11, 12}
 Thread 1: releasing lock...
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_flag_clear()`](#man-atomic_flag_clear)
 
@@ -1194,7 +1195,7 @@ Thread 1: releasing lock...
 
 [i[`atomic_flag_clear()` function]i]
 
-Clear an atomic flag
+Xoá một atomic flag
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1207,22 +1208,21 @@ void atomic_flag_clear_explicit(volatile atomic_flag *object,
                                 memory_order order);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Clears an atomic flag.
+Xoá một atomic flag.
 
-As usual, the `_explicit` allows you to specify an alternate memory
-order.
+Như thường lệ, `_explicit` cho phép bạn chỉ định memory order khác.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns nothing!
+Không trả về gì cả!
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Using test-and-set to implement a spin lock^[Don't use this unless you
-know what you're doing---use the thread mutex functionality instead.
-It'll let your blocked thread sleep and stop chewing up CPU.]:
+Dùng test-and-set để cài đặt một spin lock^[Đừng dùng cái này trừ khi
+bạn biết mình đang làm gì---dùng chức năng mutex của thread thay vào
+đó. Nó sẽ cho phép thread bị chặn ngủ và ngừng gặm CPU.]:
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1270,7 +1270,7 @@ int main(void)
 }
 ```
 
-Example output (varies run to run):
+Output ví dụ (thay đổi giữa các lần chạy):
 
 ``` {.default}
 Thread 0: waiting for lock...
@@ -1283,7 +1283,7 @@ Thread 1: set s to {10, 11, 12}
 Thread 1: releasing lock...
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`atomic_flag_test_and_set()`](#man-atomic_flag_test_and_set)
 
