@@ -3,44 +3,44 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<fenv.h>` Floating Point Exceptions and Environment {#fenv}
+# `<fenv.h>` Exception và Môi trường Dấu chấm động {#fenv}
 
 [i[`fenv.h` header file]i]
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`feclearexcept()`](#man-feclearexcept)|Clear floating point exceptions|
-|[`fegetexceptflag()`](#man-fegetexceptflag)|Save the floating point exception flags|
-|[`fesetexceptflag()`](#man-fegetexceptflag)|Restore the floating point exception flags|
-|[`feraiseexcept()`](#man-feraiseexcept)|Raise a floating point exception through software|
-|[`fetestexcept()`](#man-fetestexcept)|Test to see if an exception has occurred|
-|[`fegetround()`](#man-fegetround)|Get the rounding direction|
-|[`fesetround()`](#man-fegetround)|Set the rounding direction|
-|[`fegetenv()`](#man-fegetenv)|Save the entire floating point environment|
-|[`fesetenv()`](#man-fegetenv)|Restore the entire floating point environment|
-|[`feholdexcept()`](#man-feholdexcept)|Save floating point state and install non-stop mode|
-|[`feupdateenv()`](#man-feupdateenv)|Restore floating point environment and apply recent exceptions|
+|[`feclearexcept()`](#man-feclearexcept)|Xoá các exception dấu chấm động|
+|[`fegetexceptflag()`](#man-fegetexceptflag)|Lưu các cờ exception dấu chấm động|
+|[`fesetexceptflag()`](#man-fegetexceptflag)|Khôi phục các cờ exception dấu chấm động|
+|[`feraiseexcept()`](#man-feraiseexcept)|Raise một exception dấu chấm động bằng phần mềm|
+|[`fetestexcept()`](#man-fetestexcept)|Kiểm tra xem một exception đã xảy ra hay chưa|
+|[`fegetround()`](#man-fegetround)|Lấy hướng làm tròn|
+|[`fesetround()`](#man-fegetround)|Đặt hướng làm tròn|
+|[`fegetenv()`](#man-fegetenv)|Lưu toàn bộ môi trường dấu chấm động|
+|[`fesetenv()`](#man-fegetenv)|Khôi phục toàn bộ môi trường dấu chấm động|
+|[`feholdexcept()`](#man-feholdexcept)|Lưu trạng thái dấu chấm động và bật chế độ non-stop|
+|[`feupdateenv()`](#man-feupdateenv)|Khôi phục môi trường dấu chấm động và áp dụng các exception gần nhất|
 
-## Types and Macros
+## Kiểu và Macro
 
-There are two types defined in this header:
+Có hai kiểu được định nghĩa trong header này:
 
 [i[`fenv_t` type]i]
 [i[`fexcept_t` type]i]
 
-|Type|Description|
+|Kiểu|Mô tả|
 |--------|----------------------|
-|`fenv_t`|The entire floating point environment|
-|`fexcept_t`|A set of floating point exceptions|
+|`fenv_t`|Toàn bộ môi trường dấu chấm động|
+|`fexcept_t`|Một tập exception dấu chấm động|
 
-The "environment" can be thought of as the status at this moment of the
-floating point processing system: this includes the exceptions,
-rounding, etc. It's an opaque type, so you won't be able to access it
-directly, and it must be done through the proper functions.
+"Môi trường" có thể xem như trạng thái tại thời điểm hiện tại của hệ
+thống xử lý dấu chấm động: gồm exception, làm tròn, v.v. Nó là kiểu
+opaque, nên bạn không thể truy cập trực tiếp mà phải làm qua các hàm
+đúng cách.
 
-If the functions in question exist on your system (they might not be!),
-then you'll also have these macros defined to represent different
-exceptions:
+Nếu các hàm nói đến có tồn tại trên hệ của bạn (có thể không!), thì
+bạn cũng sẽ có các macro sau được định nghĩa để biểu diễn các
+exception khác nhau:
 
 [i[`FE_DIVBYZERO` macro]i]
 [i[`FE_INEXACT` macro]i]
@@ -49,29 +49,28 @@ exceptions:
 [i[`FE_UNDERFLOW` macro]i]
 [i[`FE_ALL_EXCEPT` macro]i]
 
-|Macro|Description|
+|Macro|Mô tả|
 |--------|----------------------|
-|`FE_DIVBYZERO`|Division by zero|
-|`FE_INEXACT`|Result was not exact, was rounded|
-|`FE_INVALID`|Domain error|
-|`FE_OVERFLOW`|Numeric overflow|
-|`FE_UNDERFLOW`|Numeric underflow|
-|`FE_ALL_EXCEPT`|All of the above combined|
+|`FE_DIVBYZERO`|Chia cho 0|
+|`FE_INEXACT`|Kết quả không chính xác, bị làm tròn|
+|`FE_INVALID`|Lỗi miền xác định|
+|`FE_OVERFLOW`|Tràn trên|
+|`FE_UNDERFLOW`|Tràn dưới|
+|`FE_ALL_EXCEPT`|Tất cả ở trên gộp lại|
 
-The idea is that you can bitwise-OR these together to represent multiple
-exceptions, e.g. `FE_INVALID|FE_OVERFLOW`.
+Ý tưởng là bạn có thể bitwise-OR chúng với nhau để biểu diễn nhiều
+exception, ví dụ `FE_INVALID|FE_OVERFLOW`.
 
-The functions, below, that have an `excepts` parameter will take these
-values.
+Các hàm bên dưới có tham số `excepts` sẽ nhận các giá trị này.
 
-See [`<math.h>`](#math) for which functions raise which exceptions and
-when.
+Xem [`<math.h>`](#math) để biết hàm nào raise exception nào và khi
+nào.
 
-## Pragmas
+## Pragma
 
-Normally C is free to optimize all kinds of stuff that might cause the
-flags to not look like you might expect. So if you're going to use this
-stuff, be sure to set this pragma:
+Bình thường C được tự do tối ưu đủ thứ chuyện có thể khiến các cờ
+không giống như bạn mong đợi. Vậy nên nếu bạn định dùng mớ này, nhớ
+set pragma này:
 
 [i[`FENV_ACCESS` pragma]i]
 
@@ -79,27 +78,27 @@ stuff, be sure to set this pragma:
 #pragma STDC FENV_ACCESS ON
 ```
 
-If you do this at global scope, it remains in effect until you turn it
-off:
+Nếu bạn làm vậy ở scope toàn cục, nó có hiệu lực cho đến khi bạn tắt
+đi:
 
 ``` {.c}
 #pragma STDC FENV_ACCESS OFF
 ```
 
-If you do it in block scope, it has to come before any statements or
-declarations. In this case, it has effect until the block ends (or until
-it is explicitly turned off.)
+Nếu bạn làm ở block scope, nó phải đứng trước mọi statement hoặc
+declaration. Trong trường hợp đó, nó có hiệu lực cho đến khi block
+kết thúc (hoặc đến khi bị tắt đi rõ ràng).
 
-**A caveat**: this program isn't supported on either of the compilers I
-have (gcc and clang) as of this writing, so though I have built the
-code, below, it's not particularly well-tested.
+**Một cảnh báo**: pragma này không được hỗ trợ trên cả hai compiler
+tôi đang có (gcc và clang) ở thời điểm viết, nên dù tôi có build mớ
+code dưới đây, nó không được test kỹ lắm.
 
 [[manbreak]]
 ## `feclearexcept()` {#man-feclearexcept}
 
 [i[`feclearexcept()` function]i]
 
-Clear floating point exceptions
+Xoá các exception dấu chấm động
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -109,19 +108,19 @@ Clear floating point exceptions
 int feclearexcept(int excepts);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If a floating point exception has occurred, this function can clear it.
+Nếu có exception dấu chấm động đã xảy ra, hàm này có thể xoá nó.
 
-Set `excepts` to a bitwise-OR list of exceptions to clear.
+Set `excepts` thành danh sách exception nối bằng bitwise-OR cần xoá.
 
-Passing `0` has no effect.
+Truyền `0` thì không có tác dụng gì.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `0` on success and non-zero on failure.
+Trả về `0` nếu thành công và khác 0 nếu thất bại.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -140,7 +139,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`feraiseexcept()`](#man-feraiseexcept),
 [`fetestexcept()`](#man-fetestexcept)
@@ -151,7 +150,7 @@ int main(void)
 [i[`fegetexceptflag()` function]i]
 [i[`fesetexceptflag()` function]i]
 
-Save or restore the floating point exception flags
+Lưu hoặc khôi phục các cờ exception dấu chấm động
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -163,33 +162,33 @@ int fegetexceptflag(fexcept_t *flagp, int excepts);
 int fesetexceptflag(fexcept_t *flagp, int excepts);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Use these functions to save or restore the current floating point
-environment in a variable.
+Dùng các hàm này để lưu hoặc khôi phục môi trường dấu chấm động hiện
+tại trong một biến.
 
-Set `excepts` to the set of exceptions you want to save or restore the
-state of. Setting it to `FE_ALL_EXCEPT` will save or restore the entire
-state.
+Set `excepts` thành tập exception bạn muốn lưu hoặc khôi phục trạng
+thái. Set thành `FE_ALL_EXCEPT` sẽ lưu hoặc khôi phục toàn bộ trạng
+thái.
 
-Note that `fexcept_t` is an opaque type---you don't know what's in
-it.
+Chú ý `fexcept_t` là kiểu opaque---bạn không biết bên trong nó có
+gì.
 
-`excepts` can be set to zero for no effect.
+`excepts` có thể set thành 0 để không có tác dụng gì.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `0` on success or if `excepts` is zero.
+Trả về `0` nếu thành công hoặc nếu `excepts` là 0.
 
-Returns non-zero on failure.
+Trả về khác 0 nếu thất bại.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This program saves the state (before any error has happened), then
-deliberately causes a domain error by trying to take $\sqrt{-1}$.
+Chương trình này lưu trạng thái (trước khi có lỗi nào xảy ra), rồi cố
+ý gây lỗi miền xác định bằng cách thử tính $\sqrt{-1}$.
 
-After that, it restores the floating point state to before the error had
-occurred, thereby clearing it.
+Sau đó, nó khôi phục trạng thái dấu chấm động về trước khi có lỗi, nhờ
+đó xoá lỗi đi.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -202,22 +201,22 @@ int main(void)
 
     fexcept_t flag;
 
-    fegetexceptflag(&flag, FE_ALL_EXCEPT);  // Save state
+    fegetexceptflag(&flag, FE_ALL_EXCEPT);  // Lưu trạng thái
 
-    double f = sqrt(-1);                    // I imagine this won't work
+    double f = sqrt(-1);                    // Tôi đoán cái này không chạy được
     printf("%f\n", f);                      // "nan"
 
     if (fetestexcept(FE_INVALID))
-        printf("1: Domain error\n");        // This prints!
+        printf("1: Domain error\n");        // Dòng này in!
     else
         printf("1: No domain error\n");
 
-    fesetexceptflag(&flag, FE_ALL_EXCEPT);  // Restore to before error
+    fesetexceptflag(&flag, FE_ALL_EXCEPT);  // Khôi phục về trước khi có lỗi
 
     if (fetestexcept(FE_INVALID))
         printf("2: Domain error\n");
     else
-        printf("2: No domain error\n");     // This prints!
+        printf("2: No domain error\n");     // Dòng này in!
 }
 ```
 
@@ -232,7 +231,7 @@ int main(void)
 
 [i[`feraiseexcept()` function]i]
 
-Raise a floating point exception through software
+Raise một exception dấu chấm động bằng phần mềm
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -242,31 +241,30 @@ Raise a floating point exception through software
 int feraiseexcept(int excepts);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This attempts to raise a floating point exception as if it had happened.
+Cái này cố raise một exception dấu chấm động như thể nó đã xảy ra.
 
-You can specify multiple exceptions to raise.
+Bạn có thể chỉ định nhiều exception để raise.
 
-If either `FE_UNDERFLOW` or `FE_OVERFLOW` is raised, C _might_ also
-raise `FE_INEXACT`.
+Nếu `FE_UNDERFLOW` hoặc `FE_OVERFLOW` được raise, C _có thể_ raise
+thêm `FE_INEXACT`.
 
-If either `FE_UNDERFLOW` or `FE_OVERFLOW` is raised at the same time as
-`FE_INEXACT`, then `FE_UNDERFLOW` or `FE_OVERFLOW` will be raised
-_before_ `FE_INEXACT` behind the scenes.
+Nếu `FE_UNDERFLOW` hoặc `FE_OVERFLOW` được raise cùng lúc với
+`FE_INEXACT`, thì `FE_UNDERFLOW` hoặc `FE_OVERFLOW` sẽ được raise
+_trước_ `FE_INEXACT` phía sau hậu trường.
 
-The order the other exceptions are raised is undefined.
+Thứ tự các exception khác được raise thì không xác định.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `0` if all the exceptions were raised or if `excepts` is `0`.
+Trả về `0` nếu mọi exception đều được raise hoặc nếu `excepts` là `0`.
 
-Returns non-zero otherwise.
+Trả về khác 0 trong trường hợp khác.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This code deliberately raises a division-by-zero exception and then
-detects it.
+Đoạn code này cố ý raise exception chia cho 0 rồi phát hiện nó.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -280,13 +278,13 @@ int main(void)
     feraiseexcept(FE_DIVBYZERO);
 
     if (fetestexcept(FE_DIVBYZERO) == FE_DIVBYZERO)
-        printf("Detected division by zero\n");  // This prints!!
+        printf("Detected division by zero\n");  // Dòng này in!!
     else
         printf("This is fine.\n");
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`feclearexcept()`](#man-feclearexcept),
 [`fetestexcept()`](#man-fetestexcept)
@@ -296,7 +294,7 @@ int main(void)
 
 [i[`fetestexcept()` function]i]
 
-Test to see if an exception has occurred
+Kiểm tra xem một exception đã xảy ra hay chưa
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -306,19 +304,18 @@ Test to see if an exception has occurred
 int fetestexcept(int excepts);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Put the exceptions you want to test in `excepts`, bitwise-ORing them
-together.
+Đặt các exception bạn muốn kiểm tra vào `excepts`, bitwise-OR chúng
+lại với nhau.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the bitwise-OR of the exceptions that have been raised.
+Trả về bitwise-OR của các exception đã được raise.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This code deliberately raises a division-by-zero exception and then
-detects it.
+Đoạn code này cố ý raise exception chia cho 0 rồi phát hiện nó.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -332,13 +329,13 @@ int main(void)
     feraiseexcept(FE_DIVBYZERO);
 
     if (fetestexcept(FE_DIVBYZERO) == FE_DIVBYZERO)
-        printf("Detected division by zero\n");  // This prints!!
+        printf("Detected division by zero\n");  // Dòng này in!!
     else
         printf("This is fine.\n");
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`feclearexcept()`](#man-feclearexcept),
 [`feraiseexcept()`](#man-feraiseexcept)
@@ -349,7 +346,7 @@ int main(void)
 [i[`fegetround()` function]i]
 [i[`fesetround()` function]i]
 
-Get or set the rounding direction
+Lấy hoặc đặt hướng làm tròn
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -361,46 +358,45 @@ int fegetround(void);
 int fesetround(int round);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Use these to get or set the rounding direction used by a variety of math
-functions.
+Dùng mấy hàm này để lấy hoặc đặt hướng làm tròn được dùng bởi một
+đống hàm toán.
 
-Basically when a function "rounds" a number, it wants to know how to do
-it. By default, it does it how we tend to expect: if the fractional part
-is less than 0.5, it rounds down closer to zero, otherwise up farther
-from zero.
+Cơ bản là khi một hàm "làm tròn" một số, nó muốn biết làm tròn thế
+nào. Mặc định, nó làm theo cách ta hay mong đợi: nếu phần phân số nhỏ
+hơn 0.5, làm tròn xuống về phía 0, ngược lại làm tròn lên xa 0.
 
-|Macro|Description|
+|Macro|Mô tả|
 |--------|----------------------|
-|`FE_TONEAREST`|Round to the nearest whole number, the default|
-|`FE_TOWARDZERO`|Round toward zero always|
-|`FE_DOWNWARD`|Round toward the next lesser whole number|
-|`FE_UPWARD`|Round toward the next greater whole number|
+|`FE_TONEAREST`|Làm tròn về số nguyên gần nhất, mặc định|
+|`FE_TOWARDZERO`|Luôn làm tròn về phía 0|
+|`FE_DOWNWARD`|Làm tròn về số nguyên nhỏ hơn kế tiếp|
+|`FE_UPWARD`|Làm tròn về số nguyên lớn hơn kế tiếp|
 
-Some implementations don't support rounding. If it does, the above
-macros will be defined.
+Một số hiện thực không hỗ trợ làm tròn. Nếu có, các macro trên sẽ
+được định nghĩa.
 
-Note that the `round()` function is always "to-nearest" and doesn't pay
-attention to the rounding mode.
+Chú ý hàm `round()` luôn là "về-gần-nhất" và không quan tâm đến chế
+độ làm tròn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-`fegetround()` returns the current rounding direction, or a negative
-value on error.
+`fegetround()` trả về hướng làm tròn hiện tại, hoặc giá trị âm nếu
+lỗi.
 
-`fesetround()` returns zero on success, or non-zero on failure.
+`fesetround()` trả về 0 nếu thành công, khác 0 nếu thất bại.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This rounds some numbers 
+Ví dụ này làm tròn vài số 
 
 ``` {.c .numberLines}
 #include <stdio.h>
 #include <math.h>
 #include <fenv.h>
 
-// Helper function to print the rounding mode
+// Hàm phụ in ra chế độ làm tròn
 const char *rounding_mode_str(int mode)
 {
     switch (mode) {
@@ -421,15 +417,15 @@ int main(void)
 
     rm = fegetround();
 
-    printf("%s\n", rounding_mode_str(rm));    // Print current mode
-    printf("%f %f\n", rint(2.1), rint(2.7));  // Try rounding
+    printf("%s\n", rounding_mode_str(rm));    // In chế độ hiện tại
+    printf("%f %f\n", rint(2.1), rint(2.7));  // Thử làm tròn
 
-    fesetround(FE_TOWARDZERO);                // Set the mode
+    fesetround(FE_TOWARDZERO);                // Đổi chế độ
 
     rm = fegetround();
 
-    printf("%s\n", rounding_mode_str(rm));    // Print it
-    printf("%f %f\n", rint(2.1), rint(2.7));  // Try it now!
+    printf("%s\n", rounding_mode_str(rm));    // In ra
+    printf("%f %f\n", rint(2.1), rint(2.7));  // Thử lại xem!
 }
 ```
 
@@ -442,7 +438,7 @@ FE_TOWARDZERO
 2.000000 2.000000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`nearbyint()`](#man-nearbyint),
 [`nearbyintf()`](#man-nearbyint),
@@ -463,7 +459,7 @@ FE_TOWARDZERO
 [i[`fegetenv()` function]i]
 [i[`fesetenv()` function]i]
 
-Save or restore the entire floating point environment
+Lưu hoặc khôi phục toàn bộ môi trường dấu chấm động
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -474,25 +470,25 @@ int fegetenv(fenv_t *envp);
 int fesetenv(const fenv_t *envp);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-You can save the environment (exceptions, rounding direction, etc.) by
-calling `fegetenv()` and restore it with `fesetenv()`.
+Bạn có thể lưu môi trường (exception, hướng làm tròn, v.v.) bằng cách
+gọi `fegetenv()` và khôi phục bằng `fesetenv()`.
 
-Use this if you want to restore the state after a function call, i.e.
-hide from the caller that some floating point exceptions or changes
-occurred.
+Dùng cái này nếu bạn muốn khôi phục trạng thái sau khi gọi hàm, nghĩa
+là giấu đi khỏi caller rằng có vài exception dấu chấm động hoặc thay
+đổi đã xảy ra.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-`fegetenv()` and `fesetenv()` return `0` on success, and non-zero
-otherwise.
+`fegetenv()` và `fesetenv()` trả về `0` nếu thành công, khác 0 trong
+trường hợp khác.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This example saves the environment, messes with the rounding and
-exceptions, then restores it. After the environment is restored, we see
-that the rounding is back to default and the exception is cleared.
+Ví dụ này lưu môi trường, quậy với rounding và exception, rồi khôi
+phục lại. Sau khi môi trường được khôi phục, ta thấy rounding đã về
+mặc định và exception đã bị xoá.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -514,14 +510,14 @@ int main(void)
 
     fenv_t env;
 
-    fegetenv(&env);  // Save the environment
+    fegetenv(&env);  // Lưu môi trường
 
-    fesetround(FE_TOWARDZERO);    // Change rounding
-    feraiseexcept(FE_DIVBYZERO);  // Raise an exception
+    fesetround(FE_TOWARDZERO);    // Đổi rounding
+    feraiseexcept(FE_DIVBYZERO);  // Raise exception
 
     show_status();
 
-    fesetenv(&env);  // Restore the environment
+    fesetenv(&env);  // Khôi phục môi trường
 
     show_status();
 }
@@ -536,7 +532,7 @@ Rounding is FE_TOWARDZERO: 0
 FE_DIVBYZERO is set: 0
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`feholdexcept()`](#man-feholdexcept),
 [`feupdateenv()`](#man-feupdateenv)
@@ -546,7 +542,7 @@ FE_DIVBYZERO is set: 0
 
 [i[`feholdexcept()` function]i]
 
-Save floating point state and install non-stop mode
+Lưu trạng thái dấu chấm động và bật chế độ non-stop
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -556,24 +552,24 @@ Save floating point state and install non-stop mode
 int feholdexcept(fenv_t *envp);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is just like `fegetenv()` except that it updates the current
-environment to be in _non-stop_ mode, namely it won't halt on any
-exceptions.
+Cái này giống `fegetenv()` chỉ khác là nó cập nhật môi trường hiện
+tại sang chế độ _non-stop_, tức là nó sẽ không dừng lại ở bất kỳ
+exception nào.
 
-It remains in this state until you restore the state with `fesetenv()`
-or `feupdateenv()`.
+Nó giữ nguyên trạng thái này cho đến khi bạn khôi phục trạng thái
+bằng `fesetenv()` hoặc `feupdateenv()`.
 
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This example saves the environment and goes into non-stop mode, messes
-with the rounding and exceptions, then restores it. After the
-environment is restored, we see that the rounding is back to default and
-the exception is cleared. We'll also be out of non-stop mode.
+Ví dụ này lưu môi trường và vào chế độ non-stop, quậy với rounding và
+exception, rồi khôi phục lại. Sau khi khôi phục môi trường, ta thấy
+rounding đã về mặc định và exception đã bị xoá. Ta cũng sẽ không còn
+ở chế độ non-stop nữa.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -595,21 +591,21 @@ int main(void)
 
     fenv_t env;
 
-    // Save the environment and don't stop on exceptions
+    // Lưu môi trường và không dừng lại khi gặp exception
     feholdexcept(&env);
 
-    fesetround(FE_TOWARDZERO);    // Change rounding
-    feraiseexcept(FE_DIVBYZERO);  // Raise an exception
+    fesetround(FE_TOWARDZERO);    // Đổi rounding
+    feraiseexcept(FE_DIVBYZERO);  // Raise exception
 
     show_status();
 
-    fesetenv(&env);  // Restore the environment
+    fesetenv(&env);  // Khôi phục môi trường
 
     show_status();
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fegetenv()`](#man-fegetenv),
 [`fesetenv()`](#man-fegetenv),
@@ -620,7 +616,7 @@ int main(void)
 
 [i[`feupdateenv()` function]i]
 
-Restore floating point environment and apply recent exceptions
+Khôi phục môi trường dấu chấm động và áp dụng các exception gần nhất
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -630,41 +626,40 @@ Restore floating point environment and apply recent exceptions
 int feupdateenv(const fenv_t *envp);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is like `fesetenv()` except that it modifies the passed-in
-environment so that it is updated with exceptions that have happened in
-the meantime.
+Cái này giống `fesetenv()` chỉ khác là nó chỉnh lại môi trường truyền
+vào sao cho được cập nhật với các exception đã xảy ra trong lúc đó.
 
-So let's say you had a function that might raise exceptions, but you
-wanted to hide those in the caller. One option might be to:
+Ví dụ bạn có một hàm có thể raise exception, nhưng bạn muốn giấu
+chúng đi khỏi caller. Một lựa chọn là:
 
-1. Save the environment with `fegetenv()` or `feholdexcept()`.
-2. Do whatever you do that might raise exceptions.
-3. Restore the environment with `fesetenv()`, thereby hiding the
-   exceptions that happened in step 2.
+1. Lưu môi trường bằng `fegetenv()` hoặc `feholdexcept()`.
+2. Làm gì thì làm mà có thể raise exception.
+3. Khôi phục môi trường bằng `fesetenv()`, qua đó giấu đi các
+   exception đã xảy ra ở bước 2.
 
-But that hides _all_ exceptions. What if you just wanted to hide some of
-them? You could use `feupdateenv()` like this:
+Nhưng cách đó giấu _toàn bộ_ exception. Lỡ bạn chỉ muốn giấu vài cái
+thì sao? Bạn có thể dùng `feupdateenv()` như sau:
 
-1. Save the environment with `fegetenv()` or `feholdexcept()`.
-2. Do whatever you do that might raise exceptions.
-3. Call `feclearexcept()` to clear the exceptions you want to hide from
-   the caller.
-4. Call `feupdateenv()` to restore the previous environment and update
-   it with the other exceptions that have occurred.
+1. Lưu môi trường bằng `fegetenv()` hoặc `feholdexcept()`.
+2. Làm gì thì làm mà có thể raise exception.
+3. Gọi `feclearexcept()` để xoá các exception bạn muốn giấu khỏi
+   caller.
+4. Gọi `feupdateenv()` để khôi phục môi trường trước đó và cập nhật
+   nó với các exception khác đã xảy ra.
 
-So it's like a more capable way of restoring the environment than simply
-`fegetenv()`/`fesetenv()`.
+Nên nó giống một cách khôi phục môi trường có năng lực hơn so với chỉ
+đơn giản `fegetenv()`/`fesetenv()`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `0` on success, non-zero otherwise.
+Trả về `0` nếu thành công, khác 0 trong trường hợp khác.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-This program saves state, raises some exceptions, then clears one of the
-exceptions, then restores and updates the state.
+Chương trình này lưu trạng thái, raise vài exception, rồi xoá một
+trong các exception, rồi khôi phục và cập nhật trạng thái.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -684,26 +679,26 @@ int main(void)
 
     fenv_t env;
 
-    feholdexcept(&env);  // Save the environment
+    feholdexcept(&env);  // Lưu môi trường
 
-    // Pretend some bad math happened here:
-    feraiseexcept(FE_DIVBYZERO);  // Raise an exception
-    feraiseexcept(FE_INVALID);    // Raise an exception
-    feraiseexcept(FE_OVERFLOW);   // Raise an exception
+    // Giả vờ có chút toán tệ xảy ra ở đây:
+    feraiseexcept(FE_DIVBYZERO);  // Raise exception
+    feraiseexcept(FE_INVALID);    // Raise exception
+    feraiseexcept(FE_OVERFLOW);   // Raise exception
 
     show_status();
 
     feclearexcept(FE_INVALID);
 
-    feupdateenv(&env);  // Restore the environment
+    feupdateenv(&env);  // Khôi phục môi trường
 
     show_status();
 }
 ```
 
-In the output, at first we have no exceptions. Then we have the three we
-raised. Then after we restore/update the environment, we see the one we
-cleared (`FE_INVALID`) hasn't been applied:
+Trong output, lúc đầu ta không có exception nào. Rồi ta có ba cái đã
+raise. Sau đó khi khôi phục/cập nhật môi trường, ta thấy cái đã xoá
+(`FE_INVALID`) không được áp dụng:
 
 ``` {.default}
 FE_DIVBYZERO: 0
@@ -719,7 +714,7 @@ FE_INVALID  : 0
 FE_OVERFLOW : 1
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fegetenv()`](#man-fegetenv),
 [`fesetenv()`](#man-fegetenv),
