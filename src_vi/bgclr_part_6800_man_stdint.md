@@ -3,29 +3,29 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<stdint.h>` More Integer Types {#stdint}
+# `<stdint.h>` Thêm Kiểu Integer {#stdint}
 
 [i[`stdint.h` header file]i]
 
-This header gives us access to (potentially) types of a fixed number of
-bits, or, at the very least, types that are at least that many bits.
+Header này cho ta quyền truy cập (có thể) các kiểu có số bit cố
+định, hoặc, ít ra, các kiểu có ít nhất từng đó bit.
 
-It also gives us handy macros to use.
+Nó cũng cho ta mấy macro tiện tay.
 
-## Specific-Width Integers
+## Integer Kích Thước Cụ Thể
 
-There are three main classes of types defined here, signed and unsigned:
+Có ba nhóm kiểu chính được định nghĩa ở đây, có dấu và không dấu:
 
-* Integers of exactly a certain size (`int`_N_`_t`, `uint`_N_`_t`)
-* Integers that are at least a certain size (`int_least`_N_`_t`,
+* Integer chính xác một kích thước (`int`_N_`_t`, `uint`_N_`_t`)
+* Integer ít nhất một kích thước (`int_least`_N_`_t`,
   `uint_least`_N_`_t`)
-* Integers that are at least a certain size and are as fast as possible
+* Integer ít nhất một kích thước và nhanh hết mức có thể
   (`int_fast`_N_`_t`, `uint_fast`_N_`_t`)
 
-Where the _N_ occurs, you substitute the number of bits, commonly
-multiples of 8, e.g. `uint16_t`.
+Chỗ _N_ xuất hiện, bạn thay vào số bit, thường là bội của 8, ví dụ
+`uint16_t`.
 
-The following types are guaranteed to be defined:
+Các kiểu sau được đảm bảo có định nghĩa:
 
 [i[`int_leastN_t` types]i]
 [i[`int_fastN_t` types]i]
@@ -42,11 +42,11 @@ int_fast32_t      uint_fast32_t
 int_fast64_t      uint_fast64_t
 ```
 
-Everything else is optional, but you'll probably also have the
-following, which are required when a system has integers of these sizes
-with no padding and two's-complement representation... which is the case
-for Macs and PCs and a lot of other systems. In short, you very likely
-have these:
+Những cái còn lại là tùy chọn, nhưng bạn có thể sẽ có luôn các kiểu
+sau, chúng được yêu cầu khi hệ thống có integer đúng kích thước đó
+không có padding và dùng biểu diễn two's-complement... đây là
+trường hợp với Mac, PC và cả đống hệ thống khác. Tóm lại, bạn nhiều
+khả năng có sẵn mấy cái này:
 
 [i[`intN_t` types]i]
 
@@ -57,10 +57,10 @@ int32_t     uint32_t
 int64_t     uint64_t
 ```
 
-Other numbers of bits can also be supported by an implementation if it
-wants to go all crazy with it.
+Số bit khác cũng có thể được hỗ trợ nếu implementation muốn làm
+chuyện điên rồ.
 
-Examples:
+Ví dụ:
 
 ``` {.c}
 #include <stdint.h>
@@ -73,10 +73,9 @@ int main(void)
     // ...
 ```
 
-## Other Integer Types
+## Các Kiểu Integer Khác
 
-There are a couple optional types that are integers capable of holding
-pointer types.
+Có vài kiểu tùy chọn là integer có khả năng giữ kiểu pointer.
 
 [i[`intptr_t` type]i]
 [i[`uintptr_t` type]i]
@@ -86,14 +85,14 @@ intptr_t
 uintptr_t
 ```
 
-You can convert a `void*` to one of these types, and back again. And the
-`void*`s will compare equal.
+Bạn có thể convert `void*` thành một trong các kiểu này, rồi trở
+lại. Và các `void*` sẽ so sánh bằng nhau.
 
-The use case is any place you need an integer that represents a pointer
-for some reason.
+Use case là bất cứ chỗ nào bạn cần một integer đại diện cho pointer
+vì lý do nào đó.
 
-Also, there are a couple types that are just there to be the biggest
-possible integers your system supports:
+Ngoài ra, có vài kiểu tồn tại chỉ để là integer lớn nhất mà hệ của
+bạn hỗ trợ:
 
 [i[`intmax_t` type]i]
 [i[`uintmax_t` type]i]
@@ -103,16 +102,15 @@ intmax_t
 uintmax_t
 ```
 
-Fun fact: you can print these types with the `"%jd"` and `"%ju"`
-[`printf()`](#man-printf) format specifiers.
+Fact vui: bạn có thể in các kiểu này với format specifier `"%jd"`
+và `"%ju"` của [`printf()`](#man-printf).
 
-There are also a bunch of macros in `<inttypes.h>`(#inttypes) that you
-can use to print any of the types mentioned, above.
+Cũng có cả đống macro trong `<inttypes.h>`(#inttypes) bạn có thể
+dùng để in bất kỳ kiểu nào ở trên.
 
 ## Macros
 
-The following macros define the minimum and maximum values for these
-types:
+Các macro sau định nghĩa giá trị min và max cho các kiểu này:
 
 [i[`INTn_MAX` macros]i]
 [i[`INTn_MIN` macros]i]
@@ -151,26 +149,26 @@ INTMAX_MAX         INTMAX_MIN         UINTMAX_MAX
 INTPTR_MAX         INTPTR_MIN         UINTPTR_MAX
 ```
 
-For the exact-bit-size signed types, the minimum is exactly $-(2^{N-1})$
-and the maximum is exactly $2^{N-1}-1$. And for the exact-bit-size
-unsigned types, the max is exactly $2^N-1$.
+Với kiểu signed kích thước chính xác, min chính xác là $-(2^{N-1})$
+và max chính xác là $2^{N-1}-1$. Và với kiểu unsigned kích thước
+chính xác, max chính xác là $2^N-1$.
 
-For the signed "least" and "fast" variants, the magnitude and sign of the
-minimum is at least $-(2^{N-1}-1)$ and the maximum is at least
-$2^{N-1}-1$. And for unsigned it's at least $2^N-1$.
+Với biến thể signed "least" và "fast", độ lớn và dấu của min ít
+nhất là $-(2^{N-1}-1)$ và max ít nhất là $2^{N-1}-1$. Và với
+unsigned, ít nhất là $2^N-1$.
 
-`INTMAX_MAX` is at least $2^{63}-1$, `INTMAX_MIN` is at least
-$-(2^{63}-1)$ in sign and magnitude. And `UINTMAX_MAX` is at least
+`INTMAX_MAX` ít nhất là $2^{63}-1$, `INTMAX_MIN` ít nhất là
+$-(2^{63}-1)$ xét về dấu và độ lớn. Và `UINTMAX_MAX` ít nhất là
 $2^{64}-1$.
 
-Finally, `INTPTR_MAX` is at least $2^{15}-1$, `INTPTR_MIN` is at least
-$-(2^{15}-1)$ in sign and magnitude. And `UINTPTR_MAX` is at least
+Cuối cùng, `INTPTR_MAX` ít nhất là $2^{15}-1$, `INTPTR_MIN` ít nhất
+là $-(2^{15}-1)$ xét về dấu và độ lớn. Và `UINTPTR_MAX` ít nhất là
 $2^{16}-1$.
 
-## Other Limits
+## Giới Hạn Khác
 
-There are a bunch of types in `<inttypes.h>`(#inttypes) that have their
-limits defined here. (`<inttypes.h>` includes `<stdint.h>`.)
+Có một đống kiểu trong `<inttypes.h>`(#inttypes) có giới hạn được
+định nghĩa ở đây. (`<inttypes.h>` include `<stdint.h>`.)
 
 [i[`PTRDIFF_MIN` macro]i]
 [i[`PTRDIFF_MAX` macro]i]
@@ -182,32 +180,32 @@ limits defined here. (`<inttypes.h>` includes `<stdint.h>`.)
 [i[`WINT_MIN` macro]i]
 [i[`WINT_MAX` macro]i]
 
-|Macro|Description|
+|Macro|Mô tả|
 |-|-|
-|`PTRDIFF_MIN`|Minimum `ptrdiff_t` value|
-|`PTRDIFF_MAX`|Maximum `ptrdiff_t` value|
-|`SIG_ATOMIC_MIN`|Minimum `sig_atomic_t` value|
-|`SIG_ATOMIC_MAX`|Maximum `sig_atomic_t` value|
-|`SIZE_MAX`|Maximum `size_t` value|
-|`WCHAR_MIN`|Minimum `wchar_t` value|
-|`WCHAR_MAX`|Maximum `wchar_t` value|
-|`WINT_MIN`|Minimum `wint_t` value|
-|`WINT_MAX`|Maximum `wint_t` value|
+|`PTRDIFF_MIN`|Giá trị min của `ptrdiff_t`|
+|`PTRDIFF_MAX`|Giá trị max của `ptrdiff_t`|
+|`SIG_ATOMIC_MIN`|Giá trị min của `sig_atomic_t`|
+|`SIG_ATOMIC_MAX`|Giá trị max của `sig_atomic_t`|
+|`SIZE_MAX`|Giá trị max của `size_t`|
+|`WCHAR_MIN`|Giá trị min của `wchar_t`|
+|`WCHAR_MAX`|Giá trị max của `wchar_t`|
+|`WINT_MIN`|Giá trị min của `wint_t`|
+|`WINT_MAX`|Giá trị max của `wint_t`|
 
-The spec says that `PTRDIFF_MIN` will be at least -65535 in magnitude.
-And `PTRDIFF_MAX` and `SIZE_MAX` will be at least 65535.
+Spec nói `PTRDIFF_MIN` về độ lớn sẽ ít nhất là -65535. Và
+`PTRDIFF_MAX` với `SIZE_MAX` sẽ ít nhất là 65535.
 
-`SIG_ATOMIC_MIN` and `MAX` will be either -127 and 127 (if it's signed)
-or 0 and 255 (if it's unsigned).
+`SIG_ATOMIC_MIN` và `MAX` sẽ hoặc là -127 và 127 (nếu signed) hoặc
+0 và 255 (nếu unsigned).
 
-Same for `WCHAR_MIN` and `MAX`.
+Tương tự với `WCHAR_MIN` và `MAX`.
 
-`WINT_MIN` and `MAX` will be either -32767 and 32767 (if it's signed) or
-0 and 65535 (if it's unsigned).
+`WINT_MIN` và `MAX` sẽ hoặc là -32767 và 32767 (nếu signed) hoặc 0
+và 65535 (nếu unsigned).
 
-## Macros for Declaring Constants
+## Macro Để Khai Báo Hằng
 
-If you recall, you can specify a type for integer constants:
+Nếu bạn còn nhớ, bạn có thể chỉ định kiểu cho hằng integer:
 
 ``` {.c}
 int x = 12;
@@ -215,8 +213,8 @@ long int y = 12L;
 unsigned long long int z = 12ULL;
 ```
 
-You can use the macros `INT`_N_`_C()` and `UINT`_N_`()` where _N_ is
-`8`, `16`, `32` or `64`.
+Bạn có thể dùng macro `INT`_N_`_C()` và `UINT`_N_`()` trong đó _N_
+là `8`, `16`, `32` hoặc `64`.
 
 [i[`INTn_C()` macros]i]
 
@@ -225,8 +223,8 @@ uint_least16_t x = INT16_C(3490);
 uint_least64_t y = INT64_C(1122334455);
 ```
 
-A variant on these is `INTMAX_C()` and `UINTMAX_C()`. They will make a
-constant suitable for storing in an `intmax_t` or `uintmax_t`.
+Biến thể của mấy cái này là `INTMAX_C()` và `UINTMAX_C()`. Chúng
+tạo một hằng phù hợp để lưu trong `intmax_t` hoặc `uintmax_t`.
 
 [i[`INTMAX_C()` macro]i]
 [i[`UINTMAX_C()` macro]i]
