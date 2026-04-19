@@ -3,106 +3,103 @@
 # vim: ts=4:sw=4:nosi:et:tw=72
 -->
 
-# `<math.h>` Mathematics {#math}
+# `<math.h>` Toán Học {#math}
 
 [i[`math.h` header file]i]
 
-Many of the following functions have `float` and `long double` variants
-as described [below](#func-idioms) (e.g. `pow()`, `powf()`, `powl()`).
-The `float` and `long double` variants are omitted from the following
-table to keep your eyeballs from melting out.
+Nhiều hàm trong phần này có các phiên bản `float` và `long double` như
+mô tả [ở dưới](#func-idioms) (ví dụ `pow()`, `powf()`, `powl()`). Các
+biến thể `float` và `long double` được bỏ qua trong bảng dưới để mắt bạn
+khỏi nổ tung.
 
-|Function|Description|
+|Hàm|Mô tả|
 |--------|----------------------|
-|[`acos()`](#man-acos)|Calculate the arc cosine of a number.|
-|[`acosh()`](#man-acosh)|Compute arc hyperbolic cosine.|
-|[`asin()`](#man-asin)|Calculate the arc sine of a number.|
-|[`asinh()`](#man-asinh)|Compute arc hyperbolic sine.|
-|[`atan()`](#man-atan), [`atan2()`](#man-atan)|Calculate the arc tangent of a number.|
-|[`atanh()`](#man-atanh)|Compute the arc hyperbolic tangent.|
-|[`cbrt()`](#man-cbrt)|Compute the cube root.|
-|[`ceil()`](#man-ceil)|Ceiling---return the next whole number not smaller than the given number.|
-|[`copysign()`](#man-copysign)|Copy the sign of one value into another.|
-|[`cos()`](#man-cos)|Calculate the cosine of a number.|
-|[`cosh()`](#man-cosh)|Compute the hyperbolic cosine.|
-|[`erf()`](#man-erf)|Compute the error function of the given value.|
-|[`erfc()`](#man-erfc)|Compute the complementary error function of a value.|
-|[`exp()`](#man-exp)|Compute $e$ raised to a power.|
-|[`exp2()`](#man-exp2)|Compute 2 to a power.|
-|[`expm1()`](#man-expm1)|Compute $e^x-1$.|
-|[`fabs()`](#man-fabs)|Compute the absolute value.|
-|[`fdim()`](#man-fdim)|Return the positive difference between two numbers clamped at 0.|
-|[`floor()`](#man-floor)|Compute the largest whole number not larger than the given value.|
-|[`fma()`](#man-fma)|Floating (AKA "Fast") multiply and add.|
-|[`fmax()`](#man-fmax), [`fmin()`](#man-fmax)|Return the maximum or minimum of two numbers.|
-|[`fmod()`](#man-fmod)|Compute the floating point remainder.|
-|[`fpclassify()`](#man-fpclassify)|Return the classification of a given floating point number.|
-|[`frexp()`](#man-frexp)|Break a number into its fraction part and exponent (as a power of 2).|
-|[`hypot()`](#man-hypot)|Compute the length of the hypotenuse of a triangle.|
-|[`ilogb()`](#man-ilogb)|Return the exponent of a floating point number.|
-|[`isfinite()`](#man-isnan)|True if the number is not infinite or NaN.|
-|[`isgreater()`](#man-isgreater)|True if one argument is greater than another.|
-|[`isgreatereequal()`](#man-isgreater)|True if one argument is greater than or equal to another.|
-|[`isinf()`](#man-isnan)|True if the number is infinite.|
-|[`isless()`](#man-isgreater)|True if one argument is less than another.|
-|[`islesseequal()`](#man-isgreater)|True if one argument is less than or equal to another.|
-|[`islessgreater()`](#man-islessgreater)|Test if a floating point number is less than or greater than another.|
-|[`isnan()`](#man-isnan)|True if the number is Not-a-Number.|
-|[`isnormal()`](#man-isnan)|True if the number is normal.|
-|[`isunordered()`](#man-isunordered)|Macro returns true if either floating point argument is NaN.|
-|[`ldexp()`](#man-ldexp)|Multiply a number by an integral power of 2.|
-|[`lgamma()`](#man-lgamma)|Compute the natural logarithm of the absolute value of $\Gamma(x)$.|
-|[`log()`](#man-log)|Compute the natural logarithm.|
-|[`log10()`](#man-log10)|Compute the log-base-10 of a number.|
-|[`log2()`](#man-log2)|Compute the base-2 logarithm of a number.|
-|[`logb()`](#man-logb)|Extract the exponent of a number given `FLT_RADIX`.|
-|[`log1p()`](#man-log1p)|Compute the natural logarithm of a number plus 1.|
-|[`lrint()`](#man-lrint)|Returns `x` rounded in the current rounding direction as an integer.|
-|[`lround()`](#man-lround), [`llround()`](#man-lround)|Round a number in the good old-fashioned way, returning an integer.|
-|[`modf()`](#man-modf)|Extract the integral and fractional parts of a number.|
-|[`nan()`](#man-nan)|Return `NAN`.|
-|[`nearbyint()`](#man-nearbyint)|Rounds a value in the current rounding direction.|
-|[`nextafter()`](#man-nextafter)|Get the next (or previous) representable floating point value.|
-|[`nexttoward()`](#man-nexttoward)|Get the next (or previous) representable floating point value.|
-|[`pow()`](#man-pow)|Compute a value raised to a power.|
-|[`remainder()`](#man-remainder)|Compute the remainder IEC 60559-style.|
-|[`remquo()`](#man-remquo)|Compute the remainder and (some of the) quotient.|
-|[`rint()`](#man-rint)|Rounds a value in the current rounding direction.|
-|[`round()`](#man-round)|Round a number in the good old-fashioned way.|
-|[`scalbn()`](#man-scalb), [`scalbln()`](#man-scalb)|Efficiently compute $x\times r^n$, where $r$ is `FLT_RADIX`.|
-|[`signbit()`](#man-signbit)|Return the sign of a number.|
-|[`sin()`](#man-sin)|Calculate the sine of a number.|
-|[`sqrt()`](#man-sqrt)|Calculate the square root of a number.|
-|[`tan()`](#man-tan)|Calculate the tangent of a number.|
-|[`tanh()`](#man-tanh)|Compute the hyperbolic tangent.|
-|[`tgamma()`](#man-tgamma)|Compute the gamma function, $\Gamma(x)$.|
-|[`trunc()`](#man-trunc)|Truncate the fractional part off a floating point value.|
+|[`acos()`](#man-acos)|Tính arc cosine của một số.|
+|[`acosh()`](#man-acosh)|Tính arc hyperbolic cosine.|
+|[`asin()`](#man-asin)|Tính arc sine của một số.|
+|[`asinh()`](#man-asinh)|Tính arc hyperbolic sine.|
+|[`atan()`](#man-atan), [`atan2()`](#man-atan)|Tính arc tangent của một số.|
+|[`atanh()`](#man-atanh)|Tính arc hyperbolic tangent.|
+|[`cbrt()`](#man-cbrt)|Tính căn bậc ba.|
+|[`ceil()`](#man-ceil)|Ceiling---trả về số nguyên (phần nguyên hướng lên) không nhỏ hơn số đã cho.|
+|[`copysign()`](#man-copysign)|Chép dấu của một giá trị sang một giá trị khác.|
+|[`cos()`](#man-cos)|Tính cosine của một số.|
+|[`cosh()`](#man-cosh)|Tính hyperbolic cosine.|
+|[`erf()`](#man-erf)|Tính hàm lỗi (error function) của giá trị cho trước.|
+|[`erfc()`](#man-erfc)|Tính hàm lỗi bù (complementary error function) của một giá trị.|
+|[`exp()`](#man-exp)|Tính $e$ mũ lên.|
+|[`exp2()`](#man-exp2)|Tính 2 mũ lên.|
+|[`expm1()`](#man-expm1)|Tính $e^x-1$.|
+|[`fabs()`](#man-fabs)|Tính giá trị tuyệt đối.|
+|[`fdim()`](#man-fdim)|Trả về hiệu số dương giữa hai số, chặn dưới ở 0.|
+|[`floor()`](#man-floor)|Tính số nguyên lớn nhất không lớn hơn giá trị cho trước.|
+|[`fma()`](#man-fma)|Nhân và cộng Floating (còn gọi là "Fast").|
+|[`fmax()`](#man-fmax), [`fmin()`](#man-fmax)|Trả về giá trị lớn nhất hoặc nhỏ nhất trong hai số.|
+|[`fmod()`](#man-fmod)|Tính phần dư floating point.|
+|[`fpclassify()`](#man-fpclassify)|Trả về phân loại của một số floating point cho trước.|
+|[`frexp()`](#man-frexp)|Tách một số thành phần phân số và phần mũ (theo luỹ thừa của 2).|
+|[`hypot()`](#man-hypot)|Tính độ dài cạnh huyền của tam giác.|
+|[`ilogb()`](#man-ilogb)|Trả về số mũ của một số floating point.|
+|[`isfinite()`](#man-isnan)|True nếu số không phải vô cùng hay NaN.|
+|[`isgreater()`](#man-isgreater)|True nếu một đối số lớn hơn đối số khác.|
+|[`isgreatereequal()`](#man-isgreater)|True nếu một đối số lớn hơn hoặc bằng đối số khác.|
+|[`isinf()`](#man-isnan)|True nếu số là vô cùng.|
+|[`isless()`](#man-isgreater)|True nếu một đối số nhỏ hơn đối số khác.|
+|[`islesseequal()`](#man-isgreater)|True nếu một đối số nhỏ hơn hoặc bằng đối số khác.|
+|[`islessgreater()`](#man-islessgreater)|Kiểm tra số floating point này nhỏ hơn hoặc lớn hơn số kia.|
+|[`isnan()`](#man-isnan)|True nếu số là Not-a-Number.|
+|[`isnormal()`](#man-isnan)|True nếu số là số "normal".|
+|[`isunordered()`](#man-isunordered)|Macro trả về true nếu bất kỳ đối số floating point nào là NaN.|
+|[`ldexp()`](#man-ldexp)|Nhân một số với luỹ thừa nguyên của 2.|
+|[`lgamma()`](#man-lgamma)|Tính logarithm tự nhiên của giá trị tuyệt đối của $\Gamma(x)$.|
+|[`log()`](#man-log)|Tính logarithm tự nhiên.|
+|[`log10()`](#man-log10)|Tính log cơ số 10 của một số.|
+|[`log2()`](#man-log2)|Tính logarithm cơ số 2 của một số.|
+|[`logb()`](#man-logb)|Trích số mũ của một số theo cơ số `FLT_RADIX`.|
+|[`log1p()`](#man-log1p)|Tính logarithm tự nhiên của một số cộng 1.|
+|[`lrint()`](#man-lrint)|Trả về `x` được làm tròn theo hướng làm tròn hiện tại dưới dạng số nguyên.|
+|[`lround()`](#man-lround), [`llround()`](#man-lround)|Làm tròn một số theo cách cổ điển, trả về số nguyên.|
+|[`modf()`](#man-modf)|Tách phần nguyên và phần phân số của một số.|
+|[`nan()`](#man-nan)|Trả về `NAN`.|
+|[`nearbyint()`](#man-nearbyint)|Làm tròn giá trị theo hướng làm tròn hiện tại.|
+|[`nextafter()`](#man-nextafter)|Lấy giá trị floating point kế tiếp (hoặc trước đó) biểu diễn được.|
+|[`nexttoward()`](#man-nexttoward)|Lấy giá trị floating point kế tiếp (hoặc trước đó) biểu diễn được.|
+|[`pow()`](#man-pow)|Tính một giá trị luỹ thừa.|
+|[`remainder()`](#man-remainder)|Tính phần dư kiểu IEC 60559.|
+|[`remquo()`](#man-remquo)|Tính phần dư và (một phần của) thương.|
+|[`rint()`](#man-rint)|Làm tròn một giá trị theo hướng làm tròn hiện tại.|
+|[`round()`](#man-round)|Làm tròn một số theo cách cổ điển.|
+|[`scalbn()`](#man-scalb), [`scalbln()`](#man-scalb)|Tính $x\times r^n$ hiệu quả, với $r$ là `FLT_RADIX`.|
+|[`signbit()`](#man-signbit)|Trả về dấu của một số.|
+|[`sin()`](#man-sin)|Tính sine của một số.|
+|[`sqrt()`](#man-sqrt)|Tính căn bậc hai của một số.|
+|[`tan()`](#man-tan)|Tính tangent của một số.|
+|[`tanh()`](#man-tanh)|Tính hyperbolic tangent.|
+|[`tgamma()`](#man-tgamma)|Tính hàm gamma, $\Gamma(x)$.|
+|[`trunc()`](#man-trunc)|Cắt phần phân số của một giá trị floating point.|
 
 
-It's your favorite subject: Mathematics! Hello, I'm Doctor Math, and
-I'll be making math FUN and EASY!
+Môn học yêu thích của bạn đây: Toán học! Xin chào, tôi là Tiến sĩ Math,
+và tôi sẽ làm cho toán trở nên VUI và DỄ!
 
-_[vomiting sounds]_
+_[tiếng ói mửa]_
 
-Ok, I know math isn't the grandest thing for some of you out there,
-but these are merely functions that quickly and easily do math you
-either know, want, or just don't care about. That pretty much covers
-it.
+Được rồi, tôi biết toán không phải thứ tuyệt vời nhất với một số bạn,
+nhưng đây chỉ là những hàm làm toán nhanh gọn, thứ toán mà bạn hoặc biết,
+hoặc cần, hoặc chẳng quan tâm. Tóm lại là vậy đó.
 
-## Math Function Idioms {#func-idioms}
+## Các idiom hàm Toán học {#func-idioms}
 
-Many of these math functions exist in three forms, each corresponding
-to the argument and/or return types the function uses, `float`,
-`double`, or `long double`.
+Nhiều hàm toán học này tồn tại ở ba dạng, tương ứng với kiểu đối số
+và/hoặc kiểu trả về mà hàm sử dụng: `float`, `double`, hoặc `long
+double`.
 
-The alternate form for `float` is made by appending `f` to the end of
-the function name.
+Dạng thay thế cho `float` được tạo bằng cách thêm `f` vào cuối tên hàm.
 
-The alternate form for `long double` is made by appending `l` to the end
-of the function name.
+Dạng thay thế cho `long double` được tạo bằng cách thêm `l` vào cuối tên
+hàm.
 
-For example, the `pow()` function, which computes $x^y$, exists in these
-forms:
+Ví dụ, hàm `pow()` dùng để tính $x^y$ tồn tại ở các dạng sau:
 
 ``` {.c}
 double      pow(double x, double y);             // double
@@ -110,145 +107,141 @@ float       powf(float x, float y);              // float
 long double powl(long double x, long double y);  // long double
 ```
 
-Remember that parameters are given values as if you assigned into them.
-So if you pass a `double` to `powf()`, it'll choose the closest
-`float` it can to hold the double. If the `double` doesn't fit,
-undefined behavior happens.
+Nhớ là tham số nhận giá trị như thể bạn gán vào chúng. Vậy nên nếu bạn
+truyền một `double` vào `powf()`, nó sẽ chọn `float` gần nhất có thể để
+giữ giá trị double đó. Nếu `double` không vừa, hành vi không xác định
+(undefined behavior) sẽ xảy ra.
 
-## Math Types
+## Các kiểu Toán học
 
-We have two exciting new types in `<math.h>`:
+Chúng ta có hai kiểu mới rất hấp dẫn trong `<math.h>`:
 
 * [i[`float_t` type]i] `float_t`
 * [i[`double_t` type]i] `double_t`
 
-The `float_t` type is at least as accurate as a `float`, and the
-`double_t` type is at least as accurate as a `double`.
+Kiểu `float_t` ít nhất chính xác bằng `float`, và kiểu `double_t` ít
+nhất chính xác bằng `double`.
 
-The idea with these types is they can represent the most efficient way
-of storing numbers for maximum speed.
+Ý tưởng của các kiểu này là chúng có thể biểu diễn cách lưu trữ số hiệu
+quả nhất để đạt tốc độ tối đa.
 
-Their actual types vary by implementation, but can be determined by the
-value of the [i[`FLT_EVAL_METHOD` macro]i] `FLT_EVAL_METHOD` macro.
+Kiểu thực tế thay đổi theo implementation, nhưng có thể xác định qua
+giá trị của macro [i[`FLT_EVAL_METHOD` macro]i] `FLT_EVAL_METHOD`.
 
-|`FLT_EVAL_METHOD`|`float_t` type|`double_t` type|
+|`FLT_EVAL_METHOD`|Kiểu `float_t`|Kiểu `double_t`|
 |-|-|-|
 |`0`|`float`|`double`|
 |`1`|`double`|`double`|
 |`2`|`long double`|`long double`|
-|Other|Implementation-defined|Implementation-defined|
+|Khác|Phụ thuộc implementation|Phụ thuộc implementation|
 
-For all defined values of `FLT_EVAL_METHOD`, `float_t` is the
-least-precise type used for all floating calculations.
+Với mọi giá trị xác định của `FLT_EVAL_METHOD`, `float_t` là kiểu có độ
+chính xác thấp nhất được dùng cho mọi phép tính floating point.
 
-## Math Macros
+## Các Macro Toán học
 
-There are actually a number of these defined, but we'll cover most of
-them in their relevant reference sections, below.
+Thực ra có khá nhiều macro được định nghĩa, nhưng chúng ta sẽ nói hầu
+hết chúng trong các phần tham chiếu tương ứng bên dưới.
 
-But here are a couple:
+Nhưng đây là vài cái:
 
 [i[`NAN` macro]i]
 
-`NAN` represents Not-A-Number.
+`NAN` biểu diễn Not-A-Number.
 
-Defined in `<float.h>` is `FLT_RADIX`: the number base used by floating
-point numbers. This is commonly `2`, but could be anything.
+Định nghĩa trong `<float.h>` là `FLT_RADIX`: cơ số mà floating point
+dùng. Thường là `2`, nhưng có thể là bất kỳ giá trị nào.
 
-## Math Errors
+## Các lỗi Toán học
 
-As we know, nothing can ever go wrong with math... except _everything_!
+Như ta biết, không gì có thể sai trong toán học... ngoại trừ _mọi thứ_!
 
-So there are just a couple errors that might occur when using some of
-these functions.
+Vậy nên có vài loại lỗi có thể xảy ra khi dùng các hàm này.
 
-* **Range errors** mean that some result is beyond what can be stored in
-  the result type.
+* **Range error (lỗi miền giá trị)** nghĩa là kết quả vượt quá những gì
+  có thể lưu trong kiểu trả về.
 
-* **Domain errors** mean that you've passed in an argument that doesn't
-  have a defined result for this function.
+* **Domain error (lỗi miền xác định)** nghĩa là bạn truyền vào một đối
+  số không có kết quả xác định với hàm này.
 
-* **Pole errors** mean that the limit of the function as $x$ approaches
-  the given argument is infinite.
+* **Pole error** nghĩa là giới hạn của hàm khi $x$ tiến tới đối số cho
+  trước là vô cùng.
 
-* **Overflow errors** are when the result is really large, but can't be
-  stored without incurring large roundoff error.
+* **Overflow error (lỗi tràn trên)** là khi kết quả rất lớn, nhưng không
+  thể lưu mà không gây sai số làm tròn (rounding) lớn.
 
-* **Underflow errors** are like overflow errors, except with very small
-  numbers.
+* **Underflow error (lỗi tràn dưới)** giống overflow, nhưng với các số
+  rất nhỏ.
 
-Now, the C math library can do a couple things when these errors occur:
+Giờ, thư viện toán của C có thể làm vài thứ khi các lỗi này xảy ra:
 
-* Set `errno` to some value, or...
-* Raise a floating point exception.
+* Đặt `errno` thành một giá trị nào đó, hoặc...
+* Raise một floating point exception.
 
-Your system might vary on what happens. You can check it by looking at
-the value of the variable [i[`math_errhandling` variable]i]
-`math_errhandling`. It will be equivalent to one of the
-following^[Though the system defines `MATH_ERRNO` as `1` and
-`MATH_ERREXCEPT` as `2`, it's best to always use their symbolic names.
-Just in case.]:
+Hệ thống của bạn có thể xử lý khác nhau. Bạn có thể kiểm tra bằng cách
+xem giá trị của biến [i[`math_errhandling` variable]i]
+`math_errhandling`. Nó sẽ bằng một trong những giá trị sau^[Dù hệ thống
+định nghĩa `MATH_ERRNO` là `1` và `MATH_ERREXCEPT` là `2`, tốt nhất luôn
+dùng tên ký hiệu. Phòng hờ.]:
 
 [i[`MATH_ERRNO` macro]i]
 [i[`MATH_ERREXCEPT` macro]i]
 
-|`math_errhandling`|Description|
+|`math_errhandling`|Mô tả|
 |-|-|
-|`MATH_ERRNO`|The system uses `errno` for math errors.|
-|`MATH_ERREXCEPT`|The system uses exceptions for math errors.|
-|`MATH_ERRNO | MATH_ERREXCEPT`|The system does both! (That's a bitwise-OR!)|
+|`MATH_ERRNO`|Hệ thống dùng `errno` cho các lỗi toán.|
+|`MATH_ERREXCEPT`|Hệ thống dùng exception cho các lỗi toán.|
+|`MATH_ERRNO | MATH_ERREXCEPT`|Hệ thống làm cả hai! (Đó là phép OR bit!)|
 
-You are not allowed to change `math_errhandling`.
+Bạn không được phép thay đổi `math_errhandling`.
 
-For a fuller description on how exceptions work and their meanings, see
-the [`<fenv.h>`](#fenv) section.
+Muốn mô tả đầy đủ hơn về cách exception hoạt động và ý nghĩa của chúng,
+xem phần [`<fenv.h>`](#fenv).
 
-## Math Pragmas
+## Các Pragma Toán học
 
-In a nutshell, pragmas offer various ways to control the compiler's
-behavior. In this case, we're talking about controlling how C's math
-library works.
+Nói gọn, pragma cho phép ta điều khiển hành vi của trình biên dịch theo
+nhiều cách. Ở đây, ta nói về chuyện điều khiển cách thư viện toán của C
+hoạt động.
 
-In specific, we have a pragma [i[`FP_CONTRACT` pragma]i] `FP_CONTRACT`
-that can be turned off and on.
+Cụ thể, chúng ta có pragma [i[`FP_CONTRACT` pragma]i] `FP_CONTRACT` có
+thể bật/tắt.
 
-What does it mean?
+Nó có nghĩa gì?
 
-First of all, keep in mind that any operation in an expression can cause
-rounding error. So each step of the expression can introduce more
+Trước tiên, nhớ rằng bất kỳ phép toán nào trong một biểu thức đều có
+thể gây rounding error. Nên mỗi bước của biểu thức có thể tạo thêm
 rounding error.
 
-But what if the compiler knows a _double secret_ way of taking the
-expression you wrote and converting it to a single instruction that
-reduced the number of steps such that the intermediate rounding error
-didn't occur?
+Nhưng sẽ thế nào nếu compiler biết một cách _siêu bí mật_ để lấy biểu
+thức bạn viết và chuyển nó thành một lệnh duy nhất, giảm số bước đến
+mức rounding error trung gian không xảy ra?
 
-Could it use it? I mean, the results would be different than if you let
-the rounding error settle each step of the way...
+Nó có được dùng cách đó không? Ý là, kết quả sẽ khác so với khi bạn để
+rounding error tích tụ qua từng bước...
 
-Because the results would be different, you can tell the compiler if you
-want to allow it to do this or not.
+Vì kết quả sẽ khác, bạn có thể bảo compiler rằng bạn có cho phép làm thế
+hay không.
 
-If you want to allow it:
+Nếu bạn cho phép:
 
 ``` {.c}
 #pragma STDC FP_CONTRACT ON
 ```
 
-and to disallow it:
+và để không cho phép:
 
 ``` {.c}
 #pragma STDC FP_CONTRACT OFF
 ```
 
-If you do this at global scope, it stays at whatever state you set it to
-until you change it.
+Nếu bạn làm điều này ở phạm vi toàn cục, nó sẽ giữ trạng thái bạn đặt
+cho đến khi bạn đổi nó.
 
-If you do it at block scope, it reverts to the value outside the block
-when the block ends.
+Nếu bạn làm ở phạm vi block, nó sẽ quay về giá trị bên ngoài block khi
+block kết thúc.
 
-The initial value of the `FP_CONTRACT` pragma varies from system to
-system.
+Giá trị ban đầu của pragma `FP_CONTRACT` thay đổi tuỳ hệ thống.
 
 
 [[manbreak]]
@@ -256,7 +249,7 @@ system.
 
 [i[`fpclassify()` function]i]
 
-Return the classification of a given floating point number.
+Trả về phân loại của một số floating point cho trước.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -266,42 +259,41 @@ Return the classification of a given floating point number.
 int fpclassify(any_floating_type x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-What kind of entity does this floating point number represent? What are
-the options?
+Số floating point này biểu diễn loại thực thể nào? Có những lựa chọn
+nào?
 
-We're used to floating point numbers being regular old things like
-`3.14` or `3490.0001`.
+Chúng ta quen thuộc với số floating point là những thứ bình thường như
+`3.14` hay `3490.0001`.
 
-But floating point numbers can also represent things like infinity. Or
-Not-A-Number (NAN). This function will let you know which type of
-floating point number the argument is.
+Nhưng số floating point cũng có thể biểu diễn những thứ như vô cùng. Hay
+Not-A-Number (NAN). Hàm này cho bạn biết đối số là loại floating point
+nào.
 
-This is a macro, so you can use it with `float`, `double`, `long double`
-or anything similar.
+Đây là một macro, nên bạn có thể dùng với `float`, `double`, `long
+double`, hay bất kỳ kiểu tương tự nào.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns one of these macros depending on the argument's classification:
+Trả về một trong các macro sau tuỳ theo phân loại của đối số:
 
-|Classification|Description|
+|Phân loại|Mô tả|
 |-|-|
-|`FP_INFINITE`|Number is infinite.|
-|`FP_NAN`|Number is Not-A-Number (NAN).|
-|`FP_NORMAL`|Just a regular number.|
-|`FP_SUBNORMAL`|Number is a sub-normal number.|
-|`FP_ZERO`|Number is zero.|
+|`FP_INFINITE`|Số là vô cùng.|
+|`FP_NAN`|Số là Not-A-Number (NAN).|
+|`FP_NORMAL`|Chỉ là một số bình thường.|
+|`FP_SUBNORMAL`|Số là số sub-normal.|
+|`FP_ZERO`|Số là không.|
 
-A discussion of subnormal numbers is beyond the scope of the guide, and
-is something that most devs go their whole lives without dealing with.
-In a nutshell, it's a way to represent really small numbers that might
-normally round down to zero. If you want to know more, see the Wikipedia
-page on [flw[denormal numbers|Denormal_number]].
+Bàn về số subnormal nằm ngoài phạm vi guide này, và là thứ mà phần lớn
+dev đi hết đời mà không phải đụng tới. Nói ngắn gọn, đó là cách biểu
+diễn các số rất nhỏ mà bình thường sẽ bị làm tròn về không. Nếu muốn
+biết thêm, xem trang Wikipedia về [flw[số denormal|Denormal_number]].
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Print various number classifications.
+In các phân loại số khác nhau.
 
 ```{.c .numberLines}
 #include <stdio.h>
@@ -326,13 +318,12 @@ int main(void)
     printf("     0.0: %s\n", get_classification(0.0));
     printf("sqrt(-1): %s\n", get_classification(sqrt(-1)));
     printf("1/tan(0): %s\n", get_classification(1/tan(0)));
-    printf("  1e-310: %s\n", get_classification(1e-310));  // very small!
+    printf("  1e-310: %s\n", get_classification(1e-310));  // rất nhỏ!
 }
 ```
 
-Output^[This is on my system. Some systems will have different points at
-which numbers become subnormal, or they might not support subnormal
-values at all.]:
+Output^[Đây là trên máy tôi. Một số hệ thống sẽ có ngưỡng mà số trở
+thành subnormal khác, hoặc có thể không hỗ trợ giá trị subnormal.]:
 
 ``` {.default}
     1.23: normal
@@ -342,7 +333,7 @@ sqrt(-1): not a number
   1e-310: subnormal
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 [`isfinite()`](#man-isnan),
 [`isinf()`](#man-isnan),
 [`isnan()`](#man-isnan),
@@ -357,7 +348,7 @@ sqrt(-1): not a number
 [i[`isnan()` function]i]
 [i[`isnormal()` function]i]
 
-Return true if a number matches a classification.
+Trả về true nếu số khớp một phân loại.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -373,26 +364,26 @@ int isnan(any_floating_type x);
 int isnormal(any_floating_type x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These are helper macros to `fpclassify()`. Bring macros, they work on
-any floating point type.
+Đây là các macro trợ giúp cho `fpclassify()`. Vì là macro, chúng hoạt
+động trên mọi kiểu floating point.
 
-|Macro|Description|
+|Macro|Mô tả|
 |-|-|
-|`isfinite()`|True if the number is not infinite or NaN.|
-|`isinf()`|True if the number is infinite.|
-|`isnan()`|True if the number is Not-a-Number.|
-|`isnormal()`|True if the number is normal.|
+|`isfinite()`|True nếu số không phải vô cùng hoặc NaN.|
+|`isinf()`|True nếu số là vô cùng.|
+|`isnan()`|True nếu số là Not-a-Number.|
+|`isnormal()`|True nếu số là normal.|
 
-For more superficial discussion on normal and subnormal numbers, see
+Để biết thêm thảo luận sơ lược về số normal và subnormal, xem
 [`fpclassify()`](#man-fpclassify).
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns non-zero for true, and zero for false.
+Trả về khác không nếu true, và không nếu false.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -407,7 +398,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fpclassify()`](#man-fpclassify),
 [`signbit()`](#man-signbit),
@@ -418,7 +409,7 @@ int main(void)
 
 [i[`signbit()` function]i]
 
-Return the sign of a number.
+Trả về dấu của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -428,16 +419,16 @@ Return the sign of a number.
 int signbit(any_floating_type x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This macro takes any floating point number and returns a value
-indicating the sign of the number, positive or negative.
+Macro này nhận vào một số floating point bất kỳ và trả về giá trị cho
+biết dấu của số đó, dương hay âm.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `1` if the sign is negative, otherwise `0`.
+Trả về `1` nếu dấu là âm, ngược lại là `0`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -450,7 +441,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fpclassify()`](#man-fpclassify),
 [`isfinite()`](#man-isnan),
@@ -467,7 +458,7 @@ int main(void)
 [i[`acosf()` function]i]
 [i[`acosl()` function]i]
 
-Calculate the arc cosine of a number.
+Tính arc cosine của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -479,15 +470,13 @@ float acosf(float x);
 long double acosl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Calculates the arc cosine of a number in radians. (That is, the value
-whose cosine is `x`.)  The number must be in the range -1.0 to
-1.0.
+Tính arc cosine của một số theo radian. (Tức là giá trị mà cosine của
+nó bằng `x`.) Số phải nằm trong khoảng -1.0 đến 1.0.
 
-For those of you who don't remember, radians are another way of
-measuring an angle, just like degrees. To convert from degrees to
-radians or the other way around, use the following code:
+Với những bạn đã quên, radian là một cách đo góc khác, giống như độ.
+Để chuyển đổi giữa độ và radian, dùng đoạn code sau:
 
 ``` {.c}
 pi = 3.14159265358979;
@@ -495,13 +484,13 @@ degrees = radians * 180 / pi;
 radians = degrees * pi / 180;
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the arc cosine of `x`, unless `x` is out of
-range. In that case, `errno` will be set to EDOM and the
-return value will be NaN. The variants return different types.
+Trả về arc cosine của `x`, trừ khi `x` ngoài khoảng. Trong trường hợp
+đó, `errno` sẽ được đặt thành EDOM và giá trị trả về sẽ là NaN. Các
+biến thể trả về kiểu khác nhau.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -520,7 +509,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`asin()`](#man-asin),
 [`atan()`](#man-atan),
@@ -535,7 +524,7 @@ int main(void)
 [i[`asinf()` function]i]
 [i[`asinl()` function]i]
 
-Calculate the arc sine of a number.
+Tính arc sine của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -547,15 +536,13 @@ float asinf(float x);
 long double asinl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Calculates the arc sine of a number in radians. (That is, the value
-whose sine is `x`.)  The number must be in the range -1.0 to
-1.0.
+Tính arc sine của một số theo radian. (Tức là giá trị mà sine của nó
+bằng `x`.) Số phải nằm trong khoảng -1.0 đến 1.0.
 
-For those of you who don't remember, radians are another way of
-measuring an angle, just like degrees. To convert from degrees to
-radians or the other way around, use the following code:
+Với những bạn đã quên, radian là một cách đo góc khác, giống như độ.
+Để chuyển đổi giữa độ và radian, dùng đoạn code sau:
 
 ``` {.c}
 pi = 3.14159265358979;
@@ -563,13 +550,13 @@ degrees = radians * 180 / pi;
 radians = degrees * pi / 180;
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the arc sine of `x`, unless `x` is out of
-range. In that case, `errno` will be set to EDOM and the
-return value will be NaN. The variants return different types.
+Trả về arc sine của `x`, trừ khi `x` ngoài khoảng. Trong trường hợp đó,
+`errno` sẽ được đặt thành EDOM và giá trị trả về sẽ là NaN. Các biến
+thể trả về kiểu khác nhau.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -588,7 +575,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`acos()`](#man-acos),
 [`atan()`](#man-atan),
@@ -606,7 +593,7 @@ int main(void)
 [i[`atan2f()` function]i]
 [i[`atan2l()` function]i]
 
-Calculate the arc tangent of a number.
+Tính arc tangent của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -622,19 +609,17 @@ float atan2f(float y, float x);
 long double atan2l(long double y, long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Calculates the arc tangent of a number in radians. (That is, the value
-whose tangent is `x`.)
+Tính arc tangent của một số theo radian. (Tức là giá trị mà tangent
+của nó bằng `x`.)
 
-The `atan2()` variants are pretty much the same as using
-`atan()` with `y`/`x` as the
-argument...except that `atan2()` will use those values to
-determine the correct quadrant of the result.
+Các biến thể `atan2()` khá giống gọi `atan()` với tham số `y`/`x`...
+ngoại trừ chuyện `atan2()` sẽ dùng các giá trị đó để xác định đúng góc
+phần tư (quadrant) của kết quả.
 
-For those of you who don't remember, radians are another way of
-measuring an angle, just like degrees. To convert from degrees to
-radians or the other way around, use the following code:
+Với những bạn đã quên, radian là một cách đo góc khác, giống như độ.
+Để chuyển đổi giữa độ và radian, dùng đoạn code sau:
 
 ``` {.c}
 pi = 3.14159265358979;
@@ -642,13 +627,12 @@ degrees = radians * 180 / pi;
 radians = degrees * pi / 180;
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-The `atan()` functions return the arc tangent of
-`x`, which will be between PI/2 and -PI/2. The
-`atan2()` functions return an angle between PI and -PI.
+Các hàm `atan()` trả về arc tangent của `x`, nằm giữa PI/2 và -PI/2.
+Các hàm `atan2()` trả về một góc giữa PI và -PI.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -673,7 +657,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`tan()`](#man-tan),
 [`asin()`](#man-asin),
@@ -686,7 +670,7 @@ int main(void)
 [i[`cosf()` function]i]
 [i[`cosl()` function]i]
 
-Calculate the cosine of a number.
+Tính cosine của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -698,14 +682,12 @@ float cosf(float x)
 long double cosl(long double x)
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Calculates the cosine of the value `x`, where `x` is
-in radians.
+Tính cosine của giá trị `x`, với `x` tính bằng radian.
 
-For those of you who don't remember, radians are another way of
-measuring an angle, just like degrees. To convert from degrees to
-radians or the other way around, use the following code:
+Với những bạn đã quên, radian là một cách đo góc khác, giống như độ.
+Để chuyển đổi giữa độ và radian, dùng đoạn code sau:
 
 ``` {.c}
 pi = 3.14159265358979;
@@ -713,12 +695,11 @@ degrees = radians * 180 / pi;
 radians = degrees * pi / 180;
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the cosine of `x`. The variants return different
-types.
+Trả về cosine của `x`. Các biến thể trả về kiểu khác nhau.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -729,7 +710,7 @@ int main(void)
 	double cosx;
 	long double ldcosx;
 
-	cosx = cos(3490.0); // round and round we go!
+	cosx = cos(3490.0); // quay mòng mòng!
 	ldcosx = cosl(3.490L);
 
 	printf("%f\n", cosx);
@@ -737,7 +718,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`sin()`](#man-sin),
 [`tan()`](#man-tan),
@@ -750,7 +731,7 @@ int main(void)
 [i[`sinf()` function]i]
 [i[`sinl()` function]i]
 
-Calculate the sine of a number.
+Tính sine của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -762,14 +743,12 @@ float sinf(float x);
 long double sinl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Calculates the sine of the value `x`, where `x` is
-in radians.
+Tính sine của giá trị `x`, với `x` tính bằng radian.
 
-For those of you who don't remember, radians are another way of
-measuring an angle, just like degrees. To convert from degrees to
-radians or the other way around, use the following code:
+Với những bạn đã quên, radian là một cách đo góc khác, giống như độ.
+Để chuyển đổi giữa độ và radian, dùng đoạn code sau:
 
 ``` {.c}
 pi = 3.14159265358979;
@@ -777,12 +756,11 @@ degrees = radians * 180 / pi;
 radians = degrees * pi / 180;
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the sine of `x`. The variants return different
-types.
+Trả về sine của `x`. Các biến thể trả về kiểu khác nhau.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -793,7 +771,7 @@ int main(void)
 	double sinx;
 	long double ldsinx;
 
-	sinx = sin(3490.0); // round and round we go!
+	sinx = sin(3490.0); // quay mòng mòng!
 	ldsinx = sinl(3.490L);
 
 	printf("%f\n", sinx);
@@ -801,7 +779,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cos()`](#man-cos),
 [`tan()`](#man-tan),
@@ -814,7 +792,7 @@ int main(void)
 [i[`tanf()` function]i]
 [i[`tanl()` function]i]
 
-Calculate the tangent of a number.
+Tính tangent của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -826,14 +804,12 @@ float tanf(float x)
 long double tanl(long double x)
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Calculates the tangent of the value `x`, where `x` is
-in radians.
+Tính tangent của giá trị `x`, với `x` tính bằng radian.
 
-For those of you who don't remember, radians are another way of
-measuring an angle, just like degrees. To convert from degrees to
-radians or the other way around, use the following code:
+Với những bạn đã quên, radian là một cách đo góc khác, giống như độ.
+Để chuyển đổi giữa độ và radian, dùng đoạn code sau:
 
 ``` {.c}
 pi = 3.14159265358979;
@@ -841,12 +817,11 @@ degrees = radians * 180 / pi;
 radians = degrees * pi / 180;
 ```
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the tangent of `x`. The variants return different
-types.
+Trả về tangent của `x`. Các biến thể trả về kiểu khác nhau.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -857,7 +832,7 @@ int main(void)
 	double tanx;
 	long double ldtanx;
 
-	tanx = tan(3490.0); // round and round we go!
+	tanx = tan(3490.0); // quay mòng mòng!
 	ldtanx = tanl(3.490L);
 
 	printf("%f\n", tanx);
@@ -865,7 +840,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`sin()`](#man-sin),
 [`cos()`](#man-cos),
@@ -879,7 +854,7 @@ int main(void)
 [i[`acoshf()` function]i]
 [i[`acoshl()` function]i]
 
-Compute arc hyperbolic cosine.
+Tính arc hyperbolic cosine.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -893,18 +868,18 @@ float acoshf(float x);
 long double acoshl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Trig lovers can rejoice! C has arc hyperbolic cosine!
+Fan trig mừng đi! C có arc hyperbolic cosine!
 
-These functions return the nonnegative acosh of `x`, which must be
-greater than or equal to `1`.
+Các hàm này trả về acosh không âm của `x`, với `x` phải lớn hơn hoặc
+bằng `1`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the arc hyperbolic cosince in the range $[0,+\infty]$.
+Trả về arc hyperbolic cosine trong khoảng $[0,+\infty]$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -916,7 +891,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`asinh()`](#man-asinh)
 
@@ -927,7 +902,7 @@ int main(void)
 [i[`asinhf()` function]i]
 [i[`asinhl()` function]i]
 
-Compute arc hyperbolic sine.
+Tính arc hyperbolic sine.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -941,17 +916,17 @@ float asinhf(float x);
 long double asinhl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Trig lovers can rejoice! C has arc hyperbolic sine!
+Fan trig mừng đi! C có arc hyperbolic sine!
 
-These functions return the asinh of `x`.
+Các hàm này trả về asinh của `x`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the arc hyperbolic sine.
+Trả về arc hyperbolic sine.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -963,7 +938,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`acosh()`](#man-acosh)
 
@@ -974,7 +949,7 @@ int main(void)
 [i[`atanhf()` function]i]
 [i[`atanhl()` function]i]
 
-Compute the arc hyperbolic tangent.
+Tính arc hyperbolic tangent.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -988,17 +963,16 @@ float atanhf(float x);
 long double atanhl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions compute the arc hyperbolic tangent of `x`, which must be
-in the range $[-1,+1]$. Passing exactly $-1$ or $+1$ might result in a
-pole error.
+Các hàm này tính arc hyperbolic tangent của `x`, với `x` phải nằm trong
+khoảng $[-1,+1]$. Truyền đúng $-1$ hoặc $+1$ có thể gây pole error.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the arc hyperbolic tangent of `x`.
+Trả về arc hyperbolic tangent của `x`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1010,7 +984,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 [`acosh()`](#man-acosh),
 [`asinh()`](#man-asinh)
 
@@ -1022,7 +996,7 @@ int main(void)
 [i[`coshf()` function]i]
 [i[`coshl()` function]i]
 
-Compute the hyperbolic cosine.
+Tính hyperbolic cosine.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1036,16 +1010,16 @@ float coshf(float x);
 long double coshl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions predictably compute the hyperbolic cosine of `x`. A
-range error might occur if `x` is too large.
+Như bạn đoán, các hàm này tính hyperbolic cosine của `x`. Range error
+có thể xảy ra nếu `x` quá lớn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the hyperbolic cosine of `x`.
+Trả về hyperbolic cosine của `x`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1057,7 +1031,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`sinh()`](#man-sinh),
 [`tanh()`](#man-tanh)
@@ -1069,7 +1043,7 @@ int main(void)
 [i[`sinhf()` function]i]
 [i[`sinhl()` function]i]
 
-Compute the hyperbolic sine.
+Tính hyperbolic sine.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1083,16 +1057,16 @@ float sinhf(float x);
 long double sinhl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions predictably compute the hyperbolic sine of `x`. A
-range error might occur if `x` is too large.
+Như bạn đoán, các hàm này tính hyperbolic sine của `x`. Range error có
+thể xảy ra nếu `x` quá lớn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the hyperbolic sine of `x`.
+Trả về hyperbolic sine của `x`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1104,7 +1078,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`sinh()`](#man-cosh),
 [`tanh()`](#man-tanh)
@@ -1116,7 +1090,7 @@ int main(void)
 [i[`tanhf()` function]i]
 [i[`tanhl()` function]i]
 
-Compute the hyperbolic tangent.
+Tính hyperbolic tangent.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1130,17 +1104,17 @@ float tanhf(float x);
 long double tanhl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions predictably compute the hyperbolic tangent of `x`.
+Như bạn đoán, các hàm này tính hyperbolic tangent của `x`.
 
-Mercifully, this is the last trig-related man page I'm going to write.
+May thay, đây là trang man liên quan trig cuối cùng tôi sẽ viết.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the hyperbolic tangent of `x`.
+Trả về hyperbolic tangent của `x`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1152,7 +1126,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`cosh()`](#man-cosh),
 [`sinh()`](#man-sinh)
@@ -1164,7 +1138,7 @@ int main(void)
 [i[`expf()` function]i]
 [i[`expl()` function]i]
 
-Compute $e$ raised to a power.
+Tính $e$ mũ lên.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1178,20 +1152,19 @@ float expf(float x);
 long double expl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Compute $e^x$ where $e$ is [flw[Euler's
-number|E_(mathematical_constant)]].
+Tính $e^x$ với $e$ là [flw[hằng số Euler|E_(mathematical_constant)]].
 
-The number $e$ is named after Leonard Euler, born April 15, 1707, who is
-responsible, among other things, for making this reference page longer
-than it needed to be.
+Số $e$ được đặt theo tên Leonard Euler, sinh ngày 15/4/1707, ông là
+người chịu trách nhiệm, ngoài những việc khác, cho việc làm trang tham
+chiếu này dài hơn cần thiết.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns $e^x$.
+Trả về $e^x$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1204,7 +1177,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`exp2()`](#man-exp2),
 [`expm1()`](#man-expm1),
@@ -1218,7 +1191,7 @@ int main(void)
 [i[`exp2f()` function]i]
 [i[`exp2l()` function]i]
 
-Compute 2 to a power.
+Tính 2 mũ lên.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1232,22 +1205,22 @@ float exp2f(float x);
 long double exp2l(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions raise 2 to a power. Very exciting, since computers are
-all about twos-to-powers!
+Các hàm này tính 2 mũ một số. Rất thú vị, vì máy tính chơi đùa toàn với
+luỹ thừa của 2!
 
-These are likely to be faster than using `pow()` to do the same thing.
+Các hàm này có thể nhanh hơn dùng `pow()` để làm cùng việc.
 
-They support fractional exponents, as well.
+Chúng cũng hỗ trợ số mũ phân số.
 
-A range error occurs if `x` is too large.
+Range error xảy ra nếu `x` quá lớn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-`exp2()` returns $2^x$.
+`exp2()` trả về $2^x$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1261,7 +1234,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 [`exp()`](#man-exp),
 [`pow()`](#man-pow)
 
@@ -1273,7 +1246,7 @@ int main(void)
 [i[`expm1f()` function]i]
 [i[`expm1l()` function]i]
 
-Compute $e^x-1$.
+Tính $e^x-1$.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1287,24 +1260,24 @@ float expm1f(float x);
 long double expm1l(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is just like `exp()` except---_plot twist!_--it computes that
-result minus one.
+Cái này giống hệt `exp()` ngoại trừ---_twist bất ngờ!_---nó tính kết quả
+đó trừ đi một.
 
-For more discussion about what $e$ is, see [the `exp()` man
-page](#man-exp).
+Để thảo luận thêm về $e$ là gì, xem [trang man
+`exp()`](#man-exp).
 
-If `x` is giant, a range error might occur.
+Nếu `x` khổng lồ, range error có thể xảy ra.
 
-For small values of `x` near zero, `expm1(x)` might be more accurate
-than computing `exp(x)-1`.
+Với các giá trị `x` nhỏ gần không, `expm1(x)` có thể chính xác hơn
+`exp(x)-1`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns $e^x-1$.
+Trả về $e^x-1$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1316,7 +1289,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`exp()`](#man-exp)
 
@@ -1328,7 +1301,7 @@ int main(void)
 [i[`frexpf()` function]i]
 [i[`frexpl()` function]i]
 
-Break a number into its fraction part and exponent (as a power of 2).
+Tách một số thành phần phân số và phần mũ (theo luỹ thừa của 2).
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1342,45 +1315,45 @@ float frexpf(float value, int *exp);
 long double frexpl(long double value, int *exp);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a floating point number, you can break it into its
-fractional part and exponent part (as a power of 2).
+Nếu có một số floating point, bạn có thể tách nó thành phần phân số và
+phần mũ (theo luỹ thừa của 2).
 
-For example, if you have the number $1234.56$, this can be represented
-as a multiple of a power of 2 like so:
+Ví dụ, nếu có số $1234.56$, nó có thể biểu diễn dưới dạng bội của luỹ
+thừa 2 như sau:
 
 $1234.56=0.6028125\times2^{11}$
 
-And you can use this function to get the $0.6028125$ and $11$ parts of
-that equation.
+Và bạn có thể dùng hàm này để lấy phần $0.6028125$ và $11$ của phương
+trình đó.
 
-As for why, I have a simple answer: I don't know. I can't find a use.
-K&R2 and everyone else I can find just says _how_ to use it, but not
-_why_ you might want to.
+Còn vì sao, câu trả lời của tôi đơn giản thôi: tôi không biết. Tìm không
+ra chỗ nào dùng. K&R2 và mọi nguồn tôi tìm được chỉ nói _cách_ dùng,
+chứ không nói _vì sao_ bạn lại muốn dùng.
 
-The C99 Rationale document says:
+Tài liệu C99 Rationale viết:
 
-> The functions `frexp`, `ldexp`, and `modf` are primitives used by the
-> remainder of the library.
+> Các hàm `frexp`, `ldexp`, và `modf` là nguyên thuỷ được phần còn lại
+> của thư viện sử dụng.
 >
-> There was some sentiment for dropping them for the same reasons that
-> `ecvt`, `fcvt`, and `gcvt` were dropped, but their adherents rescued
-> them for general use. Their use is problematic: on non-binary
-> architectures, ldexp may lose precision and frexp may be inefficient. 
+> Có ý kiến muốn bỏ chúng vì lý do tương tự như `ecvt`, `fcvt`, và
+> `gcvt` bị bỏ, nhưng phe ủng hộ giữ chúng lại cho dùng chung. Việc
+> dùng chúng có vấn đề: trên kiến trúc không nhị phân, ldexp có thể mất
+> độ chính xác và frexp có thể không hiệu quả.
 
-So there you have it. If you need it.
+Vậy đó. Nếu bạn cần dùng.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-`frexp()` returns the fractional part of `value` in the range 0.5
-(inclusive) to 1 (exclusive), or 0. And it stores the exponent
-power-of-2 in the variable pointed to by `exp`.
+`frexp()` trả về phần phân số của `value` trong khoảng 0.5 (bao gồm)
+đến 1 (không bao gồm), hoặc 0. Và nó lưu số mũ luỹ thừa 2 vào biến mà
+`exp` trỏ tới.
 
-If you pass in zero, the return value and the variable `exp` points to
-are both zero.
+Nếu bạn truyền vào không, cả giá trị trả về lẫn biến `exp` trỏ tới đều
+là không.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1402,7 +1375,7 @@ Output:
 1234.56 = 0.6028125 x 2^11
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ldexp()`](#man-ldexp),
 [`ilogb()`](#man-ldexp),
@@ -1416,7 +1389,7 @@ Output:
 [i[`ilogbf()` function]i]
 [i[`ilogbl()` function]i]
 
-Return the exponent of a floating point number.
+Trả về số mũ của một số floating point.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1430,35 +1403,34 @@ int ilogbf(float x);
 int ilogbl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This gives you the exponent of the given number... it's a little weird,
-because the exponent depends on the value of `FLT_RADIX`. Now, this is
-very often `2`---but no guarantees!
+Cái này cho bạn số mũ của số cho trước... hơi lạ, vì số mũ phụ thuộc
+vào giá trị của `FLT_RADIX`. Giờ, giá trị này rất thường là `2`---nhưng
+không có gì đảm bảo!
 
-It actually returns $\log_r|x|$ where $r$ is `FLT_RADIX`.
+Thực ra nó trả về $\log_r|x|$ với $r$ là `FLT_RADIX`.
 
-Domain or range errors might occur for invalid values of `x`, or for
-return values that are outside the range of the return type.
+Domain hoặc range error có thể xảy ra với giá trị `x` không hợp lệ, hoặc
+với giá trị trả về nằm ngoài phạm vi của kiểu trả về.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-The exponent of the absolute value of the given number, depending on
-`FLT_RADIX`. 
+Số mũ của giá trị tuyệt đối của số đã cho, phụ thuộc `FLT_RADIX`.
 
-Specifically $\log_r|x|$ where $r$ is `FLT_RADIX`.
+Cụ thể là $\log_r|x|$ với $r$ là `FLT_RADIX`.
 
-If you pass in `0`, it'll return `FP_ILOGB0`.
+Nếu bạn truyền vào `0`, nó sẽ trả về `FP_ILOGB0`.
 
-If you pass in infinity, it'll return `INT_MAX`.
+Nếu bạn truyền vào vô cùng, nó sẽ trả về `INT_MAX`.
 
-If you pass in NaN, it'll return `FP_ILOGBNAN`.
+Nếu bạn truyền vào NaN, nó sẽ trả về `FP_ILOGBNAN`.
 
-The spec goes on to say that the value of `FP_ILOGB0` will be either
-`INT_MIN` or `-INT_MAX`. And the value of `FP_ILOGBNAN` shall be either
-`INT_MAX` or `INT_MIN`, if that's useful in any way.
+Spec còn nói giá trị của `FP_ILOGB0` sẽ là `INT_MIN` hoặc `-INT_MAX`. Và
+giá trị của `FP_ILOGBNAN` sẽ là `INT_MAX` hoặc `INT_MIN`, phòng khi có
+ích.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1472,7 +1444,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`frexp()`](#man-frexp),
 [`logb()`](#man-logb)
@@ -1485,7 +1457,7 @@ int main(void)
 [i[`ldexpf()` function]i]
 [i[`ldexpl()` function]i]
 
-Multiply a number by an integral power of 2.
+Nhân một số với luỹ thừa nguyên của 2.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1499,16 +1471,15 @@ float ldexpf(float x, int exp);
 long double ldexpl(long double x, int exp);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions multiply the given number `x` by 2 raised to the `exp`
-power.
+Các hàm này nhân số `x` với 2 mũ `exp`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns $x\times2^{exp}$.
+Trả về $x\times2^{exp}$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1528,7 +1499,7 @@ Output:
 5.67 x 2^7 = 725.760000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`exp()`](#man-exp)
 
@@ -1540,7 +1511,7 @@ Output:
 [i[`logf()` function]i]
 [i[`logl()` function]i]
 
-Compute the natural logarithm.
+Tính logarithm tự nhiên.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1554,19 +1525,19 @@ float logf(float x);
 long double logl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Natural logarithms! And there was much rejoycing. 
+Logarithm tự nhiên! Và mọi người cùng reo mừng.
 
-These compute the base-$e$ logarithm of a number, $\log_ex$, $\ln x$.
+Các hàm này tính logarithm cơ số $e$ của một số, $\log_ex$, $\ln x$.
 
-In other words, for a given $x$, solves $x=e^y$ for $y$.
+Nói cách khác, với một $x$ cho trước, giải $x=e^y$ tìm $y$.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-The base-$e$ logarithm of the given value, $\log_ex$, $\ln x$.
+Logarithm cơ số $e$ của giá trị đã cho, $\log_ex$, $\ln x$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1581,7 +1552,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 [`exp()`](#man-exp),
 [`log10()`](#man-log10),
 [`log1p()`](#man-log10)
@@ -1593,7 +1564,7 @@ int main(void)
 [i[`log10f()` function]i]
 [i[`log10l()` function]i]
 
-Compute the log-base-10 of a number.
+Tính log cơ số 10 của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1607,20 +1578,20 @@ float log10f(float x);
 long double log10l(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Just when you thought you might have to use Laws of Logarithms to
-compute this, here's a function coming out of the blue to save you.
+Ngay khi bạn tưởng mình sắp phải dùng Định luật Logarithm để tính cái
+này, đây là một hàm xuất hiện bất ngờ để cứu bạn.
 
-These compute the base-$10$ logarithm of a number, $\log_{10}x$.
+Các hàm này tính logarithm cơ số $10$ của một số, $\log_{10}x$.
 
-In other words, for a given $x$, solves $x=10^y$ for $y$.
+Nói cách khác, với một $x$ cho trước, giải $x=10^y$ tìm $y$.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the log base-10 of `x`, $\log_{10}x$.
+Trả về log cơ số 10 của `x`, $\log_{10}x$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1633,7 +1604,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`pow()`](#man-pow),
 [`log()`](#man-log)
@@ -1645,7 +1616,7 @@ int main(void)
 [i[`log1pf()` function]i]
 [i[`log1pl()` function]i]
 
-Compute the natural logarithm of a number plus 1.
+Tính logarithm tự nhiên của một số cộng 1.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1659,32 +1630,32 @@ float log1pf(float x);
 long double log1pl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This computes $\log_e(1 + x)$, $\ln(1+x)$.
+Hàm này tính $\log_e(1 + x)$, $\ln(1+x)$.
 
-This works just like calling:
+Nó hoạt động y như gọi:
 
 ``` {.c}
 log(1 + x)
 ```
 
-except it could be more accurate for small values of `x`.
+ngoại trừ là có thể chính xác hơn với giá trị `x` nhỏ.
 
-So if your `x` is small magnitude, use this.
+Vậy nếu `x` có độ lớn nhỏ, hãy dùng cái này.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns $\log_e(1 + x)$, $\ln(1+x)$.
+Trả về $\log_e(1 + x)$, $\ln(1+x)$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Compute some big and small logarithm values to see the difference
-between `log1p()` and `log()`:
+Tính vài giá trị logarithm lớn và nhỏ để xem khác biệt giữa `log1p()`
+và `log()`:
 
 ``` {.c .numberLines}
 #include <stdio.h>
-#include <float.h> // for LDBL_DECIMAL_DIG
+#include <float.h> // cho LDBL_DECIMAL_DIG
 #include <math.h>
 
 int main(void)
@@ -1697,7 +1668,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 Big log1p()  : 2.30258509299404568403
@@ -1706,7 +1677,7 @@ Small log1p(): 0.00995033085316808305
 Small log()  : 0.00995033085316809164
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`log()`](#man-log)
 
@@ -1718,7 +1689,7 @@ Small log()  : 0.00995033085316809164
 [i[`log2f()` function]i]
 [i[`log2l()` function]i]
 
-Compute the base-2 logarithm of a number.
+Tính logarithm cơ số 2 của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1732,21 +1703,20 @@ float log2f(float x);
 long double log2l(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Wow! Were you thinking we were done with the logarithm functions? We're
-only getting started!
+Wow! Bạn nghĩ mình đã xong với các hàm logarithm? Chúng ta chỉ mới bắt
+đầu!
 
-This one computes $\log_2 x$. That is, computes $y$ that satisfies
-$x=2^y$.
+Hàm này tính $\log_2 x$. Tức là, tính $y$ thoả mãn $x=2^y$.
 
-Love me those powers of 2!
+Yêu luỹ thừa của 2 đó!
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the base-2 logarithm of the given value, $\log_2 x$.
+Trả về logarithm cơ số 2 của giá trị đã cho, $\log_2 x$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1759,7 +1729,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`log()`](#man-log)
 
@@ -1770,7 +1740,7 @@ int main(void)
 [i[`logbf()` function]i]
 [i[`logbl()` function]i]
 
-Extract the exponent of a number given `FLT_RADIX`.
+Trích số mũ của một số theo cơ số `FLT_RADIX`.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1784,27 +1754,26 @@ float logbf(float x);
 long double logbl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function returns the whole number portion of the exponent of the
-number with radix `FLT_RADIX`, namely the whole number portion
-$\log_r|x|$ where $r$ is `FLT_RADIX`. Fractional numbers are truncated.
+Hàm này trả về phần nguyên của số mũ của số với cơ số `FLT_RADIX`, cụ
+thể là phần nguyên của $\log_r|x|$ với $r$ là `FLT_RADIX`. Phần phân số
+bị cắt.
 
-If the number is [flw[subnormal|Denormal_number]], `logb()` treats it as
-if it were normalized.
+Nếu số là [flw[subnormal|Denormal_number]], `logb()` xử lý như thể nó
+đã được chuẩn hoá.
 
-If `x` is `0`, there could be a domain error or pole error.
+Nếu `x` là `0`, có thể có domain error hoặc pole error.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-This function returns the whole number portion of $\log_r|x|$ where $r$
-is `FLT_RADIX`.
+Hàm này trả về phần nguyên của $\log_r|x|$ với $r$ là `FLT_RADIX`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
-#include <float.h>  // For FLT_RADIX
+#include <float.h>  // Cho FLT_RADIX
 #include <math.h>
 
 int main(void)
@@ -1823,7 +1792,7 @@ FLT_RADIX = 2
 8.000000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ilogb()`](#man-ilogb)
 
@@ -1835,7 +1804,7 @@ FLT_RADIX = 2
 [i[`modff()` function]i]
 [i[`modfl()` function]i]
 
-Extract the integral and fractional parts of a number.
+Tách phần nguyên và phần phân số của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1849,28 +1818,25 @@ float modff(float value, float *iptr);
 long double modfl(long double value, long double *iptr);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-If you have a floating point number, like `123.456`, this function will
-extract the integral part (`123.0`) and the fractional part (`0.456`).
-It's total coincidence that this is exactly the plot for the latest
-Jason Statham action spectacular.
+Nếu bạn có một số floating point, như `123.456`, hàm này sẽ trích phần
+nguyên (`123.0`) và phần phân số (`0.456`). Trùng hợp tuyệt đối là đây
+cũng là nội dung cốt truyện phim hành động mới nhất của Jason Statham.
 
-Both the integral part and fractional parts keep the sign of the passed
-in `value`.
+Cả phần nguyên và phần phân số đều giữ dấu của `value` được truyền vào.
 
-The integral part is stored in the address pointed to by `iptr`.
+Phần nguyên được lưu vào địa chỉ mà `iptr` trỏ tới.
 
-See the note in [`frexp()`](#man-frexp) regarding why this is in the
-library.
+Xem ghi chú trong [`frexp()`](#man-frexp) về lý do nó nằm trong thư viện.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-These functions return the fractional part of the number. The integral
-part is stored in the address pointed to by `iptr`. Both the integral
-and fractional parts preserve the sign of the passed-in `value`.
+Các hàm này trả về phần phân số của số. Phần nguyên được lưu vào địa
+chỉ mà `iptr` trỏ tới. Cả phần nguyên và phần phân số đều giữ dấu của
+`value` được truyền vào.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1906,7 +1872,7 @@ Integral part  : -123.000000
 Fractional part: -0.456000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`frexp()`](#man-frexp)
 
@@ -1920,7 +1886,7 @@ Fractional part: -0.456000
 [i[`scalblnf()` function]i]
 [i[`scalblnl()` function]i]
 
-Efficiently compute $x\times r^n$, where $r$ is `FLT_RADIX`.
+Tính $x\times r^n$ hiệu quả, với $r$ là `FLT_RADIX`.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -1940,39 +1906,37 @@ float scalblnf(float x, long int n);
 long double scalblnl(long double x, long int n);
 ```
 
-### Description {.unnumbered .unlisted}
-These functions efficiently compute $x\times r^n$, where $r$ is
-`FLT_RADIX`.
+### Mô tả {.unnumbered .unlisted}
+Các hàm này tính $x\times r^n$ hiệu quả, với $r$ là `FLT_RADIX`.
 
-If `FLT_RADIX` happens to be `2` (no guarantees!), then this works like
-[`exp2()`](#man-exp2).
+Nếu `FLT_RADIX` tình cờ là `2` (không hứa hẹn gì đâu!), cái này chạy
+giống [`exp2()`](#man-exp2).
 
-The name of this function should have an obvious meaning to you. Clearly
-they all start with the prefix "scalb" which means...
+Tên hàm chắc hẳn phải có ý nghĩa rõ ràng với bạn. Rõ ràng là tất cả đều
+bắt đầu bằng tiền tố "scalb" nghĩa là...
 
-...OK, I confess! I have no idea what it means. My searches are futile!
+...OK, tôi thú nhận! Tôi chẳng biết nó nghĩa gì. Tra hoài không ra!
 
-But let's look at the suffixes:
+Nhưng hãy nhìn vào các hậu tố:
 
-|Suffix|Meaning|
+|Hậu tố|Ý nghĩa|
 |-|-|
-|`n`|`scalbn()`---exponent `n` is an `int`|
-|`nf`|`scalbnf()`---`float` version of `scalbn()`|
-|`nl`|`scalbnl()`---`long double` version of `scalbn()`|
-|`ln`|`scalbln()`---exponent `n` is a `long int`|
-|`lnf`|`scalblnf()`---`float` version of `scalbln()`|
-|`lnl`|`scalblnl()`---`long double` version of `scalbln()`|
+|`n`|`scalbn()`---số mũ `n` là `int`|
+|`nf`|`scalbnf()`---phiên bản `float` của `scalbn()`|
+|`nl`|`scalbnl()`---phiên bản `long double` của `scalbn()`|
+|`ln`|`scalbln()`---số mũ `n` là `long int`|
+|`lnf`|`scalblnf()`---phiên bản `float` của `scalbln()`|
+|`lnl`|`scalblnl()`---phiên bản `long double` của `scalbln()`|
 
-So while I'm still in the dark about "scalb", at least I have that part
-down.
+Nên dù vẫn mù tịt về "scalb", ít nhất tôi đã nắm được phần đó.
 
-A range error might occur for large values.
+Range error có thể xảy ra với giá trị lớn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns $x\times r^n$, where $r$ is `FLT_RADIX`.
+Trả về $x\times r^n$, với $r$ là `FLT_RADIX`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -1987,7 +1951,7 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 FLT_RADIX = 2
@@ -1996,7 +1960,7 @@ scalbn(3, 8)       = 512.000000
 scalbn(10.2, 20.7) = 10695475.200000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`exp2()`](#man-exp2),
 [`pow()`](#man-pow)
@@ -2009,7 +1973,7 @@ scalbn(10.2, 20.7) = 10695475.200000
 [i[`cbrtf()` function]i]
 [i[`cbrtl()` function]i]
 
-Compute the cube root.
+Tính căn bậc ba.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2023,15 +1987,15 @@ float cbrtf(float x);
 long double cbrtl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the cube root of `x`, $x^{1/3}$, $\sqrt[3]{x}$.
+Tính căn bậc ba của `x`, $x^{1/3}$, $\sqrt[3]{x}$.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the cube root of `x`, $x^{1/3}$, $\sqrt[3]{x}$.
+Trả về căn bậc ba của `x`, $x^{1/3}$, $\sqrt[3]{x}$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2049,7 +2013,7 @@ Output:
 cbrt(1729.03) = 12.002384
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`sqrt()`](#man-sqrt),
 [`pow()`](#man-pow)
@@ -2061,7 +2025,7 @@ cbrt(1729.03) = 12.002384
 [i[`fabsf()` function]i]
 [i[`fabsl()` function]i]
 
-Compute the absolute value.
+Tính giá trị tuyệt đối.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2075,20 +2039,18 @@ float fabsf(float x);
 long double fabsl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions straightforwardly return the absolute value of `x`, that
-is $|x|$.
+Các hàm này trả về thẳng giá trị tuyệt đối của `x`, tức $|x|$.
 
-If you're rusty on your absolute values, all it means is that the result
-will be positive, even if `x` is negative. It's just strips negative
-signs off.
+Nếu bạn đã quên giá trị tuyệt đối, nó chỉ đơn giản nghĩa là kết quả sẽ
+dương, kể cả khi `x` là âm. Đơn giản là lột bỏ dấu âm thôi.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the absolute value of `x`, $|x|$.
+Trả về giá trị tuyệt đối của `x`, $|x|$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2101,7 +2063,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`abs()`](#man-abs),
 [`copysign()`](#man-copysign),
@@ -2114,7 +2076,7 @@ int main(void)
 [i[`hypotf()` function]i]
 [i[`hypotl()` function]i]
 
-Compute the length of the hypotenuse of a triangle.
+Tính độ dài cạnh huyền của tam giác.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2128,30 +2090,29 @@ float hypotf(float x, float y);
 long double hypotl(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-[flw[Pythagorean Theorem|Pythagorean_theorem]] fans rejoice! This is the
-function you've been waiting for!
+Fan [flw[Định lý Pythagoras|Pythagorean_theorem]] mừng lên! Đây là hàm
+bạn đã chờ đợi!
 
-If you know the lengths of the two sides of a right triangle, `x` and
-`y`, you can compute the length of the hypotenuse (the longest, diagonal
-side) with this function.
+Nếu bạn biết độ dài hai cạnh góc vuông của tam giác vuông, `x` và `y`,
+bạn có thể tính độ dài cạnh huyền (cạnh dài nhất, chéo) bằng hàm này.
 
-In particular, it computes the square root of the sum of the squares of
-the sides: $\sqrt{x^2 + y^2}$.
+Cụ thể, nó tính căn bậc hai của tổng bình phương hai cạnh: $\sqrt{x^2 +
+y^2}$.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the lenght of the hypotenuse of a right triangle with side
-lengths `x` and `y`: $\sqrt{x^2 + y^2}$.
+Trả về độ dài cạnh huyền của tam giác vuông có độ dài các cạnh là `x`
+và `y`: $\sqrt{x^2 + y^2}$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 printf("%f\n", hypot(3, 4));  // 5.000000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`sqrt()`](#man-sqrt)
 
@@ -2162,7 +2123,7 @@ printf("%f\n", hypot(3, 4));  // 5.000000
 [i[`powf()` function]i]
 [i[`powl()` function]i]
 
-Compute a value raised to a power.
+Tính một giá trị luỹ thừa.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2176,34 +2137,34 @@ float powf(float x, float y);
 long double powl(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes `x` raised to the `y`th power: $x^y$.
+Tính `x` luỹ thừa `y`: $x^y$.
 
-These arguments can be fractional.
+Các đối số có thể là phân số.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `x` raised to the `y`th power: $x^y$.
+Trả về `x` luỹ thừa `y`: $x^y$.
 
-A domain error can occur if:
+Domain error có thể xảy ra nếu:
 
-* `x` is a finite negative number and `y` is a finite non-integer
-* `x` is zero and `y` is zero.
+* `x` là số âm hữu hạn và `y` là số không nguyên hữu hạn
+* `x` là không và `y` là không.
 
-A domain error or pole error can occur if `x` is zero and `y` is
-negative.
+Domain error hoặc pole error có thể xảy ra nếu `x` là không và `y` là
+âm.
 
-A range error can occur for large values.
+Range error có thể xảy ra với giá trị lớn.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 printf("%f\n", pow(3, 4));    // 3^4    = 81.000000
 printf("%f\n", pow(2, 0.5));  // sqrt 2 = 1.414214
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`exp()`](#man-exp),
 [`exp2()`](#man-exp2),
@@ -2217,7 +2178,7 @@ printf("%f\n", pow(2, 0.5));  // sqrt 2 = 1.414214
 [i[`sqrtf()` function]i]
 [i[`sqrtl()` function]i]
 
-Calculate the square root of a number.
+Tính căn bậc hai của một số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2231,35 +2192,33 @@ float sqrtf(float x);
 long double sqrtl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the square root of a number: $\sqrt{x}$. To those of you who
-don't know what a square root is, I'm not going to explain. Suffice it
-to say, the square root of a number delivers a value that when squared
-(multiplied by itself) results in the original number.
+Tính căn bậc hai của một số: $\sqrt{x}$. Với ai chưa biết căn bậc hai
+là gì, tôi sẽ không giải thích. Chỉ cần nói, căn bậc hai của một số
+cho ra một giá trị mà khi bình phương (nhân với chính nó) sẽ cho lại
+số ban đầu.
 
-Ok, fine---I did explain it after all, but only because I wanted
-to show off. It's not like I'm giving you examples or anything, such as
-the square root of nine is three, because when you multiply three by
-three you get nine, or anything like that. No examples. I hate
-examples!
+Ok, được rồi---tôi đã giải thích rồi, nhưng chỉ vì tôi muốn khoe thôi.
+Không phải kiểu tôi cho bạn ví dụ hay gì đâu, ví dụ như căn bậc hai
+của chín là ba, bởi vì khi nhân ba với ba bạn được chín, hay gì đó.
+Không ví dụ. Tôi ghét ví dụ!
 
-And I suppose you wanted some actual practical information here as
-well. You can see the usual trio of functions here---they all
-compute square root, but they take different types as arguments. Pretty
-straightforward, really.
+Và tôi đoán bạn cũng muốn có vài thông tin thực tế ở đây. Bạn có thể
+thấy bộ ba hàm quen thuộc ở đây---tất cả đều tính căn bậc hai, nhưng
+nhận các kiểu đối số khác nhau. Khá đơn giản thôi.
 
-A domain error occurs if `x` is negative.
+Domain error xảy ra nếu `x` là âm.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns (and I know this must be something of a surprise to you) the
-square root of `x`: $\sqrt{x}$.
+Trả về (và tôi biết đây hẳn là điều bất ngờ với bạn) căn bậc hai của
+`x`: $\sqrt{x}$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
-// example usage of sqrt()
+// ví dụ dùng sqrt()
 
 float something = 10;
 
@@ -2275,14 +2234,14 @@ printf("distance between points (x1, y1) and (x2, y2): %.2f\n",
     sqrt(dx*dx + dy*dy));
 ```
 
-And the output is:
+Và output là:
 
 ``` {.default}
 square root of 10 is 3.16
 distance between points (x1, y1) and (x2, y2): 40.54
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`hypot()`](#man-hypot),
 [`pow()`](#man-pow)
@@ -2294,7 +2253,7 @@ distance between points (x1, y1) and (x2, y2): 40.54
 [i[`erff()` function]i]
 [i[`erfl()` function]i]
 
-Compute the error function of the given value.
+Tính hàm lỗi của giá trị cho trước.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2308,18 +2267,17 @@ float erfcf(float x);
 long double erfcl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions compute the [flw[error function|Error_function]] of a
-value.
+Các hàm này tính [flw[hàm lỗi|Error_function]] của một giá trị.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the error function of `x`:
+Trả về hàm lỗi của `x`:
 
 ${\displaystyle \frac{2}{\sqrt\pi} \int_0^x e^{-t^2}\,dt}$
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 for (float i = -2; i <= 2; i += 0.5)
@@ -2340,7 +2298,7 @@ Output:
  2.0: 0.995322
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`erfc()`](#man-erfc)
 
@@ -2351,7 +2309,7 @@ Output:
 [i[`erfcf()` function]i]
 [i[`erfcl()` function]i]
 
-Compute the complementary error function of a value.
+Tính hàm lỗi bù của một giá trị.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2365,26 +2323,25 @@ float erfcf(float x);
 long double erfcl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions compute the [flw[complementary error
-function|Error_function]] of a value.
+Các hàm này tính [flw[hàm lỗi bù|Error_function]] của một giá trị.
 
-This is the same as:
+Cái này giống như:
 
 ``` {.c}
 1 - erf(x)
 ```
 
-A range error can occur if `x` is too large.
+Range error có thể xảy ra nếu `x` quá lớn.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `1 - erf(x)`, namely:
+Trả về `1 - erf(x)`, cụ thể là:
 
 ${\displaystyle \frac{2}{\sqrt\pi} \int_x^{\infty} e^{-t^2}\,dt}$
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 for (float i = -2; i <= 2; i += 0.5)
@@ -2405,7 +2362,7 @@ Output:
  2.0: 0.004678
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`erf()`](#man-erf)
 
@@ -2416,7 +2373,7 @@ Output:
 [i[`lgammaf()` function]i]
 [i[`lgammal()` function]i]
 
-Compute the natural logarithm of the absolute value of $\Gamma(x)$.
+Tính logarithm tự nhiên của giá trị tuyệt đối của $\Gamma(x)$.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2430,20 +2387,20 @@ float lgammaf(float x);
 long double lgammal(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Compute the natural log of the absolute value of
+Tính log tự nhiên của giá trị tuyệt đối của hàm
 [flw[gamma|Gamma_function]] `x`, $\log_e|\Gamma(x)|$.
 
-A range error can occur if `x` is too large.
+Range error có thể xảy ra nếu `x` quá lớn.
 
-A pole error can occur is `x` is non-positive.
+Pole error có thể xảy ra nếu `x` không dương.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns $\log_e|\Gamma(x)|$.
+Trả về $\log_e|\Gamma(x)|$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 for (float i = 0.5; i <= 4; i += 0.5)
@@ -2463,7 +2420,7 @@ Output:
 4.0: 1.791759
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`tgamma()`](#man-tgamma)
 
@@ -2474,7 +2431,7 @@ Output:
 [i[`tgammaf()` function]i]
 [i[`tgammal()` function]i]
 
-Compute the gamma function, $\Gamma(x)$.
+Tính hàm gamma, $\Gamma(x)$.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2488,19 +2445,19 @@ float tgammaf(float x);
 long double tgammal(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Computes the [flw[gamma function|Gamma_function]] of `x`, $\Gamma(x)$.
+Tính [flw[hàm gamma|Gamma_function]] của `x`, $\Gamma(x)$.
 
-A domain or pole error might occur if `x` is non-positive.
+Domain hoặc pole error có thể xảy ra nếu `x` không dương.
 
-A range error might occur if `x` is too large or too small.
+Range error có thể xảy ra nếu `x` quá lớn hoặc quá nhỏ.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the gamma function of `x`, $\Gamma(x)$.
+Trả về hàm gamma của `x`, $\Gamma(x)$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 for (float i = 0.5; i <= 4; i += 0.5)
@@ -2520,7 +2477,7 @@ Output:
 4.0: 6.000000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`lgamma()`](#man-lgamma)
 
@@ -2531,7 +2488,7 @@ Output:
 [i[`ceilf()` function]i]
 [i[`ceill()` function]i]
 
-Ceiling---return the next whole number not smaller than the given number.
+Ceiling---trả về số nguyên không nhỏ hơn số đã cho.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2545,26 +2502,25 @@ float ceilf(float x);
 long double ceill(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Returns the ceiling of the `x`: $\lceil{x}\rceil$.
+Trả về ceiling của `x`: $\lceil{x}\rceil$.
 
-This is the next whole number not smaller than `x`.
+Đây là số nguyên kế tiếp không nhỏ hơn `x`.
 
-Beware this minor dragon: it's not just "rounding up". Well, it is for
-positive numbers, but negative numbers effectively round toward zero.
-(Because the ceiling function is headed for the next largest whole
-number and $-4$ is larger than $-5$.)
+Coi chừng con rồng nhỏ này: nó không đơn giản là "làm tròn lên". Ờ, với
+số dương thì đúng vậy, nhưng với số âm thực ra lại làm tròn về không.
+(Vì hàm ceiling hướng tới số nguyên lớn hơn kế tiếp, và $-4$ lớn hơn
+$-5$.)
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the next largest whole number larger than `x`.
+Trả về số nguyên lớn hơn kế tiếp lớn hơn `x`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Notice for the negative numbers it heads toward zero, i.e. toward the
-next largest whole number---just like the positives head toward the next
-largest whole number.
+Chú ý với số âm nó hướng về không, tức là hướng tới số nguyên lớn hơn
+kế tiếp---giống như số dương hướng tới số nguyên lớn hơn kế tiếp.
 
 ``` {.c .numberLines}
 printf("%f\n", ceil(4.0));   //  4.000000
@@ -2574,7 +2530,7 @@ printf("%f\n", ceil(-2.1));  // -2.000000
 printf("%f\n", ceil(-3.1));  // -3.000000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`floor()`](#man-floor),
 [`round()`](#man-round)
@@ -2586,7 +2542,7 @@ printf("%f\n", ceil(-3.1));  // -3.000000
 [i[`floorf()` function]i]
 [i[`floorl()` function]i]
 
-Compute the largest whole number not larger than the given value.
+Tính số nguyên lớn nhất không lớn hơn giá trị cho trước.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2597,29 +2553,27 @@ float floorf(float x);
 long double floorl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Returns the floor of the value: $\lfloor{x}\rfloor$. This is the
-opposite of `ceil()`.
+Trả về floor của giá trị: $\lfloor{x}\rfloor$. Đây là ngược lại của
+`ceil()`.
 
-This is the largest whole number that is not greater than `x`.
+Đây là số nguyên lớn nhất không lớn hơn `x`.
 
-For positive numbers, this is like rounding down: `4.5` becomes `4.0`.
+Với số dương, cái này giống làm tròn xuống: `4.5` thành `4.0`.
 
-For negative numbers, it's like rounding up: `-3.6` becomes `-4.0`.
+Với số âm, nó giống làm tròn lên: `-3.6` thành `-4.0`.
 
-In both cases, those results are the largest whole number not bigger
-than the given number.
+Trong cả hai trường hợp, những kết quả đó là số nguyên lớn nhất không
+lớn hơn số đã cho.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the largest whole number not greater than `x`:
-$\lfloor{x}\rfloor$.
+Trả về số nguyên lớn nhất không lớn hơn `x`: $\lfloor{x}\rfloor$.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-Note how the negative numbers effectively round away from zero, unlike
-the positives.
+Chú ý cách số âm thực ra làm tròn ra xa không, không giống số dương.
 
 ``` {.c .numberLines}
 printf("%f\n", floor(4.0));   //  4.000000
@@ -2629,7 +2583,7 @@ printf("%f\n", floor(-2.1));  // -3.000000
 printf("%f\n", floor(-3.1));  // -4.000000
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`ceil()`](#man-ceil),
 [`round()`](#man-round)
@@ -2642,7 +2596,7 @@ printf("%f\n", floor(-3.1));  // -4.000000
 [i[`nearbyintf()` function]i]
 [i[`nearbyintl()` function]i]
 
-Rounds a value in the current rounding direction.
+Làm tròn giá trị theo hướng làm tròn hiện tại.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2656,21 +2610,21 @@ float nearbyintf(float x);
 long double nearbyintl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This function rounds `x` to the nearest integer in the current rounding
-direction.
+Hàm này làm tròn `x` đến số nguyên gần nhất theo hướng làm tròn
+(rounding) hiện tại.
 
-The rounding direction can be set with [`fesetround()`](#man-fegetround)
-in `<fenv.h>`.
+Hướng làm tròn có thể được đặt bằng
+[`fesetround()`](#man-fegetround) trong `<fenv.h>`.
 
-`nearbyint()` won't raise the "inexact" floating point exception.
+`nearbyint()` không raise floating point exception "inexact".
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `x` rounded in the current rounding direction.
+Trả về `x` được làm tròn theo hướng làm tròn hiện tại.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2679,21 +2633,21 @@ Returns `x` rounded in the current rounding direction.
 
 int main(void)
 {
-    #pragma STDC FENV_ACCESS ON        // If supported
+    #pragma STDC FENV_ACCESS ON        // Nếu được hỗ trợ
 
-    fesetround(FE_TONEAREST);          // round to nearest
+    fesetround(FE_TONEAREST);          // làm tròn đến gần nhất
 
     printf("%f\n", nearbyint(3.14));   // 3.000000
     printf("%f\n", nearbyint(3.74));   // 4.000000
 
-    fesetround(FE_TOWARDZERO);         // round toward zero
+    fesetround(FE_TOWARDZERO);         // làm tròn về không
 
     printf("%f\n", nearbyint(1.99));   // 1.000000
     printf("%f\n", nearbyint(-1.99));  // -1.000000
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`rint()`](#man-rint),
 [`lrint()`](#man-lrint),
@@ -2708,7 +2662,7 @@ int main(void)
 [i[`rintf()` function]i]
 [i[`rintl()` function]i]
 
-Rounds a value in the current rounding direction.
+Làm tròn giá trị theo hướng làm tròn hiện tại.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2722,16 +2676,16 @@ float rintf(float x);
 long double rintl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This works just like [`nearbyint()`](#man-nearbyint) except that is can
-raise the "inexact" floating point exception.
+Hàm này hoạt động y như [`nearbyint()`](#man-nearbyint) ngoại trừ là nó
+có thể raise floating point exception "inexact".
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `x` rounded in the current rounding direction.
+Trả về `x` được làm tròn theo hướng làm tròn hiện tại.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2754,7 +2708,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`nearbyint()`](#man-nearbyint),
 [`lrint()`](#man-lrint),
@@ -2772,7 +2726,7 @@ int main(void)
 [i[`llrintf()` function]i]
 [i[`llrintl()` function]i]
 
-Returns `x` rounded in the current rounding direction as an integer.
+Trả về `x` được làm tròn theo hướng làm tròn hiện tại dưới dạng số nguyên.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2788,26 +2742,25 @@ long long int llrintf(float x);
 long long int llrintl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Round a floating point number in the current rounding direction, but
-this time return an integer intead of a float. You know, just to mix it
-up.
+Làm tròn một số floating point theo hướng làm tròn hiện tại, nhưng lần
+này trả về số nguyên thay vì float. Bạn biết đó, chỉ để thay đổi không
+khí.
 
-These come in two variants:
+Các hàm này có hai biến thể:
 
-* `lrint()`---returns `long int`
-* `llrint()`---returns `long long int`
+* `lrint()`---trả về `long int`
+* `llrint()`---trả về `long long int`
 
-If the result doesn't fit in the return type, a domain or range error
-might occur.
+Nếu kết quả không vừa kiểu trả về, domain hoặc range error có thể xảy
+ra.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-The value of `x` rounded to an integer in the current rounding
-direction.
+Giá trị `x` được làm tròn thành số nguyên theo hướng làm tròn hiện tại.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2830,7 +2783,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`nearbyint()`](#man-nearbyint),
 [`rint()`](#man-lrint),
@@ -2845,7 +2798,7 @@ int main(void)
 [i[`roundf()` function]i]
 [i[`roundl()` function]i]
 
-Round a number in the good old-fashioned way.
+Làm tròn một số theo cách cổ điển.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2859,21 +2812,20 @@ float roundf(float x);
 long double roundl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Rounds a number to the nearest whole value.
+Làm tròn một số đến giá trị nguyên gần nhất.
 
-In case of halfsies, rounds away from zero (i.e. "round up" in
-magnitude).
+Với trường hợp chính giữa, làm tròn ra xa không (tức "tròn lên" về độ
+lớn).
 
-The current rounding direction's Jedi mind tricks don't work on this
-function.
+Trò Jedi của hướng làm tròn hiện tại không có tác dụng với hàm này.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-The rounded value of `x`.
+Giá trị làm tròn của `x`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2889,7 +2841,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`lround()`](#man-lround),
 [`nearbyint()`](#man-nearbyint),
@@ -2907,7 +2859,7 @@ int main(void)
 [i[`llroundf()` function]i]
 [i[`llroundl()` function]i]
 
-Round a number in the good old-fashioned way, returning an integer.
+Làm tròn một số theo cách cổ điển, trả về số nguyên.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2923,26 +2875,27 @@ long long int llroundf(float x);
 long long int llroundl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These are just like [`round()`](#man-round) except they return integers.
+Các hàm này giống như [`round()`](#man-round) ngoại trừ chúng trả về số
+nguyên.
 
-Halfway values round away from zero, e.g. $1.5$ rounds to $2$ and $-1.5$
-rounds to $-2$.
+Giá trị chính giữa làm tròn ra xa không, ví dụ $1.5$ làm tròn thành $2$
+và $-1.5$ làm tròn thành $-2$.
 
-The functions are grouped by return type:
+Các hàm được nhóm theo kiểu trả về:
 
-* `lround()`---returns a `long int`
-* `llround()`---returns a `long long int`
+* `lround()`---trả về `long int`
+* `llround()`---trả về `long long int`
 
-If the rounded value can't fit in the return type, a domain or range
-error can occur.
+Nếu giá trị làm tròn không vừa kiểu trả về, domain hoặc range error có
+thể xảy ra.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the rounded value of `x` as an integer.
+Trả về giá trị làm tròn của `x` dưới dạng số nguyên.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -2958,7 +2911,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`round()`](#man-lround),
 [`nearbyint()`](#man-nearbyint),
@@ -2973,7 +2926,7 @@ int main(void)
 [i[`truncf()` function]i]
 [i[`truncl()` function]i]
 
-Truncate the fractional part off a floating point value.
+Cắt phần phân số của một giá trị floating point.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -2987,18 +2940,17 @@ float truncf(float x);
 long double truncl(long double x);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions just drop the fractional part of a floating point
-number. Boom.
+Các hàm này đơn giản bỏ phần phân số của một số floating point. Bùm.
 
-In other words, they always round toward zero.
+Nói cách khác, chúng luôn làm tròn về không.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the truncated floating point number.
+Trả về số floating point đã bị cắt.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3014,7 +2966,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 [`round()`](#man-lround),
 [`lround()`](#man-lround),
 [`nearbyint()`](#man-nearbyint),
@@ -3028,7 +2980,7 @@ int main(void)
 [i[`fmodf()` function]i]
 [i[`fmodl()` function]i]
 
-Compute the floating point remainder.
+Tính phần dư floating point.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3042,24 +2994,23 @@ float fmodf(float x, float y);
 long double fmodl(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Returns the remainder of $\frac{x}{y}$. The result will have the same
-sign as `x`.
+Trả về phần dư của $\frac{x}{y}$. Kết quả có cùng dấu với `x`.
 
-Under the hood, the computation performed is:
+Dưới vỏ bọc, phép tính thực hiện là:
 
 ``` {.c}
 x - trunc(x / y) * y
 ```
 
-But it might be easier just to think of the remainder.
+Nhưng dễ hơn thì cứ nghĩ về phần dư thôi.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the remainder of $\frac{x}{y}$ with the same sign as `x`.
+Trả về phần dư của $\frac{x}{y}$ cùng dấu với `x`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3072,7 +3023,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`remainder()`](#man-remainder)
 
@@ -3083,7 +3034,7 @@ int main(void)
 [i[`remainderf()` function]i]
 [i[`remainderl()` function]i]
 
-Compute the remainder IEC 60559-style.
+Tính phần dư kiểu IEC 60559.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3097,45 +3048,45 @@ float remainderf(float x, float y);
 long double remainderl(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is similar to `fmod()`, but not quite the same. `fmod()` is
-probably what you're after if you're expecting remainders to wrap around
-like an odometer.
+Cái này tương tự `fmod()`, nhưng không hoàn toàn giống. `fmod()` có lẽ
+là cái bạn muốn nếu bạn mong phần dư xoay vòng như đồng hồ đo đường xe
+chạy (odometer).
 
-The C spec quotes IEC 60559 on how this works:
+Spec C trích IEC 60559 về cách nó hoạt động:
 
-> When $y\neq0$, the remainder $r=x$ REM $y$ is defined regardless of
-> the rounding mode by the mathematical relation $r=x-ny$, where $n$ is
-> the integer nearest the exact value of $x/y$; whenever $|n-x/y|=1/2$,
-> then $n$ is even. If $r=0$, its sign shall be that of $x$.
+> Khi $y\neq0$, phần dư $r=x$ REM $y$ được xác định bất kể mode làm
+> tròn bằng quan hệ toán học $r=x-ny$, với $n$ là số nguyên gần nhất
+> với giá trị chính xác của $x/y$; khi $|n-x/y|=1/2$, thì $n$ là số
+> chẵn. Nếu $r=0$, dấu của nó sẽ là dấu của $x$.
 
-Hope that clears it up!
+Hy vọng đã sáng tỏ!
 
-OK, maybe not. Here's the upshot:
+OK, có thể chưa. Tóm lại:
 
-You know how if you `fmod()` something by, say `2.0` you get a result
-that is somewhere between `0.0` and `2.0`? And how if you just increase
-the number that you're modding by `2.0`, you can see the result climb up
-to `2.0` and then wrap around to `0.0` like your car's odometer?
+Bạn biết là nếu `fmod()` cho gì đó, ví dụ `2.0`, bạn được kết quả nào
+đó nằm giữa `0.0` và `2.0`? Và nếu bạn cứ tăng số mà bạn đang lấy mod
+với `2.0`, bạn thấy kết quả leo lên `2.0` rồi xoay vòng về `0.0` như
+đồng hồ đo đường của ô tô?
 
-`remainder()` works just like that, except if `y` is `2.0`, it wraps
-from `-1.0` to `1.0` instead of from `0.0` to `2.0`.
+`remainder()` hoạt động y vậy, ngoại trừ nếu `y` là `2.0`, nó xoay
+vòng từ `-1.0` đến `1.0` thay vì từ `0.0` đến `2.0`.
 
-In other words, the range of the function runs from `-y/2` to `y/2`.
-Contrasted to `fmod()` that runs from `0.0` to `y`, `remainder()`'s
-output is just shifted down half a `y`.
+Nói cách khác, phạm vi của hàm chạy từ `-y/2` đến `y/2`. Khác với
+`fmod()` chạy từ `0.0` đến `y`, output của `remainder()` chỉ là dịch
+xuống nửa `y`.
 
-And zero-remainder-anything is `0`.
+Và không-dư-bất-kỳ-cái-gì là `0`.
 
-Except if `y` is zero, the function might return zero or a domain error
-might occur.
+Ngoại trừ nếu `y` là không, hàm có thể trả về không hoặc domain error
+có thể xảy ra.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-The IEC 60559 result of `x`-remainder-`y`.
+Kết quả IEC 60559 của `x`-dư-`y`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3148,7 +3099,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`fmod()`](#man-fmod),
 [`remquo()`](#man-remquo)
@@ -3160,7 +3111,7 @@ int main(void)
 [i[`remquof()` function]i]
 [i[`remquol()` function]i]
 
-Compute the remainder and (some of the) quotient.
+Tính phần dư và (một phần của) thương.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3174,70 +3125,66 @@ float remquof(float x, float y, int *quo);
 long double remquol(long double x, long double y, int *quo);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This is a funky little thing.
+Đây là một thứ hơi lạ đời.
 
-First of all, the return value is the remainder, the same as the
-[`remainder()`](#man-remainder) function, so check that out.
+Thứ nhất, giá trị trả về là phần dư, giống hàm
+[`remainder()`](#man-remainder), nên xem cái đó.
 
-And the quotient comes back in the `quo` pointer.
+Và thương trở về trong con trỏ `quo`.
 
-Or at least _some of it_ does. You'll get at least 3 bits worth of the
-quotient.
+Hoặc ít nhất _một phần của nó_. Bạn sẽ nhận ít nhất 3 bit của thương.
 
-But _why_?
+Nhưng _vì sao_?
 
-So a couple things.
+Vài lý do.
 
-One is that the quotient of some very large floating point numbers can
-easily be far too gigantic to fit in even a `long long unsigned int`. So
-some of it might very well need to be lopped off, anyway.
+Một là thương của một số floating point rất lớn có thể dễ dàng quá
+khổng lồ để vừa cả `long long unsigned int`. Nên dù sao cũng phải cắt
+bớt một phần.
 
-But at 3 bits? How's that even useful? That only gets you from 0 to 7!
+Nhưng 3 bit? Có ích gì? Chỉ cho bạn từ 0 đến 7!
 
-The C99 Rationale document states:
+Tài liệu C99 Rationale nói:
 
-> The `remquo` functions are intended for implementing argument
-> reductions which can exploit a few low-order bits of the quotient.
-> Note that $x$ may be so large in magnitude relative to $y$ that an
-> exact representation of the quotient is not practical.
+> Các hàm `remquo` dành cho việc triển khai các phép giảm đối số có thể
+> khai thác vài bit thấp của thương. Lưu ý rằng $x$ có thể quá lớn về
+> độ lớn so với $y$ đến mức biểu diễn chính xác của thương là không
+> khả thi.
 
-So... implementing argument reductions... which can exploit a few
-low-order bits... Ooookay.
+Vậy là... triển khai các phép giảm đối số... có thể khai thác vài bit
+thấp... Ờ ờ okay.
 
-[fl[CPPReference has this to
-say|https://en.cppreference.com/w/c/numeric/math/remquo]] on the matter,
-which is spoken so well, I will quote wholesale:
+[fl[CPPReference có nói thế
+này|https://en.cppreference.com/w/c/numeric/math/remquo]] về chuyện
+này, nói hay quá nên tôi sẽ trích nguyên văn:
 
-> This function is useful when implementing periodic functions with the
-> period exactly representable as a floating-point value: when
-> calculating $\sin(πx)$ for a very large `x`, calling `sin` directly
-> may result in a large error, but if the function argument is first
-> reduced with `remquo`, the low-order bits of the quotient may be used
-> to determine the sign and the octant of the result within the period,
-> while the remainder may be used to calculate the value with high
-> precision.
+> Hàm này hữu ích khi triển khai các hàm tuần hoàn có chu kỳ biểu diễn
+> chính xác được bằng giá trị floating point: khi tính $\sin(πx)$ với
+> `x` rất lớn, gọi `sin` trực tiếp có thể cho sai số lớn, nhưng nếu
+> đối số hàm được giảm trước bằng `remquo`, các bit thấp của thương có
+> thể dùng để xác định dấu và octant của kết quả trong chu kỳ, còn
+> phần dư có thể dùng để tính giá trị với độ chính xác cao.
 
-And there you have it. If you have another example that works for you...
-congratulations! :)
+Đấy. Nếu bạn có ví dụ khác dùng được... xin chúc mừng! :)
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the same as [`remainder`](#man-remainder): The IEC 60559 result
-of `x`-remainder-`y`.
+Trả về giống [`remainder`](#man-remainder): Kết quả IEC 60559 của
+`x`-dư-`y`.
 
-In addition, at least the lowest 3 bits of the quotient will be stored
-in `quo` with the same sign as `x/y`.
+Ngoài ra, ít nhất 3 bit thấp nhất của thương sẽ được lưu vào `quo` với
+cùng dấu của `x/y`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
-There's a [fl[great `cos()` example at
-CPPReference|https://en.cppreference.com/w/c/numeric/math/remquo]] that
-covers a genuine use case.
+Có [fl[ví dụ `cos()` hay ở
+CPPReference|https://en.cppreference.com/w/c/numeric/math/remquo]] bao
+quát một use case thực tế.
 
-But instead of stealing it, I'll just post a simple example here and you
-can visit their site for a real one.
+Nhưng thay vì "mượn" nó, tôi sẽ đăng một ví dụ đơn giản ở đây và bạn có
+thể ghé trang họ để xem ví dụ thật.
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3254,7 +3201,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`remainder()`](#man-remainder),
 [`imaxdiv()`](#man-imaxdiv)
@@ -3266,7 +3213,7 @@ int main(void)
 [i[`copysignf()` function]i]
 [i[`copysignl()` function]i]
 
-Copy the sign of one value into another.
+Chép dấu của một giá trị sang một giá trị khác.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3280,20 +3227,19 @@ float copysignf(float x, float y);
 long double copysignl(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions return a number that has the magnitude of `x` and the
-sign of `y`. You can use them to coerce the sign to that of another
-value.
+Các hàm này trả về một số có độ lớn của `x` và dấu của `y`. Bạn có thể
+dùng chúng để ép dấu theo giá trị khác.
 
-Neither `x` nor `y` are modified, of course. The return value holds the
-result.
+Tất nhiên là cả `x` lẫn `y` đều không bị thay đổi. Giá trị trả về chứa
+kết quả.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns a value with the magnitude of `x` and the sign of `y`.
+Trả về giá trị có độ lớn của `x` và dấu của `y`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3310,7 +3256,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`signbit()`](#man-signbit)
 
@@ -3321,7 +3267,7 @@ int main(void)
 [i[`nanf()` function]i]
 [i[`nanl()` function]i]
 
-Return `NAN`.
+Trả về `NAN`.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3335,22 +3281,21 @@ float nanf(const char *tagp);
 long double nanl(const char *tagp);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions return a quiet NaN^[A _quiet NaN_ is one that doesn't
-raise any exceptions.]. It is produced as if calling
-[`strtod()`](#man-strtod) with `"NAN"` (or a variant thereof) as an
-argument.
+Các hàm này trả về một quiet NaN^[Một _quiet NaN_ là NaN không raise
+bất kỳ exception nào.]. Nó được tạo như thể gọi
+[`strtod()`](#man-strtod) với `"NAN"` (hoặc biến thể của nó) làm đối số.
 
-`tagp` points to a string which could be several things, including
-empty. The contents of the string determine which variant of NaN might
-get returned depending on the implementation.
+`tagp` trỏ tới một chuỗi có thể là nhiều thứ, bao gồm cả rỗng. Nội dung
+của chuỗi quyết định biến thể NaN nào có thể được trả về tuỳ
+implementation.
 
-Which _version_ of NaN? Did you even know it was possible to get this
-far into the weeds with something that wasn't a number?
+_Phiên bản_ NaN nào? Bạn có biết là có thể đi sâu tới mức này với một
+thứ không phải là số không?
 
-Case 1 in which you pass in an empty string, in which case these are the
-same:
+Trường hợp 1, bạn truyền vào chuỗi rỗng, trong trường hợp đó các dòng
+sau tương đương:
 
 ``` {.c}
 nan("");
@@ -3358,8 +3303,8 @@ nan("");
 strtod("NAN()", NULL);
 ```
 
-Case 2 in which the string contains only digits 0-9, letters a-z,
-letters A-Z, and/or underscore:
+Trường hợp 2, chuỗi chỉ chứa chữ số 0-9, chữ cái a-z, chữ cái A-Z,
+và/hoặc gạch dưới:
 
 ``` {.c}
 nan("goats");
@@ -3367,7 +3312,7 @@ nan("goats");
 strtod("NAN(goats)", NULL);
 ```
 
-And Case 3, in which the string contains anything else and is ignored:
+Và Trường hợp 3, chuỗi chứa bất cứ thứ gì khác và bị bỏ qua:
 
 ``` {.c}
 nan("!");
@@ -3375,15 +3320,15 @@ nan("!");
 strtod("NAN", NULL);
 ```
 
-As for what `strtod()` does with those values in parens, see the
-[`strtod()`] reference page. Spoiler: it's implementation-defined.
+Còn `strtod()` làm gì với các giá trị trong ngoặc đơn, xem trang tham
+chiếu [`strtod()`]. Spoiler: phụ thuộc implementation.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the requested quiet NaN, or 0 if such things aren't supported by
-your system.
+Trả về quiet NaN được yêu cầu, hoặc 0 nếu hệ thống của bạn không hỗ trợ
+những thứ này.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3397,7 +3342,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`strtod()`](#man-strtod)
 
@@ -3408,7 +3353,7 @@ int main(void)
 [i[`nextafterf()` function]i]
 [i[`nextafterl()` function]i]
 
-Get the next (or previous) representable floating point value.
+Lấy giá trị floating point kế tiếp (hoặc trước đó) biểu diễn được.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3422,30 +3367,28 @@ float nextafterf(float x, float y);
 long double nextafterl(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-As you probably know, floating point numbers can't represent _every_
-possible real number. There are limits.
+Như bạn có lẽ đã biết, số floating point không thể biểu diễn _mọi_ số
+thực khả dĩ. Có giới hạn.
 
-And, as such, there exists a "next" and "previous" number after or
-before any floating point number.
+Và, như vậy, tồn tại một số "kế tiếp" và "trước đó" sau hoặc trước bất
+kỳ số floating point nào.
 
-These functions return the next (or previous) representable number. That
-is, no floating point numbers exist between the given number and the
-next one.
+Các hàm này trả về số kế tiếp (hoặc trước đó) biểu diễn được. Nghĩa là,
+không có số floating point nào tồn tại giữa số đã cho và số kế tiếp.
 
-The way it figures it out is it works from `x` in the direction of `y`,
-answering the question of "what is the next representable number from
-`x` as we head toward `y`.
+Cách nó xác định là nó chạy từ `x` theo hướng `y`, trả lời câu hỏi "số
+kế tiếp biểu diễn được từ `x` khi ta đi về phía `y` là gì".
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the next representable floating point value from `x` in the
-direction of `y`.
+Trả về giá trị floating point kế tiếp biểu diễn được từ `x` theo hướng
+`y`.
 
-If `x` equals `y`, returns `y`. And also `x`, I suppose.
+Nếu `x` bằng `y`, trả về `y`. Và cả `x` nữa, tôi đoán vậy.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3458,14 +3401,14 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 0.50000000000000011
 0.34899999999999992
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`nexttoward()`](#man-nexttoward)
 
@@ -3476,7 +3419,7 @@ Output on my system:
 [i[`nexttowardf()` function]i]
 [i[`nexttowardl()` function]i]
 
-Get the next (or previous) representable floating point value.
+Lấy giá trị floating point kế tiếp (hoặc trước đó) biểu diễn được.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3490,17 +3433,17 @@ float nexttowardf(float x, long double y);
 long double nexttowardl(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These functions are the same as [`nextafter()`](#man-nextafter) except
-the second parameter is always `long double`.
+Các hàm này giống [`nextafter()`](#man-nextafter) ngoại trừ tham số thứ
+hai luôn là `long double`.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the same as [`nextafter()`](#man-nextafter) except if `x` equals
-`y`, returns `y` cast to the function's return type.
+Trả về giống [`nextafter()`](#man-nextafter) ngoại trừ nếu `x` bằng
+`y`, trả về `y` cast sang kiểu trả về của hàm.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3514,14 +3457,14 @@ int main(void)
 }
 ```
 
-Output on my system:
+Output trên máy tôi:
 
 ``` {.default}
 0.50000000000000011
 0.34899999999999992
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`nextafter()`](#man-nextafter)
 
@@ -3532,7 +3475,7 @@ Output on my system:
 [i[`fdimf()` function]i]
 [i[`fdiml()` function]i]
 
-Return the positive difference between two numbers clamped at 0.
+Trả về hiệu số dương giữa hai số, chặn dưới ở 0.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3546,19 +3489,18 @@ float fdimf(float x, float y);
 long double fdiml(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-The positive difference between `x` and `y` is the difference... except
-if the difference is less than `0`, it's clamped to `0`.
+Hiệu số dương giữa `x` và `y` là hiệu... ngoại trừ nếu hiệu nhỏ hơn
+`0`, nó bị kẹp ở `0`.
 
-These functions might throw a range error.
+Các hàm này có thể ném range error.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the difference of `x-y` if the difference is greater than `0`.
-Otherwise it returns `0`.
+Trả về hiệu của `x-y` nếu hiệu lớn hơn `0`. Ngược lại trả về `0`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3567,7 +3509,7 @@ Otherwise it returns `0`.
 int main(void)
 {
 	printf("%f\n", fdim(10.0, 3.0));   // 7.000000
-	printf("%f\n", fdim(3.0, 10.0));   // 0.000000, clamped
+	printf("%f\n", fdim(3.0, 10.0));   // 0.000000, bị kẹp
 }
 ```
 
@@ -3587,7 +3529,7 @@ int main(void)
 [i[`fminf()` function]i]
 [i[`fminl()` function]i]
 
-Return the maximum or minimum of two numbers.
+Trả về giá trị lớn nhất hoặc nhỏ nhất trong hai số.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3607,20 +3549,19 @@ float fminf(float x, float y);
 long double fminl(long double x, long double y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-Straightforwardly, these functions return the minimum or maximum of two
-given numbers.
+Đơn giản, các hàm này trả về giá trị nhỏ nhất hoặc lớn nhất trong hai
+số đã cho.
 
-If one of the numbers is NaN, the functions return the non-NaN number.
-If both arguments are NaN, the functions return NaN.
+Nếu một trong các số là NaN, các hàm trả về số không phải NaN. Nếu cả
+hai đối số đều là NaN, các hàm trả về NaN.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns the minimum or maximum values, with NaN handled as mentioned
-above.
+Trả về giá trị nhỏ nhất hoặc lớn nhất, với NaN được xử lý như trên.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3646,7 +3587,7 @@ int main(void)
 [i[`fmaf()` function]i]
 [i[`fmal()` function]i]
 
-Floating (AKA "Fast") multiply and add.
+Nhân và cộng Floating (còn gọi là "Fast").
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3660,32 +3601,29 @@ float fmaf(float x, float y, float z);
 long double fmal(long double x, long double y, long double z);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This performs the operation $(x\times{y})+z$, but does so in a nifty
-way. It does the computation as if it had infinite precision, and then
-rounds the final result to the final data type according to the current
-rounding mode.
+Hàm này thực hiện phép toán $(x\times{y})+z$, nhưng theo một cách rất
+đỉnh. Nó làm phép tính như thể có độ chính xác vô hạn, rồi làm tròn kết
+quả cuối cùng về kiểu dữ liệu cuối cùng theo mode làm tròn hiện tại.
 
-Contrast to if you'd do the math yourself, where it would have rounded
-each step of the way, potentially.
+So với cách bạn tự làm toán, trong đó có thể làm tròn ở mỗi bước.
 
-Also some architectures have a CPU instruction to do exactly this
-calculation, so it can do it super quick. (If it doesn't, it's
-considerably slower.)
+Ngoài ra, một số kiến trúc có lệnh CPU để làm đúng phép tính này, nên
+có thể làm siêu nhanh. (Nếu không có, đáng kể chậm hơn.)
 
-You can tell if your CPU supports the fast version by checking that the
-macro `FP_FAST_FMA` is set to `1`. (The `float` and `long` variants of
-`fma()` can be tested with `FP_FAST_FMAF` and `FP_FAST_FMAL`,
-respectively.)
+Bạn có thể biết CPU của mình có hỗ trợ phiên bản nhanh không bằng cách
+kiểm tra macro `FP_FAST_FMA` được đặt thành `1`. (Biến thể `float` và
+`long` của `fma()` có thể được kiểm tra với `FP_FAST_FMAF` và
+`FP_FAST_FMAL` tương ứng.)
 
-These functions might cause a range error to occur.
+Các hàm này có thể gây range error.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `(x * y) + z`.
+Trả về `(x * y) + z`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 printf("%f\n", fma(1.0, 2.0, 3.0));  // 5.000000
@@ -3705,7 +3643,7 @@ printf("%f\n", fma(1.0, 2.0, 3.0));  // 5.000000
 [i[`isless()` function]i]
 [i[`islessequal()` function]i]
 
-Floating point comparison macros.
+Các macro so sánh floating point.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3721,31 +3659,31 @@ int isless(any_floating_type x, any_floating_type y);
 int islessequal(any_floating_type x, any_floating_type y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-These macros compare floating point numbers. Being macros, we can pass
-in any floating point type.
+Các macro này so sánh các số floating point. Vì là macro, ta có thể
+truyền bất kỳ kiểu floating point nào.
 
-You might think you can already do that with just regular comparison
-operators---and you'd be right!
+Bạn có thể nghĩ mình đã làm được điều đó chỉ với các toán tử so sánh
+bình thường---và bạn nói đúng!
 
-One one exception: the comparison operators raise the "invalid" floating
-exception if one or more of the operands is NaN. These macros do not.
+Trừ một ngoại lệ: toán tử so sánh raise floating exception "invalid"
+nếu một hoặc nhiều toán hạng là NaN. Các macro này không như vậy.
 
-Note that you must only pass floating point types into these functions.
-Passing an integer or any other type is undefined behavior.
+Lưu ý là bạn chỉ được truyền kiểu floating point vào các hàm này.
+Truyền số nguyên hay bất kỳ kiểu nào khác là hành vi không xác định.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-`isgreater()` returns the result of `x > y`.
+`isgreater()` trả về kết quả của `x > y`.
 
-`isgreaterequal()` returns the result of `x >= y`.
+`isgreaterequal()` trả về kết quả của `x >= y`.
 
-`isless()` returns the result of `x < y`.
+`isless()` trả về kết quả của `x < y`.
 
-`islessequal()` returns the result of `x <= y`.
+`islessequal()` trả về kết quả của `x <= y`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3760,7 +3698,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`islessgreater()`](#man-islessgreater),
 [`isunordered()`](#man-isunordered)
@@ -3770,7 +3708,7 @@ int main(void)
 
 [i[`islessgreater()` function]i]
 
-Test if a floating point number is less than or greater than another.
+Kiểm tra số floating point này nhỏ hơn hoặc lớn hơn số kia.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3780,27 +3718,26 @@ Test if a floating point number is less than or greater than another.
 int islessgreater(any_floating_type x, any_floating_type y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-This macro is similar to `isgreater()` and all those, except it made the
-section name too long if I included it up there. So it gets its own
-spot.
+Macro này tương tự `isgreater()` và đồng bọn, nhưng nó làm tên section
+quá dài nếu tôi bao nó vào trên kia. Nên nó được có chỗ riêng.
 
-This returns true if $x < y$ or $x > y$.
+Cái này trả về true nếu $x < y$ hoặc $x > y$.
 
-Even though it's a macro, we can rest assured that `x` and `y` are only
-evaluated once.
+Dù là macro, ta có thể yên tâm rằng `x` và `y` chỉ được tính giá trị
+một lần.
 
-And even if `x` or `y` are NaN, this will not throw an "invalid"
-exception, unlike the normal comparison operators.
+Và kể cả khi `x` hoặc `y` là NaN, cái này sẽ không ném exception
+"invalid", không giống các toán tử so sánh thường.
 
-If you pass in a non-floating type, the behavior is undefined.
+Nếu bạn truyền kiểu không phải floating point, hành vi không xác định.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-Returns `(x < y) || (x > y)`.
+Trả về `(x < y) || (x > y)`.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3814,7 +3751,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isgreater()`](#man-isgreater),
 [`isgreaterequal()`](#man-isgreater),
@@ -3827,7 +3764,7 @@ int main(void)
 
 [i[`isunordered()` function]i]
 
-Macro returns true if either floating point argument is NaN.
+Macro trả về true nếu bất kỳ đối số floating point nào là NaN.
 
 ### Synopsis {.unnumbered .unlisted}
 
@@ -3837,22 +3774,21 @@ Macro returns true if either floating point argument is NaN.
 int isunordered(any_floating_type x, any_floating_type y);
 ```
 
-### Description {.unnumbered .unlisted}
+### Mô tả {.unnumbered .unlisted}
 
-The spec writes:
+Spec viết:
 
-> The isunordered macro determines whether its arguments are unordered.
+> Macro isunordered xác định xem các đối số của nó có unordered không.
 
-See? Told you C was easy!
+Thấy chưa? Tôi đã nói C dễ mà!
 
-It does also elaborate that the arguments are unordered if one or both
-of them are NaN.
+Nó cũng nói thêm là các đối số là unordered nếu một hoặc cả hai là NaN.
 
-### Return Value {.unnumbered .unlisted}
+### Giá trị trả về {.unnumbered .unlisted}
 
-This macro returns true if one or both of the arguments are NaN.
+Macro này trả về true nếu một hoặc cả hai đối số là NaN.
 
-### Example {.unnumbered .unlisted}
+### Ví dụ {.unnumbered .unlisted}
 
 ``` {.c .numberLines}
 #include <stdio.h>
@@ -3867,7 +3803,7 @@ int main(void)
 }
 ```
 
-### See Also {.unnumbered .unlisted}
+### Xem thêm {.unnumbered .unlisted}
 
 [`isgreater()`](#man-isgreater),
 [`isgreaterequal()`](#man-isgreater),
@@ -3897,4 +3833,3 @@ int main(void)
 
 [`example()`](#man-example),
 -->
-
